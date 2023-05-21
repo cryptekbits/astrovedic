@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from flatlib import const
-from flatlib.aspects import getAspect
+from flatlib.aspects import getAspect, getTransitAspect
 from flatlib.chart import Chart
 
 
@@ -27,7 +27,7 @@ class TransitChart:
 
     def _get_transit_object_aspects(self, transit_object, birth_objects):
         # Get aspects
-        aspects = [getAspect(transit_object, birth_object, self.transit_aspects) for birth_object in birth_objects]
+        aspects = [getTransitAspect(transit_object, birth_object, self.transit_aspects) for birth_object in birth_objects]
 
         # Remove no aspects objects before return
         return [aspect for aspect in aspects if aspect.type is not const.NO_ASPECT]

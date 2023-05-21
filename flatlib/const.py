@@ -289,6 +289,15 @@ LIST_TEN_PLANETS = [
     SUN, MOON, MERCURY, VENUS, MARS, JUPITER, SATURN, NEPTUNE, URANUS, PLUTO
 ]
 
+""" Personal planets are the usually the fastest when calculating aspects """
+LIST_PERSONAL_PLANETS = [
+    SUN,
+    MOON,
+    MERCURY,
+    VENUS,
+    MARS,
+]
+
 """MH on 2018/3/4 - List of aspecting planets"""
 
 LIST_ASP_PLANETS = [

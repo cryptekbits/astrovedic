@@ -251,6 +251,22 @@ def getAspect(obj1, obj2, aspList):
     return Aspect(aspProp)
 
 
+def getTransitAspect(activeObj, passiveObj, aspList):
+    """ Returns an Aspect object for the transit aspect between two
+    objects considering a list of possible aspect types.
+    The main difference, is that in transits, the transit object is always active object
+    """
+    aspDict = _aspectDict(activeObj, passiveObj, aspList)
+    if not aspDict:
+        aspDict = {
+            'type': const.NO_ASPECT,
+            'orb': 0,
+            'separation': 0,
+        }
+    aspProp = _aspectProperties(activeObj, passiveObj, aspDict)
+    return Aspect(aspProp)
+
+
 # ---------------- #
 #   Aspect Class   #
 # ---------------- #
