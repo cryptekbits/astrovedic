@@ -101,6 +101,7 @@ PARS_FORTUNA = 'Pars Fortuna'
 NO_PLANET = 'None'
 
 # Asteroids
+LILITH = 'Lilith'
 CHIRON = 'Chiron'
 PHOLUS = 'Pholus'
 CERES = 'Ceres'
@@ -266,7 +267,7 @@ LIST_SIGNS = [
 
 LIST_OBJECTS = [
     SUN, MOON, MERCURY, VENUS, MARS, JUPITER, SATURN,
-    URANUS, NEPTUNE, PLUTO, CHIRON, NORTH_NODE,
+    URANUS, NEPTUNE, PLUTO, LILITH, CHIRON, NORTH_NODE,
     SOUTH_NODE, SYZYGY, PARS_FORTUNA,
 ]
 
@@ -289,6 +290,15 @@ LIST_TEN_PLANETS = [
     SUN, MOON, MERCURY, VENUS, MARS, JUPITER, SATURN, NEPTUNE, URANUS, PLUTO
 ]
 
+""" Personal planets are the usually the fastest when calculating aspects """
+LIST_PERSONAL_PLANETS = [
+    SUN,
+    MOON,
+    MERCURY,
+    VENUS,
+    MARS,
+]
+
 """MH on 2018/3/4 - List of aspecting planets"""
 
 LIST_ASP_PLANETS = [
@@ -305,6 +315,7 @@ LIST_ANGLES = [
 ]
 
 LIST_ASTEROIDS = [
+    LILITH,
     CHIRON,
     PHOLUS,
     CERES,
@@ -360,6 +371,7 @@ LIST_ORBS_TIGHT = {
     URANUS: 5,
     NEPTUNE: 5,
     PLUTO: 5,
+    LILITH: 5,
     CHIRON: 5,
     NORTH_NODE: 12,
     SOUTH_NODE: 12,
@@ -385,6 +397,7 @@ LIST_ORBS_WIDE = {
     URANUS: 2,
     NEPTUNE: 1,
     PLUTO: 3,
+    LILITH: 1,
     CHIRON: 1,
     NORTH_NODE: 2,
     SOUTH_NODE: 2,
