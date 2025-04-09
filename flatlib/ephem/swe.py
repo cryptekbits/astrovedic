@@ -1,14 +1,14 @@
 """
     This file is part of flatlib - (C) FlatAngle
     Author: João Ventura (flatangleweb@gmail.com)
-    
-    
-    This module implements a simple interface with the C 
+
+
+    This module implements a simple interface with the C
     Swiss Ephemeris using the pyswisseph library.
-    
+
     The pyswisseph library must be already installed and
     accessible.
-  
+
 """
 
 import swisseph
@@ -55,6 +55,39 @@ SWE_HOUSESYS = {
     const.HOUSES_MORINUS: b'M'
 }
 
+# Map ayanamsas
+SWE_AYANAMSAS = {
+    const.AY_FAGAN_BRADLEY: 0,
+    const.AY_LAHIRI: 1,
+    const.AY_DELUCE: 2,
+    const.AY_RAMAN: 3,
+    const.AY_KRISHNAMURTI: 5,
+    const.AY_SASSANIAN: 16,
+    const.AY_ALDEBARAN_15TAU: 14,
+    const.AY_GALCENTER_5SAG: 17,
+    # Additional Vedic Ayanamsas
+    const.AY_YUKTESHWAR: 7,
+    const.AY_JN_BHASIN: 8,
+    const.AY_SURYASIDDHANTA: 21,
+    const.AY_SURYASIDDHANTA_MSUN: 22,
+    const.AY_ARYABHATA: 23,
+    const.AY_ARYABHATA_MSUN: 24,
+    const.AY_SS_REVATI: 25,
+    const.AY_SS_CITRA: 26,
+    const.AY_TRUE_CITRA: 27,
+    const.AY_TRUE_REVATI: 28,
+    const.AY_TRUE_PUSHYA: 29,
+    const.AY_TRUE_MULA: 30,
+    const.AY_ARYABHATA_522: 34,
+    const.AY_TRUE_SHEORAN: 39,
+}
+
+# SWE flags for computations
+SEFLG_SWIEPH = 2
+SEFLG_SPEED = 256
+SEFLG_TOPOCTR = 32 * 1024
+SEFLG_SIDEREAL = 64 * 1024
+
 
 # ==== Internal functions ==== #
 
@@ -87,8 +120,8 @@ def sweObjectLon(obj, jd):
 
 def sweNextTransit(obj, jd, lat, lon, flag):
     """ Returns the julian date of the next transit of
-    an object. The flag should be 'RISE' or 'SET'. 
-    
+    an object. The flag should be 'RISE' or 'SET'.
+
     """
     sweObj = SWE_OBJECTS[obj]
     flag = swisseph.CALC_RISE if flag == 'RISE' else swisseph.CALC_SET
@@ -103,7 +136,7 @@ def sweHouses(jd, lat, lon, hsys):
     hsys = SWE_HOUSESYS[hsys]
     hlist, ascmc = swisseph.houses(jd, lat, lon, hsys)
     # Add first house to the end of 'hlist' so that we
-    # can compute house sizes with an iterator 
+    # can compute house sizes with an iterator
     hlist += (hlist[0],)
     houses = [
         {
@@ -129,7 +162,7 @@ def sweHousesLon(jd, lat, lon, hsys):
     angles = [
         ascmc[0],
         ascmc[1],
-        angle.norm(ascmc[0] + 180), 
+        angle.norm(ascmc[0] + 180),
         angle.norm(ascmc[1] + 180),
         ascmc[3]
     ]
@@ -138,8 +171,8 @@ def sweHousesLon(jd, lat, lon, hsys):
 
 # === Fixed stars === #
 
-# Beware: the swisseph.fixstar_mag function is really 
-# slow because it parses the fixstars.cat file every 
+# Beware: the swisseph.fixstar_mag function is really
+# slow because it parses the fixstars.cat file every
 # time..
 
 def sweFixedStar(star, jd):
@@ -184,3 +217,123 @@ def lunarEclipseGlobal(jd, backward):
         'penumbral_begin': sweList[1][6],
         'penumbral_end': sweList[1][7],
     }
+
+
+# === Sidereal zodiac === #
+
+def get_ayanamsa(jd, mode):
+    """ Returns the distance of the tropical vernal point
+    from the sidereal zero point of the zodiac.
+    """
+    eph_mode = SWE_AYANAMSAS[mode]
+    swisseph.set_sid_mode(eph_mode, 0, 0)
+    return swisseph.get_ayanamsa_ut(jd)
+
+
+# === Sidereal and topocentric functions == #
+
+def swe_object(obj, jd, lat=None, lon=None, alt=None, mode=None):
+    """ Returns an object from the swiss ephemeris.
+    - If lat/lon/alt values are set, it returns the topocentric position
+    - If mode is set, returns sidereal positions for the given mode
+
+    :param obj: the object
+    :param jd: the julian date
+    :param lat: the latitude in degrees
+    :param lon: the longitude in degrees
+    :param alt: the altitude above msl in meters
+    :param mode: the ayanamsa
+    :return: swiss ephem object dict
+    """
+    swe_obj = SWE_OBJECTS[obj]
+    flags = SEFLG_SWIEPH + SEFLG_SPEED
+
+    # Use topocentric positions
+    if lat and lon and alt:
+        swisseph.set_topo(lat, lon, alt)
+        flags += SEFLG_TOPOCTR
+
+    # Use sidereal zodiac
+    if mode:
+        eph_mode = SWE_AYANAMSAS[mode]
+        swisseph.set_sid_mode(eph_mode, 0, 0)
+        flags += SEFLG_SIDEREAL
+
+    # Compute and return positions
+    swelist, flg = swisseph.calc_ut(jd, swe_obj, flags)
+    return {
+        'id': obj,
+        'lon': swelist[0],
+        'lat': swelist[1],
+        'lonspeed': swelist[3],
+        'latspeed': swelist[4],
+    }
+
+
+def swe_houses_lon(jd, lat, lon, hsys, mode=None):
+    """ Returns the longitudes of houses and angles cusps.
+    - If mode is set, returns sidereal positions for the given mode
+
+    :param jd: the julian date
+    :param lat: the latitude in degrees
+    :param lon: the longitude in degrees
+    :param hsys: the house system
+    :param mode: the ayanamsa
+    :return: list of houses and angles longitudes
+    """
+    swe_hsys = SWE_HOUSESYS[hsys]
+    flags = SEFLG_SWIEPH + SEFLG_SPEED
+
+    # Use sidereal zodiac
+    if mode:
+        eph_mode = SWE_AYANAMSAS[mode]
+        swisseph.set_sid_mode(eph_mode, 0, 0)
+        flags = SEFLG_SIDEREAL
+
+    # Compute house cusps and angles
+    cusps, ascmc = swisseph.houses_ex(jd, lat, lon, swe_hsys, flags)
+    angles = [
+        ascmc[0],
+        ascmc[1],
+        angle.norm(ascmc[0] + 180),
+        angle.norm(ascmc[1] + 180),
+        ascmc[3]  # Vertex
+    ]
+
+    return (cusps, angles)
+
+
+def swe_houses(jd, lat, lon, hsys, mode=None):
+    """ Returns the houses and angles.
+    - If mode is set, returns sidereal positions for the given mode
+
+    :param jd: the julian date
+    :param lat: the latitude in degrees
+    :param lon: the longitude in degrees
+    :param hsys: the house system
+    :param mode: the ayanamsa
+    :return: list of houses and angles
+    """
+    # Compute house cusps and angles
+    cusps, ascmc = swe_houses_lon(jd, lat, lon, hsys, mode)
+
+    # Compute house sizes
+    cusps += (cusps[0],)
+    houses = [
+        {
+            'id': const.LIST_HOUSES[i],
+            'lon': cusps[i],
+            'size': angle.distance(cusps[i], cusps[i + 1]),
+        } for i in range(12)
+    ]
+
+    # Create angles
+    angles = [
+        {'id': const.ASC, 'lon': ascmc[0]},
+        {'id': const.MC, 'lon': ascmc[1]},
+        {'id': const.DESC, 'lon': angle.norm(ascmc[0] + 180)},
+        {'id': const.IC, 'lon': angle.norm(ascmc[1] + 180)},
+        {'id': const.VERTEX, 'lon': ascmc[4]}
+    ]
+
+    return (houses, angles)

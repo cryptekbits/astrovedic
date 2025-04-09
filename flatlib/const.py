@@ -258,6 +258,33 @@ MAJOR_ASPECTS = [0, 60, 90, 120, 180]
 MINOR_ASPECTS = [30, 36, 45, 72, 108, 135, 144, 150]
 ALL_ASPECTS = MAJOR_ASPECTS + MINOR_ASPECTS
 
+# === Ayanamsas / Sidereal Zodiac === */
+
+AY_FAGAN_BRADLEY = 'Ayanamsa Fagan Bradley'
+AY_LAHIRI = 'Ayanamsa Lahiri'
+AY_DELUCE = 'Ayanamsa De Luce'
+AY_RAMAN = 'Ayanamsa Raman'
+AY_KRISHNAMURTI = 'Ayanamsa Krishnamurti'
+AY_SASSANIAN = 'Ayanamsa Sassanian'
+AY_ALDEBARAN_15TAU = 'Ayanamsa Aldebaran 15 Taurus'
+AY_GALCENTER_5SAG = 'Ayanamsa Galactic Eq. 05 Sag'
+
+# Additional Vedic Ayanamsas
+AY_YUKTESHWAR = 'Ayanamsa Yukteshwar'
+AY_JN_BHASIN = 'Ayanamsa JN Bhasin'
+AY_SURYASIDDHANTA = 'Ayanamsa Surya Siddhanta'
+AY_SURYASIDDHANTA_MSUN = 'Ayanamsa Surya Siddhanta (Mean Sun)'
+AY_ARYABHATA = 'Ayanamsa Aryabhata'
+AY_ARYABHATA_MSUN = 'Ayanamsa Aryabhata (Mean Sun)'
+AY_SS_REVATI = 'Ayanamsa SS Revati'
+AY_SS_CITRA = 'Ayanamsa SS Citra'
+AY_TRUE_CITRA = 'Ayanamsa True Citra'
+AY_TRUE_REVATI = 'Ayanamsa True Revati'
+AY_TRUE_PUSHYA = 'Ayanamsa True Pushya'
+AY_TRUE_MULA = 'Ayanamsa True Mula'
+AY_ARYABHATA_522 = 'Ayanamsa Aryabhata 522'
+AY_TRUE_SHEORAN = 'Ayanamsa True Sheoran'
+
 # === Some Lists === */
 
 LIST_SIGNS = [

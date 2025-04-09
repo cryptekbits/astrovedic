@@ -1,23 +1,23 @@
 """
     This file is part of flatlib - (C) FlatAngle
     Author: João Ventura (flatangleweb@gmail.com)
-    
 
-    This module implements a class to represent an 
+
+    This module implements a class to represent an
     astrology Chart. It provides methods to handle
     the chart, as well as three relevant properties:
-    
+
     - objects: a list with the chart's objects
     - houses: a list with the chart's houses
     - angles: a list with the chart's angles
 
     Since houses 1 and 10 may not match the Asc and
-    MC in some house systems, the Chart class 
+    MC in some house systems, the Chart class
     includes the list of angles. The angles should be
     used when you want to deal with angle's longitudes.
-    
+
     There are also methods to access fixed stars.
-    
+
 """
 
 from . import angle
@@ -36,13 +36,14 @@ class Chart:
 
     def __init__(self, date, pos, **kwargs):
         """ Creates an astrology chart for a given
-        date and location. 
-        
+        date and location.
+
         Optional arguments are:
         - hsys: house system
         - IDs: list of objects to include
         - houses_offset: Offset for including objects in calculed houses.
         - orbs: alternative dict of orbs for using dynamic orbs instead of the default const.LIST_ORBS
+        - mode: ayanamsa for sidereal zodiac
 
         """
         # Handle optional arguments
@@ -50,14 +51,22 @@ class Chart:
         IDs = kwargs.get('IDs', const.LIST_OBJECTS_TRADITIONAL)
         houses_offset = kwargs.get('houses_offset', const.MODERN_HOUSE_OFFSET)
         orbs = kwargs.get('orbs', const.LIST_ORBS)
+        mode = kwargs.get('mode', None)
 
         self.date = date
         self.pos = pos
         self.hsys = hsys
         self.orbs = orbs
-        self.objects = ephem.getObjectList(IDs, date, pos)
-        self.houses_offset = houses_offset
-        self.houses, self.angles = ephem.getHouses(date, pos, hsys, houses_offset)
+        self.mode = mode
+
+        if mode:
+            self.objects = ephem.get_objects(IDs, date, pos, mode=mode)
+            self.houses_offset = houses_offset
+            self.houses, self.angles = ephem.get_houses(date, pos, hsys, houses_offset, mode=mode)
+        else:
+            self.objects = ephem.getObjectList(IDs, date, pos)
+            self.houses_offset = houses_offset
+            self.houses, self.angles = ephem.getHouses(date, pos, hsys, houses_offset)
 
         self.update_objects_orbs()
 
@@ -67,9 +76,29 @@ class Chart:
         chart.date = self.date
         chart.pos = self.pos
         chart.hsys = self.hsys
+        chart.orbs = self.orbs
+        chart.mode = self.mode if hasattr(self, 'mode') else None
+        chart.houses_offset = self.houses_offset
         chart.objects = self.objects.copy()
         chart.houses = self.houses.copy()
         chart.angles = self.angles.copy()
+        return chart
+
+    def move(self, offset):
+        """ Moves all items of the chart by an offset. """
+        for obj in self.objects:
+            obj.relocate(obj.lon + offset)
+        for obj in self.houses:
+            obj.relocate(obj.lon + offset)
+        for obj in self.angles:
+            obj.relocate(obj.lon + offset)
+
+    def to_sidereal_zodiac(self, mode):
+        """ Returns a copy of this chart on the sidereal zodiac. """
+        from flatlib.ephem import swe
+        chart = self.copy()
+        offset = swe.get_ayanamsa(chart.date.jd, mode)
+        chart.move(-offset)
         return chart
 
     def update_objects_orbs(self):
@@ -95,9 +124,9 @@ class Chart:
         return self.angles.get(ID)
 
     def get(self, ID):
-        """ Returns an object, house or angle 
+        """ Returns an object, house or angle
         from the chart.
-        
+
         """
         if ID.startswith('House'):
             return self.getHouse(ID)
@@ -168,9 +197,9 @@ class Chart:
     # === Solar returns === #
 
     def solarReturn(self, year):
-        """ Returns this chart's solar return for a 
-        given year. 
-        
+        """ Returns this chart's solar return for a
+        given year.
+
         """
         sun = self.getObject(const.SUN)
         date = Datetime('{0}/01/01'.format(year),
