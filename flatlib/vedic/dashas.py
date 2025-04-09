@@ -190,13 +190,17 @@ def calculate_dasha_periods(birth_date, moon_longitude):
     """
     # Convert flatlib Datetime to Python datetime
     if isinstance(birth_date, Datetime):
-        # Extract date and time from flatlib Datetime
-        date_str = str(birth_date.date).strip('<>')
-        time_str = str(birth_date.time).strip('<>')
-        # Handle time format with seconds
-        if ':' in time_str.split(':')[1]:
-            time_str = ':'.join(time_str.split(':')[:2])
-        birth_dt = datetime.strptime(f"{date_str} {time_str}", "%Y/%m/%d %H:%M")
+        # Create a Python datetime from the components
+        date_parts = str(birth_date.date).strip('<>').split('/')
+        time_parts = str(birth_date.time).strip('<>').split(':')
+
+        year = int(date_parts[0])
+        month = int(date_parts[1])
+        day = int(date_parts[2])
+        hour = int(time_parts[0])
+        minute = int(time_parts[1])
+
+        birth_dt = datetime(year, month, day, hour, minute)
     else:
         birth_dt = birth_date
 
