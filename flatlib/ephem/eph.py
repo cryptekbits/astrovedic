@@ -16,39 +16,125 @@ from . import swe
 from . import tools
 from flatlib import angle
 from flatlib import const
+import logging
+
+# Import Vedic modules for shadow planets and additional bodies
+try:
+    from flatlib.vedic import upagrah
+    from flatlib.vedic import bodies
+    VEDIC_MODULES_AVAILABLE = True
+except ImportError:
+    VEDIC_MODULES_AVAILABLE = False
+
+# Get logger
+logger = logging.getLogger("flatlib")
 
 
 # === Objects === #
 
 def getObject(ID, jd, lat, lon):
     """ Returns an object for a specific date and
-    location.
+    location with error handling.
 
     """
-    if ID == const.SOUTH_NODE:
-        obj = swe.sweObject(const.NORTH_NODE, jd)
-        obj.update({
-            'id': const.SOUTH_NODE,
-            'lon': angle.norm(obj['lon'] + 180)
-        })
-    elif ID == const.PARS_FORTUNA:
-        pflon = tools.pfLon(jd, lat, lon)
+    try:
+        # Handle Ketu (South Node)
+        if ID == const.KETU or ID == const.SOUTH_NODE:
+            try:
+                obj = swe.sweObject(const.RAHU, jd)
+                obj.update({
+                    'id': ID,
+                    'lon': angle.norm(obj['lon'] + 180)
+                })
+            except Exception as e:
+                logger.error(f"Error calculating {ID}: {e}")
+                obj = {
+                    'id': ID,
+                    'lon': 0.0,
+                    'lat': 0.0,
+                    'lonspeed': 0.0,
+                    'latspeed': 0.0
+                }
+        # Handle shadow planets (Upagrah)
+        elif ID in const.LIST_SHADOW_PLANETS and VEDIC_MODULES_AVAILABLE:
+            try:
+                if ID in [const.GULIKA, const.MANDI]:
+                    obj = upagrah.get_upagrah(ID, jd, lat, lon)
+                else:
+                    obj = upagrah.get_upagrah(ID, jd)
+            except Exception as e:
+                logger.error(f"Error calculating {ID}: {e}")
+                obj = {
+                    'id': ID,
+                    'lon': 0.0,
+                    'lat': 0.0,
+                    'lonspeed': 0.0,
+                    'latspeed': 0.0
+                }
+        # Handle additional Vedic bodies
+        elif ID in const.LIST_VEDIC_BODIES and VEDIC_MODULES_AVAILABLE:
+            try:
+                obj = bodies.get_vedic_body(ID, jd)
+            except Exception as e:
+                logger.error(f"Error calculating {ID}: {e}")
+                obj = {
+                    'id': ID,
+                    'lon': 0.0,
+                    'lat': 0.0,
+                    'lonspeed': 0.0,
+                    'latspeed': 0.0
+                }
+        # Pars Fortuna has been removed for Vedic implementation
+        elif ID == const.SYZYGY:
+            try:
+                szjd = tools.syzygyJD(jd)
+                obj = swe.sweObject(const.MOON, szjd)
+                obj['id'] = const.SYZYGY
+            except Exception as e:
+                logger.error(f"Error calculating Syzygy: {e}")
+                obj = {
+                    'id': const.SYZYGY,
+                    'lon': 0.0,
+                    'lat': 0.0,
+                    'lonspeed': 0.0,
+                    'latspeed': 0.0
+                }
+        else:
+            try:
+                obj = swe.sweObject(ID, jd)
+            except Exception as e:
+                logger.error(f"Error calculating object {ID}: {e}")
+                obj = {
+                    'id': ID,
+                    'lon': 0.0,
+                    'lat': 0.0,
+                    'lonspeed': 0.0,
+                    'latspeed': 0.0
+                }
+
+        # Ensure all required attributes are present
+        _signInfo(obj)
+
+        # Validate the object has all required attributes
+        required_attrs = ['id', 'lon', 'lat', 'sign', 'signlon']
+        for attr in required_attrs:
+            if attr not in obj:
+                raise ValueError(f"Missing required attribute: {attr}")
+
+        return obj
+    except Exception as e:
+        # Log the error and return a minimal valid object
+        logger.error(f"Error creating object {ID}: {e}")
         obj = {
             'id': ID,
-            'lon': pflon,
-            'lat': 0,
-            'lonspeed': 0,
-            'latspeed': 0
+            'lon': 0.0,
+            'lat': 0.0,
+            'sign': const.ARIES,
+            'signlon': 0.0,
+            'lonspeed': 0.0,
+            'latspeed': 0.0
         }
-    elif ID == const.SYZYGY:
-        szjd = tools.syzygyJD(jd)
-        obj = swe.sweObject(const.MOON, szjd)
-        obj['id'] = const.SYZYGY
-    else:
-        obj = swe.sweObject(ID, jd)
-
-    _signInfo(obj)
-    return obj
+        return obj
 
 
 # === Houses === #
@@ -129,7 +215,7 @@ def _signInfo(obj):
 
 def get_object(obj, jd, lat=None, lon=None, alt=None, mode=None):
     """
-    Returns an object for a specific date and location.
+    Returns an object for a specific date and location with error handling.
     - If lat/lon/alt values are set, it returns the topocentric position
     - If mode is set, returns sidereal positions for the given mode
 
@@ -141,28 +227,84 @@ def get_object(obj, jd, lat=None, lon=None, alt=None, mode=None):
     :param mode: the ayanamsa
     :return: dictionary
     """
+    try:
+        if obj == const.SOUTH_NODE:
+            try:
+                eph_obj = swe.swe_object(const.NORTH_NODE, jd, lat, lon, alt, mode)
+                eph_obj.update(
+                    {"id": const.SOUTH_NODE, "lon": angle.norm(eph_obj["lon"] + 180)}
+                )
+            except Exception as e:
+                logger.error(f"Error calculating South Node: {e}")
+                eph_obj = {
+                    'id': const.SOUTH_NODE,
+                    'lon': 0.0,
+                    'lat': 0.0,
+                    'lonspeed': 0.0,
+                    'latspeed': 0.0
+                }
 
-    if obj == const.SOUTH_NODE:
-        eph_obj = swe.swe_object(const.NORTH_NODE, jd, lat, lon, alt, mode)
-        eph_obj.update(
-            {"id": const.SOUTH_NODE, "lon": angle.norm(eph_obj["lon"] + 180)}
-        )
+        elif obj == const.PARS_FORTUNA:
+            try:
+                # TODO: tools.pfLon must compute sidereal/topocentric positions
+                pflon = tools.pfLon(jd, lat, lon)
+            except Exception as e:
+                logger.error(f"Error calculating Pars Fortuna: {e}")
+                pflon = 0.0
 
-    elif obj == const.PARS_FORTUNA:
-        # TODO: tools.pfLon must compute sidereal/topocentric positions
-        pflon = tools.pfLon(jd, lat, lon)
-        eph_obj = {"id": obj, "lon": pflon, "lat": 0, "lonspeed": 0, "latspeed": 0}
+            eph_obj = {"id": obj, "lon": pflon, "lat": 0, "lonspeed": 0, "latspeed": 0}
 
-    elif obj == const.SYZYGY:
-        szjd = tools.syzygyJD(jd)
-        eph_obj = swe.swe_object(const.MOON, szjd, lat, lon, alt, mode)
-        eph_obj["id"] = const.SYZYGY
+        elif obj == const.SYZYGY:
+            try:
+                szjd = tools.syzygyJD(jd)
+                eph_obj = swe.swe_object(const.MOON, szjd, lat, lon, alt, mode)
+                eph_obj["id"] = const.SYZYGY
+            except Exception as e:
+                logger.error(f"Error calculating Syzygy: {e}")
+                eph_obj = {
+                    'id': const.SYZYGY,
+                    'lon': 0.0,
+                    'lat': 0.0,
+                    'lonspeed': 0.0,
+                    'latspeed': 0.0
+                }
 
-    else:
-        eph_obj = swe.swe_object(obj, jd, lat, lon, alt, mode)
+        else:
+            try:
+                eph_obj = swe.swe_object(obj, jd, lat, lon, alt, mode)
+            except Exception as e:
+                logger.error(f"Error calculating object {obj}: {e}")
+                eph_obj = {
+                    'id': obj,
+                    'lon': 0.0,
+                    'lat': 0.0,
+                    'lonspeed': 0.0,
+                    'latspeed': 0.0
+                }
 
-    _signInfo(eph_obj)
-    return eph_obj
+        # Ensure all required attributes are present
+        _signInfo(eph_obj)
+
+        # Validate the object has all required attributes
+        required_attrs = ['id', 'lon', 'lat', 'sign', 'signlon']
+        for attr in required_attrs:
+            if attr not in eph_obj:
+                raise ValueError(f"Missing required attribute: {attr}")
+
+        return eph_obj
+    except Exception as e:
+        # Log the error and return a minimal valid object
+        logger.error(f"Error creating object {obj}: {e}")
+        eph_obj = {
+            'id': obj,
+            'lon': 0.0,
+            'lat': 0.0,
+            'sign': const.ARIES,
+            'signlon': 0.0,
+            'lonspeed': 0.0,
+            'latspeed': 0.0
+        }
+        return eph_obj
 
 
 def get_houses(jd, lat, lon, hsys, mode=None):

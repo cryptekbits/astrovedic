@@ -1,6 +1,7 @@
 """
     This file is part of flatlib - (C) FlatAngle
     Author: João Ventura (flatangleweb@gmail.com)
+    Modified for Vedic Astrology
 
 
     This module defines the names of signs, objects, angles,
@@ -10,23 +11,29 @@
 
 # === Base constants === */
 
-# Four primitive qualities
+# Primitive qualities
 HOT = 'Hot'
 COLD = 'Cold'
 DRY = 'Dry'
 HUMID = 'Humid'
 
-# Four Elements
-FIRE = 'Fire'
-EARTH = 'Earth'
-AIR = 'Air'
-WATER = 'Water'
+# Five Elements (Pancha Tattva)
+FIRE = 'Fire'    # Agni
+EARTH = 'Earth'  # Prithvi
+AIR = 'Air'      # Vayu
+WATER = 'Water'  # Jala
+ETHER = 'Ether'  # Akasha
 
-# Four Temperaments
+# Four Temperaments (Western)
 CHOLERIC = 'Choleric'
 MELANCHOLIC = 'Melancholic'
 SANGUINE = 'Sanguine'
 PHLEGMATIC = 'Phlegmatic'
+
+# Three Doshas (Ayurvedic)
+VATA = 'Vata'      # Air + Ether
+PITTA = 'Pitta'    # Fire + Water
+KAPHA = 'Kapha'    # Earth + Water
 
 # Genders
 MASCULINE = 'Masculine'
@@ -84,21 +91,37 @@ SIGN_MODERATELY_STERILE = 'Moderately Sterile'
 # === Objects === */
 
 # Names
-SUN = 'Sun'
-MOON = 'Moon'
-MERCURY = 'Mercury'
-VENUS = 'Venus'
-MARS = 'Mars'
-JUPITER = 'Jupiter'
-SATURN = 'Saturn'
+SUN = 'Sun'         # Surya
+MOON = 'Moon'       # Chandra
+MERCURY = 'Mercury' # Budha
+VENUS = 'Venus'     # Shukra
+MARS = 'Mars'       # Mangala
+JUPITER = 'Jupiter' # Guru
+SATURN = 'Saturn'   # Shani
 URANUS = 'Uranus'
 NEPTUNE = 'Neptune'
 PLUTO = 'Pluto'
-NORTH_NODE = 'North Node'
-SOUTH_NODE = 'South Node'
-SYZYGY = 'Syzygy'
-PARS_FORTUNA = 'Pars Fortuna'
 NO_PLANET = 'None'
+
+# Nodes
+RAHU = 'Rahu'       # North Node
+KETU = 'Ketu'       # South Node
+NORTH_NODE = RAHU
+SOUTH_NODE = KETU
+
+# Shadow Planets (Upagrah)
+GULIKA = 'Gulika'   # Son of Saturn
+MANDI = 'Mandi'     # Another name for Gulika
+DHUMA = 'Dhuma'     # Smoky one
+VYATIPATA = 'Vyatipata' # Calamity
+PARIVESHA = 'Parivesha' # Halo
+INDRACHAPA = 'Indrachapa' # Rainbow
+UPAKETU = 'Upaketu' # Comet
+
+# Additional Vedic Bodies
+ARUN = 'Arun'       # Charioteer of the Sun
+VARUN = 'Varun'     # God of Water
+YAMA = 'Yama'       # God of Death
 
 # Asteroids
 LILITH = 'Lilith'
@@ -108,6 +131,9 @@ CERES = 'Ceres'
 PALLAS = 'Pallas'
 JUNO = 'Juno'
 VESTA = 'Vesta'
+
+# Special Points
+SYZYGY = 'Syzygy'
 
 # Object movement
 DIRECT = 'Direct'
@@ -122,11 +148,12 @@ MEAN_MOTION_MOON = 13.1833
 OBJ_PLANET = 'Planet'
 OBJ_HOUSE = 'House'
 OBJ_MOON_NODE = 'Moon Node'
-OBJ_ARABIC_PART = 'Arabic Part'
+OBJ_SHADOW_PLANET = 'Shadow Planet'
 OBJ_FIXED_STAR = 'Fixed Star'
 OBJ_ASTEROID = 'Asteroid'
 OBJ_LUNATION = 'Lunation'
 OBJ_GENERIC = 'Generic'
+OBJ_SPECIAL_POINT = 'Special Point'
 
 # List of Objs with Orbital properties for Orbital Class
 LIST_ORBITAL_OBJ = [OBJ_PLANET, OBJ_ASTEROID]
@@ -285,6 +312,10 @@ AY_TRUE_MULA = 'Ayanamsa True Mula'
 AY_ARYABHATA_522 = 'Ayanamsa Aryabhata 522'
 AY_TRUE_SHEORAN = 'Ayanamsa True Sheoran'
 
+# Default Ayanamsas for different systems
+AY_DEFAULT_VEDIC = AY_LAHIRI
+AY_DEFAULT_KP = AY_KRISHNAMURTI
+
 # === Some Lists === */
 
 LIST_SIGNS = [
@@ -294,18 +325,29 @@ LIST_SIGNS = [
 
 LIST_OBJECTS = [
     SUN, MOON, MERCURY, VENUS, MARS, JUPITER, SATURN,
-    URANUS, NEPTUNE, PLUTO, LILITH, CHIRON, NORTH_NODE,
-    SOUTH_NODE, SYZYGY, PARS_FORTUNA,
+    URANUS, NEPTUNE, PLUTO, LILITH, CHIRON, RAHU, KETU, SYZYGY
 ]
 
 LIST_OBJECTS_TRADITIONAL = [
     SUN, MOON, MERCURY, VENUS, MARS, JUPITER, SATURN,
-    NORTH_NODE, SOUTH_NODE, SYZYGY, PARS_FORTUNA
+    RAHU, KETU, SYZYGY
 ]
 
 LIST_OBJECTS_MODERN = [
     SUN, MOON, MERCURY, VENUS, MARS, JUPITER, SATURN, NEPTUNE, URANUS, PLUTO,
-    NORTH_NODE, SOUTH_NODE, SYZYGY, PARS_FORTUNA
+    RAHU, KETU, SYZYGY
+]
+
+LIST_OBJECTS_VEDIC = [
+    SUN, MOON, MERCURY, VENUS, MARS, JUPITER, SATURN, RAHU, KETU
+]
+
+LIST_SHADOW_PLANETS = [
+    GULIKA, MANDI, DHUMA, VYATIPATA, PARIVESHA, INDRACHAPA, UPAKETU
+]
+
+LIST_VEDIC_BODIES = [
+    ARUN, VARUN, YAMA
 ]
 
 LIST_SEVEN_PLANETS = [
@@ -352,8 +394,8 @@ LIST_ASTEROIDS = [
 ]
 
 LIST_MOON_NODES = [
-    NORTH_NODE,
-    SOUTH_NODE
+    RAHU,
+    KETU
 ]
 
 LIST_FIXED_STARS = [
@@ -403,7 +445,6 @@ LIST_ORBS_TIGHT = {
     NORTH_NODE: 12,
     SOUTH_NODE: 12,
     SYZYGY: 0,
-    PARS_FORTUNA: 0,
     PHOLUS: 5,
     CERES: 5,
     JUNO: 5,
@@ -429,7 +470,6 @@ LIST_ORBS_WIDE = {
     NORTH_NODE: 2,
     SOUTH_NODE: 2,
     SYZYGY: 0,
-    PARS_FORTUNA: 0,
     PHOLUS: 1,
     CERES: 1,
     JUNO: 1,

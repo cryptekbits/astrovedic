@@ -1,10 +1,10 @@
 """
     This file is part of flatlib - (C) FlatAngle
     Author: João Ventura (flatangleweb@gmail.com)
-    
 
-    This module implements classes to represent 
-    Astrology objects, such as planets, Houses 
+
+    This module implements classes to represent
+    Astrology objects, such as planets, Houses
     and Fixed-Stars.
 
 """
@@ -13,20 +13,24 @@ from . import const
 from . import angle
 from . import utils
 from . import props
+from .interfaces import IAstronomicalObject, IOrbitalObject, IHouse, IFixedStar
+import logging
 
+# Get logger
+logger = logging.getLogger("flatlib")
 
 
 # ------------------ #
 #   Generic Object   #
 # ------------------ #
 
-class GenericObject:
+class GenericObject(IAstronomicalObject):
     """ This class represents a generic object and
-    includes properties which are common to all 
+    includes properties which are common to all
     objects on a chart.
     orbs: dict of orbs to use instead of const.LIST_ORBS
     """
-    
+
     def __init__(self, orbs=const.LIST_ORBS):
         self.id = const.NO_PLANET
         self.type = const.OBJ_GENERIC
@@ -38,9 +42,28 @@ class GenericObject:
 
     @classmethod
     def fromDict(cls, _dict):
-        """ Builds instance from dictionary of properties. """
+        """ Builds instance from dictionary of properties with validation. """
         obj = cls()
+
+        # Validate required attributes
+        required_attrs = ['id', 'lon', 'lat']
+        missing_attrs = [attr for attr in required_attrs if attr not in _dict]
+
+        if missing_attrs:
+            logger.warning(f"Missing required attributes: {', '.join(missing_attrs)}")
+            # Add default values for missing attributes
+            for attr in missing_attrs:
+                if attr == 'id':
+                    _dict['id'] = const.NO_PLANET
+                elif attr in ['lon', 'lat']:
+                    _dict[attr] = 0.0
+
         obj.__dict__.update(_dict)
+
+        # Ensure sign and signlon are set
+        if 'sign' not in _dict or 'signlon' not in _dict:
+            obj.relocate(obj.lon)  # This will set sign and signlon
+
         return obj
 
     def copy(self):
@@ -65,9 +88,9 @@ class GenericObject:
         return self.type == const.OBJ_PLANET
 
     def eqCoords(self, zerolat=False):
-        """ Returns the Equatorial Coordinates of this object. 
-        Receives a boolean parameter to consider a zero latitude. 
-        
+        """ Returns the Equatorial Coordinates of this object.
+        Receives a boolean parameter to consider a zero latitude.
+
         """
         lat = 0.0 if zerolat else self.lat
         return utils.eqCoords(self.lon, lat)
@@ -106,7 +129,7 @@ class GenericObject:
 #    Orbital Object    #
 # -------------------- #
 
-class OrbitalObject(GenericObject):
+class OrbitalObject(GenericObject, IOrbitalObject):
     """ This class represents an orbital object, such
     as planets and asteroids.
 
@@ -212,11 +235,35 @@ class Asteroid(OrbitalObject):
         self.type = const.OBJ_ASTEROID
 
 
+# ---------------------- #
+#   Shadow Planet Object #
+# ---------------------- #
+
+class ShadowPlanet(GenericObject):
+    """ This class represents a shadow planet (Upagrah) in Vedic astrology. """
+
+    def __init__(self):
+        super().__init__()
+        self.type = const.OBJ_SHADOW_PLANET
+
+
+# -------------------- #
+#   Vedic Body Object  #
+# -------------------- #
+
+class VedicBody(GenericObject):
+    """ This class represents additional Vedic bodies like Arun, Varun, Yama. """
+
+    def __init__(self):
+        super().__init__()
+        self.type = const.OBJ_GENERIC
+
+
 # ------------------ #
 #     House Cusp     #
 # ------------------ #
 
-class House(GenericObject):
+class House(GenericObject, IHouse):
     """ This class represents a generic house cusp. """
 
     def __init__(self, offset=const.MODERN_HOUSE_OFFSET):
@@ -230,6 +277,21 @@ class House(GenericObject):
     @classmethod
     def fromDict(cls, _dict, offset=const.MODERN_HOUSE_OFFSET):
         """Overrides fromDict for using a dynamic offset."""
+        # Validate required attributes
+        required_attrs = ['id', 'lon', 'lat', 'size']
+        missing_attrs = [attr for attr in required_attrs if attr not in _dict]
+
+        if missing_attrs:
+            logger.warning(f"Missing required attributes for House: {', '.join(missing_attrs)}")
+            # Add default values for missing attributes
+            for attr in missing_attrs:
+                if attr == 'id':
+                    _dict['id'] = const.HOUSE1
+                elif attr in ['lon', 'lat']:
+                    _dict[attr] = 0.0
+                elif attr == 'size':
+                    _dict[attr] = 30.0
+
         obj = super().fromDict(_dict)
         obj.offset = offset
         return obj
@@ -248,9 +310,9 @@ class House(GenericObject):
         return int(self.id[5:])
 
     def condition(self):
-        """ Returns the condition of this house. 
+        """ Returns the condition of this house.
         The house can be angular, succedent or cadent.
-    
+
         """
         return props.house.condition[self.id]
 
@@ -278,7 +340,7 @@ class House(GenericObject):
 #     Fixed Star     #
 # ------------------ #
 
-class FixedStar(GenericObject):
+class FixedStar(GenericObject, IFixedStar):
     """ This class represents a generic fixed star. """
 
     def __init__(self):
@@ -309,8 +371,8 @@ class FixedStar(GenericObject):
 
     def aspects(self, obj):
         """ Returns true if this star aspects another object.
-        Fixed stars only aspect by conjunctions. 
-        
+        Fixed stars only aspect by conjunctions.
+
         """
         dist = angle.closestdistance(self.lon, obj.lon)
         return abs(dist) < self.orb()

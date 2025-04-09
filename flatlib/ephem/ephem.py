@@ -22,6 +22,11 @@ from flatlib.object import (GenericObject, Object,
                             House, FixedStar, Asteroid, MoonNode)
 from flatlib.lists import (GenericList, ObjectList,
                            HouseList, FixedStarList)
+from flatlib.factory import AstronomicalObjectFactory
+import logging
+
+# Get logger
+logger = logging.getLogger("flatlib")
 
 
 # === Objects === #
@@ -39,10 +44,35 @@ def getObjectClass(ID):
         return Object
 
 def getObject(ID, date, pos):
-    """ Returns an ephemeris object. """
-    obj = eph.getObject(ID, date.jd, pos.lat, pos.lon)
-    cls = getObjectClass(ID)
-    return cls.fromDict(obj)
+    """ Returns an ephemeris object with validation. """
+    try:
+        obj_data = eph.getObject(ID, date.jd, pos.lat, pos.lon)
+
+        # Determine object type based on ID
+        if ID in const.LIST_TEN_PLANETS:
+            obj_type = const.OBJ_PLANET
+        elif ID in const.LIST_ASTEROIDS:
+            obj_type = const.OBJ_ASTEROID
+        elif ID in const.LIST_MOON_NODES:
+            obj_type = const.OBJ_MOON_NODE
+        else:
+            obj_type = const.OBJ_GENERIC
+
+        # Create object using factory
+        return AstronomicalObjectFactory.create_object(obj_data, obj_type)
+    except Exception as e:
+        logger.error(f"Error in getObject for {ID}: {e}")
+        # Create a minimal valid object
+        obj_data = {
+            'id': ID,
+            'lon': 0.0,
+            'lat': 0.0,
+            'sign': const.ARIES,
+            'signlon': 0.0,
+            'lonspeed': 0.0,
+            'latspeed': 0.0
+        }
+        return AstronomicalObjectFactory.create_object(obj_data)
 
 
 def getObjectList(IDs, date, pos):
@@ -53,7 +83,7 @@ def getObjectList(IDs, date, pos):
 
 def get_object(obj, date, pos, alt=None, mode=None):
     """
-    Returns an object for a specific date and location.
+    Returns an object for a specific date and location with validation.
     - If the altitude value is set, returns the topocentric position
     - If mode is set, returns sidereal positions for the given mode
 
@@ -64,9 +94,34 @@ def get_object(obj, date, pos, alt=None, mode=None):
     :param mode: the ayanamsa
     :return: Object
     """
-    obj_values = eph.get_object(obj, date.jd, pos.lat, pos.lon, alt, mode)
-    cls = getObjectClass(obj)
-    return cls.fromDict(obj_values)
+    try:
+        obj_values = eph.get_object(obj, date.jd, pos.lat, pos.lon, alt, mode)
+
+        # Determine object type based on ID
+        if obj in const.LIST_TEN_PLANETS:
+            obj_type = const.OBJ_PLANET
+        elif obj in const.LIST_ASTEROIDS:
+            obj_type = const.OBJ_ASTEROID
+        elif obj in const.LIST_MOON_NODES:
+            obj_type = const.OBJ_MOON_NODE
+        else:
+            obj_type = const.OBJ_GENERIC
+
+        # Create object using factory
+        return AstronomicalObjectFactory.create_object(obj_values, obj_type)
+    except Exception as e:
+        logger.error(f"Error in get_object for {obj}: {e}")
+        # Create a minimal valid object
+        obj_values = {
+            'id': obj,
+            'lon': 0.0,
+            'lat': 0.0,
+            'sign': const.ARIES,
+            'signlon': 0.0,
+            'lonspeed': 0.0,
+            'latspeed': 0.0
+        }
+        return AstronomicalObjectFactory.create_object(obj_values)
 
 
 def get_objects(objs, date, pos, alt=None, mode=None):

@@ -29,12 +29,15 @@ SWE_OBJECTS = {
     const.PLUTO: 9,
     const.LILITH: 12,
     const.CHIRON: 15,
-    const.NORTH_NODE: 10,
+    const.RAHU: 10,      # North Node
+    const.KETU: 11,      # South Node (calculated as Rahu + 180°)
     const.PHOLUS: 16,
     const.CERES: 17,
     const.PALLAS: 18,
     const.JUNO: 19,
     const.VESTA: 20,
+    # Shadow planets and Vedic bodies are calculated separately
+    # in flatlib/vedic/upagrah.py and flatlib/vedic/bodies.py
 }
 
 # Map house systems
