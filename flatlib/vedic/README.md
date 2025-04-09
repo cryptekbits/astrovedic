@@ -54,6 +54,17 @@ The `bodies.py` module provides calculations for additional Vedic bodies:
 - Varun (God of Water)
 - Yama (God of Death)
 
+### Vimshottari Dasha
+
+The `dashas.py` module implements Vimshottari Dasha calculations:
+
+- Mahadasha (main period) calculations
+- Antardasha (sub-period) calculations
+- Pratyantardasha (sub-sub-period) calculations
+- Dasha balance at birth
+- Current operating period analysis
+- Dasha Sandhi (junction points) detection
+
 ## Usage
 
 ```python
@@ -66,6 +77,7 @@ from flatlib.vedic.panchang import get_panchang
 from flatlib.vedic.kp import get_kp_lords
 from flatlib.vedic.upagrah import get_upagrah
 from flatlib.vedic.bodies import get_vedic_body
+from flatlib.vedic.dashas import calculate_dasha_periods, get_current_dasha
 
 # Create a chart with Lahiri ayanamsa and Whole Sign houses
 date = Datetime('2025/04/09', '20:51', '+05:30')
@@ -95,6 +107,12 @@ print(f"Gulika is at {gulika['sign']} {gulika['signlon']:.2f}°")
 # Get Vedic body position
 arun = get_vedic_body(const.ARUN, date.jd)
 print(f"Arun is at {arun['sign']} {arun['signlon']:.2f}°")
+
+# Calculate Vimshottari Dasha periods
+moon = chart.getObject(const.MOON)
+dasha_periods = calculate_dasha_periods(date, moon.lon)
+current_dasha = get_current_dasha(dasha_periods)
+print(f"Current Dasha: {current_dasha['mahadasha']}-{current_dasha['antardasha']}-{current_dasha['pratyantardasha']}")
 ```
 
 ## References

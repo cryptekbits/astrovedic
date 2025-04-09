@@ -1,13 +1,14 @@
 """
     This file is part of flatlib - (C) FlatAngle
     Modified for Vedic Astrology
-    
+
     This subpackage implements Vedic astrology features including:
     - Nakshatra calculations
     - KP (Krishnamurti Paddhati) astrology
     - Panchang elements (tithi, yoga, karana, etc.)
     - Shadow planets (upagrah) calculations
     - Additional Vedic bodies
+    - Vimshottari Dasha calculations
 """
 
 from flatlib import const
