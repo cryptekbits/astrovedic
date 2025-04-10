@@ -60,3 +60,24 @@ Check the `examples/` directory for example scripts:
 ## Development
 
 This is a fork of the original flatlib library, modified to focus on Vedic astrology features.
+
+### Commit Message Format
+
+We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for commit messages:
+
+```
+feat(vedic): implement Vimshottari Dasha system
+
+- Create core dasha calculations based on Moon's nakshatra
+- Implement main periods (Mahadashas) with precise dates
+- Add sub-period (Antardasha/Bhukti) calculations
+- Include utility functions for finding current period
+```
+
+Common types include:
+- `feat`: A new feature
+- `fix`: A bug fix
+- `docs`: Documentation changes
+- `refactor`: Code changes that neither fix bugs nor add features
+- `test`: Adding or updating tests
+- `chore`: Changes to build process or auxiliary tools
