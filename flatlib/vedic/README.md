@@ -46,13 +46,13 @@ The `upagrah.py` module implements calculations for shadow planets:
 - Indrachapa (Rainbow)
 - Upaketu (Comet)
 
-### Additional Vedic Bodies
+### Outer Planets
 
-The `bodies.py` module provides calculations for additional Vedic bodies:
+The library supports outer planets in Vedic calculations:
 
-- Arun (Charioteer of the Sun)
-- Varun (God of Water)
-- Yama (God of Death)
+- Uranus
+- Neptune
+- Pluto
 
 ### Vimshottari Dasha
 
@@ -76,7 +76,7 @@ from flatlib.vedic.nakshatras import get_nakshatra
 from flatlib.vedic.panchang import get_panchang
 from flatlib.vedic.kp import get_kp_lords
 from flatlib.vedic.upagrah import get_upagrah
-from flatlib.vedic.bodies import get_vedic_body
+
 from flatlib.vedic.dashas import calculate_dasha_periods, get_current_dasha
 
 # Create a chart with Lahiri ayanamsa and Whole Sign houses
@@ -104,9 +104,9 @@ print(f"Sun KP pointer: {kp_info['kp_pointer']}")
 gulika = get_upagrah(const.GULIKA, date.jd, pos.lat, pos.lon)
 print(f"Gulika is at {gulika['sign']} {gulika['signlon']:.2f}°")
 
-# Get Vedic body position
-arun = get_vedic_body(const.ARUN, date.jd)
-print(f"Arun is at {arun['sign']} {arun['signlon']:.2f}°")
+# Get outer planet position
+uranus = chart.getObject(const.URANUS)
+print(f"Uranus is at {uranus.sign} {uranus.signlon:.2f}°")
 
 # Calculate Vimshottari Dasha periods
 moon = chart.getObject(const.MOON)

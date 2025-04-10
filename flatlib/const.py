@@ -24,7 +24,7 @@ AIR = 'Air'      # Vayu
 WATER = 'Water'  # Jala
 ETHER = 'Ether'  # Akasha
 
-# Four Temperaments (Western)
+# Four Temperaments (Western) - Kept for backward compatibility
 CHOLERIC = 'Choleric'
 MELANCHOLIC = 'Melancholic'
 SANGUINE = 'Sanguine'
@@ -118,10 +118,6 @@ PARIVESHA = 'Parivesha' # Halo
 INDRACHAPA = 'Indrachapa' # Rainbow
 UPAKETU = 'Upaketu' # Comet
 
-# Additional Vedic Bodies
-ARUN = 'Arun'       # Charioteer of the Sun
-VARUN = 'Varun'     # God of Water
-YAMA = 'Yama'       # God of Death
 
 # Asteroids
 LILITH = 'Lilith'
@@ -339,7 +335,7 @@ LIST_OBJECTS_MODERN = [
 ]
 
 LIST_OBJECTS_VEDIC = [
-    SUN, MOON, MERCURY, VENUS, MARS, JUPITER, SATURN, RAHU, KETU
+    SUN, MOON, MERCURY, VENUS, MARS, JUPITER, SATURN, URANUS, NEPTUNE, PLUTO, RAHU, KETU
 ]
 
 LIST_SHADOW_PLANETS = [
@@ -347,7 +343,7 @@ LIST_SHADOW_PLANETS = [
 ]
 
 LIST_VEDIC_BODIES = [
-    ARUN, VARUN, YAMA
+    URANUS, NEPTUNE, PLUTO
 ]
 
 LIST_SEVEN_PLANETS = [

@@ -93,9 +93,8 @@ def _aspectDict(obj1, obj2, aspList):
             if MAX_MINOR_ASP_ORB < orb:
                 continue
 
-        # Only conjunctions for Pars Fortuna and Nodes
-        if obj1.id in [const.PARS_FORTUNA,
-                       const.NORTH_NODE,
+        # Only conjunctions for Nodes
+        if obj1.id in [const.NORTH_NODE,
                        const.SOUTH_NODE] and \
                 asp != const.CONJUNCTION:
             continue

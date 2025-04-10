@@ -48,7 +48,11 @@ class Chart:
         """
         # Handle optional arguments
         hsys = kwargs.get('hsys', const.HOUSES_DEFAULT)
-        IDs = kwargs.get('IDs', const.LIST_OBJECTS_TRADITIONAL)
+        # Use Vedic objects list if mode is set (sidereal zodiac)
+        if 'mode' in kwargs and kwargs['mode'] is not None:
+            IDs = kwargs.get('IDs', const.LIST_OBJECTS_VEDIC)
+        else:
+            IDs = kwargs.get('IDs', const.LIST_OBJECTS_TRADITIONAL)
         houses_offset = kwargs.get('houses_offset', const.MODERN_HOUSE_OFFSET)
         orbs = kwargs.get('orbs', const.LIST_ORBS)
         mode = kwargs.get('mode', None)

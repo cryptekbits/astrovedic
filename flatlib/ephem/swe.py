@@ -145,15 +145,16 @@ def sweHouses(jd, lat, lon, hsys):
         {
             'id': const.LIST_HOUSES[i],
             'lon': hlist[i],
+            'lat': 0.0,  # Add lat attribute to avoid warnings
             'size': angle.distance(hlist[i], hlist[i + 1])
         } for i in range(12)
     ]
     angles = [
-        {'id': const.ASC, 'lon': ascmc[0]},
-        {'id': const.MC, 'lon': ascmc[1]},
-        {'id': const.DESC, 'lon': angle.norm(ascmc[0] + 180)},
-        {'id': const.IC, 'lon': angle.norm(ascmc[1] + 180)},
-        {'id': const.VERTEX, 'lon': ascmc[3]}
+        {'id': const.ASC, 'lon': ascmc[0], 'lat': 0.0},
+        {'id': const.MC, 'lon': ascmc[1], 'lat': 0.0},
+        {'id': const.DESC, 'lon': angle.norm(ascmc[0] + 180), 'lat': 0.0},
+        {'id': const.IC, 'lon': angle.norm(ascmc[1] + 180), 'lat': 0.0},
+        {'id': const.VERTEX, 'lon': ascmc[3], 'lat': 0.0}
     ]
     return (houses, angles)
 
@@ -326,17 +327,18 @@ def swe_houses(jd, lat, lon, hsys, mode=None):
         {
             'id': const.LIST_HOUSES[i],
             'lon': cusps[i],
+            'lat': 0.0,  # Add lat attribute to avoid warnings
             'size': angle.distance(cusps[i], cusps[i + 1]),
         } for i in range(12)
     ]
 
     # Create angles
     angles = [
-        {'id': const.ASC, 'lon': ascmc[0]},
-        {'id': const.MC, 'lon': ascmc[1]},
-        {'id': const.DESC, 'lon': angle.norm(ascmc[0] + 180)},
-        {'id': const.IC, 'lon': angle.norm(ascmc[1] + 180)},
-        {'id': const.VERTEX, 'lon': ascmc[4]}
+        {'id': const.ASC, 'lon': ascmc[0], 'lat': 0.0},
+        {'id': const.MC, 'lon': ascmc[1], 'lat': 0.0},
+        {'id': const.DESC, 'lon': angle.norm(ascmc[0] + 180), 'lat': 0.0},
+        {'id': const.IC, 'lon': angle.norm(ascmc[1] + 180), 'lat': 0.0},
+        {'id': const.VERTEX, 'lon': ascmc[4], 'lat': 0.0}
     ]
 
     return (houses, angles)

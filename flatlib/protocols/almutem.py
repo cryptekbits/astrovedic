@@ -64,7 +64,6 @@ def compute(chart):
         chart.getObject(const.SUN),
         chart.getObject(const.MOON),
         chart.getAngle(const.ASC),
-        chart.getObject(const.PARS_FORTUNA),
         chart.getObject(const.SYZYGY)
     ]
     for hyleg in hylegic:

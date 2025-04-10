@@ -30,7 +30,7 @@ print(f"Nakshatra: {nakshatra_info['name']} (Pada {nakshatra_info['pada']})")
 - **Panchang**: Vedic almanac elements including tithi, yoga, karana, and more
 - **KP Astrology**: Krishnamurti Paddhati features including sublord calculations
 - **Shadow Planets**: Support for upagrah (shadow planets) like Gulika, Mandi, etc.
-- **Additional Vedic Bodies**: Support for bodies like Arun, Varun, Yama
+- **Outer Planets**: Support for Uranus, Neptune, and Pluto in Vedic calculations
 
 ## Installation
 

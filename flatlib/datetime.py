@@ -1,14 +1,14 @@
 """
     This file is part of flatlib - (C) FlatAngle
     Author: João Ventura (flatangleweb@gmail.com)
-    
 
-    This module provides functions and classes for handling 
+
+    This module provides functions and classes for handling
     dates and times.
-    
-    The classes implemented in this file are <Date>, <Time> 
-    and <Datetime>. Since time is similar to angles (same 
-    string separators and base 60), the <Time> class uses 
+
+    The classes implemented in this file are <Date>, <Time>
+    and <Datetime>. Since time is similar to angles (same
+    string separators and base 60), the <Time> class uses
     angular functions for internal conversions.
 
 """
@@ -54,11 +54,11 @@ def jdnDate(jdn):
 class Date:
     """ This class represents a calendar date. It is
     internally represented by a JDN integer.
-    
-    Objects of this class can be instantiated with 
+
+    Objects of this class can be instantiated with
     dates of type string, list and int (jdn).
     String and date lists are like 'yyyy/mm/dd'.
-    
+
     """
 
     # Calendar types
@@ -108,20 +108,20 @@ class Date:
 class Time:
     """ This class represents a time in the library.
     A time from this class can have negative values.
-    
+
     Objects of this class can be instantiated with
     strings, signed lists or float values.
     String and time lists are like 'hh:mm:ss.'
-    
+
     """
 
     def __init__(self, value):
         self.value = angle.toFloat(value)
 
     def getUTC(self, utcoffset):
-        """ Returns a new Time object set to UTC given 
+        """ Returns a new Time object set to UTC given
         an offset Time object.
-        
+
         """
         newTime = (self.value - utcoffset.value) % 24
         return Time(newTime)
@@ -131,7 +131,7 @@ class Time:
         slist = self.toList()
         if slist[0] == '-':
             slist[1] *= -1
-            # We must do a trick if we want to 
+            # We must do a trick if we want to
             # make negative zeros explicit
             if slist[1] == -0:
                 slist[1] = -0.0
@@ -162,7 +162,7 @@ class Datetime:
     """ This class represents a specific moment in time given by
     a date, a time and an UTC Offset. The UTC Offset is zero
     by default (UTC+0) although an offset can be given.
-    
+
     """
 
     # Calendar types
@@ -199,6 +199,19 @@ class Datetime:
         date = Date(round(localJD))
         time = Time((localJD + 0.5 - date.jdn) * 24)
         return Datetime(date, time, utcoffset)
+
+    @staticmethod
+    def fromDatetime(dt):
+        """ Builds a Datetime object from a Python datetime object. """
+        from datetime import datetime
+        if not isinstance(dt, datetime):
+            raise ValueError("Expected a datetime.datetime object")
+        date_str = dt.strftime('%Y/%m/%d')
+        time_str = dt.strftime('%H:%M')
+        utc_offset = dt.strftime('%z')
+        if not utc_offset:
+            utc_offset = '+00:00'  # Default to UTC if no timezone
+        return Datetime(date_str, time_str, utc_offset)
 
     def getUTC(self):
         """ Returns this Datetime localized for UTC. """

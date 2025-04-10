@@ -18,10 +18,9 @@ from flatlib import angle
 from flatlib import const
 import logging
 
-# Import Vedic modules for shadow planets and additional bodies
+# Import Vedic modules for shadow planets
 try:
     from flatlib.vedic import upagrah
-    from flatlib.vedic import bodies
     VEDIC_MODULES_AVAILABLE = True
 except ImportError:
     VEDIC_MODULES_AVAILABLE = False
@@ -71,19 +70,7 @@ def getObject(ID, jd, lat, lon):
                     'lonspeed': 0.0,
                     'latspeed': 0.0
                 }
-        # Handle additional Vedic bodies
-        elif ID in const.LIST_VEDIC_BODIES and VEDIC_MODULES_AVAILABLE:
-            try:
-                obj = bodies.get_vedic_body(ID, jd)
-            except Exception as e:
-                logger.error(f"Error calculating {ID}: {e}")
-                obj = {
-                    'id': ID,
-                    'lon': 0.0,
-                    'lat': 0.0,
-                    'lonspeed': 0.0,
-                    'latspeed': 0.0
-                }
+        # Outer planets are handled by the default case
         # Pars Fortuna has been removed for Vedic implementation
         elif ID == const.SYZYGY:
             try:
@@ -244,15 +231,16 @@ def get_object(obj, jd, lat=None, lon=None, alt=None, mode=None):
                     'latspeed': 0.0
                 }
 
-        elif obj == const.PARS_FORTUNA:
-            try:
-                # TODO: tools.pfLon must compute sidereal/topocentric positions
-                pflon = tools.pfLon(jd, lat, lon)
-            except Exception as e:
-                logger.error(f"Error calculating Pars Fortuna: {e}")
-                pflon = 0.0
-
-            eph_obj = {"id": obj, "lon": pflon, "lat": 0, "lonspeed": 0, "latspeed": 0}
+        # Commented out PARS_FORTUNA as it is not defined in const for Vedic implementation
+        # elif obj == const.PARS_FORTUNA:
+        #     try:
+        #         # TODO: tools.pfLon must compute sidereal/topocentric positions
+        #         pflon = tools.pfLon(jd, lat, lon)
+        #     except Exception as e:
+        #         logger.error(f"Error calculating Pars Fortuna: {e}")
+        #         pflon = 0.0
+        #
+        #     eph_obj = {"id": obj, "lon": pflon, "lat": 0, "lonspeed": 0, "latspeed": 0}
 
         elif obj == const.SYZYGY:
             try:
