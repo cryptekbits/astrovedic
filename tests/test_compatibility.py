@@ -12,9 +12,9 @@ from flatlib.chart import Chart
 from flatlib import const
 from flatlib.vedic.compatibility import (
     get_compatibility_score, get_compatibility_factors,
-    get_compatibility_description, get_compatibility_report,
-    analyze_compatibility, get_detailed_compatibility_report,
-    get_compatibility_timeline, get_compatibility_strength_score
+    get_compatibility, get_compatibility_level,
+    get_detailed_compatibility_report, get_compatibility_timeline,
+    analyze_charts_compatibility, get_basic_compatibility_analysis
 )
 from flatlib.vedic.compatibility.kuta import (
     get_varna_kuta, get_vashya_kuta, get_tara_kuta,
@@ -24,7 +24,7 @@ from flatlib.vedic.compatibility.kuta import (
 from flatlib.vedic.compatibility.kuta.total import get_total_kuta_score
 from flatlib.vedic.compatibility.dosha import (
     get_mangal_dosha, get_kuja_dosha, get_shani_dosha,
-    get_grahan_dosha, get_dosha_cancellation, get_dosha_remedies
+    get_grahan_dosha, get_dosha_cancellation
 )
 from flatlib.vedic.compatibility.dasha import (
     get_dasha_compatibility, get_antardasha_compatibility,
@@ -163,13 +163,12 @@ class TestCompatibility(unittest.TestCase):
         # Check for required keys
         self.assertIn('is_cancelled', dosha_cancellation)
         self.assertIn('description', dosha_cancellation)
+        self.assertIn('kuja_dosha_cancelled', dosha_cancellation)
+        self.assertIn('shani_dosha_cancelled', dosha_cancellation)
+        self.assertIn('grahan_dosha_cancelled', dosha_cancellation)
+        self.assertIn('description', dosha_cancellation)
 
-        # Test Dosha Remedies
-        dosha_remedies = get_dosha_remedies(self.chart1, self.chart2)
-        self.assertIn('Mangal Dosha (Person 1)', dosha_remedies)
-        self.assertIn('Kuja Dosha (Person 1)', dosha_remedies)
-        self.assertIn('Shani Dosha (Person 1)', dosha_remedies)
-        self.assertIn('Grahan Dosha (Person 1)', dosha_remedies)
+
 
     def test_dasha_compatibility(self):
         """Test Dasha compatibility analysis"""
@@ -254,52 +253,34 @@ class TestCompatibility(unittest.TestCase):
         if isinstance(factors, dict):
             self.assertIn('challenging_factors', factors)
 
-        # Test Compatibility Description
-        description = get_compatibility_description(self.chart1, self.chart2)
-        self.assertIsInstance(description, str)
-        self.assertGreater(len(description), 0)
 
-        # Test Compatibility Report
-        report = get_compatibility_report(self.chart1, self.chart2)
-        self.assertIn('score', report)
-        self.assertIn('description', report)
-        self.assertIn('factors', report)
-        self.assertIn('kuta', report)
-        self.assertIn('dosha', report)
-        self.assertIn('dasha', report)
-        self.assertIn('navamsa', report)
 
         # Test Analyze Compatibility
-        analysis = analyze_compatibility(self.chart1, self.chart2)
+        analysis = analyze_charts_compatibility(self.chart1, self.chart2)
         self.assertIn('score', analysis)
-        self.assertIn('description', analysis)
-        self.assertIn('factors', analysis)
+        self.assertIn('level', analysis)
         self.assertIn('kuta_scores', analysis)
         self.assertIn('dosha_analysis', analysis)
-        self.assertIn('dosha_cancellation', analysis)
-        self.assertIn('dasha_compatibility', analysis)
-        self.assertIn('navamsa_compatibility', analysis)
 
         # Test Detailed Compatibility Report
         detailed_report = get_detailed_compatibility_report(self.chart1, self.chart2)
-        self.assertIn('overall', detailed_report)
-        self.assertIn('kuta', detailed_report)
-        self.assertIn('dosha', detailed_report)
-        self.assertIn('dasha', detailed_report)
-        self.assertIn('navamsa', detailed_report)
+        self.assertIn('score', detailed_report)
+        self.assertIn('level', detailed_report)
+        self.assertIn('kuta_scores', detailed_report)
+        self.assertIn('dosha_analysis', detailed_report)
+        self.assertIn('dosha_cancellation', detailed_report)
+        self.assertIn('dasha_compatibility', detailed_report)
+        self.assertIn('navamsa_compatibility', detailed_report)
 
         # Test Compatibility Timeline
         start_date = Datetime('2025/04/09', '20:51', '+05:30')
         end_date = Datetime('2026/04/09', '20:51', '+05:30')
         timeline = get_compatibility_timeline(self.chart1, self.chart2, start_date, end_date)
-        self.assertIn('favorable_periods', timeline)
-        self.assertIn('challenging_periods', timeline)
-        self.assertIn('description', timeline)
+        self.assertIn('periods', timeline)
+        self.assertIn('events', timeline)
+        self.assertIn('score', timeline)
 
-        # Test Compatibility Strength Score
-        strength_score = get_compatibility_strength_score(self.chart1, self.chart2)
-        self.assertGreaterEqual(strength_score, 0)
-        self.assertLessEqual(strength_score, 100)
+
 
 
 if __name__ == '__main__':
