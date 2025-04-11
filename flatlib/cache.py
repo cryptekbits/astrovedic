@@ -1,6 +1,6 @@
 """
     This file is part of flatlib - (C) FlatAngle
-    
+
     This module implements caching functionality for flatlib.
     It provides decorators and utilities for caching different
     types of calculations to improve performance.
@@ -26,26 +26,26 @@ _CACHED_FUNCTIONS: Dict[str, List[Any]] = {
 
 class CacheConfig:
     """Configuration for flatlib caching behavior."""
-    
+
     # Default values
     enabled = True
     maxsize = {
-        CACHE_REFERENCE: 1024,  # Large cache for reference data
-        CACHE_CALCULATION: 128,  # Medium cache for calculations
-        CACHE_EPHEMERIS: 64      # Small cache for ephemeris lookups
+        CACHE_REFERENCE: 512,   # Medium-large cache for reference data (rarely changes)
+        CACHE_CALCULATION: 256,  # Medium cache for calculations (moderate reuse)
+        CACHE_EPHEMERIS: 128     # Small-medium cache for ephemeris lookups (high value per cache hit)
     }
-    
+
     @classmethod
     def disable_all(cls) -> None:
         """Disable all caching."""
         cls.enabled = False
         clear_all_caches()
-    
+
     @classmethod
     def enable_all(cls) -> None:
         """Enable all caching."""
         cls.enabled = True
-    
+
     @classmethod
     def set_cache_size(cls, category: str, size: int) -> None:
         """Set cache size for a specific category."""
@@ -53,7 +53,7 @@ class CacheConfig:
             cls.maxsize[category] = size
             # Clear existing cache for this category
             clear_category_cache(category)
-    
+
     @classmethod
     def get_cache_info(cls) -> Dict[str, Any]:
         """Get information about all caches."""
@@ -88,95 +88,95 @@ def clear_all_caches() -> None:
 def reference_cache(maxsize: Optional[int] = None) -> Callable[[F], F]:
     """
     Decorator for caching reference data.
-    
+
     This is for data that doesn't change, like nakshatra lords,
     sign lords, etc.
-    
+
     Args:
         maxsize: Maximum size of the cache. If None, uses the default
                  size from CacheConfig.
-    
+
     Returns:
         A decorator function.
     """
     def decorator(func: F) -> F:
         if not CacheConfig.enabled:
             return func
-        
+
         size = maxsize if maxsize is not None else CacheConfig.maxsize[CACHE_REFERENCE]
         cached_func = functools.lru_cache(maxsize=size)(func)
         _CACHED_FUNCTIONS[CACHE_REFERENCE].append(cached_func)
-        
+
         @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             return cached_func(*args, **kwargs)
-        
+
         wrapper.cache_info = cached_func.cache_info  # type: ignore
         wrapper.cache_clear = cached_func.cache_clear  # type: ignore
-        
+
         return cast(F, wrapper)
     return decorator
 
 def calculation_cache(maxsize: Optional[int] = None) -> Callable[[F], F]:
     """
     Decorator for caching expensive calculations.
-    
+
     This is for pure functions that perform mathematical transformations,
     like divisional chart calculations.
-    
+
     Args:
         maxsize: Maximum size of the cache. If None, uses the default
                  size from CacheConfig.
-    
+
     Returns:
         A decorator function.
     """
     def decorator(func: F) -> F:
         if not CacheConfig.enabled:
             return func
-        
+
         size = maxsize if maxsize is not None else CacheConfig.maxsize[CACHE_CALCULATION]
         cached_func = functools.lru_cache(maxsize=size)(func)
         _CACHED_FUNCTIONS[CACHE_CALCULATION].append(cached_func)
-        
+
         @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             return cached_func(*args, **kwargs)
-        
+
         wrapper.cache_info = cached_func.cache_info  # type: ignore
         wrapper.cache_clear = cached_func.cache_clear  # type: ignore
-        
+
         return cast(F, wrapper)
     return decorator
 
 def ephemeris_cache(maxsize: Optional[int] = None) -> Callable[[F], F]:
     """
     Decorator for caching ephemeris lookups.
-    
+
     This is for functions that look up planetary positions,
     house cusps, etc.
-    
+
     Args:
         maxsize: Maximum size of the cache. If None, uses the default
                  size from CacheConfig.
-    
+
     Returns:
         A decorator function.
     """
     def decorator(func: F) -> F:
         if not CacheConfig.enabled:
             return func
-        
+
         size = maxsize if maxsize is not None else CacheConfig.maxsize[CACHE_EPHEMERIS]
         cached_func = functools.lru_cache(maxsize=size)(func)
         _CACHED_FUNCTIONS[CACHE_EPHEMERIS].append(cached_func)
-        
+
         @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             return cached_func(*args, **kwargs)
-        
+
         wrapper.cache_info = cached_func.cache_info  # type: ignore
         wrapper.cache_clear = cached_func.cache_clear  # type: ignore
-        
+
         return cast(F, wrapper)
     return decorator

@@ -45,11 +45,11 @@ Memory Usage
 
 Caching improves performance but increases memory usage. The default cache sizes are:
 
-- Reference Data: 1024 entries
-- Calculations: 128 entries
-- Ephemeris: 64 entries
+- Reference Data: 512 entries (rarely changing data like sign lords, nakshatra lords)
+- Calculations: 256 entries (mathematical transformations like divisional charts)
+- Ephemeris: 128 entries (planetary positions, house cusps, etc.)
 
-If you're working with limited memory, you can reduce these sizes or disable caching entirely.
+These sizes are optimized based on performance testing to balance memory usage and speed improvements. If you're working with limited memory, you can reduce these sizes or disable caching entirely.
 
 Cached Functions
 --------------
