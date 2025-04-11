@@ -214,3 +214,48 @@ def get_upagrah(upagrah_id, jd, lat=None, lon=None):
         'signlon': sign_lon,
         'type': const.OBJ_SHADOW_PLANET
     }
+
+
+def get_gulika(chart):
+    """
+    Get Gulika from a chart
+
+    Args:
+        chart (Chart): The chart
+
+    Returns:
+        dict: Dictionary with Gulika information
+    """
+    return get_upagrah(const.GULIKA, chart.date.jd, chart.pos.lat, chart.pos.lon)
+
+
+def get_mandi(chart):
+    """
+    Get Mandi from a chart
+
+    Args:
+        chart (Chart): The chart
+
+    Returns:
+        dict: Dictionary with Mandi information
+    """
+    return get_upagrah(const.MANDI, chart.date.jd, chart.pos.lat, chart.pos.lon)
+
+
+def get_upagrah_positions(chart):
+    """
+    Get all Upagrah positions from a chart
+
+    Args:
+        chart (Chart): The chart
+
+    Returns:
+        dict: Dictionary with all Upagrah positions
+    """
+    positions = {}
+
+    for upagrah_id in [const.GULIKA, const.MANDI, const.DHUMA, const.VYATIPATA,
+                      const.PARIVESHA, const.INDRACHAPA, const.UPAKETU]:
+        positions[upagrah_id] = get_upagrah(upagrah_id, chart.date.jd, chart.pos.lat, chart.pos.lon)
+
+    return positions

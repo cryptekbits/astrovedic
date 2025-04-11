@@ -33,21 +33,37 @@ def get_dosha_cancellation(chart1, chart2):
     mangal_dosha2 = get_mangal_dosha(chart2)
     kuja_dosha1 = get_kuja_dosha(chart1)
     kuja_dosha2 = get_kuja_dosha(chart2)
+    shani_dosha1 = get_shani_dosha(chart1)
+    shani_dosha2 = get_shani_dosha(chart2)
+    grahan_dosha1 = get_grahan_dosha(chart1)
+    grahan_dosha2 = get_grahan_dosha(chart2)
 
     # Check if both have the same Dosha
     both_have_mangal = mangal_dosha1['has_dosha'] and mangal_dosha2['has_dosha']
     both_have_kuja = kuja_dosha1['has_dosha'] and kuja_dosha2['has_dosha']
+    both_have_shani = shani_dosha1['has_dosha'] and shani_dosha2['has_dosha']
+    both_have_grahan = grahan_dosha1['has_dosha'] and grahan_dosha2['has_dosha']
 
     # Check for cancellation
-    is_cancelled = both_have_mangal or both_have_kuja
+    is_cancelled = both_have_mangal or both_have_kuja or both_have_shani or both_have_grahan
 
     # Generate the description
-    if both_have_mangal and both_have_kuja:
-        description = "Both individuals have Mangal Dosha and Kuja Dosha, which cancels out the negative effects."
-    elif both_have_mangal:
-        description = "Both individuals have Mangal Dosha, which cancels out the negative effects."
-    elif both_have_kuja:
-        description = "Both individuals have Kuja Dosha, which cancels out the negative effects."
+    description_parts = []
+    if both_have_mangal:
+        description_parts.append("Mangal Dosha")
+    if both_have_kuja:
+        description_parts.append("Kuja Dosha")
+    if both_have_shani:
+        description_parts.append("Shani Dosha")
+    if both_have_grahan:
+        description_parts.append("Grahan Dosha")
+
+    if description_parts:
+        if len(description_parts) > 1:
+            dosha_list = ", ".join(description_parts[:-1]) + ", and " + description_parts[-1]
+        else:
+            dosha_list = description_parts[0]
+        description = f"Both individuals have {dosha_list}, which cancels out the negative effects."
     else:
         description = "No Dosha cancellation is present."
 
@@ -55,6 +71,12 @@ def get_dosha_cancellation(chart1, chart2):
         'is_cancelled': is_cancelled,
         'both_have_mangal': both_have_mangal,
         'both_have_kuja': both_have_kuja,
+        'both_have_shani': both_have_shani,
+        'both_have_grahan': both_have_grahan,
+        'mangal_dosha_cancelled': both_have_mangal,
+        'kuja_dosha_cancelled': both_have_kuja,
+        'shani_dosha_cancelled': both_have_shani,
+        'grahan_dosha_cancelled': both_have_grahan,
         'description': description
     }
 

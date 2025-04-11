@@ -1,7 +1,7 @@
 """
     This file is part of flatlib - (C) FlatAngle
     Modified for Vedic Astrology
-    
+
     This module implements Nakshatra (lunar mansion) calculations
     for Vedic astrology.
 """
@@ -166,35 +166,35 @@ PADA_SPAN = NAKSHATRA_SPAN / 4  # 3.33333333333333
 def get_nakshatra(longitude):
     """
     Get nakshatra information from longitude
-    
+
     Args:
         longitude (float): The longitude in degrees (0-360)
-    
+
     Returns:
         dict: Dictionary with nakshatra information
     """
     # Calculate nakshatra index (0-26)
     nakshatra_index = int(longitude / NAKSHATRA_SPAN) % 27
-    
+
     # Get nakshatra name
     nakshatra = LIST_NAKSHATRAS[nakshatra_index]
-    
+
     # Calculate position within nakshatra (0-13.33333 degrees)
     pos_in_nakshatra = longitude % NAKSHATRA_SPAN
-    
+
     # Calculate pada (quarter) (1-4)
     pada = int(pos_in_nakshatra / PADA_SPAN) + 1
-    
+
     # Calculate percentage through nakshatra
     percentage = (pos_in_nakshatra / NAKSHATRA_SPAN) * 100
-    
+
     # Get nakshatra lord
     lord = NAKSHATRA_LORDS[nakshatra]
-    
+
     # Get nakshatra element and dosha
     element = NAKSHATRA_ELEMENTS[nakshatra]
     dosha = NAKSHATRA_DOSHAS[nakshatra]
-    
+
     return {
         'index': nakshatra_index,
         'name': nakshatra,
@@ -209,10 +209,10 @@ def get_nakshatra(longitude):
 def get_nakshatra_lord(longitude):
     """
     Get nakshatra lord from longitude
-    
+
     Args:
         longitude (float): The longitude in degrees (0-360)
-    
+
     Returns:
         str: Nakshatra lord (planet name)
     """
@@ -223,10 +223,10 @@ def get_nakshatra_lord(longitude):
 def get_nakshatra_span(nakshatra_index):
     """
     Get the span (start and end longitudes) of a nakshatra
-    
+
     Args:
         nakshatra_index (int): The nakshatra index (0-26)
-    
+
     Returns:
         tuple: (start_longitude, end_longitude)
     """
@@ -238,11 +238,11 @@ def get_nakshatra_span(nakshatra_index):
 def get_pada_span(nakshatra_index, pada):
     """
     Get the span (start and end longitudes) of a pada
-    
+
     Args:
         nakshatra_index (int): The nakshatra index (0-26)
         pada (int): The pada (1-4)
-    
+
     Returns:
         tuple: (start_longitude, end_longitude)
     """
@@ -250,3 +250,57 @@ def get_pada_span(nakshatra_index, pada):
     pada_start = nakshatra_start + ((pada - 1) * PADA_SPAN)
     pada_end = pada_start + PADA_SPAN
     return (pada_start % 360, pada_end % 360)
+
+
+def get_nakshatra_pada(longitude):
+    """
+    Get nakshatra pada from longitude
+
+    Args:
+        longitude (float): The longitude in degrees (0-360)
+
+    Returns:
+        int: Pada (1-4)
+    """
+    nakshatra_info = get_nakshatra(longitude)
+    return nakshatra_info['pada']
+
+
+def get_nakshatra_degree(longitude):
+    """
+    Get the degree within the nakshatra (0-13.33...)
+
+    Args:
+        longitude (float): The longitude in degrees (0-360)
+
+    Returns:
+        float: Degree within the nakshatra
+    """
+    nakshatra_index = int(longitude / NAKSHATRA_SPAN)
+    nakshatra_start = nakshatra_index * NAKSHATRA_SPAN
+    return longitude - nakshatra_start
+
+
+def get_nakshatra_qualities(nakshatra):
+    """
+    Get the qualities of a nakshatra
+
+    Args:
+        nakshatra (str): The nakshatra name
+
+    Returns:
+        dict: Dictionary with nakshatra qualities
+    """
+    # Get the nakshatra index
+    nakshatra_index = LIST_NAKSHATRAS.index(nakshatra)
+
+    # Get the element
+    element = NAKSHATRA_ELEMENTS[nakshatra_index]
+
+    # Get the dosha
+    dosha = NAKSHATRA_DOSHAS[nakshatra_index]
+
+    return {
+        'element': element,
+        'dosha': dosha
+    }

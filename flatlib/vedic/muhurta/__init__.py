@@ -1,7 +1,7 @@
 """
     This file is part of flatlib - (C) FlatAngle
     Modified for Vedic Astrology
-    
+
     This module implements Muhurta (electional astrology) calculations
     for Vedic astrology. It includes functions to find auspicious times
     for various activities based on Panchanga and planetary positions.
@@ -44,10 +44,11 @@ from flatlib.vedic.muhurta.activities import (
     get_best_time_for_activity
 )
 
-from flatlib.vedic.muhurta.analysis import (
-    analyze_muhurta, get_muhurta_predictions,
-    get_muhurta_compatibility, get_muhurta_strength_score
+from flatlib.vedic.muhurta.basic_analysis import (
+    get_basic_muhurta_analysis
 )
+
+# Note: For detailed analysis, use the astroved_extension package
 
 # Constants for Muhurta
 EXCELLENT = 'Excellent'
@@ -77,111 +78,68 @@ LIST_PANCHANGA_COMPONENTS = [
 def find_auspicious_time(start_date, end_date, location, activity=None, min_duration=60):
     """
     Find auspicious times for a specific activity within a date range
-    
+
     Args:
         start_date (Datetime): The start date and time
         end_date (Datetime): The end date and time
         location (GeoPos): The geographical location
         activity (str, optional): The type of activity
         min_duration (int, optional): Minimum duration in minutes
-    
+
     Returns:
         list: List of auspicious time periods
     """
     # Get the auspicious times
     auspicious_times = get_auspicious_times(start_date, end_date, location, min_duration)
-    
+
     # If no specific activity is provided, return all auspicious times
     if activity is None:
         return auspicious_times
-    
+
     # Filter the auspicious times based on the activity
     activity_times = []
-    
+
     for time_period in auspicious_times:
         # Get the activity score for this time period
         score = get_activity_score(time_period['start'], location, activity)
-        
+
         # Add the time period if it's suitable for the activity
         if score['quality'] in [EXCELLENT, GOOD]:
             time_period['activity_score'] = score
             activity_times.append(time_period)
-    
+
     return activity_times
 
 
 def get_muhurta_for_date(date, location):
     """
     Get Muhurta information for a specific date
-    
+    Note: For detailed analysis, use the astroved_extension package
+
     Args:
         date (Datetime): The date and time
         location (GeoPos): The geographical location
-    
+
     Returns:
-        dict: Dictionary with Muhurta information
+        dict: Dictionary with basic Muhurta information
     """
-    # Create a chart for the date
-    chart = Chart(date, location, hsys=const.HOUSES_WHOLE_SIGN, mode=const.AY_LAHIRI)
-    
-    # Get the Panchanga
-    panchanga = get_panchanga(chart)
-    
-    # Get the Muhurta quality
-    quality = get_muhurta_quality(chart)
-    
-    # Get special Muhurtas
-    abhijit = get_abhijit_muhurta(date, location)
-    brahma = get_brahma_muhurta(date, location)
-    
-    # Get inauspicious periods
-    rahu_kala = get_rahu_kala(date, location)
-    yama_ghantaka = get_yama_ghantaka(date, location)
-    gulika_kala = get_gulika_kala(date, location)
-    
-    # Get auspicious yogas
-    amrita_yoga = get_amrita_yoga(chart)
-    siddha_yoga = get_siddha_yoga(chart)
-    amrita_siddha_yoga = get_amrita_siddha_yoga(chart)
-    
-    return {
-        'date': date,
-        'panchanga': panchanga,
-        'quality': quality,
-        'special_muhurtas': {
-            'abhijit_muhurta': abhijit,
-            'brahma_muhurta': brahma
-        },
-        'inauspicious_periods': {
-            'rahu_kala': rahu_kala,
-            'yama_ghantaka': yama_ghantaka,
-            'gulika_kala': gulika_kala
-        },
-        'auspicious_yogas': {
-            'amrita_yoga': amrita_yoga,
-            'siddha_yoga': siddha_yoga,
-            'amrita_siddha_yoga': amrita_siddha_yoga
-        }
-    }
+    # Get basic Muhurta analysis
+    return get_basic_muhurta_analysis(date, location)
 
 
 def get_best_muhurta_for_activity(start_date, end_date, location, activity):
     """
     Get the best Muhurta for a specific activity within a date range
-    
+    Note: For detailed analysis, use the astroved_extension package
+
     Args:
         start_date (Datetime): The start date and time
         end_date (Datetime): The end date and time
         location (GeoPos): The geographical location
         activity (str): The type of activity
-    
+
     Returns:
         dict: Dictionary with the best Muhurta information
     """
-    # Get the activity rules
-    rules = get_activity_rules(activity)
-    
     # Get the best Muhurta
-    best_muhurta = get_best_time_for_activity(start_date, end_date, location, activity)
-    
-    return best_muhurta
+    return get_best_time_for_activity(start_date, end_date, location, activity)

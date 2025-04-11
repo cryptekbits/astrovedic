@@ -1,7 +1,7 @@
 """
     This file is part of flatlib - (C) FlatAngle
     Modified for Vedic Astrology
-    
+
     This module implements Sarvatobhadra Chakra (all-auspicious wheel)
     calculations for Vedic astrology. It includes functions to analyze
     auspicious directions and Tara Bala (lunar strength).
@@ -34,10 +34,11 @@ from flatlib.vedic.sarvatobhadra.tara import (
     get_ati_mitra_tara
 )
 
-from flatlib.vedic.sarvatobhadra.analysis import (
-    analyze_sarvatobhadra, get_sarvatobhadra_predictions,
-    get_sarvatobhadra_compatibility, get_sarvatobhadra_strength_score
+from flatlib.vedic.sarvatobhadra.basic_analysis import (
+    get_basic_sarvatobhadra_analysis
 )
+
+# Note: For detailed analysis, use the astroved_extension package
 
 # Constants for directions
 NORTH = 'North'
@@ -89,81 +90,65 @@ LIST_TARA_QUALITY = [
 def get_sarvatobhadra_for_date(date, location):
     """
     Get Sarvatobhadra Chakra information for a specific date
-    
+    Note: For detailed analysis, use the astroved_extension package
+
     Args:
         date (Datetime): The date and time
         location (GeoPos): The geographical location
-    
+
     Returns:
-        dict: Dictionary with Sarvatobhadra Chakra information
+        dict: Dictionary with basic Sarvatobhadra Chakra information
     """
     # Create a chart for the date
     chart = Chart(date, location, hsys=const.HOUSES_WHOLE_SIGN, mode=const.AY_LAHIRI)
-    
-    # Get the Sarvatobhadra Chakra
-    chakra = get_sarvatobhadra_chakra(chart)
-    
-    # Get the chakra quality
-    quality = get_chakra_quality(chakra)
-    
-    # Get auspicious directions
-    auspicious_directions = get_auspicious_directions(chakra)
-    
-    # Get inauspicious directions
-    inauspicious_directions = get_inauspicious_directions(chakra)
-    
-    # Get Tara Bala
-    tara_bala = get_tara_bala(chart)
-    
-    return {
-        'date': date,
-        'chakra': chakra,
-        'quality': quality,
-        'auspicious_directions': auspicious_directions,
-        'inauspicious_directions': inauspicious_directions,
-        'tara_bala': tara_bala
-    }
+
+    # Get basic Sarvatobhadra analysis
+    analysis = get_basic_sarvatobhadra_analysis(chart)
+
+    # Add the date to the result
+    result = {'date': date}
+    result.update(analysis)
+
+    return result
 
 
 def get_best_direction_for_activity(date, location, activity):
     """
     Get the best direction for a specific activity
-    
+    Note: For detailed analysis, use the astroved_extension package
+
     Args:
         date (Datetime): The date and time
         location (GeoPos): The geographical location
         activity (str): The type of activity
-    
+
     Returns:
         dict: Dictionary with the best direction information
     """
     # Create a chart for the date
     chart = Chart(date, location, hsys=const.HOUSES_WHOLE_SIGN, mode=const.AY_LAHIRI)
-    
+
     # Get the Sarvatobhadra Chakra
     chakra = get_sarvatobhadra_chakra(chart)
-    
+
     # Get the best direction for the activity
-    best_direction = get_direction_for_activity(chakra, activity)
-    
-    return best_direction
+    return get_direction_for_activity(chakra, activity)
 
 
 def get_tara_bala_for_date(date, location):
     """
     Get Tara Bala (lunar strength) information for a specific date
-    
+    Note: For detailed analysis, use the astroved_extension package
+
     Args:
         date (Datetime): The date and time
         location (GeoPos): The geographical location
-    
+
     Returns:
         dict: Dictionary with Tara Bala information
     """
     # Create a chart for the date
     chart = Chart(date, location, hsys=const.HOUSES_WHOLE_SIGN, mode=const.AY_LAHIRI)
-    
+
     # Get Tara Bala
-    tara_bala = get_tara_bala(chart)
-    
-    return tara_bala
+    return get_tara_bala(chart)

@@ -1,7 +1,7 @@
 """
     This file is part of flatlib - (C) FlatAngle
     Modified for Vedic Astrology
-    
+
     This module implements transit analysis for Vedic astrology.
     It includes functions to analyze Gochara (planetary transits),
     transit effects on natal chart, and Ashtakavarga transit analysis.
@@ -40,10 +40,11 @@ from flatlib.vedic.transits.predictions import (
     get_transit_events, get_transit_periods
 )
 
-from flatlib.vedic.transits.analysis import (
-    analyze_transits, get_transit_compatibility,
-    get_transit_strength_score, get_transit_analysis
+from flatlib.vedic.transits.basic_analysis import (
+    get_basic_transit_analysis
 )
+
+# Note: For detailed analysis, use the astroved_extension package
 
 # Constants for transit quality
 EXCELLENT = 'Excellent'
@@ -84,101 +85,64 @@ LIST_GOCHARA_EFFECTS = [
 def get_transits(natal_chart, transit_date):
     """
     Get transit information for a specific date
-    
+    Note: For detailed analysis, use the astroved_extension package
+
     Args:
         natal_chart (Chart): The natal chart
         transit_date (Datetime): The transit date
-    
+
     Returns:
-        dict: Dictionary with transit information
+        dict: Dictionary with basic transit information
     """
-    # Create a transit chart
-    transit_chart = get_transit_chart(natal_chart, transit_date)
-    
-    # Get the transit planets
-    transit_planets = get_transit_planets(natal_chart, transit_chart)
-    
-    # Get the transit aspects
-    transit_aspects = get_transit_aspects(natal_chart, transit_chart)
-    
-    # Get the transit houses
-    transit_houses = get_transit_houses(natal_chart, transit_chart)
-    
-    # Get the transit quality
-    transit_quality = get_transit_quality(natal_chart, transit_chart)
-    
-    # Get the Gochara effects
-    gochara_effects = get_gochara_effects(natal_chart, transit_chart)
-    
-    # Get the transit Ashtakavarga
-    transit_ashtakavarga = get_transit_ashtakavarga(natal_chart, transit_chart)
-    
-    # Get the transit Dasha effects
-    transit_dasha_effects = get_transit_dasha_effects(natal_chart, transit_chart)
-    
-    return {
-        'transit_chart': transit_chart,
-        'transit_planets': transit_planets,
-        'transit_aspects': transit_aspects,
-        'transit_houses': transit_houses,
-        'transit_quality': transit_quality,
-        'gochara_effects': gochara_effects,
-        'transit_ashtakavarga': transit_ashtakavarga,
-        'transit_dasha_effects': transit_dasha_effects
-    }
+    # Get basic transit analysis
+    return get_basic_transit_analysis(natal_chart, transit_date)
 
 
 def get_transit_predictions_for_date(natal_chart, transit_date):
     """
     Get transit predictions for a specific date
-    
+    Note: For detailed analysis, use the astroved_extension package
+
     Args:
         natal_chart (Chart): The natal chart
         transit_date (Datetime): The transit date
-    
+
     Returns:
-        dict: Dictionary with transit predictions
+        dict: Dictionary with basic transit information
     """
-    # Get the transits
-    transits = get_transits(natal_chart, transit_date)
-    
-    # Get the transit predictions
-    predictions = get_transit_predictions(natal_chart, transits)
-    
-    return predictions
+    # Get basic transit analysis
+    return get_basic_transit_analysis(natal_chart, transit_date)
 
 
 def get_transit_timeline_for_period(natal_chart, start_date, end_date):
     """
     Get transit timeline for a specific period
-    
+    Note: For detailed analysis, use the astroved_extension package
+
     Args:
         natal_chart (Chart): The natal chart
         start_date (Datetime): The start date
         end_date (Datetime): The end date
-    
+
     Returns:
-        list: List of transit events
+        dict: Dictionary with basic transit information
     """
-    # Get the transit timeline
-    timeline = get_transit_timeline(natal_chart, start_date, end_date)
-    
-    return timeline
+    # Get basic transit analysis for the start date
+    return get_basic_transit_analysis(natal_chart, start_date)
 
 
 def analyze_transit_period(natal_chart, start_date, end_date):
     """
     Analyze transits for a specific period
-    
+    Note: For detailed analysis, use the astroved_extension package
+
     Args:
         natal_chart (Chart): The natal chart
         start_date (Datetime): The start date
         end_date (Datetime): The end date
-    
+
     Returns:
-        dict: Dictionary with transit analysis
+        dict: Dictionary with basic transit information
     """
-    # Analyze the transits
-    analysis = analyze_transits(natal_chart, start_date, end_date)
-    
-    return analysis
+    # Get basic transit analysis for the start date
+    return get_basic_transit_analysis(natal_chart, start_date)

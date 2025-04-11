@@ -1,7 +1,7 @@
 """
     This file is part of flatlib - (C) FlatAngle
     Modified for Vedic Astrology
-    
+
     This module implements Yogas (planetary combinations) calculations
     for Vedic astrology. It includes functions to identify and analyze
     various types of Yogas in a chart.
@@ -45,10 +45,11 @@ from flatlib.vedic.yogas.chandra import (
     has_sunapha_yoga, has_anapha_yoga,
     has_durudhura_yoga, has_kemadruma_yoga
 )
-from flatlib.vedic.yogas.analysis import (
-    analyze_yogas, get_yoga_predictions,
-    get_yoga_compatibility, get_yoga_strength_score
+from flatlib.vedic.yogas.basic_analysis import (
+    get_basic_yoga_analysis
 )
+
+# Note: For detailed analysis, use the astroved_extension package
 
 # Constants for Yoga types
 MAHAPURUSHA_YOGA = 'Mahapurusha Yoga'
@@ -68,10 +69,10 @@ LIST_YOGA_TYPES = [
 def get_all_yogas(chart):
     """
     Identify all Yogas in a chart
-    
+
     Args:
         chart (Chart): The birth chart
-    
+
     Returns:
         dict: Dictionary with all Yoga information
     """
@@ -85,70 +86,83 @@ def get_all_yogas(chart):
         'chandra_yogas': get_chandra_yogas(chart),
         'summary': None
     }
-    
+
     # Generate summary information
     result['summary'] = get_yoga_summary(result)
-    
+
     return result
 
 
 def get_yoga_analysis(chart):
     """
     Analyze the Yogas in a chart
-    
+    Note: For detailed analysis, use the astroved_extension package
+
     Args:
         chart (Chart): The birth chart
-    
+
     Returns:
-        dict: Dictionary with Yoga analysis
+        dict: Dictionary with basic Yoga analysis
     """
     # Get all Yogas
     yogas = get_all_yogas(chart)
-    
-    # Analyze the Yogas
-    analysis = analyze_yogas(chart, yogas)
-    
+
+    # Get basic analysis
+    analysis = get_basic_yoga_analysis(chart, yogas)
+
     return analysis
 
 
 def has_yoga(chart, yoga_name):
     """
     Check if a chart has a specific Yoga
-    
+
     Args:
         chart (Chart): The birth chart
         yoga_name (str): The name of the Yoga to check
-    
+
     Returns:
         bool: True if the chart has the Yoga, False otherwise
     """
     # Get all Yogas
     yogas = get_all_yogas(chart)
-    
+
     # Check each type of Yoga
     for yoga_type, yoga_list in yogas.items():
         if yoga_type != 'summary':
             for yoga in yoga_list:
                 if yoga['name'] == yoga_name:
                     return True
-    
+
     return False
 
 
 def get_yoga_predictions(chart):
     """
     Generate predictions based on Yogas in a chart
-    
+    Note: This function is deprecated. Use astroved_extension for detailed predictions.
+
     Args:
         chart (Chart): The birth chart
-    
+
     Returns:
-        dict: Dictionary with Yoga predictions
+        dict: Dictionary with basic Yoga analysis
     """
     # Get all Yogas
     yogas = get_all_yogas(chart)
-    
-    # Generate predictions
-    predictions = get_yoga_predictions(chart, yogas)
-    
-    return predictions
+
+    # Return basic analysis instead of predictions
+    return get_basic_yoga_analysis(chart, yogas)
+
+
+def get_yogas(chart):
+    """
+    Get all Yogas in a chart (alias for get_all_yogas)
+
+    Args:
+        chart (Chart): The birth chart
+
+    Returns:
+        dict: Dictionary with all Yoga information
+    """
+    return get_all_yogas(chart)

@@ -26,7 +26,7 @@ from flatlib.vedic.nakshatras import (
 # Import from Panchang module
 from flatlib.vedic.panchang import (
     get_tithi, get_karana, get_yoga, get_vara,
-    get_panchang, get_muhurta, get_hora
+    get_panchang, get_hora
 )
 
 # Import from Upagrah module
@@ -48,51 +48,65 @@ from flatlib.vedic.kp import (
 
 # Import from Vargas module
 from flatlib.vedic.vargas import (
-    get_varga_chart, get_varga_positions, get_varga_strengths,
-    get_varga_analysis, get_all_vargas
+    get_varga_chart, get_varga_positions, analyze_varga_charts,
+    get_basic_varga_analysis
 )
+
+# Note: For detailed analysis, use the astroved_extension package
 
 # Import from Shadbala module
 from flatlib.vedic.shadbala import (
     get_shadbala, get_planet_strength, get_house_strength,
-    get_ishta_kashta_phala, get_vimsopaka_bala
+    get_basic_shadbala_analysis
 )
+
+# Note: For detailed analysis, use the astroved_extension package
 
 # Import from Ashtakavarga module
 from flatlib.vedic.ashtakavarga import (
     get_bhinnashtakavarga, get_sarvashtakavarga, get_all_ashtakavarga,
-    get_kaksha_bala, get_transit_ashtakavarga
+    get_basic_ashtakavarga_analysis
 )
+
+# Note: For detailed analysis, use the astroved_extension package
 
 # Import from Yogas module
 from flatlib.vedic.yogas import (
-    get_yogas, get_raja_yogas, get_dhana_yogas, get_dosha_yogas,
-    get_yoga_analysis, get_yoga_strength
+    get_yogas, get_basic_yoga_analysis
 )
+
+# Note: For detailed analysis, use the astroved_extension package
 
 # Import from Muhurta module
 from flatlib.vedic.muhurta import (
-    get_auspicious_time, get_inauspicious_time, get_muhurta_quality,
-    get_panchanga_shuddhi, get_activity_muhurta
+    get_muhurta_for_date, get_best_muhurta_for_activity,
+    get_basic_muhurta_analysis
 )
+
+# Note: For detailed analysis, use the astroved_extension package
 
 # Import from Sarvatobhadra module
 from flatlib.vedic.sarvatobhadra import (
-    get_sarvatobhadra_chakra, get_auspicious_directions,
-    get_tara_bala, get_direction_quality
+    get_sarvatobhadra_for_date, get_best_direction_for_activity,
+    get_tara_bala_for_date, get_basic_sarvatobhadra_analysis
 )
+
+# Note: For detailed analysis, use the astroved_extension package
 
 # Import from Transits module
 from flatlib.vedic.transits import (
-    get_transit_analysis, get_transit_effects, get_transit_timeline,
-    get_dasha_transit_analysis, get_transit_predictions
+    get_transits, get_transit_predictions_for_date,
+    get_transit_timeline_for_period, get_basic_transit_analysis
 )
+
+# Note: For detailed analysis, use the astroved_extension package
 
 # Import from Compatibility module
 from flatlib.vedic.compatibility import (
-    get_compatibility, get_compatibility_level, get_detailed_compatibility_report,
-    get_compatibility_timeline, analyze_charts_compatibility
+    get_compatibility, get_basic_compatibility_analysis
 )
+
+# Note: For detailed analysis, use the astroved_extension package
 
 
 class VedicChart:
@@ -424,14 +438,15 @@ class VedicChart:
         """
         return get_varga_positions(self.chart, varga)
 
-    def get_all_vargas(self):
+    def analyze_vargas(self):
         """
-        Get all divisional charts.
+        Analyze Varga charts (divisional charts).
+        Note: For detailed analysis, use the astroved_extension package
 
         Returns:
-            dict: Dictionary with all divisional charts
+            dict: Dictionary with basic Varga analysis
         """
-        return get_all_vargas(self.chart)
+        return analyze_varga_charts(self.chart)
 
     # Shadbala methods
     def get_shadbala(self):
@@ -442,6 +457,16 @@ class VedicChart:
             dict: Dictionary with Shadbala information
         """
         return get_shadbala(self.chart)
+
+    def analyze_shadbala(self):
+        """
+        Analyze Shadbala (six-fold strength).
+        Note: For detailed analysis, use the astroved_extension package
+
+        Returns:
+            dict: Dictionary with basic Shadbala analysis
+        """
+        return get_basic_shadbala_analysis(self.chart)
 
     def get_planet_strength(self, planet_id):
         """
@@ -492,187 +517,202 @@ class VedicChart:
         """
         return get_sarvashtakavarga(self.chart)
 
+    def analyze_ashtakavarga(self):
+        """
+        Analyze Ashtakavarga.
+        Note: For detailed analysis, use the astroved_extension package
+
+        Returns:
+            dict: Dictionary with basic Ashtakavarga analysis
+        """
+        return get_basic_ashtakavarga_analysis(self.chart)
+
     # Yoga methods
     def get_yogas(self):
         """
         Get all yogas (planetary combinations) in the chart.
+        Note: For detailed analysis, use the astroved_extension package
 
         Returns:
-            dict: Dictionary with yoga information
+            dict: Dictionary with basic yoga information
         """
         return get_yogas(self.chart)
 
-    def get_raja_yogas(self):
+    def get_yoga_analysis(self):
         """
-        Get Raja Yogas (combinations for power and authority) in the chart.
+        Get basic yoga analysis for the chart.
+        Note: For detailed analysis, use the astroved_extension package
 
         Returns:
-            dict: Dictionary with Raja Yoga information
+            dict: Dictionary with basic yoga analysis
         """
-        return get_raja_yogas(self.chart)
-
-    def get_dhana_yogas(self):
-        """
-        Get Dhana Yogas (combinations for wealth) in the chart.
-
-        Returns:
-            dict: Dictionary with Dhana Yoga information
-        """
-        return get_dhana_yogas(self.chart)
-
-    def get_dosha_yogas(self):
-        """
-        Get Dosha Yogas (combinations indicating difficulties) in the chart.
-
-        Returns:
-            dict: Dictionary with Dosha Yoga information
-        """
-        return get_dosha_yogas(self.chart)
+        return get_basic_yoga_analysis(self.chart)
 
     # Muhurta methods
-    def get_muhurta_quality(self, activity=None):
+    def get_muhurta(self, date=None):
         """
-        Get the quality of the current time for a specific activity.
+        Get Muhurta information for a specific date.
+        Note: For detailed analysis, use the astroved_extension package
 
         Args:
-            activity (str, optional): The activity to check. Defaults to None (general quality).
+            date (Datetime, optional): The date to check. Defaults to None (chart date).
 
         Returns:
-            dict: Dictionary with muhurta quality information
+            dict: Dictionary with basic Muhurta information
         """
-        return get_muhurta_quality(self.chart, activity)
+        if date is None:
+            date = self.chart.date
 
-    def get_auspicious_time(self, activity, start_date=None, end_date=None):
+        return get_muhurta_for_date(date, self.chart.pos)
+
+    def get_best_muhurta(self, activity, start_date=None, end_date=None):
         """
-        Get auspicious times for a specific activity.
+        Get the best Muhurta for a specific activity.
+        Note: For detailed analysis, use the astroved_extension package
 
         Args:
             activity (str): The activity to check
-            start_date (Datetime, optional): The start date. Defaults to None (current date).
+            start_date (Datetime, optional): The start date. Defaults to None (chart date).
             end_date (Datetime, optional): The end date. Defaults to None (7 days from start).
 
         Returns:
-            list: List of auspicious times
+            dict: Dictionary with best Muhurta information
         """
-        return get_auspicious_time(self.chart, activity, start_date, end_date)
+        if start_date is None:
+            start_date = self.chart.date
 
-    def get_inauspicious_time(self, start_date=None, end_date=None):
-        """
-        Get inauspicious times.
-
-        Args:
-            start_date (Datetime, optional): The start date. Defaults to None (current date).
-            end_date (Datetime, optional): The end date. Defaults to None (7 days from start).
-
-        Returns:
-            list: List of inauspicious times
-        """
-        return get_inauspicious_time(self.chart, start_date, end_date)
+        return get_best_muhurta_for_activity(start_date, end_date, self.chart.pos, activity)
 
     # Sarvatobhadra methods
-    def get_sarvatobhadra_chakra(self):
+    def get_sarvatobhadra(self, date=None):
         """
-        Get the Sarvatobhadra Chakra.
-
-        Returns:
-            dict: Dictionary with Sarvatobhadra Chakra information
-        """
-        return get_sarvatobhadra_chakra(self.chart)
-
-    def get_auspicious_directions(self, activity=None):
-        """
-        Get auspicious directions.
+        Get Sarvatobhadra Chakra information for a specific date.
+        Note: For detailed analysis, use the astroved_extension package
 
         Args:
-            activity (str, optional): The activity to check. Defaults to None (general directions).
+            date (Datetime, optional): The date to check. Defaults to None (chart date).
 
         Returns:
-            dict: Dictionary with auspicious direction information
+            dict: Dictionary with basic Sarvatobhadra Chakra information
         """
-        return get_auspicious_directions(self.chart, activity)
+        if date is None:
+            date = self.chart.date
+
+        return get_sarvatobhadra_for_date(date, self.chart.pos)
+
+    def get_best_direction(self, activity, date=None):
+        """
+        Get the best direction for a specific activity.
+        Note: For detailed analysis, use the astroved_extension package
+
+        Args:
+            activity (str): The activity to check
+            date (Datetime, optional): The date to check. Defaults to None (chart date).
+
+        Returns:
+            dict: Dictionary with best direction information
+        """
+        if date is None:
+            date = self.chart.date
+
+        return get_best_direction_for_activity(date, self.chart.pos, activity)
+
+    def get_tara_bala(self, date=None):
+        """
+        Get Tara Bala (lunar strength) information for a specific date.
+        Note: For detailed analysis, use the astroved_extension package
+
+        Args:
+            date (Datetime, optional): The date to check. Defaults to None (chart date).
+
+        Returns:
+            dict: Dictionary with Tara Bala information
+        """
+        if date is None:
+            date = self.chart.date
+
+        return get_tara_bala_for_date(date, self.chart.pos)
 
     # Transit methods
-    def get_transit_analysis(self, transit_chart):
+    def get_transits(self, transit_date=None):
         """
-        Get transit analysis.
+        Get transit information for a specific date.
+        Note: For detailed analysis, use the astroved_extension package
 
         Args:
-            transit_chart (Chart): The transit chart
+            transit_date (Datetime, optional): The transit date. Defaults to None (current date).
 
         Returns:
-            dict: Dictionary with transit analysis information
+            dict: Dictionary with basic transit information
         """
-        return get_transit_analysis(self.chart, transit_chart)
+        if transit_date is None:
+            transit_date = Datetime.now()
+
+        return get_transits(self.chart, transit_date)
+
+    def get_transit_predictions(self, transit_date=None):
+        """
+        Get transit predictions for a specific date.
+        Note: For detailed analysis, use the astroved_extension package
+
+        Args:
+            transit_date (Datetime, optional): The transit date. Defaults to None (current date).
+
+        Returns:
+            dict: Dictionary with basic transit predictions
+        """
+        if transit_date is None:
+            transit_date = Datetime.now()
+
+        return get_transit_predictions_for_date(self.chart, transit_date)
 
     def get_transit_timeline(self, start_date=None, end_date=None):
         """
-        Get transit timeline.
+        Get transit timeline for a specific period.
+        Note: For detailed analysis, use the astroved_extension package
 
         Args:
             start_date (Datetime, optional): The start date. Defaults to None (current date).
             end_date (Datetime, optional): The end date. Defaults to None (1 year from start).
 
         Returns:
-            list: List of transit events
+            dict: Dictionary with basic transit timeline information
         """
-        return get_transit_timeline(self.chart, start_date, end_date)
+        if start_date is None:
+            start_date = Datetime.now()
 
-    def get_dasha_transit_analysis(self, transit_chart):
-        """
-        Get combined Dasha-Transit analysis.
-
-        Args:
-            transit_chart (Chart): The transit chart
-
-        Returns:
-            dict: Dictionary with Dasha-Transit analysis information
-        """
-        return get_dasha_transit_analysis(self.chart, transit_chart)
+        return get_transit_timeline_for_period(self.chart, start_date, end_date)
 
     # Compatibility methods
     def get_compatibility(self, other_chart):
         """
         Get compatibility with another chart.
+        Note: For detailed analysis, use the astroved_extension package
 
         Args:
             other_chart (Chart or VedicChart): The other chart
 
         Returns:
-            dict: Dictionary with compatibility information
+            dict: Dictionary with basic compatibility information
         """
         if isinstance(other_chart, VedicChart):
             other_chart = other_chart.chart
         return get_compatibility(self.chart, other_chart)
 
-    def get_detailed_compatibility(self, other_chart):
+    def get_compatibility_analysis(self, other_chart):
         """
-        Get detailed compatibility with another chart.
+        Get basic compatibility analysis with another chart.
+        Note: For detailed analysis, use the astroved_extension package
 
         Args:
             other_chart (Chart or VedicChart): The other chart
 
         Returns:
-            dict: Dictionary with detailed compatibility information
+            dict: Dictionary with basic compatibility analysis
         """
         if isinstance(other_chart, VedicChart):
             other_chart = other_chart.chart
-        return get_detailed_compatibility_report(self.chart, other_chart)
-
-    def get_compatibility_timeline(self, other_chart, start_date=None, end_date=None):
-        """
-        Get compatibility timeline with another chart.
-
-        Args:
-            other_chart (Chart or VedicChart): The other chart
-            start_date (Datetime, optional): The start date. Defaults to None (current date).
-            end_date (Datetime, optional): The end date. Defaults to None (1 year from start).
-
-        Returns:
-            list: List of compatibility events
-        """
-        if isinstance(other_chart, VedicChart):
-            other_chart = other_chart.chart
-        return get_compatibility_timeline(self.chart, other_chart, start_date, end_date)
+        return get_basic_compatibility_analysis(self.chart, other_chart)
 
 
 def create_vedic_chart(date_str, time_str, lat, lon, timezone="+00:00",

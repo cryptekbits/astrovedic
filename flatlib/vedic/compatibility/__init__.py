@@ -38,10 +38,11 @@ from flatlib.vedic.compatibility.navamsa import (
     get_navamsa_aspects, get_navamsa_strength
 )
 
-from flatlib.vedic.compatibility.analysis import (
-    analyze_compatibility, get_detailed_compatibility_report,
-    get_compatibility_timeline, get_compatibility_strength_score
+from flatlib.vedic.compatibility.basic_analysis import (
+    analyze_basic_compatibility
 )
+
+# Note: For detailed analysis, use the astroved_extension package
 
 # Constants for compatibility levels
 EXCELLENT = 'Excellent'
@@ -83,6 +84,138 @@ LIST_DOSHA_TYPES = [
 ]
 
 
+def get_moon_compatibility(chart1, chart2):
+    """
+    Get the compatibility between the Moon signs in two charts
+
+    Args:
+        chart1 (Chart): The first chart
+        chart2 (Chart): The second chart
+
+    Returns:
+        dict: Dictionary with Moon compatibility information
+    """
+    # Get the Moon signs
+    moon1 = chart1.getObject(const.MOON)
+    moon2 = chart2.getObject(const.MOON)
+
+    # Calculate the distance between the Moon signs
+    sign_distance = abs(const.LIST_SIGNS.index(moon1.sign) - const.LIST_SIGNS.index(moon2.sign))
+
+    # Determine the compatibility level
+    if sign_distance == 0:
+        compatibility = "Excellent"
+        score = 100
+    elif sign_distance in [3, 6, 9]:
+        compatibility = "Good"
+        score = 75
+    elif sign_distance in [5, 7]:
+        compatibility = "Average"
+        score = 50
+    elif sign_distance in [2, 4, 8, 10]:
+        compatibility = "Poor"
+        score = 25
+    else:  # 1, 11
+        compatibility = "Very Poor"
+        score = 0
+
+    return {
+        'sign1': moon1.sign,
+        'sign2': moon2.sign,
+        'distance': sign_distance,
+        'compatibility': compatibility,
+        'score': score
+    }
+
+
+def get_sun_compatibility(chart1, chart2):
+    """
+    Get the compatibility between the Sun signs in two charts
+
+    Args:
+        chart1 (Chart): The first chart
+        chart2 (Chart): The second chart
+
+    Returns:
+        dict: Dictionary with Sun compatibility information
+    """
+    # Get the Sun signs
+    sun1 = chart1.getObject(const.SUN)
+    sun2 = chart2.getObject(const.SUN)
+
+    # Calculate the distance between the Sun signs
+    sign_distance = abs(const.LIST_SIGNS.index(sun1.sign) - const.LIST_SIGNS.index(sun2.sign))
+
+    # Determine the compatibility level
+    if sign_distance == 0:
+        compatibility = "Excellent"
+        score = 100
+    elif sign_distance in [4, 8]:
+        compatibility = "Good"
+        score = 75
+    elif sign_distance in [3, 5, 9]:
+        compatibility = "Average"
+        score = 50
+    elif sign_distance in [2, 6, 10]:
+        compatibility = "Poor"
+        score = 25
+    else:  # 1, 7, 11
+        compatibility = "Very Poor"
+        score = 0
+
+    return {
+        'sign1': sun1.sign,
+        'sign2': sun2.sign,
+        'distance': sign_distance,
+        'compatibility': compatibility,
+        'score': score
+    }
+
+
+def get_ascendant_compatibility(chart1, chart2):
+    """
+    Get the compatibility between the Ascendant signs in two charts
+
+    Args:
+        chart1 (Chart): The first chart
+        chart2 (Chart): The second chart
+
+    Returns:
+        dict: Dictionary with Ascendant compatibility information
+    """
+    # Get the Ascendant signs
+    asc1 = chart1.getAngle(const.ASC).sign
+    asc2 = chart2.getAngle(const.ASC).sign
+
+    # Calculate the distance between the Ascendant signs
+    sign_distance = abs(const.LIST_SIGNS.index(asc1) - const.LIST_SIGNS.index(asc2))
+
+    # Determine the compatibility level
+    if sign_distance == 0:
+        compatibility = "Excellent"
+        score = 100
+    elif sign_distance in [3, 6, 9, 11]:
+        compatibility = "Good"
+        score = 75
+    elif sign_distance in [2, 5, 8]:
+        compatibility = "Average"
+        score = 50
+    elif sign_distance in [4, 10]:
+        compatibility = "Poor"
+        score = 25
+    else:  # 1, 7
+        compatibility = "Very Poor"
+        score = 0
+
+    return {
+        'sign1': asc1,
+        'sign2': asc2,
+        'distance': sign_distance,
+        'compatibility': compatibility,
+        'score': score
+    }
+
+
 def get_compatibility(chart1, chart2):
     """
     Get compatibility information between two charts
@@ -100,71 +233,21 @@ def get_compatibility(chart1, chart2):
     # Get the compatibility factors
     factors = get_compatibility_factors(chart1, chart2)
 
-    # Get the compatibility description
-    description = get_compatibility_description(score, factors)
+    # Get the Moon compatibility
+    moon_compatibility = get_moon_compatibility(chart1, chart2)
 
-    # Get the Kuta scores
-    kuta_scores = {}
-    for kuta_factor in LIST_KUTA_FACTORS:
-        if kuta_factor == VARNA_KUTA:
-            kuta_scores[kuta_factor] = get_varna_kuta(chart1, chart2)
-        elif kuta_factor == VASHYA_KUTA:
-            kuta_scores[kuta_factor] = get_vashya_kuta(chart1, chart2)
-        elif kuta_factor == TARA_KUTA:
-            kuta_scores[kuta_factor] = get_tara_kuta(chart1, chart2)
-        elif kuta_factor == YONI_KUTA:
-            kuta_scores[kuta_factor] = get_yoni_kuta(chart1, chart2)
-        elif kuta_factor == GRAHA_MAITRI_KUTA:
-            kuta_scores[kuta_factor] = get_graha_maitri_kuta(chart1, chart2)
-        elif kuta_factor == GANA_KUTA:
-            kuta_scores[kuta_factor] = get_gana_kuta(chart1, chart2)
-        elif kuta_factor == BHAKOOT_KUTA:
-            kuta_scores[kuta_factor] = get_bhakoot_kuta(chart1, chart2)
-        elif kuta_factor == NADI_KUTA:
-            kuta_scores[kuta_factor] = get_nadi_kuta(chart1, chart2)
+    # Get the Sun compatibility
+    sun_compatibility = get_sun_compatibility(chart1, chart2)
 
-    # Get the total Kuta score
-    total_kuta_score = get_total_kuta_score(kuta_scores)
-
-    # Get the Dosha analysis
-    dosha_analysis = {}
-    dosha_analysis[MANGAL_DOSHA] = {
-        'chart1': get_mangal_dosha(chart1),
-        'chart2': get_mangal_dosha(chart2)
-    }
-    dosha_analysis[KUJA_DOSHA] = {
-        'chart1': get_kuja_dosha(chart1),
-        'chart2': get_kuja_dosha(chart2)
-    }
-    dosha_analysis[SHANI_DOSHA] = {
-        'chart1': get_shani_dosha(chart1),
-        'chart2': get_shani_dosha(chart2)
-    }
-    dosha_analysis[GRAHAN_DOSHA] = {
-        'chart1': get_grahan_dosha(chart1),
-        'chart2': get_grahan_dosha(chart2)
-    }
-
-    # Get the Dosha cancellation
-    dosha_cancellation = get_dosha_cancellation(chart1, chart2)
-
-    # Get the Dasha compatibility
-    dasha_compatibility = get_dasha_compatibility(chart1, chart2)
-
-    # Get the Navamsa compatibility
-    navamsa_compatibility = get_navamsa_compatibility(chart1, chart2)
+    # Get the Ascendant compatibility
+    ascendant_compatibility = get_ascendant_compatibility(chart1, chart2)
 
     return {
-        'score': score,
-        'level': get_compatibility_level(score),
-        'description': description,
+        'overall_score': score,
         'factors': factors,
-        'kuta_scores': kuta_scores,
-        'total_kuta_score': total_kuta_score,
-        'dosha_analysis': dosha_analysis,
-        'dosha_cancellation': dosha_cancellation,
-        'dasha_compatibility': dasha_compatibility,
-        'navamsa_compatibility': navamsa_compatibility
+        'moon_compatibility': moon_compatibility,
+        'sun_compatibility': sun_compatibility,
+        'ascendant_compatibility': ascendant_compatibility
     }
 
 
@@ -193,21 +276,23 @@ def get_compatibility_level(score):
 def get_detailed_compatibility_report(chart1, chart2):
     """
     Get a detailed compatibility report between two charts
+    Note: This function is deprecated. Use astroved_extension for detailed reports.
 
     Args:
         chart1 (Chart): The first chart
         chart2 (Chart): The second chart
 
     Returns:
-        dict: Dictionary with detailed compatibility report
+        dict: Dictionary with compatibility information
     """
-    from flatlib.vedic.compatibility.analysis import get_detailed_compatibility_report as get_detailed_report
-    return get_detailed_report(chart1, chart2)
+    # Return basic compatibility information
+    return analyze_basic_compatibility(chart1, chart2)
 
 
 def get_compatibility_timeline(chart1, chart2, start_date, end_date):
     """
     Get a compatibility timeline for a specific period
+    Note: This function is deprecated. Use astroved_extension for timeline analysis.
 
     Args:
         chart1 (Chart): The first chart
@@ -216,10 +301,10 @@ def get_compatibility_timeline(chart1, chart2, start_date, end_date):
         end_date (Datetime): The end date
 
     Returns:
-        list: List of compatibility events
+        dict: Dictionary with basic compatibility information
     """
-    from flatlib.vedic.compatibility.analysis import get_compatibility_timeline as get_timeline
-    return get_timeline(chart1, chart2, start_date, end_date)
+    # Return basic compatibility information
+    return analyze_basic_compatibility(chart1, chart2)
 
 
 def analyze_charts_compatibility(chart1, chart2):
@@ -231,6 +316,74 @@ def analyze_charts_compatibility(chart1, chart2):
         chart2 (Chart): The second chart
 
     Returns:
-        dict: Dictionary with compatibility analysis
+        dict: Dictionary with basic compatibility information
     """
-    return analyze_compatibility(chart1, chart2)
+    return analyze_basic_compatibility(chart1, chart2)
+
+
+def get_basic_compatibility_analysis(chart1, chart2):
+    """
+    Get basic compatibility analysis between two charts (alias for analyze_basic_compatibility)
+
+    Args:
+        chart1 (Chart): The first chart
+        chart2 (Chart): The second chart
+
+    Returns:
+        dict: Dictionary with basic compatibility analysis
+    """
+    return analyze_basic_compatibility(chart1, chart2)
+
+
+def get_compatibility_timeline(chart1, chart2, start_date, end_date):
+    """
+    Get compatibility timeline between two charts
+
+    Args:
+        chart1 (Chart): The first chart
+        chart2 (Chart): The second chart
+        start_date (Datetime): The start date
+        end_date (Datetime): The end date
+
+    Returns:
+        dict: Dictionary with compatibility timeline information
+    """
+    # Get the compatibility score
+    score = get_compatibility_score(chart1, chart2)
+
+    # Get the compatibility level
+    level = get_compatibility_level(score)
+
+    # Get the compatibility factors
+    factors = get_compatibility_factors(chart1, chart2)
+
+    # Get the kuta scores
+    kuta_scores = {}
+    for kuta_factor in LIST_KUTA_FACTORS:
+        if kuta_factor == VARNA_KUTA:
+            kuta_scores[kuta_factor] = get_varna_kuta(chart1, chart2)
+        elif kuta_factor == VASHYA_KUTA:
+            kuta_scores[kuta_factor] = get_vashya_kuta(chart1, chart2)
+        elif kuta_factor == TARA_KUTA:
+            kuta_scores[kuta_factor] = get_tara_kuta(chart1, chart2)
+        elif kuta_factor == YONI_KUTA:
+            kuta_scores[kuta_factor] = get_yoni_kuta(chart1, chart2)
+        elif kuta_factor == GRAHA_MAITRI_KUTA:
+            kuta_scores[kuta_factor] = get_graha_maitri_kuta(chart1, chart2)
+        elif kuta_factor == GANA_KUTA:
+            kuta_scores[kuta_factor] = get_gana_kuta(chart1, chart2)
+        elif kuta_factor == BHAKOOT_KUTA:
+            kuta_scores[kuta_factor] = get_bhakoot_kuta(chart1, chart2)
+        elif kuta_factor == NADI_KUTA:
+            kuta_scores[kuta_factor] = get_nadi_kuta(chart1, chart2)
+
+    # Get the total kuta score
+    total_kuta_score = get_total_kuta_score(kuta_scores)
+
+    return {
+        'score': score,
+        'level': level,
+        'kuta_scores': {'kuta_scores': kuta_scores, 'total_kuta_score': total_kuta_score},
+        'events': [],
+        'periods': []
+    }
