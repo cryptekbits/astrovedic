@@ -74,6 +74,11 @@ def calculate_nathonnatha_bala(chart, planet_id):
     """
     Calculate Nathonnatha Bala (day/night strength) for a planet
 
+    According to standard Vedic rules, Nathonnatha Bala is based on the planet's
+    preference for day or night and the birth time's proximity to midday or midnight.
+    Strength is maximum (60 Virupas) at the peak time (midday for diurnal planets,
+    midnight for nocturnal planets) and decreases linearly to 0 at the nadir.
+
     Args:
         chart (Chart): The birth chart
         planet_id (str): The ID of the planet
@@ -81,38 +86,94 @@ def calculate_nathonnatha_bala(chart, planet_id):
     Returns:
         dict: Dictionary with Nathonnatha Bala information
     """
-    # Determine if the chart is diurnal or nocturnal
-    is_diurnal = chart.isDiurnal()
+    # Get date and time components from the chart
+    date_list = jdnDate(chart.date.date.jdn)
+    year, month, day = date_list[0], date_list[1], date_list[2]
 
-    # Diurnal planets (Sun, Jupiter, Saturn)
-    diurnal_planets = [const.SUN, const.JUPITER, const.SATURN]
+    time_list = chart.date.time.time()
+    hour, minute, second = time_list[0], time_list[1], int(time_list[2])
 
-    # Nocturnal planets (Moon, Venus, Mars)
-    nocturnal_planets = [const.MOON, const.VENUS, const.MARS]
+    # Format string correctly for datetime
+    datetime_str = f"{year}/{month:02d}/{day:02d} {hour:02d}:{minute:02d}:{second:02d}"
+
+    try:
+        # Parse the datetime
+        dt = datetime.strptime(datetime_str, "%Y/%m/%d %H:%M:%S")
+
+        # Calculate time from midnight (in hours, 0-24)
+        time_from_midnight = dt.hour + dt.minute/60.0 + dt.second/3600.0
+
+        # Calculate time from midday (in hours, 0-12)
+        if time_from_midnight < 12:
+            time_from_midday = 12 - time_from_midnight
+        else:
+            time_from_midday = time_from_midnight - 12
+
+        # Normalize to 0-1 range (0 = midday/midnight, 1 = nadir)
+        midday_factor = time_from_midday / 12.0  # 0 at midday, 1 at midnight
+        midnight_factor = 1.0 - midday_factor     # 0 at midnight, 1 at midday
+    except ValueError as e:
+        # Handle datetime parsing error
+        print(f"Error parsing date/time: {datetime_str} with format %Y/%m/%d %H:%M:%S")
+        print(e)
+        # Use a default value
+        midday_factor = 0.5
+        midnight_factor = 0.5
+
+    # Correct planet classifications according to standard Vedic rules
+    # Diurnal planets (Sun, Jupiter, Venus)
+    diurnal_planets = [const.SUN, const.JUPITER, const.VENUS]
+
+    # Nocturnal planets (Moon, Mars, Saturn)
+    nocturnal_planets = [const.MOON, const.MARS, const.SATURN]
 
     # Mercury is both diurnal and nocturnal
 
     # Maximum value (in Virupas)
     max_value = 60.0
 
-    # Calculate Nathonnatha Bala
-    if planet_id in diurnal_planets and is_diurnal:
-        value = max_value
-        description = 'Diurnal planet in day'
-    elif planet_id in nocturnal_planets and not is_diurnal:
-        value = max_value
-        description = 'Nocturnal planet in night'
+    # Calculate Nathonnatha Bala using linear interpolation
+    if planet_id in diurnal_planets:
+        # Diurnal planets are strongest at midday (midday_factor = 0)
+        # and weakest at midnight (midday_factor = 1)
+        value = max_value * (1.0 - midday_factor)
+        if midday_factor < 0.25:
+            description = 'Diurnal planet near midday (strong)'
+        elif midday_factor < 0.5:
+            description = 'Diurnal planet moderately distant from midday'
+        else:
+            description = 'Diurnal planet far from midday (weak)'
+    elif planet_id in nocturnal_planets:
+        # Nocturnal planets are strongest at midnight (midnight_factor = 0)
+        # and weakest at midday (midnight_factor = 1)
+        value = max_value * (1.0 - midnight_factor)
+        if midnight_factor < 0.25:
+            description = 'Nocturnal planet near midnight (strong)'
+        elif midnight_factor < 0.5:
+            description = 'Nocturnal planet moderately distant from midnight'
+        else:
+            description = 'Nocturnal planet far from midnight (weak)'
     elif planet_id == const.MERCURY:
-        value = max_value
-        description = 'Mercury is both diurnal and nocturnal'
+        # Mercury gets the better of day or night strength
+        value = max_value * max(1.0 - midday_factor, 1.0 - midnight_factor)
+        description = 'Mercury (benefits from both day and night)'
     elif planet_id in [const.RAHU, const.KETU]:
-        value = max_value / 2.0
-        description = 'Nodes have half strength'
+        # Rahu and Ketu are excluded from Nathonnatha Bala
+        value = 0.0
+        description = 'Nodes are excluded from Nathonnatha Bala'
     else:
         value = 0.0
-        description = 'Planet in unfavorable time'
+        description = 'Unknown planet'
 
-    return {'value': value, 'description': description}
+    # Add additional information for debugging/analysis
+    return {
+        'value': value,
+        'description': description,
+        'midday_factor': midday_factor,
+        'midnight_factor': midnight_factor,
+        'time_from_midnight': time_from_midnight,
+        'time_from_midday': time_from_midday
+    }
 
 
 def calculate_paksha_bala(chart, planet_id):
