@@ -233,7 +233,7 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
 *   **Impact:** The current implementation awards the correct strength (15 Virupas) but assigns it based on a simplified rule, not to the actual astrological Lord of the Year.
 *   **Category:** `Astrology`, `Logic`, `Shadbala`, `Simplification`, `Accuracy`
 *   **Tasks:**
-    *   [ ] Replace the `year % 7` simplification with the standard calculation of the Abda Pati (weekday lord of the solar year's start). This will require integrating functionality to calculate Mesha Sankranti time accurately.
+    *   [x] Replace the `year % 7` simplification with the standard calculation of the Abda Pati (weekday lord of the solar year's start). This will require integrating functionality to calculate Mesha Sankranti time accurately.
 
 ## 23. Masa Bala Uses Non-Standard Simplification
 
