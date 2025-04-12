@@ -97,8 +97,8 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
 *   **Finding:** The main `flatlib.vedic.shadbala.drig_bala.calculate_drig_bala` function calculates the final score by subtracting the value derived from aspects *cast* by the planet from the value derived from aspects *received* by the planet (`net_value = aspects_received['value'] - aspects_cast['value']`). Standard Drig Bala calculation methodology typically focuses only on the net sum of Virupa points from aspects *received* (positive for benefic aspects, negative for malefic aspects).
 *   **Category:** `Astrology`, `Math`, `Shadbala`
 *   **Tasks:**
-    *   [ ] Modify `calculate_drig_bala` to compute the final score based solely on the sum of Virupa points from aspects received, applying the correct positive/negative sign based on the aspecting planet's benefic/malefic nature.
-    *   [ ] Remove or refactor the `calculate_aspects_cast` function within `drig_bala.py` as it's not standard for this specific Shadbala component.
+    *   [x] Modify `calculate_drig_bala` to compute the final score based solely on the sum of Virupa points from aspects received, applying the correct positive/negative sign based on the aspecting planet's benefic/malefic nature.
+    *   [x] Remove or refactor the `calculate_aspects_cast` function within `drig_bala.py` as it's not standard for this specific Shadbala component.
 
 ## 11. Missing Moolatrikona Dignity Data
 

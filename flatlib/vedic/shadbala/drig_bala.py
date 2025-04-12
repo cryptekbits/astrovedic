@@ -15,8 +15,9 @@ def calculate_drig_bala(chart, planet_id):
     """
     Calculate Drig Bala (aspectual strength) for a planet
 
-    Drig Bala is based on the aspects received by and cast by a planet.
-    Benefic aspects increase strength, while malefic aspects decrease it.
+    According to standard Vedic astrology texts, Drig Bala is based solely on the
+    aspects received by a planet, not the aspects cast by it. Benefic aspects
+    increase strength, while malefic aspects decrease it.
 
     Args:
         chart (Chart): The birth chart
@@ -34,11 +35,13 @@ def calculate_drig_bala(chart, planet_id):
     # Calculate the aspects received by the planet
     aspects_received = calculate_aspects_received(chart, planet_id)
 
-    # Calculate the aspects cast by the planet
+    # For standard Vedic Drig Bala, we only consider aspects received
+    # We still calculate aspects cast for informational purposes
     aspects_cast = calculate_aspects_cast(chart, planet_id)
 
-    # Calculate the net Drig Bala
-    net_value = aspects_received['value'] - aspects_cast['value']
+    # The Drig Bala value is simply the sum of Virupa points from aspects received
+    # (already accounting for benefic/malefic nature in the Virupa points calculation)
+    net_value = aspects_received['value']
 
     # Ensure the value is within the range [0, max_value]
     value = max(0.0, min(net_value, max_value))
