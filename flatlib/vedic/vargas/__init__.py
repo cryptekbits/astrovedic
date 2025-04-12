@@ -153,13 +153,13 @@ def get_varga_positions(chart, varga_type):
 
     # Get planet positions
     positions = {}
-    for planet_id in const.LIST_PLANETS:
+    for planet_id in const.LIST_OBJECTS_VEDIC:
         planet = varga_chart.getObject(planet_id)
         if planet:
             positions[planet_id] = {
-                'longitude': planet['lon'],
-                'sign': planet['sign'],
-                'house': planet['house']
+                'longitude': planet.lon,
+                'sign': planet.sign
+                # Removed 'house': planet.house as it's not available here
             }
 
     return positions

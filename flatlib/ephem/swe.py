@@ -128,7 +128,12 @@ def sweNextTransit(obj, jd, lat, lon, flag):
     """
     sweObj = SWE_OBJECTS[obj]
     flag = swisseph.CALC_RISE if flag == 'RISE' else swisseph.CALC_SET
-    trans = swisseph.rise_trans(jd, sweObj, lon, lat, 0, 0, 0, flag)
+    ephe_flag = swisseph.FLG_SWIEPH  # Use standard Swiss Ephemeris flag
+    altitude = 0 # Use integer altitude
+    geopos_tuple = (lon, lat, altitude)
+    # Signature from pyswisseph test suite:
+    # (tjdut, pl, rsmi, geopos, atpress, attemp, flags)
+    trans = swisseph.rise_trans(jd, sweObj, flag, geopos_tuple, 0, 0, ephe_flag)
     return trans[1][0]
 
 

@@ -43,8 +43,7 @@ def get_basic_transit_analysis(natal_chart, transit_date):
         dict: Dictionary with basic transit analysis
     """
     # Get the transit chart
-    location = GeoPos(natal_chart.pos.lat, natal_chart.pos.lon)
-    transit_chart = get_transit_chart(transit_date, location)
+    transit_chart = get_transit_chart(natal_chart, transit_date)
     
     # Get the transit planets
     transit_planets = get_transit_planets(natal_chart, transit_chart)

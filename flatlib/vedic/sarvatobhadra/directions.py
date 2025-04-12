@@ -83,18 +83,28 @@ def get_direction_quality(chakra, direction):
     tara_bala = chakra['tara_bala']
     
     # Check if favorable Taras are in the direction
-    favorable_taras = ['Sampath Tara', 'Kshema Tara', 'Sadhaka Tara', 'Mitra Tara', 'Ati Mitra Tara']
-    for tara in favorable_taras:
-        if tara_bala[tara] in nakshatras:
+    favorable_taras = {
+        'Sampath Tara': 'sampath_tara',
+        'Kshema Tara': 'kshema_tara',
+        'Sadhaka Tara': 'sadhaka_tara',
+        'Mitra Tara': 'mitra_tara',
+        'Ati Mitra Tara': 'ati_mitra_tara'
+    }
+    for tara_name, tara_key in favorable_taras.items():
+        if tara_key in tara_bala and tara_bala[tara_key] in nakshatras:
             score += 1
-            factors.append(f"{tara} is in this direction")
+            factors.append(f"{tara_name} is in this direction")
     
     # Check if unfavorable Taras are in the direction
-    unfavorable_taras = ['Vipat Tara', 'Pratyak Tara', 'Vadha Tara']
-    for tara in unfavorable_taras:
-        if tara_bala[tara] in nakshatras:
+    unfavorable_taras = {
+        'Vipat Tara': 'vipat_tara',
+        'Pratyak Tara': 'pratyak_tara',
+        'Vadha Tara': 'vadha_tara'
+    }
+    for tara_name, tara_key in unfavorable_taras.items():
+        if tara_key in tara_bala and tara_bala[tara_key] in nakshatras:
             score -= 1
-            factors.append(f"{tara} is in this direction")
+            factors.append(f"{tara_name} is in this direction")
     
     # Determine the quality based on the score
     if score >= 3:

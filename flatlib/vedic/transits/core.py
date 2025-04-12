@@ -60,7 +60,9 @@ def get_transit_planets(natal_chart, transit_chart):
         distance = angle.distance(transit_planet.lon, natal_planet.lon)
         
         # Check if the planet is retrograde
-        is_retrograde = transit_planet.isRetrograde()
+        is_retrograde = False # Default for objects without the method (e.g., MoonNodes)
+        if hasattr(transit_planet, 'isRetrograde'):
+            is_retrograde = transit_planet.isRetrograde()
         
         # Add the planet to the result
         transit_planets[planet_id] = {
@@ -231,7 +233,8 @@ def get_transit_quality(natal_chart, transit_chart):
     for planet_id in const.LIST_OBJECTS_VEDIC:
         transit_planet = transit_chart.getObject(planet_id)
         
-        if transit_planet.isRetrograde():
+        # Only check for retrograde if the object supports it (i.e., not a MoonNode)
+        if hasattr(transit_planet, 'isRetrograde') and transit_planet.isRetrograde():
             # Retrograde Mercury, Venus, and Jupiter can be positive
             if planet_id in [const.MERCURY, const.VENUS, const.JUPITER]:
                 score += 1
@@ -321,7 +324,9 @@ def is_aspect_applying(transit_planet, natal_planet, aspect_angle):
         bool: True if the aspect is applying, False if separating
     """
     # Check if the transit planet is retrograde
-    is_retrograde = transit_planet.isRetrograde()
+    is_retrograde = False # Default for objects without the method (e.g., MoonNodes)
+    if hasattr(transit_planet, 'isRetrograde'):
+        is_retrograde = transit_planet.isRetrograde()
     
     # Calculate the current angular distance
     current_dist = angle.closestdistance(transit_planet.lon, natal_planet.lon)

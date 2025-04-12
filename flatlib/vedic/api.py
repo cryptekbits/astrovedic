@@ -10,6 +10,7 @@ from flatlib import const
 from flatlib.chart import Chart
 from flatlib.datetime import Datetime
 from flatlib.geopos import GeoPos
+from datetime import datetime, timezone, timedelta
 
 # Import from Vedic modules
 from flatlib.vedic import (
@@ -55,10 +56,7 @@ from flatlib.vedic.vargas import (
 # Note: For detailed analysis, use the astroved_extension package
 
 # Import from Shadbala module
-from flatlib.vedic.shadbala import (
-    get_shadbala, get_planet_strength, get_house_strength,
-    get_basic_shadbala_analysis
-)
+from flatlib.vedic.shadbala import get_shadbala
 
 # Note: For detailed analysis, use the astroved_extension package
 
@@ -227,8 +225,18 @@ class VedicChart:
         Returns:
             dict: Dictionary with nakshatra information
         """
-        planet = self.get_planet(planet_id)
-        return get_nakshatra(planet)
+        if planet_id in const.LIST_ANGLES:
+            # Handle angles like Ascendant
+            astro_object = self.chart.getAngle(planet_id)
+        else:
+            # Handle planets and other objects
+            astro_object = self.get_planet(planet_id)
+            
+        if astro_object is None:
+            # Or raise an error, depending on desired behavior
+            return None
+            
+        return get_nakshatra(astro_object.lon)
 
     def get_nakshatra_lord(self, planet_id):
         """
@@ -259,12 +267,12 @@ class VedicChart:
     # Panchang methods
     def get_panchang(self):
         """
-        Get the panchang for the chart date.
-
+        Calculate complete Panchang for the chart's date and location
+        
         Returns:
-            dict: Dictionary with panchang information
+            dict: Dictionary with complete Panchang information
         """
-        return get_panchang(self.chart)
+        return get_panchang(self.chart.date.jd, self.chart.pos.lat, self.chart.pos.lon, self.chart.date.utcoffset, ayanamsa=self.ayanamsa)
 
     def get_tithi(self):
         """
@@ -449,14 +457,17 @@ class VedicChart:
         return analyze_varga_charts(self.chart)
 
     # Shadbala methods
-    def get_shadbala(self):
+    def get_shadbala(self, planet_id):
         """
-        Get Shadbala (six-fold strength) for all planets.
+        Get Shadbala (six-fold strength) for a specific planet.
+
+        Args:
+            planet_id (str): The ID of the planet (e.g., const.SUN).
 
         Returns:
-            dict: Dictionary with Shadbala information
+            dict: Dictionary with Shadbala information for the specified planet.
         """
-        return get_shadbala(self.chart)
+        return get_shadbala(self.chart, planet_id)
 
     def analyze_shadbala(self):
         """
@@ -646,7 +657,9 @@ class VedicChart:
             dict: Dictionary with basic transit information
         """
         if transit_date is None:
-            transit_date = Datetime.now()
+            now = datetime.now(timezone.utc)
+            utc_offset_str = str(timedelta(seconds=now.utcoffset().total_seconds())).split('.')[0]
+            transit_date = Datetime(now.strftime('%Y/%m/%d'), now.strftime('%H:%M:%S'), utc_offset_str)
 
         return get_transits(self.chart, transit_date)
 
@@ -662,7 +675,9 @@ class VedicChart:
             dict: Dictionary with basic transit predictions
         """
         if transit_date is None:
-            transit_date = Datetime.now()
+            now = datetime.now(timezone.utc)
+            utc_offset_str = str(timedelta(seconds=now.utcoffset().total_seconds())).split('.')[0]
+            transit_date = Datetime(now.strftime('%Y/%m/%d'), now.strftime('%H:%M:%S'), utc_offset_str)
 
         return get_transit_predictions_for_date(self.chart, transit_date)
 
@@ -679,7 +694,9 @@ class VedicChart:
             dict: Dictionary with basic transit timeline information
         """
         if start_date is None:
-            start_date = Datetime.now()
+            now = datetime.now(timezone.utc)
+            utc_offset_str = str(timedelta(seconds=now.utcoffset().total_seconds())).split('.')[0]
+            start_date = Datetime(now.strftime('%Y/%m/%d'), now.strftime('%H:%M:%S'), utc_offset_str)
 
         return get_transit_timeline_for_period(self.chart, start_date, end_date)
 

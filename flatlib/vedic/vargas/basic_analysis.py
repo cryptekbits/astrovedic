@@ -77,7 +77,7 @@ def get_basic_varga_analysis(chart):
 
     for planet_id, analysis in result['planet_analysis'].items():
         if 'vimshopaka_bala' in analysis:
-            total_vimshopaka += analysis['vimshopaka_bala']['total']
+            total_vimshopaka += analysis['vimshopaka_bala']['vimshopaka_bala']
             total_planets += 1
 
     if total_planets > 0:

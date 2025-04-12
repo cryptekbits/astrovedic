@@ -194,7 +194,8 @@ def has_amala_yoga(chart):
     moon = chart.getObject(const.MOON)
     
     # Get the 10th house from the Ascendant
-    asc_10th_house = (get_house_number(chart, const.ASC) + 9) % 12 or 12
+    # The Ascendant defines the 1st house in Whole Sign, so the 10th from Asc is House 10.
+    asc_10th_house = 10
     
     # Get the 10th house from the Moon
     moon_10th_house = (get_house_number(chart, const.MOON) + 9) % 12 or 12
