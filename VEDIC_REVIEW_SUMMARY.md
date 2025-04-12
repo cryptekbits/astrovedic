@@ -224,7 +224,7 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
     *   Assign strength (60 Virupas) based on the ruling planet for that part (Day: 1st-Merc, 2nd-Sun, 3rd-Sat; Night: 1st-Moon, 2nd-Ven, 3rd-Mars; Jupiter always gets 60).
 *   **Category:** `Astrology`, `Logic`, `Shadbala`, `Missing Implementation`
 *   **Tasks:**
-    *   [ ] Implement the full logic for Tribhaga Bala calculation in `calculate_tribhaga_bala`, including sunrise/sunset calculation, day/night division, and strength assignment based on planetary rulership of the parts.
+    *   [x] Implement the full logic for Tribhaga Bala calculation in `calculate_tribhaga_bala`, including sunrise/sunset calculation, day/night division, and strength assignment based on planetary rulership of the parts.
 
 ## 22. Abda Bala Uses Non-Standard Simplification
 
