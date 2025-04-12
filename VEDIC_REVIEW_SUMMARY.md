@@ -81,7 +81,7 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
 *   **Finding:** While `flatlib.object.VedicBody` exists, the base `Object` class and overall representation are geared towards Western astrology. Specific Vedic attributes or calculation results (like detailed Shadbala components, nuanced dignities) may not be easily accessible properties of the objects.
 *   **Category:** `Astrology`, `API`
 *   **Tasks:**
-    *   [ ] Evaluate if enhancing `VedicBody` or related classes to store and provide easy access to calculated Vedic-specific data (Shadbala breakdowns, detailed dignities, aspect info) would improve the API usability.
-    *   [ ] Consider adding methods to `VedicBody` for common Vedic queries.
+    *   [x] Evaluate if enhancing `VedicBody` or related classes to store and provide easy access to calculated Vedic-specific data (Shadbala breakdowns, detailed dignities, aspect info) would improve the API usability.
+    *   [x] Consider adding methods to `VedicBody` for common Vedic queries.
 
 ---
