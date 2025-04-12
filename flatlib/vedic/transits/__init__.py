@@ -44,6 +44,17 @@ from flatlib.vedic.transits.basic_analysis import (
     get_basic_transit_analysis
 )
 
+from flatlib.vedic.transits.calculator import (
+    next_sign_transit,
+    last_sign_transit,
+    next_nakshatra_transit,
+    last_nakshatra_transit,
+    next_degree_transit,
+    last_degree_transit,
+    next_aspect_transit,
+    next_station
+)
+
 # Note: For detailed analysis, use the astroved_extension package
 
 # Constants for transit quality

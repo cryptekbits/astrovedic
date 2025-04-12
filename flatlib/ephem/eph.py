@@ -159,24 +159,138 @@ def prevSolarReturn(jd, lon):
 
 # === Sunrise and sunsets === #
 
-def nextSunrise(jd, lat, lon):
-    """ Returns the JD of the next sunrise. """
-    return swe.sweNextTransit(const.SUN, jd, lat, lon, 'RISE')
+def nextSunrise(jd, lat, lon, mode=None):
+    """
+    Returns the JD of the next sunrise.
+
+    Args:
+        jd (float): Julian day
+        lat (float): Latitude in degrees
+        lon (float): Longitude in degrees
+        mode (str, optional): Ayanamsa mode for sidereal calculations
+
+    Returns:
+        float: Julian day of the next sunrise
+    """
+    return swe.sweNextTransit(const.SUN, jd, lat, lon, 'RISE', mode)
 
 
-def nextSunset(jd, lat, lon):
-    """ Returns the JD of the next sunset. """
-    return swe.sweNextTransit(const.SUN, jd, lat, lon, 'SET')
+def nextSunset(jd, lat, lon, mode=None):
+    """
+    Returns the JD of the next sunset.
+
+    Args:
+        jd (float): Julian day
+        lat (float): Latitude in degrees
+        lon (float): Longitude in degrees
+        mode (str, optional): Ayanamsa mode for sidereal calculations
+
+    Returns:
+        float: Julian day of the next sunset
+    """
+    return swe.sweNextTransit(const.SUN, jd, lat, lon, 'SET', mode)
 
 
-def lastSunrise(jd, lat, lon):
-    """ Returns the JD of the last sunrise. """
-    return nextSunrise(jd - 1.0, lat, lon)
+def lastSunrise(jd, lat, lon, mode=None):
+    """
+    Returns the JD of the last sunrise.
+
+    Args:
+        jd (float): Julian day
+        lat (float): Latitude in degrees
+        lon (float): Longitude in degrees
+        mode (str, optional): Ayanamsa mode for sidereal calculations
+
+    Returns:
+        float: Julian day of the last sunrise
+    """
+    return nextSunrise(jd - 1.0, lat, lon, mode)
 
 
-def lastSunset(jd, lat, lon):
-    """ Returns the JD of the last sunset. """
-    return nextSunset(jd - 1.0, lat, lon)
+def lastSunset(jd, lat, lon, mode=None):
+    """
+    Returns the JD of the last sunset.
+
+    Args:
+        jd (float): Julian day
+        lat (float): Latitude in degrees
+        lon (float): Longitude in degrees
+        mode (str, optional): Ayanamsa mode for sidereal calculations
+
+    Returns:
+        float: Julian day of the last sunset
+    """
+    return nextSunset(jd - 1.0, lat, lon, mode)
+
+
+# === Transits === #
+
+def nextLonTransit(obj, jd, target_lon, mode=None):
+    """
+    Returns the JD when a planet crosses a specific longitude.
+
+    Args:
+        obj (str): Object ID
+        jd (float): Julian day to start search from
+        target_lon (float): Target longitude in degrees
+        mode (str, optional): Ayanamsa mode for sidereal calculations
+
+    Returns:
+        float: Julian day of the longitude transit
+    """
+    return swe.sweNextLonTransit(obj, jd, target_lon, False, mode)
+
+
+def lastLonTransit(obj, jd, target_lon, mode=None):
+    """
+    Returns the JD when a planet last crossed a specific longitude.
+
+    Args:
+        obj (str): Object ID
+        jd (float): Julian day to start search from
+        target_lon (float): Target longitude in degrees
+        mode (str, optional): Ayanamsa mode for sidereal calculations
+
+    Returns:
+        float: Julian day of the longitude transit
+    """
+    return swe.sweNextLonTransit(obj, jd, target_lon, True, mode)
+
+
+def nextSignTransit(obj, jd, sign, mode=None):
+    """
+    Returns the JD when a planet enters a specific sign.
+
+    Args:
+        obj (str): Object ID
+        jd (float): Julian day to start search from
+        sign (int): Sign number (1-12)
+        mode (str, optional): Ayanamsa mode for sidereal calculations
+
+    Returns:
+        float: Julian day of the sign transit
+    """
+    # Convert sign number to longitude (start of sign)
+    target_lon = (sign - 1) * 30.0
+    return nextLonTransit(obj, jd, target_lon, mode)
+
+
+def lastSignTransit(obj, jd, sign, mode=None):
+    """
+    Returns the JD when a planet last entered a specific sign.
+
+    Args:
+        obj (str): Object ID
+        jd (float): Julian day to start search from
+        sign (int): Sign number (1-12)
+        mode (str, optional): Ayanamsa mode for sidereal calculations
+
+    Returns:
+        float: Julian day of the sign transit
+    """
+    # Convert sign number to longitude (start of sign)
+    target_lon = (sign - 1) * 30.0
+    return lastLonTransit(obj, jd, target_lon, mode)
 
 
 # === Stations === #
