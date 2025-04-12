@@ -242,6 +242,21 @@ def calculate_tribhaga_bala(chart, planet_id):
     """
     Calculate Tribhaga Bala (three-part day/night strength) for a planet
 
+    In Vedic astrology, Tribhaga Bala is based on dividing the day and night into
+    three equal parts each, with different planetary rulers for each part.
+
+    Day parts rulers:
+    - 1st part: Mercury
+    - 2nd part: Sun
+    - 3rd part: Saturn
+
+    Night parts rulers:
+    - 1st part: Moon
+    - 2nd part: Venus
+    - 3rd part: Mars
+
+    Jupiter always gets full strength regardless of the part.
+
     Args:
         chart (Chart): The birth chart
         planet_id (str): The ID of the planet
@@ -249,17 +264,134 @@ def calculate_tribhaga_bala(chart, planet_id):
     Returns:
         dict: Dictionary with Tribhaga Bala information
     """
-    # For simplicity, we'll use a fixed value for now
-    # In a full implementation, we would calculate the exact part of the day/night
+    from flatlib.ephem import ephem
+    from flatlib.datetime import Datetime
 
     # Maximum value (in Virupas)
     max_value = 60.0
 
-    # Fixed value for now
-    value = max_value / 2.0
-    description = 'Fixed value for Tribhaga Bala'
+    # Special case for Jupiter (always gets full strength)
+    if planet_id == const.JUPITER:
+        return {
+            'value': max_value,
+            'description': 'Jupiter always gets full strength in Tribhaga Bala',
+            'part': None,
+            'is_day': None
+        }
 
-    return {'value': value, 'description': description}
+    # Get the chart date and location
+    date = chart.date
+    location = chart.pos
+
+    # Get sunrise and sunset times
+    sunrise = ephem.lastSunrise(date, location)
+    sunset = ephem.nextSunset(date, location)
+
+    # Check if the birth time is during day or night
+    is_day = sunrise.jd <= date.jd < sunset.jd
+
+    if is_day:
+        # Day time calculation
+        day_duration = sunset.jd - sunrise.jd
+        part_duration = day_duration / 3.0
+
+        # Determine which part of the day the birth time falls into
+        elapsed_time = date.jd - sunrise.jd
+        part = int(elapsed_time / part_duration) + 1  # 1, 2, or 3
+
+        # Day parts rulers
+        day_rulers = {
+            1: const.MERCURY,  # 1st part: Mercury
+            2: const.SUN,      # 2nd part: Sun
+            3: const.SATURN    # 3rd part: Saturn
+        }
+
+        # Get the ruler of this part
+        part_ruler = day_rulers[part]
+
+        # Calculate Tribhaga Bala
+        if planet_id == part_ruler:
+            value = max_value
+            # Use correct ordinal suffix
+            if part == 1:
+                suffix = 'st'
+            elif part == 2:
+                suffix = 'nd'
+            else:  # part == 3
+                suffix = 'rd'
+            description = f'Ruler of the {part}{suffix} part of the day'
+        else:
+            value = 0.0
+            # Use correct ordinal suffix
+            if part == 1:
+                suffix = 'st'
+            elif part == 2:
+                suffix = 'nd'
+            else:  # part == 3
+                suffix = 'rd'
+            description = f'Not ruler of the {part}{suffix} part of the day'
+    else:
+        # Night time calculation
+        # For night, we need to handle the case where the birth time might be
+        # after midnight but before sunrise of the next day
+
+        # Get the next day's sunrise
+        next_sunrise = ephem.nextSunrise(date, location)
+
+        # Calculate night duration
+        night_duration = next_sunrise.jd - sunset.jd
+        part_duration = night_duration / 3.0
+
+        # Determine which part of the night the birth time falls into
+        if date.jd >= sunset.jd:
+            # After sunset on the same day
+            elapsed_time = date.jd - sunset.jd
+        else:
+            # After midnight but before sunrise
+            prev_sunset = ephem.lastSunset(date, location)
+            elapsed_time = date.jd - prev_sunset.jd
+
+        part = int(elapsed_time / part_duration) + 1  # 1, 2, or 3
+
+        # Night parts rulers
+        night_rulers = {
+            1: const.MOON,    # 1st part: Moon
+            2: const.VENUS,   # 2nd part: Venus
+            3: const.MARS     # 3rd part: Mars
+        }
+
+        # Get the ruler of this part
+        part_ruler = night_rulers[part]
+
+        # Calculate Tribhaga Bala
+        if planet_id == part_ruler:
+            value = max_value
+            # Use correct ordinal suffix
+            if part == 1:
+                suffix = 'st'
+            elif part == 2:
+                suffix = 'nd'
+            else:  # part == 3
+                suffix = 'rd'
+            description = f'Ruler of the {part}{suffix} part of the night'
+        else:
+            value = 0.0
+            # Use correct ordinal suffix
+            if part == 1:
+                suffix = 'st'
+            elif part == 2:
+                suffix = 'nd'
+            else:  # part == 3
+                suffix = 'rd'
+            description = f'Not ruler of the {part}{suffix} part of the night'
+
+    # Return the result with additional information for debugging
+    return {
+        'value': value,
+        'description': description,
+        'part': part,
+        'is_day': is_day
+    }
 
 
 def calculate_abda_bala(chart, planet_id):
