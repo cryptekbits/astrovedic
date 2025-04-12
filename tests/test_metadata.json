@@ -559,5 +559,30 @@
         "name": "Dignity Name",
         "description": "Tests Vedic dignity name functions",
         "category": "vedic"
+    },
+    "tests.test_varga_calculations.TestVargaCalculations.test_hora_calculation": {
+        "name": "Hora Calculation",
+        "description": "Tests D2 (Hora) calculation logic against standard definitions",
+        "category": "vedic"
+    },
+    "tests.test_varga_calculations.TestVargaCalculations.test_drekkana_calculation": {
+        "name": "Drekkana Calculation",
+        "description": "Tests D3 (Drekkana) calculation logic against standard definitions",
+        "category": "vedic"
+    },
+    "tests.test_varga_calculations.TestVargaCalculations.test_navamsha_calculation": {
+        "name": "Navamsha Calculation",
+        "description": "Tests D9 (Navamsha) calculation logic against standard definitions",
+        "category": "vedic"
+    },
+    "tests.test_varga_calculations.TestVargaCalculations.test_trimshamsha_calculation": {
+        "name": "Trimshamsha Calculation",
+        "description": "Tests D30 (Trimshamsha) calculation logic against standard definitions",
+        "category": "vedic"
+    },
+    "tests.test_varga_calculations.TestVargaCalculations.test_shashtiamsha_calculation": {
+        "name": "Shashtiamsha Calculation",
+        "description": "Tests D60 (Shashtiamsha) calculation logic against standard definitions",
+        "category": "vedic"
     }
 }
