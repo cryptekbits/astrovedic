@@ -134,9 +134,9 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
 *   **Finding:** The library completely lacks the logic to calculate Temporal Friendships based on planetary placements relative to each other in a specific chart. Consequently, the essential 5-fold combined friendship status (Great Friend, Friend, Neutral, Enemy, Great Enemy), derived from combining Natural and Temporal friendships, cannot be determined.
 *   **Category:** `Astrology`, `Logic`, `Shadbala`
 *   **Tasks:**
-    *   [ ] Implement a function to calculate Temporal Friendship (Temporary Friend/Enemy) between two planets based on their house positions relative to each other in the D1 chart.
-    *   [ ] Implement a function to combine Natural and Temporal friendship statuses to derive the final 5-fold relationship.
-    *   [ ] Ensure that Shadbala components requiring this status (like Saptavarga Bala within `calculate_sign_strength`) utilize the correct 5-fold status.
+    *   [x] Implement a function to calculate Temporal Friendship (Temporary Friend/Enemy) between two planets based on their house positions relative to each other in the D1 chart.
+    *   [x] Implement a function to combine Natural and Temporal friendship statuses to derive the final 5-fold relationship.
+    *   [x] Ensure that Shadbala components requiring this status (like Saptavarga Bala within `calculate_sign_strength`) utilize the correct 5-fold status.
 
 ## 15. Verification Needed for Saptavarga Bala Implementation
 
