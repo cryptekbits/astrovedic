@@ -32,10 +32,21 @@ def calculate_sthana_bala(chart, planet_id):
     # Get the planet from the chart
     planet = chart.getObject(planet_id)
 
+    # Import the necessary functions from the vargas module
+    from flatlib.vedic.vargas import get_varga_chart
+
     # Calculate each component of Sthana Bala
     uchcha_bala = calculate_uchcha_bala(planet_id, planet.lon)
     saptavarga_bala = calculate_saptavarga_bala(chart, planet_id)
-    ojha_yugma_bala = calculate_ojha_yugma_bala(planet_id, planet.sign)
+
+    # Get the Navamsha (D9) chart and planet position for Ojha-Yugma Bala
+    navamsha_chart = get_varga_chart(chart, 'D9')
+    navamsha_planet = navamsha_chart.getObject(planet_id)
+    navamsha_sign = navamsha_planet.sign
+
+    # Calculate Ojha-Yugma Bala with both D1 and D9 signs
+    ojha_yugma_bala = calculate_ojha_yugma_bala(planet_id, planet.sign, navamsha_sign)
+
     kendradi_bala = calculate_kendradi_bala(chart, planet_id)
     drekkana_bala = calculate_drekkana_bala(planet_id, planet.lon)
 
@@ -245,51 +256,74 @@ def calculate_saptavarga_bala(chart, planet_id):
     return result
 
 
-def calculate_ojha_yugma_bala(planet_id, sign):
+def calculate_ojha_yugma_bala(planet_id, d1_sign, d9_sign=None):
     """
     Calculate Ojha-Yugma Bala (odd-even sign strength) for a planet
 
+    According to standard Vedic rules, Ojha-Yugma Bala is awarded only if the planet
+    occupies a favorable sign type in BOTH the Rashi (D1) and Navamsha (D9) charts.
+
     Args:
         planet_id (str): The ID of the planet
-        sign (str): The sign of the planet
+        d1_sign (str): The sign of the planet in the Rashi (D1) chart
+        d9_sign (str, optional): The sign of the planet in the Navamsha (D9) chart
+                                If not provided, only D1 is considered (non-standard)
 
     Returns:
         dict: Dictionary with Ojha-Yugma Bala information
     """
-    # Get the sign number (0-11)
-    sign_num = {
+    # Get the sign numbers (0-11) for both D1 and D9 signs
+    sign_map = {
         const.ARIES: 0, const.TAURUS: 1, const.GEMINI: 2, const.CANCER: 3,
         const.LEO: 4, const.VIRGO: 5, const.LIBRA: 6, const.SCORPIO: 7,
         const.SAGITTARIUS: 8, const.CAPRICORN: 9, const.AQUARIUS: 10, const.PISCES: 11
-    }[sign]
+    }
 
-    # Determine if the sign is odd or even
-    is_odd_sign = (sign_num % 2 == 0)  # 0-based, so even indices are odd signs
+    d1_sign_num = sign_map[d1_sign]
 
-    # Planets that prefer odd signs
-    odd_sign_planets = [const.SUN, const.MARS, const.JUPITER, const.MERCURY]
+    # Determine if the D1 sign is odd or even
+    is_d1_odd_sign = (d1_sign_num % 2 == 0)  # 0-based, so even indices are odd signs
 
-    # Planets that prefer even signs
+    # Check D9 sign if provided
+    if d9_sign:
+        d9_sign_num = sign_map[d9_sign]
+        is_d9_odd_sign = (d9_sign_num % 2 == 0)  # 0-based, so even indices are odd signs
+    else:
+        # If D9 sign is not provided, assume it matches D1 (non-standard)
+        is_d9_odd_sign = is_d1_odd_sign
+
+    # Define planets that prefer odd signs (Aries, Gemini, Leo, Libra, Sagittarius, Aquarius)
+    odd_sign_planets = [const.SUN, const.MARS, const.JUPITER]
+
+    # Define planets that prefer even signs (Taurus, Cancer, Virgo, Scorpio, Capricorn, Pisces)
     even_sign_planets = [const.MOON, const.VENUS, const.SATURN]
 
-    # Rahu and Ketu don't have a preference
+    # Mercury gains strength in both odd and even signs
+    mercury_special_case = (planet_id == const.MERCURY)
 
-    # Determine if the planet is in its preferred sign type
-    if planet_id in odd_sign_planets and is_odd_sign:
+    # Determine if the planet is in its preferred sign type in BOTH D1 and D9
+    if mercury_special_case:
+        # Mercury always gets full strength
         value = 15.0
-        description = 'In preferred odd sign'
-    elif planet_id in even_sign_planets and not is_odd_sign:
+        description = 'Mercury gains strength in both odd and even signs'
+    elif planet_id in odd_sign_planets and is_d1_odd_sign and is_d9_odd_sign:
         value = 15.0
-        description = 'In preferred even sign'
-    elif planet_id in odd_sign_planets and not is_odd_sign:
+        description = 'In preferred odd signs in both D1 and D9'
+    elif planet_id in even_sign_planets and not is_d1_odd_sign and not is_d9_odd_sign:
+        value = 15.0
+        description = 'In preferred even signs in both D1 and D9'
+    elif planet_id in [const.RAHU, const.KETU]:
+        # For Rahu/Ketu, we'll use a more standard approach based on their dispositors
+        # For simplicity, we'll assign 0 points as they don't have standard Ojha-Yugma Bala
         value = 0.0
-        description = 'Not in preferred odd sign'
-    elif planet_id in even_sign_planets and is_odd_sign:
-        value = 0.0
-        description = 'Not in preferred even sign'
+        description = 'Nodes (Rahu/Ketu) do not receive Ojha-Yugma Bala'
     else:
-        value = 7.5  # Half strength for Rahu and Ketu
-        description = 'No preference for odd/even signs'
+        # If the planet is not in its preferred sign type in BOTH charts, it gets 0
+        value = 0.0
+        if d9_sign:
+            description = 'Not in preferred sign type in both D1 and D9 charts'
+        else:
+            description = 'Not in preferred sign type'
 
     return {'value': value, 'description': description}
 
