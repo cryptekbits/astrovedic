@@ -198,10 +198,10 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
     *   **Simplified Rahu/Ketu:** Assigns a non-standard flat half-strength.
 *   **Category:** `Astrology`, `Logic`, `Shadbala`
 *   **Tasks:**
-    *   [ ] Correct the diurnal/nocturnal planet classifications within `calculate_nathonnatha_bala`.
-    *   [ ] Replace the `chart.isDiurnal()` check with calculations involving local midday and midnight times (requires sunrise/sunset calculations).
-    *   [ ] Implement the standard linear interpolation formula to calculate strength based on the time interval from midday/midnight.
-    *   [ ] Review and implement standard handling for Rahu/Ketu (likely exclude them or assign 0).
+    *   [x] Correct the diurnal/nocturnal planet classifications within `calculate_nathonnatha_bala`.
+    *   [x] Replace the `chart.isDiurnal()` check with calculations involving local midday and midnight times (requires sunrise/sunset calculations).
+    *   [x] Implement the standard linear interpolation formula to calculate strength based on the time interval from midday/midnight.
+    *   [x] Review and implement standard handling for Rahu/Ketu (likely exclude them or assign 0).
 
 ## 20. Paksha Bala Implementation Review
 
