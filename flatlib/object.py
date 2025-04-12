@@ -252,11 +252,111 @@ class ShadowPlanet(GenericObject):
 # -------------------- #
 
 class VedicBody(GenericObject):
-    """ This class represents additional Vedic bodies like Arun, Varun, Yama. """
+    """ This class represents a Vedic astrology body with additional Vedic attributes.
+
+    This class extends GenericObject with Vedic-specific attributes and methods,
+    such as nakshatra information, shadbala components, and other Vedic properties.
+    """
 
     def __init__(self):
         super().__init__()
         self.type = const.OBJ_GENERIC
+
+        # Vedic-specific attributes
+        self.nakshatra = None  # Nakshatra name
+        self.nakshatra_lord = None  # Nakshatra lord
+        self.nakshatra_pada = None  # Nakshatra pada (1-4)
+        self.nakshatra_degree = None  # Degree within nakshatra
+
+        # Shadbala components
+        self.sthana_bala = 0.0  # Positional strength
+        self.dig_bala = 0.0  # Directional strength
+        self.kala_bala = 0.0  # Temporal strength
+        self.cheshta_bala = 0.0  # Motional strength
+        self.naisargika_bala = 0.0  # Natural strength
+        self.drig_bala = 0.0  # Aspectual strength
+        self.total_shadbala = 0.0  # Total strength
+
+        # Additional Vedic attributes
+        self.varga_positions = {}  # Positions in divisional charts
+        self.avastha = None  # Planetary state
+        self.graha_drishti = []  # Vedic aspects cast
+        self.aspects_received = []  # Vedic aspects received
+        self.ishta_phala = 0.0  # Benefic effects
+        self.kashta_phala = 0.0  # Malefic effects
+        self.vimsopaka_bala = 0.0  # Strength in divisional charts
+
+    # === Vedic Properties === #
+
+    def get_nakshatra_info(self):
+        """Returns the nakshatra information for this object."""
+        return {
+            'name': self.nakshatra,
+            'lord': self.nakshatra_lord,
+            'pada': self.nakshatra_pada,
+            'degree': self.nakshatra_degree
+        }
+
+    def get_shadbala_info(self):
+        """Returns the shadbala information for this object."""
+        return {
+            'sthana_bala': self.sthana_bala,
+            'dig_bala': self.dig_bala,
+            'kala_bala': self.kala_bala,
+            'cheshta_bala': self.cheshta_bala,
+            'naisargika_bala': self.naisargika_bala,
+            'drig_bala': self.drig_bala,
+            'total_shadbala': self.total_shadbala
+        }
+
+    def get_varga_position(self, varga):
+        """Returns the position in a specific divisional chart.
+
+        Args:
+            varga (int): The divisional chart number (e.g., 9 for D9)
+
+        Returns:
+            float: The longitude in the divisional chart, or None if not available
+        """
+        return self.varga_positions.get(varga)
+
+    def set_varga_position(self, varga, longitude):
+        """Sets the position in a specific divisional chart.
+
+        Args:
+            varga (int): The divisional chart number (e.g., 9 for D9)
+            longitude (float): The longitude in the divisional chart
+        """
+        self.varga_positions[varga] = longitude
+
+    def is_vargottama(self):
+        """Returns whether this object is in the same sign in D1 and D9 charts."""
+        if 9 not in self.varga_positions:
+            return False
+
+        d1_sign = int(self.lon / 30)
+        d9_sign = int(self.varga_positions[9] / 30)
+        return d1_sign == d9_sign
+
+    def get_dignity(self):
+        """Returns the dignity of this object in Vedic astrology."""
+        # This is a placeholder - actual implementation would check
+        # exaltation, debilitation, own sign, etc.
+        return "Unknown"
+
+    def get_vedic_aspects(self):
+        """Returns the Vedic aspects (graha drishti) cast by this object."""
+        return self.graha_drishti
+
+    def get_vedic_aspects_received(self):
+        """Returns the Vedic aspects received by this object."""
+        return self.aspects_received
+
+    def isRetrograde(self):
+        """Returns whether this object is retrograde."""
+        if hasattr(self, 'lonspeed'):
+            return self.lonspeed < 0
+        return False
 
 
 # ------------------ #

@@ -584,5 +584,25 @@
         "name": "Shashtiamsha Calculation",
         "description": "Tests D60 (Shashtiamsha) calculation logic against standard definitions",
         "category": "vedic"
+    },
+    "tests.test_vedic_object.TestVedicObject.test_vedic_body_creation": {
+        "name": "Vedic Body Creation",
+        "description": "Tests VedicBody object creation and initialization",
+        "category": "vedic"
+    },
+    "tests.test_vedic_object.TestVedicObject.test_vedic_body_methods": {
+        "name": "Vedic Body Methods",
+        "description": "Tests VedicBody object methods and functionality",
+        "category": "vedic"
+    },
+    "tests.test_vedic_object.TestVedicObject.test_to_vedic_object": {
+        "name": "To Vedic Object",
+        "description": "Tests conversion of regular objects to VedicBody objects",
+        "category": "vedic"
+    },
+    "tests.test_vedic_object.TestVedicObject.test_to_vedic_chart": {
+        "name": "To Vedic Chart",
+        "description": "Tests conversion of regular charts to charts with VedicBody objects",
+        "category": "vedic"
     }
 }
