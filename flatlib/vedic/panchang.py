@@ -11,7 +11,8 @@ import math
 from flatlib import const
 from flatlib import angle
 from flatlib.datetime import Datetime
-from flatlib.ephem import swe
+from flatlib.ephem import swe, ephem
+from flatlib.geopos import GeoPos
 
 # Tithi (lunar day) names
 TITHI_NAMES = [
@@ -229,13 +230,13 @@ def get_hora(jd, lat, lon):
     date = Datetime.fromJD(jd)
     
     # Find the previous sunrise
-    prev_sunrise = ephem.lastSunrise(date, (lat, lon))
+    prev_sunrise = ephem.lastSunrise(date, GeoPos(lat, lon))
     
     # Find the next sunset
-    next_sunset = ephem.nextSunset(date, (lat, lon))
+    next_sunset = ephem.nextSunset(date, GeoPos(lat, lon))
     
     # Find the next sunrise
-    next_sunrise = ephem.nextSunrise(date, (lat, lon))
+    next_sunrise = ephem.nextSunrise(date, GeoPos(lat, lon))
     
     # Determine if it's day or night
     is_day = prev_sunrise.jd <= jd < next_sunset.jd
@@ -266,198 +267,181 @@ def get_hora(jd, lat, lon):
     }
 
 
-def get_rahukala(jd, lat, lon):
+def get_rahukala(jd, lat, lon, utcoffset):
     """
-    Calculate Rahukala (inauspicious period) for a given Julian day
+    Calculate Rahu Kala for a given Julian day and location
     
     Args:
         jd (float): Julian day
         lat (float): Latitude in degrees
         lon (float): Longitude in degrees
+        utcoffset (Time): UTC offset
     
     Returns:
-        dict: Dictionary with Rahukala information
+        dict: Dictionary with Rahu Kala start and end times
     """
-    from flatlib.ephem import ephem
+    # Get date and weekday
+    date = Datetime.fromJD(jd, utcoffset)
+    # Convert flatlib dayofweek (Sun=0) to Python weekday (Mon=0)
+    weekday = (date.date.dayofweek() - 1 + 7) % 7
     
-    # Get date from Julian day
-    date = Datetime.fromJD(jd)
+    # Find the previous sunrise and next sunset using ephem
+    prev_sunrise = ephem.lastSunrise(date, GeoPos(lat, lon))
+    next_sunset = ephem.nextSunset(date, GeoPos(lat, lon))
     
-    # Find the previous sunrise
-    prev_sunrise = ephem.lastSunrise(date, (lat, lon))
-    
-    # Find the next sunset
-    next_sunset = ephem.nextSunset(date, (lat, lon))
-    
-    # Get day of week (0 = Sunday, 1 = Monday, etc.)
-    day_of_week = date.date.weekday()
-    
-    # Rahukala occurs at different times on different days
-    # The sequence is: 8, 2, 7, 5, 6, 4, 3 (in terms of 1/8th parts of the day)
-    rahukala_sequence = [7, 1, 6, 4, 5, 3, 2]  # 0-based index
-    rahukala_part = rahukala_sequence[day_of_week]
-    
-    # Calculate day duration
+    # Calculate day duration in JD
     day_duration = next_sunset.jd - prev_sunrise.jd
     
-    # Calculate Rahukala start and end times
-    rahukala_start = prev_sunrise.jd + (rahukala_part * day_duration / 8)
-    rahukala_end = prev_sunrise.jd + ((rahukala_part + 1) * day_duration / 8)
+    # Rahu Kala sequence (Mon=0 to Sun=6)
+    # Original flatlib sequence: [7, 1, 6, 4, 5, 3, 2] for Sun=0 index
+    # Adjusted for Mon=0 index: [1, 6, 4, 5, 3, 2, 7]
+    rahukala_sequence = [1, 6, 4, 5, 3, 2, 7] 
+    rahukala_part = rahukala_sequence[weekday]
     
-    # Convert to Datetime objects
-    rahukala_start_dt = Datetime.fromJD(rahukala_start, date.utcoffset)
-    rahukala_end_dt = Datetime.fromJD(rahukala_end, date.utcoffset)
+    # Calculate Rahu Kala start and end Julian Days
+    # Note: Sequence parts are 1-based for calculation (1st part to 8th part)
+    rahukala_start_jd = prev_sunrise.jd + ((rahukala_part - 1) * day_duration / 8)
+    rahukala_end_jd = prev_sunrise.jd + (rahukala_part * day_duration / 8)
+    
+    # Convert back to Datetime objects with the correct utcoffset
+    rahukala_start = Datetime.fromJD(rahukala_start_jd, utcoffset)
+    rahukala_end = Datetime.fromJD(rahukala_end_jd, utcoffset)
     
     return {
-        'start': rahukala_start_dt,
-        'end': rahukala_end_dt,
-        'duration': rahukala_end - rahukala_start
+        'start': rahukala_start,
+        'end': rahukala_end
     }
 
 
-def get_yamaganda(jd, lat, lon):
+def get_yamaganda(jd, lat, lon, utcoffset):
     """
-    Calculate Yamaganda (inauspicious period) for a given Julian day
+    Calculate Yamaganda Kalam for a given Julian day and location
     
     Args:
         jd (float): Julian day
         lat (float): Latitude in degrees
         lon (float): Longitude in degrees
+        utcoffset (Time): UTC offset
     
     Returns:
-        dict: Dictionary with Yamaganda information
+        dict: Dictionary with Yamaganda Kalam start and end times
     """
-    from flatlib.ephem import ephem
+    # Get date and weekday
+    date = Datetime.fromJD(jd, utcoffset)
+    # Convert flatlib dayofweek (Sun=0) to Python weekday (Mon=0)
+    weekday = (date.date.dayofweek() - 1 + 7) % 7
     
-    # Get date from Julian day
-    date = Datetime.fromJD(jd)
+    # Find the previous sunrise and next sunset using ephem
+    prev_sunrise = ephem.lastSunrise(date, GeoPos(lat, lon))
+    next_sunset = ephem.nextSunset(date, GeoPos(lat, lon))
     
-    # Find the previous sunrise
-    prev_sunrise = ephem.lastSunrise(date, (lat, lon))
-    
-    # Find the next sunset
-    next_sunset = ephem.nextSunset(date, (lat, lon))
-    
-    # Get day of week (0 = Sunday, 1 = Monday, etc.)
-    day_of_week = date.date.weekday()
-    
-    # Yamaganda occurs at different times on different days
-    # The sequence is: 2, 6, 4, 5, 3, 7, 8 (in terms of 1/8th parts of the day)
-    yamaganda_sequence = [1, 5, 3, 4, 2, 6, 7]  # 0-based index
-    yamaganda_part = yamaganda_sequence[day_of_week]
-    
-    # Calculate day duration
+    # Calculate day duration in JD
     day_duration = next_sunset.jd - prev_sunrise.jd
     
-    # Calculate Yamaganda start and end times
-    yamaganda_start = prev_sunrise.jd + (yamaganda_part * day_duration / 8)
-    yamaganda_end = prev_sunrise.jd + ((yamaganda_part + 1) * day_duration / 8)
+    # Yamaganda sequence (Mon=0 to Sun=6)
+    # Original flatlib sequence: [1, 5, 3, 4, 2, 6, 7] for Sun=0 index
+    # Adjusted for Mon=0 index: [5, 3, 4, 2, 6, 7, 1]
+    yamaganda_sequence = [5, 3, 4, 2, 6, 7, 1]
+    yamaganda_part = yamaganda_sequence[weekday]
     
-    # Convert to Datetime objects
-    yamaganda_start_dt = Datetime.fromJD(yamaganda_start, date.utcoffset)
-    yamaganda_end_dt = Datetime.fromJD(yamaganda_end, date.utcoffset)
+    # Calculate Yamaganda start and end Julian Days
+    yamaganda_start_jd = prev_sunrise.jd + ((yamaganda_part - 1) * day_duration / 8)
+    yamaganda_end_jd = prev_sunrise.jd + (yamaganda_part * day_duration / 8)
+    
+    # Convert back to Datetime objects with the correct utcoffset
+    yamaganda_start = Datetime.fromJD(yamaganda_start_jd, utcoffset)
+    yamaganda_end = Datetime.fromJD(yamaganda_end_jd, utcoffset)
     
     return {
-        'start': yamaganda_start_dt,
-        'end': yamaganda_end_dt,
-        'duration': yamaganda_end - yamaganda_start
+        'start': yamaganda_start,
+        'end': yamaganda_end
     }
 
 
-def get_gulika_kala(jd, lat, lon):
+def get_gulika_kala(jd, lat, lon, utcoffset):
     """
-    Calculate Gulika Kala (inauspicious period) for a given Julian day
+    Calculate Gulika Kalam for a given Julian day and location
     
     Args:
         jd (float): Julian day
         lat (float): Latitude in degrees
         lon (float): Longitude in degrees
+        utcoffset (Time): UTC offset
     
     Returns:
-        dict: Dictionary with Gulika Kala information
+        dict: Dictionary with Gulika Kalam start and end times
     """
-    from flatlib.ephem import ephem
+    # Get date and weekday
+    date = Datetime.fromJD(jd, utcoffset)
+    # Convert flatlib dayofweek (Sun=0) to Python weekday (Mon=0)
+    weekday = (date.date.dayofweek() - 1 + 7) % 7
     
-    # Get date from Julian day
-    date = Datetime.fromJD(jd)
+    # Find the previous sunrise and next sunset using ephem
+    prev_sunrise = ephem.lastSunrise(date, GeoPos(lat, lon))
+    next_sunset = ephem.nextSunset(date, GeoPos(lat, lon))
     
-    # Find the previous sunrise
-    prev_sunrise = ephem.lastSunrise(date, (lat, lon))
-    
-    # Find the next sunset
-    next_sunset = ephem.nextSunset(date, (lat, lon))
-    
-    # Get day of week (0 = Sunday, 1 = Monday, etc.)
-    day_of_week = date.date.weekday()
-    
-    # Gulika Kala occurs at different times on different days
-    # The sequence is: 7, 6, 5, 4, 3, 2, 1 (in terms of 1/8th parts of the day)
-    gulika_sequence = [6, 5, 4, 3, 2, 1, 0]  # 0-based index
-    gulika_part = gulika_sequence[day_of_week]
-    
-    # Calculate day duration
+    # Calculate day duration in JD
     day_duration = next_sunset.jd - prev_sunrise.jd
     
-    # Calculate Gulika Kala start and end times
-    gulika_start = prev_sunrise.jd + (gulika_part * day_duration / 8)
-    gulika_end = prev_sunrise.jd + ((gulika_part + 1) * day_duration / 8)
+    # Gulika sequence (Mon=0 to Sun=6)
+    # Original flatlib sequence: [6, 5, 4, 3, 2, 1, 0] for Sun=0 index --> [6, 5, 4, 3, 2, 1, 7] 1-based
+    # Adjusted for Mon=0 index: [5, 4, 3, 2, 1, 7, 6]
+    gulika_sequence = [5, 4, 3, 2, 1, 7, 6] 
+    gulika_part = gulika_sequence[weekday]
     
-    # Convert to Datetime objects
-    gulika_start_dt = Datetime.fromJD(gulika_start, date.utcoffset)
-    gulika_end_dt = Datetime.fromJD(gulika_end, date.utcoffset)
+    # Calculate Gulika start and end Julian Days
+    gulika_start_jd = prev_sunrise.jd + ((gulika_part - 1) * day_duration / 8)
+    gulika_end_jd = prev_sunrise.jd + (gulika_part * day_duration / 8)
+    
+    # Convert back to Datetime objects with the correct utcoffset
+    gulika_start = Datetime.fromJD(gulika_start_jd, utcoffset)
+    gulika_end = Datetime.fromJD(gulika_end_jd, utcoffset)
     
     return {
-        'start': gulika_start_dt,
-        'end': gulika_end_dt,
-        'duration': gulika_end - gulika_start
+        'start': gulika_start,
+        'end': gulika_end
     }
 
 
-def get_abhijit_muhurta(jd, lat, lon):
+def get_abhijit_muhurta(jd, lat, lon, utcoffset):
     """
-    Calculate Abhijit Muhurta (auspicious period) for a given Julian day
-    
-    Abhijit Muhurta is the 8th muhurta of the day, occurring around midday.
+    Calculate Abhijit Muhurta for a given Julian day and location
     
     Args:
         jd (float): Julian day
         lat (float): Latitude in degrees
         lon (float): Longitude in degrees
-    
+        utcoffset (Time): UTC offset
+
     Returns:
-        dict: Dictionary with Abhijit Muhurta information
+        dict: Dictionary with Abhijit Muhurta start and end times
     """
-    from flatlib.ephem import ephem
+    # Get date object
+    date = Datetime.fromJD(jd, utcoffset)
+
+    # Find the previous sunrise and next sunset using ephem
+    prev_sunrise = ephem.lastSunrise(date, GeoPos(lat, lon))
+    next_sunset = ephem.nextSunset(date, GeoPos(lat, lon))
     
-    # Get date from Julian day
-    date = Datetime.fromJD(jd)
-    
-    # Find the previous sunrise
-    prev_sunrise = ephem.lastSunrise(date, (lat, lon))
-    
-    # Find the next sunset
-    next_sunset = ephem.nextSunset(date, (lat, lon))
-    
-    # Calculate day duration
+    # Calculate day duration in JD
     day_duration = next_sunset.jd - prev_sunrise.jd
     
     # Calculate Abhijit Muhurta (8th muhurta of the day)
-    # There are 15 muhurtas in a day
-    abhijit_start = prev_sunrise.jd + (7 * day_duration / 15)
-    abhijit_end = prev_sunrise.jd + (8 * day_duration / 15)
+    # There are 15 muhurtas in a day, so the 8th starts after 7/15 and ends after 8/15
+    abhijit_start_jd = prev_sunrise.jd + (7 * day_duration / 15)
+    abhijit_end_jd = prev_sunrise.jd + (8 * day_duration / 15)
     
-    # Convert to Datetime objects
-    abhijit_start_dt = Datetime.fromJD(abhijit_start, date.utcoffset)
-    abhijit_end_dt = Datetime.fromJD(abhijit_end, date.utcoffset)
-    
+    # Convert back to Datetime objects with the correct utcoffset
+    abhijit_start = Datetime.fromJD(abhijit_start_jd, utcoffset)
+    abhijit_end = Datetime.fromJD(abhijit_end_jd, utcoffset)
+
     return {
-        'start': abhijit_start_dt,
-        'end': abhijit_end_dt,
-        'duration': abhijit_end - abhijit_start
+        'start': abhijit_start,
+        'end': abhijit_end
     }
 
 
-def get_panchang(jd, lat, lon, ayanamsa=None):
+def get_panchang(jd, lat, lon, utcoffset, ayanamsa=None):
     """
     Calculate complete Panchang for a given Julian day
     
@@ -465,13 +449,14 @@ def get_panchang(jd, lat, lon, ayanamsa=None):
         jd (float): Julian day
         lat (float): Latitude in degrees
         lon (float): Longitude in degrees
+        utcoffset (Time): UTC offset
         ayanamsa (str, optional): Ayanamsa to use for sidereal calculations
     
     Returns:
         dict: Dictionary with complete Panchang information
     """
     # Get date from Julian day
-    date = Datetime.fromJD(jd)
+    date = Datetime.fromJD(jd, utcoffset)
     
     # Calculate all Panchang elements
     tithi_info = get_tithi(jd, ayanamsa)
@@ -481,12 +466,12 @@ def get_panchang(jd, lat, lon, ayanamsa=None):
     vara_info = get_vara(jd)
     
     # Calculate inauspicious periods
-    rahukala_info = get_rahukala(jd, lat, lon)
-    yamaganda_info = get_yamaganda(jd, lat, lon)
-    gulika_kala_info = get_gulika_kala(jd, lat, lon)
+    rahukala_info = get_rahukala(jd, lat, lon, utcoffset)
+    yamaganda_info = get_yamaganda(jd, lat, lon, utcoffset)
+    gulika_kala_info = get_gulika_kala(jd, lat, lon, utcoffset)
     
     # Calculate auspicious periods
-    abhijit_muhurta_info = get_abhijit_muhurta(jd, lat, lon)
+    abhijit_muhurta_info = get_abhijit_muhurta(jd, lat, lon, utcoffset)
     
     return {
         'date': date,
