@@ -1,0 +1,872 @@
+{
+    "score": 47.88888888888889,
+    "level": "Average",
+    "kuta_scores": {
+        "kuta_scores": {
+            "Varna Kuta": {
+                "varna1": "Kshatriya",
+                "varna2": "Kshatriya",
+                "score": 1,
+                "max_score": 1,
+                "description": "Both individuals belong to the same Varna (Kshatriya), indicating excellent social compatibility."
+            },
+            "Vashya Kuta": {
+                "vashya1": "Chatushpad",
+                "vashya2": "Chatushpad",
+                "score": 2,
+                "max_score": 2,
+                "description": "Both individuals belong to the same Vashya category (Chatushpad), indicating excellent dominance compatibility."
+            },
+            "Tara Kuta": {
+                "nakshatra1": "Purva Phalguni",
+                "nakshatra2": "Mula",
+                "tara": 8,
+                "score": 2,
+                "max_score": 3,
+                "description": "The Tara is Mitra (Friend), which is good. Indicates a strong friendship and supportive partnership."
+            },
+            "Yoni Kuta": {
+                "yoni1": "Rat",
+                "yoni2": "Dog",
+                "score": 1,
+                "max_score": 4,
+                "description": "The Yonis (Rat and Dog) have low compatibility, indicating potential physical and temperamental differences."
+            },
+            "Graha Maitri Kuta": {
+                "lord1": "Sun",
+                "lord2": "Jupiter",
+                "friendship": "Friend",
+                "score": 5,
+                "max_score": 5,
+                "description": "The lords of the Moon signs (Sun and Jupiter) are friends, indicating excellent planetary compatibility and mutual understanding."
+            },
+            "Gana Kuta": {
+                "gana1": "Manushya",
+                "gana2": "Rakshasa",
+                "score": 1,
+                "max_score": 6,
+                "description": "The Ganas (Manushya and Rakshasa) have low compatibility, indicating potential temperamental differences. One has a human and balanced nature, while the other has a demonic and passionate nature."
+            },
+            "Bhakoot Kuta": {
+                "sign1": "Leo",
+                "sign2": "Sagittarius",
+                "house_position": 4,
+                "score": 0,
+                "max_score": 7,
+                "description": "The Moon signs (Leo and Sagittarius) are in the 4th house from each other, indicating potential emotional instability."
+            },
+            "Nadi Kuta": {
+                "nadi1": "Pitta",
+                "nadi2": "Vata",
+                "score": 8,
+                "max_score": 8,
+                "description": "The individuals have different Nadis (Pitta and Vata), indicating excellent health compatibility. One has a fire constitution (intense, intelligent, and determined), while the other has a air constitution (active, creative, and quick), which creates a balanced relationship."
+            }
+        },
+        "total_kuta_score": {
+            "total_score": 20,
+            "max_total_score": 36,
+            "percentage": 55.55555555555556,
+            "level": "Average",
+            "description": "This is an average match with moderate compatibility."
+        }
+    },
+    "dosha_analysis": {
+        "Mangal Dosha": {
+            "chart1": {
+                "has_dosha": false,
+                "mars_house": 10,
+                "is_in_dosha_house": false,
+                "cancellation": {
+                    "is_cancelled": false,
+                    "cancellation_factors": []
+                },
+                "description": "No Mangal Dosha is present. Mars is in the 10th house, which is not a Dosha house."
+            },
+            "chart2": {
+                "has_dosha": true,
+                "mars_house": 12,
+                "is_in_dosha_house": true,
+                "cancellation": {
+                    "is_cancelled": false,
+                    "cancellation_factors": []
+                },
+                "description": "Mangal Dosha is present. Mars is in the 12th house, which may cause financial losses, isolation, and foreign residence."
+            }
+        },
+        "Kuja Dosha": {
+            "chart1": {
+                "has_dosha": false,
+                "mars_house_from_asc": 10,
+                "mars_house_from_moon": 12,
+                "mars_house_from_venus": 6,
+                "is_in_dosha_house_from_asc": false,
+                "is_in_dosha_house_from_moon": true,
+                "is_in_dosha_house_from_venus": false,
+                "is_in_dosha_house": true,
+                "cancellation": {
+                    "is_cancelled": true,
+                    "cancellation_factors": [
+                        "Mars is in Cancer"
+                    ]
+                },
+                "description": "Kuja Dosha is present but cancelled. The Dosha is cancelled due to: Mars is in Cancer."
+            },
+            "chart2": {
+                "has_dosha": false,
+                "mars_house_from_asc": 12,
+                "mars_house_from_moon": 9,
+                "mars_house_from_venus": 6,
+                "is_in_dosha_house_from_asc": true,
+                "is_in_dosha_house_from_moon": false,
+                "is_in_dosha_house_from_venus": false,
+                "is_in_dosha_house": true,
+                "cancellation": {
+                    "is_cancelled": true,
+                    "cancellation_factors": [
+                        "Mars is in Cancer"
+                    ]
+                },
+                "description": "Kuja Dosha is present but cancelled. The Dosha is cancelled due to: Mars is in Cancer."
+            }
+        }
+    },
+    "dosha_cancellation": {
+        "is_cancelled": false,
+        "both_have_mangal": false,
+        "both_have_kuja": false,
+        "both_have_shani": false,
+        "both_have_grahan": false,
+        "mangal_dosha_cancelled": false,
+        "kuja_dosha_cancelled": false,
+        "shani_dosha_cancelled": false,
+        "grahan_dosha_cancelled": false,
+        "description": "No Dosha cancellation is present."
+    },
+    "dasha_compatibility": {
+        "dasha1": "Venus",
+        "dasha2": "Unknown",
+        "dasha_lord1": "Venus",
+        "dasha_lord2": "Unknown",
+        "compatibility": {
+            "friendship": "Unknown",
+            "score": 0,
+            "quality1": "love, harmony, and pleasure",
+            "quality2": "unknown qualities"
+        },
+        "score": 0,
+        "description": "The relationship between the Dasha lords (Venus and Unknown) is unknown. Person 1 is currently in a phase of love, harmony, and pleasure, while Person 2 is in a phase of unknown qualities."
+    },
+    "navamsa_compatibility": {
+        "positions1": {
+            "Sun": {
+                "sign": "Aquarius",
+                "longitude": 322.3031861780472,
+                "retrograde": false
+            },
+            "Moon": {
+                "sign": "Virgo",
+                "longitude": 169.6167777534848,
+                "retrograde": false
+            },
+            "Mercury": {
+                "sign": "Cancer",
+                "longitude": 115.43350576725766,
+                "retrograde": false
+            },
+            "Venus": {
+                "sign": "Cancer",
+                "longitude": 95.83384364887667,
+                "retrograde": true
+            },
+            "Mars": {
+                "sign": "Cancer",
+                "longitude": 111.83885671732234,
+                "retrograde": false
+            },
+            "Jupiter": {
+                "sign": "Cancer",
+                "longitude": 118.58104737932527,
+                "retrograde": false
+            },
+            "Saturn": {
+                "sign": "Cancer",
+                "longitude": 101.70587346615156,
+                "retrograde": false
+            },
+            "Uranus": {
+                "sign": "Capricorn",
+                "longitude": 278.6449854056864,
+                "retrograde": false
+            },
+            "Neptune": {
+                "sign": "Leo",
+                "longitude": 145.4756196791867,
+                "retrograde": false
+            },
+            "Pluto": {
+                "sign": "Pisces",
+                "longitude": 355.1507053770447,
+                "retrograde": false
+            },
+            "Rahu": {
+                "sign": "Cancer",
+                "longitude": 108.57486905781127,
+                "retrograde": false
+            },
+            "Ketu": {
+                "sign": "Capricorn",
+                "longitude": 288.57486905781127,
+                "retrograde": false
+            },
+            "Asc": {
+                "sign": "Gemini",
+                "longitude": 86.89036674497696
+            },
+            "MC": {
+                "sign": "Pisces",
+                "longitude": 354.9124916666016
+            },
+            "Desc": {
+                "sign": "Sagittarius",
+                "longitude": 266.890366744977
+            },
+            "IC": {
+                "sign": "Virgo",
+                "longitude": 174.91249166660162
+            }
+        },
+        "positions2": {
+            "Sun": {
+                "sign": "Capricorn",
+                "longitude": 275.17039393603665,
+                "retrograde": false
+            },
+            "Moon": {
+                "sign": "Aries",
+                "longitude": 1.7033859162378917,
+                "retrograde": false
+            },
+            "Mercury": {
+                "sign": "Leo",
+                "longitude": 129.2364489149953,
+                "retrograde": false
+            },
+            "Venus": {
+                "sign": "Scorpio",
+                "longitude": 233.22118230707753,
+                "retrograde": false
+            },
+            "Mars": {
+                "sign": "Sagittarius",
+                "longitude": 254.42042114302822,
+                "retrograde": false
+            },
+            "Jupiter": {
+                "sign": "Libra",
+                "longitude": 181.27212792223096,
+                "retrograde": false
+            },
+            "Saturn": {
+                "sign": "Leo",
+                "longitude": 134.9437540347448,
+                "retrograde": false
+            },
+            "Uranus": {
+                "sign": "Capricorn",
+                "longitude": 296.4051777722442,
+                "retrograde": false
+            },
+            "Neptune": {
+                "sign": "Virgo",
+                "longitude": 155.61494759236325,
+                "retrograde": false
+            },
+            "Pluto": {
+                "sign": "Pisces",
+                "longitude": 356.2246695366282,
+                "retrograde": true
+            },
+            "Rahu": {
+                "sign": "Cancer",
+                "longitude": 91.5316526281897,
+                "retrograde": false
+            },
+            "Ketu": {
+                "sign": "Capricorn",
+                "longitude": 271.5316526281897,
+                "retrograde": false
+            },
+            "Asc": {
+                "sign": "Capricorn",
+                "longitude": 285.8982466665419
+            },
+            "MC": {
+                "sign": "Libra",
+                "longitude": 198.56687072219376
+            },
+            "Desc": {
+                "sign": "Cancer",
+                "longitude": 105.89824666654192
+            },
+            "IC": {
+                "sign": "Aries",
+                "longitude": 18.56687072219364
+            }
+        },
+        "house_positions1": {
+            "Sun": 9,
+            "Moon": 4,
+            "Mercury": 2,
+            "Venus": 2,
+            "Mars": 2,
+            "Jupiter": 2,
+            "Saturn": 2,
+            "Uranus": 8,
+            "Neptune": 3,
+            "Pluto": 10,
+            "Rahu": 2,
+            "Ketu": 8
+        },
+        "house_positions2": {
+            "Sun": 1,
+            "Moon": 4,
+            "Mercury": 8,
+            "Venus": 11,
+            "Mars": 12,
+            "Jupiter": 10,
+            "Saturn": 8,
+            "Uranus": 1,
+            "Neptune": 9,
+            "Pluto": 3,
+            "Rahu": 7,
+            "Ketu": 1
+        },
+        "aspects": [
+            {
+                "planet1": "Sun",
+                "planet2": "Venus",
+                "aspect": "Square",
+                "orb": 0.917996129030314
+            },
+            {
+                "planet1": "Sun",
+                "planet2": "Saturn",
+                "aspect": "Opposition",
+                "orb": 7.359432143302399
+            },
+            {
+                "planet1": "Moon",
+                "planet2": "Venus",
+                "aspect": "Sextile",
+                "orb": 3.6044045535927296
+            },
+            {
+                "planet1": "Moon",
+                "planet2": "Mars",
+                "aspect": "Square",
+                "orb": 5.196356610456576
+            },
+            {
+                "planet1": "Moon",
+                "planet2": "Uranus",
+                "aspect": "Trine",
+                "orb": 6.788400018759404
+            },
+            {
+                "planet1": "Moon",
+                "planet2": "Pluto",
+                "aspect": "Opposition",
+                "orb": 6.607891783143401
+            },
+            {
+                "planet1": "Mercury",
+                "planet2": "Moon",
+                "aspect": "Trine",
+                "orb": 6.269880148980235
+            },
+            {
+                "planet1": "Mercury",
+                "planet2": "Venus",
+                "aspect": "Trine",
+                "orb": 2.21232346018013
+            },
+            {
+                "planet1": "Mercury",
+                "planet2": "Jupiter",
+                "aspect": "Sextile",
+                "orb": 5.838622154973308
+            },
+            {
+                "planet1": "Mercury",
+                "planet2": "Uranus",
+                "aspect": "Opposition",
+                "orb": 0.9716720049865444
+            },
+            {
+                "planet1": "Mercury",
+                "planet2": "Pluto",
+                "aspect": "Trine",
+                "orb": 0.7911637693705416
+            },
+            {
+                "planet1": "Venus",
+                "planet2": "Sun",
+                "aspect": "Opposition",
+                "orb": 0.6634497128400199
+            },
+            {
+                "planet1": "Venus",
+                "planet2": "Moon",
+                "aspect": "Square",
+                "orb": 4.130457732638774
+            },
+            {
+                "planet1": "Venus",
+                "planet2": "Jupiter",
+                "aspect": "Square",
+                "orb": 4.561715726645701
+            },
+            {
+                "planet1": "Venus",
+                "planet2": "Neptune",
+                "aspect": "Sextile",
+                "orb": 0.21889605651341526
+            },
+            {
+                "planet1": "Venus",
+                "planet2": "Rahu",
+                "aspect": "Conjunction",
+                "orb": 4.302191020686962
+            },
+            {
+                "planet1": "Venus",
+                "planet2": "Ketu",
+                "aspect": "Opposition",
+                "orb": 4.302191020686962
+            },
+            {
+                "planet1": "Mars",
+                "planet2": "Venus",
+                "aspect": "Trine",
+                "orb": 1.3823255897551832
+            },
+            {
+                "planet1": "Mars",
+                "planet2": "Uranus",
+                "aspect": "Opposition",
+                "orb": 4.566321054921843
+            },
+            {
+                "planet1": "Mars",
+                "planet2": "Pluto",
+                "aspect": "Trine",
+                "orb": 4.3858128193058405
+            },
+            {
+                "planet1": "Jupiter",
+                "planet2": "Moon",
+                "aspect": "Trine",
+                "orb": 3.122338536912622
+            },
+            {
+                "planet1": "Jupiter",
+                "planet2": "Venus",
+                "aspect": "Trine",
+                "orb": 5.359865072247743
+            },
+            {
+                "planet1": "Jupiter",
+                "planet2": "Jupiter",
+                "aspect": "Sextile",
+                "orb": 2.691080542905695
+            },
+            {
+                "planet1": "Jupiter",
+                "planet2": "Uranus",
+                "aspect": "Opposition",
+                "orb": 2.1758696070810686
+            },
+            {
+                "planet1": "Jupiter",
+                "planet2": "Pluto",
+                "aspect": "Trine",
+                "orb": 2.3563778426970714
+            },
+            {
+                "planet1": "Saturn",
+                "planet2": "Sun",
+                "aspect": "Opposition",
+                "orb": 6.5354795301149124
+            },
+            {
+                "planet1": "Uranus",
+                "planet2": "Sun",
+                "aspect": "Conjunction",
+                "orb": 3.474591469649738
+            },
+            {
+                "planet1": "Uranus",
+                "planet2": "Moon",
+                "aspect": "Square",
+                "orb": 6.9415994894484925
+            },
+            {
+                "planet1": "Uranus",
+                "planet2": "Neptune",
+                "aspect": "Trine",
+                "orb": 3.0300378133231334
+            },
+            {
+                "planet1": "Uranus",
+                "planet2": "Rahu",
+                "aspect": "Opposition",
+                "orb": 7.11333277749668
+            },
+            {
+                "planet1": "Uranus",
+                "planet2": "Ketu",
+                "aspect": "Conjunction",
+                "orb": 7.11333277749668
+            },
+            {
+                "planet1": "Neptune",
+                "planet2": "Venus",
+                "aspect": "Square",
+                "orb": 2.25443737210918
+            },
+            {
+                "planet1": "Neptune",
+                "planet2": "Ketu",
+                "aspect": "Trine",
+                "orb": 6.056032949002997
+            },
+            {
+                "planet1": "Pluto",
+                "planet2": "Moon",
+                "aspect": "Conjunction",
+                "orb": 6.552680539193204
+            },
+            {
+                "planet1": "Pluto",
+                "planet2": "Venus",
+                "aspect": "Trine",
+                "orb": 1.9295230699671606
+            },
+            {
+                "planet1": "Pluto",
+                "planet2": "Jupiter",
+                "aspect": "Opposition",
+                "orb": 6.121422545186277
+            },
+            {
+                "planet1": "Pluto",
+                "planet2": "Uranus",
+                "aspect": "Sextile",
+                "orb": 1.2544723951995138
+            },
+            {
+                "planet1": "Pluto",
+                "planet2": "Pluto",
+                "aspect": "Conjunction",
+                "orb": 1.073964159583511
+            },
+            {
+                "planet1": "Pluto",
+                "planet2": "Rahu",
+                "aspect": "Square",
+                "orb": 6.380947251145017
+            },
+            {
+                "planet1": "Pluto",
+                "planet2": "Ketu",
+                "aspect": "Square",
+                "orb": 6.380947251145017
+            },
+            {
+                "planet1": "Rahu",
+                "planet2": "Venus",
+                "aspect": "Trine",
+                "orb": 4.646313249266257
+            },
+            {
+                "planet1": "Rahu",
+                "planet2": "Uranus",
+                "aspect": "Opposition",
+                "orb": 7.830308714432931
+            },
+            {
+                "planet1": "Rahu",
+                "planet2": "Pluto",
+                "aspect": "Trine",
+                "orb": 7.649800478816928
+            },
+            {
+                "planet1": "Ketu",
+                "planet2": "Venus",
+                "aspect": "Sextile",
+                "orb": 4.646313249266257
+            },
+            {
+                "planet1": "Ketu",
+                "planet2": "Uranus",
+                "aspect": "Conjunction",
+                "orb": 7.830308714432931
+            },
+            {
+                "planet1": "Sun",
+                "planet2": "MC",
+                "aspect": "Trine",
+                "orb": 3.7363154558534575
+            },
+            {
+                "planet1": "Moon",
+                "planet2": "Asc",
+                "aspect": "Trine",
+                "orb": 3.7185310869428747
+            },
+            {
+                "planet1": "Mercury",
+                "planet2": "MC",
+                "aspect": "Square",
+                "orb": 6.8666350450639015
+            },
+            {
+                "planet1": "Mars",
+                "planet2": "Asc",
+                "aspect": "Opposition",
+                "orb": 5.940610050780435
+            },
+            {
+                "planet1": "Mars",
+                "planet2": "MC",
+                "aspect": "Square",
+                "orb": 3.2719859951285883
+            },
+            {
+                "planet1": "Saturn",
+                "planet2": "Asc",
+                "aspect": "Opposition",
+                "orb": 4.192373200390364
+            },
+            {
+                "planet1": "Saturn",
+                "planet2": "MC",
+                "aspect": "Square",
+                "orb": 6.860997256042197
+            },
+            {
+                "planet1": "Uranus",
+                "planet2": "Asc",
+                "aspect": "Conjunction",
+                "orb": 7.253261260855538
+            },
+            {
+                "planet1": "Rahu",
+                "planet2": "Asc",
+                "aspect": "Opposition",
+                "orb": 2.6766223912693476
+            },
+            {
+                "planet1": "Rahu",
+                "planet2": "MC",
+                "aspect": "Square",
+                "orb": 0.00799833561751484
+            },
+            {
+                "planet1": "Ketu",
+                "planet2": "Asc",
+                "aspect": "Conjunction",
+                "orb": 2.6766223912693476
+            },
+            {
+                "planet1": "Ketu",
+                "planet2": "MC",
+                "aspect": "Square",
+                "orb": 0.00799833561751484
+            },
+            {
+                "planet1": "Asc",
+                "planet2": "Moon",
+                "aspect": "Square",
+                "orb": 4.813019171260919
+            },
+            {
+                "planet1": "Asc",
+                "planet2": "Jupiter",
+                "aspect": "Square",
+                "orb": 4.381761177254006
+            },
+            {
+                "planet1": "Asc",
+                "planet2": "Pluto",
+                "aspect": "Square",
+                "orb": 0.6656972083487744
+            },
+            {
+                "planet1": "Asc",
+                "planet2": "Rahu",
+                "aspect": "Conjunction",
+                "orb": 4.6412858832127455
+            },
+            {
+                "planet1": "Asc",
+                "planet2": "Ketu",
+                "aspect": "Opposition",
+                "orb": 4.641285883212731
+            },
+            {
+                "planet1": "MC",
+                "planet2": "Moon",
+                "aspect": "Conjunction",
+                "orb": 6.790894249636267
+            },
+            {
+                "planet1": "MC",
+                "planet2": "Venus",
+                "aspect": "Trine",
+                "orb": 1.691309359524098
+            },
+            {
+                "planet1": "MC",
+                "planet2": "Jupiter",
+                "aspect": "Opposition",
+                "orb": 6.35963625562934
+            },
+            {
+                "planet1": "MC",
+                "planet2": "Uranus",
+                "aspect": "Sextile",
+                "orb": 1.4926861056425764
+            },
+            {
+                "planet1": "MC",
+                "planet2": "Pluto",
+                "aspect": "Conjunction",
+                "orb": 1.3121778700265736
+            },
+            {
+                "planet1": "MC",
+                "planet2": "Rahu",
+                "aspect": "Square",
+                "orb": 6.619160961588079
+            },
+            {
+                "planet1": "MC",
+                "planet2": "Ketu",
+                "aspect": "Square",
+                "orb": 6.619160961588079
+            }
+        ],
+        "strength1": {
+            "Sun": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Moon": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Mercury": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Venus": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Mars": {
+                "value": 0,
+                "description": "Debilitated"
+            },
+            "Jupiter": {
+                "value": 10,
+                "description": "Exalted"
+            },
+            "Saturn": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Uranus": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Neptune": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Pluto": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Rahu": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Ketu": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "overall": {
+                "value": 50.0,
+                "description": "Average"
+            }
+        },
+        "strength2": {
+            "Sun": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Moon": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Mercury": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Venus": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Mars": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Jupiter": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Saturn": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Uranus": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Neptune": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Pluto": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Rahu": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "Ketu": {
+                "value": 5,
+                "description": "Neutral"
+            },
+            "overall": {
+                "value": 50.0,
+                "description": "Average"
+            }
+        },
+        "score": 10,
+        "description": "Navamsa Compatibility Score: 10.0/10. This indicates excellent compatibility at the soul level, suggesting a deep spiritual connection and mutual growth. Key aspects in Navamsa: Challenging Square between Sun and Venus, Favorable Sextile between Moon and Venus, Challenging Opposition between Venus and Sun. Person 1's Navamsa chart is average (50%), while Person 2's Navamsa chart is average (50%). Both individuals have Moon well-placed in Navamsa, indicating strong emotional compatibility. "
+    }
+}
