@@ -17,7 +17,17 @@ class ErrorHandlingTests(unittest.TestCase):
 
     @patch('flatlib.ephem.swe.sweObject')
     def test_getObject_handles_exception(self, mock_sweObject):
-        """Test that getObject handles exceptions from sweObject"""
+        """
+        Test that getObject handles exceptions from sweObject
+
+        Note: This test intentionally mocks sweObject to raise an exception.
+        The test will generate an ERROR log message like:
+        - ERROR - Error calculating object Sun: Test exception
+
+        This message is expected and indicates that the error handling mechanism
+        is correctly catching exceptions and returning a valid object with default
+        values when the calculation fails.
+        """
         # Setup mock to raise an exception
         mock_sweObject.side_effect = Exception("Test exception")
 
@@ -37,7 +47,17 @@ class ErrorHandlingTests(unittest.TestCase):
 
     @patch('flatlib.ephem.tools.syzygyJD')
     def test_getObject_handles_syzygy_exception(self, mock_syzygyJD):
-        """Test that getObject handles exceptions when calculating Syzygy"""
+        """
+        Test that getObject handles exceptions when calculating Syzygy
+
+        Note: This test intentionally mocks syzygyJD to raise an exception.
+        The test will generate an ERROR log message like:
+        - ERROR - Error calculating Syzygy: Test exception
+
+        This message is expected and indicates that the error handling mechanism
+        is correctly catching exceptions during Syzygy calculations and returning
+        a valid object with default values when the calculation fails.
+        """
         # Setup mock to raise an exception
         mock_syzygyJD.side_effect = Exception("Test exception")
 
@@ -55,7 +75,17 @@ class ErrorHandlingTests(unittest.TestCase):
 
     @patch('flatlib.ephem.swe.swe_object')
     def test_get_object_handles_exception(self, mock_swe_object):
-        """Test that get_object handles exceptions from swe_object"""
+        """
+        Test that get_object handles exceptions from swe_object
+
+        Note: This test intentionally mocks swe_object to raise an exception.
+        The test will generate an ERROR log message like:
+        - ERROR - Error calculating object Sun: Test exception
+
+        This message is expected and indicates that the error handling mechanism
+        is correctly catching exceptions and returning a valid object with default
+        values when the calculation fails.
+        """
         # Setup mock to raise an exception
         mock_swe_object.side_effect = Exception("Test exception")
 
@@ -72,7 +102,17 @@ class ErrorHandlingTests(unittest.TestCase):
         self.assertEqual(obj['latspeed'], 0.0)
 
     def test_chart_creation_with_invalid_object(self):
-        """Test that Chart creation handles invalid objects gracefully"""
+        """
+        Test that Chart creation handles invalid objects gracefully
+
+        Note: This test intentionally creates a chart with a non-existent object.
+        The test will generate an ERROR log message like:
+        - ERROR - Error calculating object NonExistentObject: 'NonExistentObject'
+
+        This message is expected and indicates that the chart creation process
+        is correctly handling invalid objects by creating placeholder objects
+        with default values when the actual object cannot be calculated.
+        """
         # Create a chart with a non-existent object
         chart = Chart(self.date, self.pos, IDs=[const.SUN, 'NonExistentObject'])
 

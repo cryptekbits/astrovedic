@@ -28,4 +28,9 @@ venv/
 
 # Build
 build/
+build/
 .idea
+.roomodes
+tmp/
+reports/
+logs/

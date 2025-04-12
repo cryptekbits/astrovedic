@@ -17,7 +17,7 @@ class FactoryTests(unittest.TestCase):
             'latspeed': 0.0
         }
         obj = AstronomicalObjectFactory.create_object(obj_data, const.OBJ_PLANET)
-        
+
         self.assertEqual(obj.id, const.SUN)
         self.assertEqual(obj.lon, 45.0)
         self.assertEqual(obj.lat, 0.0)
@@ -27,14 +27,25 @@ class FactoryTests(unittest.TestCase):
         self.assertEqual(obj.signlon, 15.0)  # Should be calculated
 
     def test_create_object_with_missing_data(self):
-        """Test creating an object with missing data"""
+        """
+        Test creating an object with missing data
+
+        Note: This test intentionally creates an object with missing required attributes
+        (lat, lonspeed, latspeed). The test will generate ERROR and WARNING log messages
+        like:
+        - ERROR - Missing required attributes for Sun: lat, lonspeed, latspeed
+        - WARNING - Created object with default values for missing attributes: Sun
+
+        These messages are expected and indicate that the factory is correctly identifying
+        missing attributes and applying default values as designed.
+        """
         obj_data = {
             'id': const.SUN,
             'lon': 45.0
             # Missing 'lat', 'lonspeed', 'latspeed'
         }
         obj = AstronomicalObjectFactory.create_object(obj_data, const.OBJ_PLANET)
-        
+
         self.assertEqual(obj.id, const.SUN)
         self.assertEqual(obj.lon, 45.0)
         self.assertEqual(obj.lat, 0.0)  # Default value
@@ -52,7 +63,7 @@ class FactoryTests(unittest.TestCase):
             'size': 30.0
         }
         house = AstronomicalObjectFactory.create_object(house_data, const.OBJ_HOUSE)
-        
+
         self.assertEqual(house.id, const.HOUSE1)
         self.assertEqual(house.lon, 30.0)
         self.assertEqual(house.lat, 0.0)
@@ -69,7 +80,7 @@ class FactoryTests(unittest.TestCase):
             'mag': 1.0
         }
         star = AstronomicalObjectFactory.create_object(star_data, const.OBJ_FIXED_STAR)
-        
+
         self.assertEqual(star.id, const.STAR_ALDEBARAN)
         self.assertEqual(star.lon, 60.0)
         self.assertEqual(star.lat, 5.0)
@@ -78,10 +89,20 @@ class FactoryTests(unittest.TestCase):
         self.assertEqual(star.signlon, 0.0)  # Should be calculated
 
     def test_create_object_with_empty_data(self):
-        """Test creating an object with empty data"""
+        """
+        Test creating an object with empty data
+
+        Note: This test intentionally creates an object with completely empty data.
+        The test will generate ERROR and WARNING log messages like:
+        - ERROR - Missing required attributes for None: id, lon, lat
+        - WARNING - Created object with default values for missing attributes: None
+
+        These messages are expected and indicate that the factory is correctly handling
+        the case of empty data by applying default values for all required attributes.
+        """
         obj_data = {}
         obj = AstronomicalObjectFactory.create_object(obj_data)
-        
+
         self.assertEqual(obj.id, const.NO_PLANET)  # Default value
         self.assertEqual(obj.lon, 0.0)  # Default value
         self.assertEqual(obj.lat, 0.0)  # Default value
