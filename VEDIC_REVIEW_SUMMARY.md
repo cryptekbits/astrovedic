@@ -105,8 +105,8 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
 *   **Finding:** The primary dignity table (`flatlib.dignities.tables.ESSENTIAL_DIGNITIES`) completely lacks definitions for Moolatrikona signs and their specific degree ranges for each planet. Moolatrikona is a crucial dignity in Vedic astrology, especially for Shadbala (Saptavarga Bala).
 *   **Category:** `Astrology`, `Data`, `Shadbala`
 *   **Tasks:**
-    *   [ ] Create a comprehensive data structure (potentially in a new `flatlib/vedic/tables.py` or within `const.py`) defining the Moolatrikona sign and exact degree range for each of the 7 traditional planets according to authoritative Vedic sources.
-    *   [ ] Update dignity assessment functions (like `calculate_sign_strength`) to correctly identify when a planet falls within its Moolatrikona range.
+    *   [x] Create a comprehensive data structure (potentially in a new `flatlib/vedic/tables.py` or within `const.py`) defining the Moolatrikona sign and exact degree range for each of the 7 traditional planets according to authoritative Vedic sources.
+    *   [x] Update dignity assessment functions (like `calculate_sign_strength`) to correctly identify when a planet falls within its Moolatrikona range.
 
 ## 12. Incorrect Vedic Exaltation/Fall Degrees
 
