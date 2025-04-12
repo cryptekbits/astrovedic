@@ -281,15 +281,15 @@ def get_activity_score(date, location, activity):
     
     # Get Rahu Kala
     rahu_kala = get_rahu_kala(date, location)
-    is_in_rahu_kala = rahu_kala['start'].datetime() <= date.datetime() <= rahu_kala['end'].datetime()
+    is_in_rahu_kala = rahu_kala['start'].jd <= date.jd <= rahu_kala['end'].jd
     
     # Get Yama Ghantaka
     yama_ghantaka = get_yama_ghantaka(date, location)
-    is_in_yama_ghantaka = yama_ghantaka['start'].datetime() <= date.datetime() <= yama_ghantaka['end'].datetime()
+    is_in_yama_ghantaka = yama_ghantaka['start'].jd <= date.jd <= yama_ghantaka['end'].jd
     
     # Get Gulika Kala
     gulika_kala = get_gulika_kala(date, location)
-    is_in_gulika_kala = gulika_kala['start'].datetime() <= date.datetime() <= gulika_kala['end'].datetime()
+    is_in_gulika_kala = gulika_kala['start'].jd <= date.jd <= gulika_kala['end'].jd
     
     if not (is_in_rahu_kala or is_in_yama_ghantaka or is_in_gulika_kala):
         score += 2
@@ -306,11 +306,11 @@ def get_activity_score(date, location, activity):
     
     # Get Abhijit Muhurta
     abhijit_muhurta = get_abhijit_muhurta(date, location)
-    is_in_abhijit_muhurta = abhijit_muhurta['start'].datetime() <= date.datetime() <= abhijit_muhurta['end'].datetime()
+    is_in_abhijit_muhurta = abhijit_muhurta['start'].jd <= date.jd <= abhijit_muhurta['end'].jd
     
     # Get Brahma Muhurta
     brahma_muhurta = get_brahma_muhurta(date, location)
-    is_in_brahma_muhurta = brahma_muhurta['start'].datetime() <= date.datetime() <= brahma_muhurta['end'].datetime()
+    is_in_brahma_muhurta = brahma_muhurta['start'].jd <= date.jd <= brahma_muhurta['end'].jd
     
     if is_in_abhijit_muhurta:
         score += 1

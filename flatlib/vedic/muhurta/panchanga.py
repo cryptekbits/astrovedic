@@ -115,20 +115,17 @@ def get_nakshatra_for_muhurta(chart):
     nakshatra_info = get_nakshatra(moon.lon)
     
     # Get the Nakshatra lord
-    nakshatra_lord = get_nakshatra_lord(nakshatra_info['num'])
+    nakshatra_lord = get_nakshatra_lord(nakshatra_info['index'])
     
     # Get the Nakshatra type
-    nakshatra_type = get_nakshatra_type(nakshatra_info['num'])
+    nakshatra_type = get_nakshatra_type(nakshatra_info['index'])
     
     return {
-        'num': nakshatra_info['num'],
+        'num': nakshatra_info['index'],
         'name': nakshatra_info['name'],
         'pada': nakshatra_info['pada'],
         'lord': nakshatra_lord,
-        'type': nakshatra_type,
-        'start_lon': nakshatra_info['start_lon'],
-        'end_lon': nakshatra_info['end_lon'],
-        'elapsed': nakshatra_info['elapsed']
+        'type': nakshatra_type
     }
 
 
@@ -218,7 +215,8 @@ def get_vara(chart):
     date = chart.date
     
     # Get the weekday (0-6, where 0 is Monday)
-    weekday = date.datetime().weekday()
+    # Calculate from Julian Day: int((jd + 0.5) % 7)
+    weekday = int((date.jd + 0.5) % 7)
     
     # Convert to Vedic weekday (1-7, where 1 is Sunday)
     vara_num = weekday + 2

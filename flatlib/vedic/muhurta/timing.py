@@ -8,14 +8,14 @@
 
 from flatlib import const
 from flatlib.chart import Chart
-from flatlib.datetime import Datetime
 from flatlib.geopos import GeoPos
-from datetime import timedelta, datetime
+from flatlib.datetime import Datetime, Time, Date, dateJDN, GREGORIAN
+from datetime import datetime
 import math
+from datetime import timedelta
 
 # Import Panchanga functions
 from flatlib.vedic.muhurta.panchanga import get_vara
-
 
 def get_abhijit_muhurta(date, location):
     """
@@ -35,23 +35,31 @@ def get_abhijit_muhurta(date, location):
     sunrise = get_sunrise(date, location)
     sunset = get_sunset(date, location)
     
-    # Calculate the duration of the day
-    day_duration = (sunset.datetime() - sunrise.datetime()).total_seconds()
+    # Calculate the duration of the day in days using Julian Day
+    day_duration_days = sunset.jd - sunrise.jd
     
-    # Calculate the midday
-    midday = sunrise.datetime() + timedelta(seconds=day_duration / 2)
+    # Calculate the midday Julian Day
+    midday_jd = sunrise.jd + day_duration_days / 2
     
     # Calculate the duration of Abhijit Muhurta (48 minutes)
-    abhijit_duration = 48 * 60  # in seconds
+    abhijit_duration_minutes = 48
+    abhijit_duration_seconds = abhijit_duration_minutes * 60
+    # Convert half duration (24 minutes) to fraction of a day
+    half_duration_days = (abhijit_duration_seconds / 2) / (24 * 60 * 60)
     
-    # Calculate the start and end times of Abhijit Muhurta
-    abhijit_start = midday - timedelta(seconds=abhijit_duration / 2)
-    abhijit_end = midday + timedelta(seconds=abhijit_duration / 2)
+    # Calculate the start and end times of Abhijit Muhurta in JD
+    abhijit_start_jd = midday_jd - half_duration_days
+    abhijit_end_jd = midday_jd + half_duration_days
     
+    # Convert start and end JDs back to Datetime objects
+    # Use the original date's utcoffset
+    abhijit_start_dt = Datetime.fromJD(abhijit_start_jd, date.utcoffset)
+    abhijit_end_dt = Datetime.fromJD(abhijit_end_jd, date.utcoffset)
+
     return {
-        'start': Datetime.fromDatetime(abhijit_start),
-        'end': Datetime.fromDatetime(abhijit_end),
-        'duration': abhijit_duration / 60,  # in minutes
+        'start': abhijit_start_dt, # Use the calculated Datetime objects
+        'end': abhijit_end_dt,     # Use the calculated Datetime objects
+        'duration': abhijit_duration_minutes,  # in minutes
         'description': 'Most auspicious time of the day'
     }
 
@@ -60,8 +68,8 @@ def get_brahma_muhurta(date, location):
     """
     Calculate the Brahma Muhurta (auspicious time before sunrise)
     
-    Brahma Muhurta is the time approximately 1.5 hours before sunrise,
-    lasting for 48 minutes (2 ghatis). It is considered auspicious for
+    Brahma Muhurta starts 96 minutes before sunrise and ends 48 minutes
+    before sunrise (lasting 48 minutes). It is considered auspicious for
     spiritual practices.
     
     Args:
@@ -73,18 +81,31 @@ def get_brahma_muhurta(date, location):
     """
     # Get the sunrise time
     sunrise = get_sunrise(date, location)
+    sunrise_jd = sunrise.jd # Get Julian Day
     
     # Calculate the duration of Brahma Muhurta (48 minutes)
-    brahma_duration = 48 * 60  # in seconds
+    brahma_duration_minutes = 48
     
-    # Calculate the start and end times of Brahma Muhurta
-    brahma_end = sunrise.datetime() - timedelta(minutes=24)
-    brahma_start = brahma_end - timedelta(seconds=brahma_duration)
+    # Calculate offsets in minutes before sunrise
+    start_offset_minutes = 96
+    end_offset_minutes = 48
+    
+    # Convert offsets to fractions of a day
+    start_offset_days = (start_offset_minutes * 60) / (24 * 60 * 60)
+    end_offset_days = (end_offset_minutes * 60) / (24 * 60 * 60)
+    
+    # Calculate the start and end times in JD
+    brahma_start_jd = sunrise_jd - start_offset_days
+    brahma_end_jd = sunrise_jd - end_offset_days
+    
+    # Convert JDs back to Datetime objects
+    brahma_start_dt = Datetime.fromJD(brahma_start_jd, date.utcoffset)
+    brahma_end_dt = Datetime.fromJD(brahma_end_jd, date.utcoffset)
     
     return {
-        'start': Datetime.fromDatetime(brahma_start),
-        'end': Datetime.fromDatetime(brahma_end),
-        'duration': brahma_duration / 60,  # in minutes
+        'start': brahma_start_dt,
+        'end': brahma_end_dt,
+        'duration': brahma_duration_minutes, # Duration remains 48 minutes
         'description': 'Auspicious time before sunrise for spiritual practices'
     }
 
@@ -94,7 +115,8 @@ def get_rahu_kala(date, location):
     Calculate the Rahu Kala (inauspicious time of the day)
     
     Rahu Kala is an inauspicious time that occurs during different parts
-    of the day depending on the weekday. It lasts for 1.5 hours (3 horas).
+    of the day depending on the weekday. It lasts for 1.5 horas (where a hora
+    is 1/8th of the daylight duration).
     
     Args:
         date (Datetime): The date
@@ -107,31 +129,42 @@ def get_rahu_kala(date, location):
     sunrise = get_sunrise(date, location)
     sunset = get_sunset(date, location)
     
-    # Calculate the duration of the day
-    day_duration = (sunset.datetime() - sunrise.datetime()).total_seconds()
+    # Calculate the duration of the day in days using Julian Day
+    day_duration_days = sunset.jd - sunrise.jd
     
-    # Calculate the duration of one hora (1/8 of the day)
-    hora_duration = day_duration / 8
+    # Calculate the duration of one hora in days
+    hora_duration_days = day_duration_days / 8
     
     # Get the weekday
+    # Note: Creating a chart just to get the weekday might be inefficient
+    # if called repeatedly. Consider passing weekday if already known.
     chart = Chart(date, location, hsys=const.HOUSES_WHOLE_SIGN, mode=const.AY_LAHIRI)
     vara = get_vara(chart)
-    weekday = vara['num']
+    weekday = vara['num'] # Weekday 1=Sunday, ..., 7=Saturday
     
-    # Determine the hora for Rahu Kala based on the weekday
-    # Sunday: 8th hora, Monday: 2nd hora, Tuesday: 7th hora,
-    # Wednesday: 5th hora, Thursday: 6th hora, Friday: 4th hora, Saturday: 3rd hora
+    # Determine the starting hora number (1-8) for Rahu Kala based on the weekday
+    # Sun: 8th, Mon: 2nd, Tue: 7th, Wed: 5th, Thu: 6th, Fri: 4th, Sat: 3rd
+    # Using 1-based indexing for horas (1st hora starts at sunrise)
     rahu_horas = {1: 8, 2: 2, 3: 7, 4: 5, 5: 6, 6: 4, 7: 3}
-    rahu_hora = rahu_horas.get(weekday, 1)
+    rahu_hora_start_num = rahu_horas.get(weekday, 1) # Default to 1 (Sunday's value) if error
     
-    # Calculate the start and end times of Rahu Kala
-    rahu_start = sunrise.datetime() + timedelta(seconds=(rahu_hora - 1) * hora_duration)
-    rahu_end = rahu_start + timedelta(seconds=hora_duration * 1.5)
+    # Calculate the start and end times of Rahu Kala in JD
+    rahu_start_jd = sunrise.jd + (rahu_hora_start_num - 1) * hora_duration_days
+    # Rahu Kala duration is 1.5 horas
+    rahu_duration_days = hora_duration_days * 1.5
+    rahu_end_jd = rahu_start_jd + rahu_duration_days
+
+    # Convert JDs back to Datetime objects
+    rahu_start_dt = Datetime.fromJD(rahu_start_jd, date.utcoffset)
+    rahu_end_dt = Datetime.fromJD(rahu_end_jd, date.utcoffset)
+
+    # Calculate duration in minutes for the return dict
+    rahu_duration_minutes = rahu_duration_days * 24 * 60
     
     return {
-        'start': Datetime.fromDatetime(rahu_start),
-        'end': Datetime.fromDatetime(rahu_end),
-        'duration': hora_duration * 1.5 / 60,  # in minutes
+        'start': rahu_start_dt,
+        'end': rahu_end_dt,
+        'duration': rahu_duration_minutes,  # in minutes
         'description': 'Inauspicious time ruled by Rahu'
     }
 
@@ -141,7 +174,8 @@ def get_yama_ghantaka(date, location):
     Calculate the Yama Ghantaka (inauspicious time of the day)
     
     Yama Ghantaka is an inauspicious time that occurs during different parts
-    of the day depending on the weekday. It lasts for 1.5 hours (3 horas).
+    of the day depending on the weekday. It lasts for 1.5 horas (where a hora
+    is 1/8th of the daylight duration).
     
     Args:
         date (Datetime): The date
@@ -154,31 +188,39 @@ def get_yama_ghantaka(date, location):
     sunrise = get_sunrise(date, location)
     sunset = get_sunset(date, location)
     
-    # Calculate the duration of the day
-    day_duration = (sunset.datetime() - sunrise.datetime()).total_seconds()
+    # Calculate the duration of the day in days using Julian Day
+    day_duration_days = sunset.jd - sunrise.jd
     
-    # Calculate the duration of one hora (1/8 of the day)
-    hora_duration = day_duration / 8
+    # Calculate the duration of one hora in days
+    hora_duration_days = day_duration_days / 8
     
     # Get the weekday
     chart = Chart(date, location, hsys=const.HOUSES_WHOLE_SIGN, mode=const.AY_LAHIRI)
     vara = get_vara(chart)
-    weekday = vara['num']
+    weekday = vara['num'] # Weekday 1=Sunday, ..., 7=Saturday
     
-    # Determine the hora for Yama Ghantaka based on the weekday
-    # Sunday: 4th hora, Monday: 7th hora, Tuesday: 3rd hora,
-    # Wednesday: 6th hora, Thursday: 2nd hora, Friday: 5th hora, Saturday: 8th hora
+    # Determine the starting hora number (1-8) for Yama Ghantaka based on the weekday
+    # Sun: 4th, Mon: 7th, Tue: 3rd, Wed: 6th, Thu: 2nd, Fri: 5th, Sat: 8th
     yama_horas = {1: 4, 2: 7, 3: 3, 4: 6, 5: 2, 6: 5, 7: 8}
-    yama_hora = yama_horas.get(weekday, 1)
+    yama_hora_start_num = yama_horas.get(weekday, 1) # Default to 1 if error
     
-    # Calculate the start and end times of Yama Ghantaka
-    yama_start = sunrise.datetime() + timedelta(seconds=(yama_hora - 1) * hora_duration)
-    yama_end = yama_start + timedelta(seconds=hora_duration * 1.5)
+    # Calculate the start and end times of Yama Ghantaka in JD
+    yama_start_jd = sunrise.jd + (yama_hora_start_num - 1) * hora_duration_days
+    # Yama Ghantaka duration is 1.5 horas
+    yama_duration_days = hora_duration_days * 1.5
+    yama_end_jd = yama_start_jd + yama_duration_days
+
+    # Convert JDs back to Datetime objects
+    yama_start_dt = Datetime.fromJD(yama_start_jd, date.utcoffset)
+    yama_end_dt = Datetime.fromJD(yama_end_jd, date.utcoffset)
+
+    # Calculate duration in minutes for the return dict
+    yama_duration_minutes = yama_duration_days * 24 * 60
     
     return {
-        'start': Datetime.fromDatetime(yama_start),
-        'end': Datetime.fromDatetime(yama_end),
-        'duration': hora_duration * 1.5 / 60,  # in minutes
+        'start': yama_start_dt,
+        'end': yama_end_dt,
+        'duration': yama_duration_minutes,  # in minutes
         'description': 'Inauspicious time ruled by Yama'
     }
 
@@ -188,7 +230,8 @@ def get_gulika_kala(date, location):
     Calculate the Gulika Kala (inauspicious time of the day)
     
     Gulika Kala is an inauspicious time that occurs during different parts
-    of the day depending on the weekday. It lasts for 1.5 hours (3 horas).
+    of the day depending on the weekday. It lasts for 1.5 horas (where a hora
+    is 1/8th of the daylight duration).
     
     Args:
         date (Datetime): The date
@@ -201,31 +244,39 @@ def get_gulika_kala(date, location):
     sunrise = get_sunrise(date, location)
     sunset = get_sunset(date, location)
     
-    # Calculate the duration of the day
-    day_duration = (sunset.datetime() - sunrise.datetime()).total_seconds()
+    # Calculate the duration of the day in days using Julian Day
+    day_duration_days = sunset.jd - sunrise.jd
     
-    # Calculate the duration of one hora (1/8 of the day)
-    hora_duration = day_duration / 8
+    # Calculate the duration of one hora in days
+    hora_duration_days = day_duration_days / 8
     
     # Get the weekday
     chart = Chart(date, location, hsys=const.HOUSES_WHOLE_SIGN, mode=const.AY_LAHIRI)
     vara = get_vara(chart)
-    weekday = vara['num']
+    weekday = vara['num'] # Weekday 1=Sunday, ..., 7=Saturday
     
-    # Determine the hora for Gulika Kala based on the weekday
-    # Sunday: 6th hora, Monday: 5th hora, Tuesday: 4th hora,
-    # Wednesday: 3rd hora, Thursday: 2nd hora, Friday: 1st hora, Saturday: 7th hora
+    # Determine the starting hora number (1-8) for Gulika Kala based on the weekday
+    # Sun: 6th, Mon: 5th, Tue: 4th, Wed: 3rd, Thu: 2nd, Fri: 1st, Sat: 7th
     gulika_horas = {1: 6, 2: 5, 3: 4, 4: 3, 5: 2, 6: 1, 7: 7}
-    gulika_hora = gulika_horas.get(weekday, 1)
+    gulika_hora_start_num = gulika_horas.get(weekday, 1) # Default to 1 if error
     
-    # Calculate the start and end times of Gulika Kala
-    gulika_start = sunrise.datetime() + timedelta(seconds=(gulika_hora - 1) * hora_duration)
-    gulika_end = gulika_start + timedelta(seconds=hora_duration * 1.5)
+    # Calculate the start and end times of Gulika Kala in JD
+    gulika_start_jd = sunrise.jd + (gulika_hora_start_num - 1) * hora_duration_days
+    # Gulika Kala duration is 1.5 horas
+    gulika_duration_days = hora_duration_days * 1.5
+    gulika_end_jd = gulika_start_jd + gulika_duration_days
+
+    # Convert JDs back to Datetime objects
+    gulika_start_dt = Datetime.fromJD(gulika_start_jd, date.utcoffset)
+    gulika_end_dt = Datetime.fromJD(gulika_end_jd, date.utcoffset)
+
+    # Calculate duration in minutes for the return dict
+    gulika_duration_minutes = gulika_duration_days * 24 * 60
     
     return {
-        'start': Datetime.fromDatetime(gulika_start),
-        'end': Datetime.fromDatetime(gulika_end),
-        'duration': hora_duration * 1.5 / 60,  # in minutes
+        'start': gulika_start_dt,
+        'end': gulika_end_dt,
+        'duration': gulika_duration_minutes,  # in minutes
         'description': 'Inauspicious time ruled by Gulika'
     }
 
@@ -477,18 +528,16 @@ def get_sunrise(date, location):
     # This is a simplified calculation for demonstration purposes
     # In a real implementation, you would use a more accurate algorithm
     
-    # Get the date components
-    dt = date.datetime()
-    year = dt.year
-    month = dt.month
-    day = dt.day
+    # Get the date components from flatlib Datetime object
+    year, month, day = date.date.date()
     
     # Get the location components
     lat = location.lat
     lon = location.lon
     
-    # Calculate the day of the year
-    day_of_year = dt.timetuple().tm_yday
+    # Calculate the day of the year using JDN
+    jdn_start_of_year = dateJDN(year, 1, 1, GREGORIAN) # Assuming Gregorian
+    day_of_year = int(date.date.jdn - jdn_start_of_year + 1)
     
     # Calculate the solar declination
     declination = 23.45 * math.sin(math.radians(360 / 365 * (day_of_year - 81)))
@@ -510,6 +559,7 @@ def get_sunrise(date, location):
     sunrise_dt = datetime(year, month, day, sunrise_hour, sunrise_minute)
     
     # Convert to Datetime object
+    # Use the class method fromDatetime which handles conversion correctly
     return Datetime.fromDatetime(sunrise_dt)
 
 
@@ -528,17 +578,15 @@ def get_sunset(date, location):
     # In a real implementation, you would use a more accurate algorithm
     
     # Get the date components
-    dt = date.datetime()
-    year = dt.year
-    month = dt.month
-    day = dt.day
+    year, month, day = date.date.date()
     
     # Get the location components
     lat = location.lat
     lon = location.lon
     
     # Calculate the day of the year
-    day_of_year = dt.timetuple().tm_yday
+    jdn_start_of_year = dateJDN(year, 1, 1, GREGORIAN) # Assuming Gregorian
+    day_of_year = int(date.date.jdn - jdn_start_of_year + 1)
     
     # Calculate the solar declination
     declination = 23.45 * math.sin(math.radians(360 / 365 * (day_of_year - 81)))

@@ -394,9 +394,16 @@ def is_aspected_by_benefics(chart, planet_id):
     Returns:
         bool: True if the planet is aspected by benefics, False otherwise
     """
-    # Get the planet
-    planet = chart.getObject(planet_id)
-    
+    # Get the target object (planet or Ascendant)
+    if planet_id == const.ASC:
+        target_object = chart.getAngle(const.ASC) # Use getAngle method
+    else:
+        target_object = chart.getObject(planet_id)
+
+    # If target object doesn't exist (e.g., in some chart types), return False
+    if target_object is None:
+        return False
+
     # List of benefic planets
     benefics = [const.MOON, const.MERCURY, const.JUPITER, const.VENUS]
     
@@ -411,18 +418,18 @@ def is_aspected_by_benefics(chart, planet_id):
         from flatlib import angle
         
         # Check for conjunction (0 degrees)
-        conj_orb = abs(angle.closestdistance(planet.lon, benefic.lon))
+        conj_orb = abs(angle.closestdistance(target_object.lon, benefic.lon))
         if conj_orb <= 10:  # 10 degrees orb
             return True
         
         # Check for opposition (180 degrees)
-        opp_orb = abs(angle.closestdistance(planet.lon, benefic.lon + 180))
+        opp_orb = abs(angle.closestdistance(target_object.lon, benefic.lon + 180))
         if opp_orb <= 10:  # 10 degrees orb
             return True
         
         # Check for trine (120 degrees)
-        trine1_orb = abs(angle.closestdistance(planet.lon, benefic.lon + 120))
-        trine2_orb = abs(angle.closestdistance(planet.lon, benefic.lon - 120))
+        trine1_orb = abs(angle.closestdistance(target_object.lon, benefic.lon + 120))
+        trine2_orb = abs(angle.closestdistance(target_object.lon, benefic.lon - 120))
         if trine1_orb <= 10 or trine2_orb <= 10:  # 10 degrees orb
             return True
     

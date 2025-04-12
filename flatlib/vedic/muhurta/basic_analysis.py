@@ -69,13 +69,15 @@ def get_basic_muhurta_analysis(date, location):
     if abhijit:
         abhijit_start = abhijit['start']
         abhijit_end = abhijit['end']
-        if date >= abhijit_start and date <= abhijit_end:
+        # Compare Julian Day (jd) attributes
+        if date.jd >= abhijit_start.jd and date.jd <= abhijit_end.jd:
             in_abhijit = True
     
     if brahma:
         brahma_start = brahma['start']
         brahma_end = brahma['end']
-        if date >= brahma_start and date <= brahma_end:
+        # Compare Julian Day (jd) attributes
+        if date.jd >= brahma_start.jd and date.jd <= brahma_end.jd:
             in_brahma = True
     
     # Check if the time is in any inauspicious period
@@ -86,19 +88,22 @@ def get_basic_muhurta_analysis(date, location):
     if rahu_kala:
         rahu_start = rahu_kala['start']
         rahu_end = rahu_kala['end']
-        if date >= rahu_start and date <= rahu_end:
+        # Compare Julian Day (jd) attributes
+        if date.jd >= rahu_start.jd and date.jd <= rahu_end.jd:
             in_rahu_kala = True
     
     if yama_ghantaka:
         yama_start = yama_ghantaka['start']
         yama_end = yama_ghantaka['end']
-        if date >= yama_start and date <= yama_end:
+        # Compare Julian Day (jd) attributes
+        if date.jd >= yama_start.jd and date.jd <= yama_end.jd:
             in_yama_ghantaka = True
     
     if gulika_kala:
         gulika_start = gulika_kala['start']
         gulika_end = gulika_kala['end']
-        if date >= gulika_start and date <= gulika_end:
+        # Compare Julian Day (jd) attributes
+        if date.jd >= gulika_start.jd and date.jd <= gulika_end.jd:
             in_gulika_kala = True
     
     # Generate a basic analysis
