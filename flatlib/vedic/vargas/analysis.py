@@ -408,7 +408,8 @@ def get_debilitation_signs(planet_id):
 
 def get_friendly_signs(planet_id):
     """
-    Get the friendly signs for a planet
+    Get the friendly signs for a planet based on the natural friendship
+    between the planet and the sign lord.
 
     Args:
         planet_id (str): The ID of the planet
@@ -416,31 +417,29 @@ def get_friendly_signs(planet_id):
     Returns:
         list: List of friendly signs for the planet
     """
-    # This is a simplified version; a more accurate version would consider
-    # temporary friendships based on the birth chart
-
-    friendly_planets = {
-        const.SUN: [const.MOON, const.MARS, const.JUPITER],
-        const.MOON: [const.SUN, const.MERCURY],
-        const.MERCURY: [const.SUN, const.VENUS],
-        const.VENUS: [const.MERCURY, const.SATURN],
-        const.MARS: [const.SUN, const.MOON, const.JUPITER],
-        const.JUPITER: [const.SUN, const.MOON, const.MARS],
-        const.SATURN: [const.MERCURY, const.VENUS],
-        const.RAHU: [const.VENUS, const.SATURN],
-        const.KETU: [const.VENUS, const.SATURN]
-    }
+    from flatlib.vedic import dignities as vedic_dignities
 
     friendly_signs = []
-    for friend in friendly_planets.get(planet_id, []):
-        friendly_signs.extend(get_ruled_signs(friend))
+
+    # Check each sign
+    for sign in const.LIST_SIGNS:
+        # Get the lord of the sign
+        sign_lord = vedic_dignities.get_ruler(sign)
+
+        # Get the natural friendship level between the planet and the sign lord
+        friendship = vedic_dignities.get_natural_friendship(planet_id, sign_lord)
+
+        # If the sign lord is a friend of the planet, add the sign to the list
+        if friendship >= vedic_dignities.FRIENDSHIP_LEVELS['FRIEND']:
+            friendly_signs.append(sign)
 
     return friendly_signs
 
 
 def get_enemy_signs(planet_id):
     """
-    Get the enemy signs for a planet
+    Get the enemy signs for a planet based on the natural friendship
+    between the planet and the sign lord.
 
     Args:
         planet_id (str): The ID of the planet
@@ -448,24 +447,21 @@ def get_enemy_signs(planet_id):
     Returns:
         list: List of enemy signs for the planet
     """
-    # This is a simplified version; a more accurate version would consider
-    # temporary enmities based on the birth chart
-
-    enemy_planets = {
-        const.SUN: [const.SATURN, const.VENUS],
-        const.MOON: [const.SATURN],
-        const.MERCURY: [const.MOON],
-        const.VENUS: [const.SUN, const.MOON],
-        const.MARS: [const.MERCURY],
-        const.JUPITER: [const.MERCURY, const.VENUS],
-        const.SATURN: [const.SUN, const.MOON, const.MARS],
-        const.RAHU: [const.SUN, const.MOON, const.MARS],
-        const.KETU: [const.SUN, const.MOON, const.MARS]
-    }
+    from flatlib.vedic import dignities as vedic_dignities
 
     enemy_signs = []
-    for enemy in enemy_planets.get(planet_id, []):
-        enemy_signs.extend(get_ruled_signs(enemy))
+
+    # Check each sign
+    for sign in const.LIST_SIGNS:
+        # Get the lord of the sign
+        sign_lord = vedic_dignities.get_ruler(sign)
+
+        # Get the natural friendship level between the planet and the sign lord
+        friendship = vedic_dignities.get_natural_friendship(planet_id, sign_lord)
+
+        # If the sign lord is an enemy of the planet, add the sign to the list
+        if friendship <= vedic_dignities.FRIENDSHIP_LEVELS['ENEMY']:
+            enemy_signs.append(sign)
 
     return enemy_signs
 

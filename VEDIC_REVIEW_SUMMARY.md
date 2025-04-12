@@ -126,8 +126,8 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
     *   **Incorrect Logic:** The functions return lists of *signs ruled by* friends/enemies, instead of determining the Natural Friendship status between a planet and the lord of a sign it occupies, which is the standard requirement for Shadbala calculations.
 *   **Category:** `Astrology`, `Logic`, `Shadbala`
 *   **Tasks:**
-    *   [ ] Correct the Natural Friendship data (specifically for the Moon's enemies).
-    *   [ ] Refactor or create a new function to determine the correct Natural Friendship status (Friend, Enemy, Neutral) between two planets according to Vedic rules.
+    *   [x] Correct the Natural Friendship data (specifically for the Moon's enemies).
+    *   [x] Refactor or create a new function to determine the correct Natural Friendship status (Friend, Enemy, Neutral) between two planets according to Vedic rules.
 
 ## 14. Missing Temporal and Combined Friendship Calculation
 
