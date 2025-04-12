@@ -73,8 +73,8 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
 *   **Finding:** The calculation of Varga chart *positions* seems structurally sound and comprehensive (`flatlib.vedic.vargas`). The issue lies in the *interpretation* of these positions for dignity/strength (addressed in Shadbala/Saptavarga findings).
 *   **Category:** `Core`, `Math`
 *   **Tasks:**
-    *   [ ] No immediate tasks required for the core Varga position calculation, but ensure underlying planetary position calculations are accurate (relies on Swiss Ephemeris, seems okay).
-    *   [ ] Verify the specific calculation logic within each individual Varga module (e.g., `navamsha.py`, `hora.py`) against standard definitions if deeper accuracy checks are needed.
+    *   [x] No immediate tasks required for the core Varga position calculation, but ensure underlying planetary position calculations are accurate (relies on Swiss Ephemeris, seems okay).
+    *   [x] Verify the specific calculation logic within each individual Varga module (e.g., `navamsha.py`, `hora.py`) against standard definitions if deeper accuracy checks are needed.
 
 ## 8. Vedic Object Representation
 
