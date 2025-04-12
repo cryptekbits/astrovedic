@@ -172,10 +172,10 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
     *   **Simplified Rahu/Ketu:** Rahu and Ketu are given a fixed half-strength (7.5 Virupas) regardless of sign placement, which is a non-standard simplification.
 *   **Category:** `Astrology`, `Logic`, `Shadbala`
 *   **Tasks:**
-    *   [ ] Modify `calculate_ojha_yugma_bala` to accept both the Rashi (D1) sign and Navamsha (D9) sign as input.
-    *   [ ] Implement the logic to check if the planet is in a favorable sign type (Odd/Even) in *both* D1 and D9.
-    *   [ ] Correct Mercury's classification to gain strength in both Odd and Even signs (or always award full points).
-    *   [ ] Review and implement a more standard handling for Rahu/Ketu (e.g., neutral, based on dispositor, etc.) or clarify the source of the current rule.
+    *   [x] Modify `calculate_ojha_yugma_bala` to accept both the Rashi (D1) sign and Navamsha (D9) sign as input.
+    *   [x] Implement the logic to check if the planet is in a favorable sign type (Odd/Even) in *both* D1 and D9.
+    *   [x] Correct Mercury's classification to gain strength in both Odd and Even signs (or always award full points).
+    *   [x] Review and implement a more standard handling for Rahu/Ketu (e.g., neutral, based on dispositor, etc.) or clarify the source of the current rule.
 
 ## 18. Dig Bala Implementation Errors
 
