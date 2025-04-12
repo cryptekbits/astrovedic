@@ -314,10 +314,17 @@ def print_yoga_effects(chart, yogas):
     analysis = get_yoga_analysis(chart)
     
     # Print the effects of each Yoga
-    for effect in analysis['effects']:
-        print(f"\n{effect['name']} ({effect['type']})")
-        for e in effect['effects']:
-            print(f"- {e}")
+    if analysis and 'effects' in analysis and analysis['effects']:
+        for effect in analysis['effects']:
+            print(f"\n{effect['name']} ({effect['type']})")
+            # Also check if the inner 'effects' key exists
+            if 'effects' in effect and effect['effects']:
+                for e in effect['effects']:
+                    print(f"- {e}")
+            else:
+                print("- No specific effects listed for this yoga.")
+    else:
+        print("\nNo specific yoga effects analysis available.")
 
 def print_yoga_predictions(chart):
     """
@@ -330,49 +337,69 @@ def print_yoga_predictions(chart):
     print(f"Yoga Predictions")
     print(f"{'=' * 60}")
     
-    # Get the Yoga predictions
     predictions = get_yoga_predictions(chart)
     
     # Print general predictions
     print("\nGeneral:")
-    for prediction in predictions['general']:
-        print(f"- {prediction}")
+    if predictions and 'general' in predictions and predictions['general']:
+        for prediction in predictions['general']:
+            print(f"- {prediction}")
+    else:
+        print("- No general predictions available.")
     
     # Print personality predictions
-    if predictions['personality']:
+    if predictions and 'personality' in predictions and predictions['personality']:
         print("\nPersonality:")
         for prediction in predictions['personality']:
             print(f"- {prediction}")
+    else:
+        print("\nPersonality:")
+        print("- No personality predictions available.")
     
     # Print career predictions
-    if predictions['career']:
+    if predictions and 'career' in predictions and predictions['career']:
         print("\nCareer:")
         for prediction in predictions['career']:
             print(f"- {prediction}")
+    else:
+        print("\nCareer:")
+        print("- No career predictions available.")
     
     # Print wealth predictions
-    if predictions['wealth']:
+    if predictions and 'wealth' in predictions and predictions['wealth']:
         print("\nWealth:")
         for prediction in predictions['wealth']:
             print(f"- {prediction}")
+    else:
+        print("\nWealth:")
+        print("- No wealth predictions available.")
     
     # Print relationship predictions
-    if predictions['relationships']:
+    if predictions and 'relationships' in predictions and predictions['relationships']:
         print("\nRelationships:")
         for prediction in predictions['relationships']:
             print(f"- {prediction}")
+    else:
+        print("\nRelationships:")
+        print("- No relationship predictions available.")
     
     # Print health predictions
-    if predictions['health']:
+    if predictions and 'health' in predictions and predictions['health']:
         print("\nHealth:")
         for prediction in predictions['health']:
             print(f"- {prediction}")
+    else:
+        print("\nHealth:")
+        print("- No health predictions available.")
     
     # Print challenge predictions
-    if predictions['challenges']:
+    if predictions and 'challenges' in predictions and predictions['challenges']:
         print("\nChallenges:")
         for prediction in predictions['challenges']:
             print(f"- {prediction}")
+    else:
+        print("\nChallenges:")
+        print("- No challenge predictions available.")
 
 def main():
     """Main function"""

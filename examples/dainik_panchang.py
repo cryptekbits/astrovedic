@@ -73,7 +73,7 @@ def print_panchang(chart):
     pos = chart.pos
     
     # Get panchang information
-    panchang = get_panchang(date.jd, pos.lat, pos.lon, chart.mode)
+    panchang = get_panchang(date.jd, pos.lat, pos.lon, date.utcoffset, chart.mode)
     
     # Print header
     print(f"\n{'=' * 60}")

@@ -29,8 +29,8 @@ from flatlib.vedic.transits import (
     get_transit_timeline_for_period, analyze_transit_period,
     get_transit_chart, get_transit_planets, get_transit_aspects,
     get_transit_houses, get_transit_quality, get_gochara_effects,
-    get_transit_ashtakavarga, get_transit_dasha_effects,
-    get_transit_analysis
+    get_transit_ashtakavarga, get_transit_dasha_effects
+    # Removed get_transit_analysis as it's not available and seemingly unused
 )
 
 # Default location: Bangalore, India
@@ -136,7 +136,10 @@ def print_chart_info(chart, chart_type, location, ayanamsa):
     print("\nPlanetary Positions:")
     for planet_id in const.LIST_OBJECTS_VEDIC:
         planet = chart.getObject(planet_id)
-        print(f"  {planet_id}: {planet.sign} {planet.signlon:.2f}° {'(R)' if planet.isRetrograde() else ''}")
+        retrograde_status = ''
+        if hasattr(planet, 'isRetrograde') and planet.isRetrograde():
+            retrograde_status = ' (R)'
+        print(f"  {planet_id}: {planet.sign} {planet.signlon:.2f}°{retrograde_status}")
 
 def print_transit_planets(transit_planets):
     """
@@ -449,23 +452,14 @@ def main():
     # Print Gochara effects
     print_gochara_effects(transits['gochara_effects'])
     
-    # Print transit Ashtakavarga
-    print_transit_ashtakavarga(transits['transit_ashtakavarga'])
+    # Print Ashtakavarga analysis
+    print_transit_ashtakavarga(transits['ashtakavarga_analysis']) # Use the correct key
     
-    # Print transit Dasha effects
-    print_transit_dasha_effects(transits['transit_dasha_effects'])
+    # Example: Analyze transit period (replace with desired start/end dates)
+    #start_date = Datetime('2024/01/01', '00:00', '+00:00')
     
-    # Get and print transit predictions
-    predictions = get_transit_predictions_for_date(natal_chart, transit_date)
-    print_transit_predictions(predictions)
-    
-    # Calculate the end date for the timeline
-    end_dt = transit_date.datetime() + timedelta(days=args.days)
-    end_date = Datetime.fromDatetime(end_dt)
-    
-    # Get and print transit timeline
-    timeline = get_transit_timeline_for_period(natal_chart, transit_date, end_date)
-    print_transit_timeline(timeline)
+    # Print transit Dasha effects (Data not available in get_basic_transit_analysis)
+    # print_transit_dasha_effects(transits['transit_dasha_effects'])
 
 if __name__ == "__main__":
     main()

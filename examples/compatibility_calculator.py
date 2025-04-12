@@ -126,7 +126,10 @@ def print_chart_info(chart, chart_type, location, ayanamsa):
     print("\nPlanetary Positions:")
     for planet_id in const.LIST_OBJECTS_VEDIC:
         planet = chart.getObject(planet_id)
-        print(f"  {planet_id}: {planet.sign} {planet.signlon:.2f}° {'(R)' if planet.isRetrograde() else ''}")
+        retrograde_str = ''
+        if hasattr(planet, 'isRetrograde') and planet.isRetrograde():
+            retrograde_str = ' (R)'
+        print(f"  {planet_id}: {planet.sign} {planet.signlon:.2f}°{retrograde_str}")
 
 
 def print_kuta_scores(kuta_scores):
@@ -305,26 +308,35 @@ def print_compatibility_timeline(timeline):
     headers = ["Date", "Person 1", "Person 2", "Score", "Level"]
     rows = []
     
-    for event in timeline:
-        # Format the date
-        date_str = event['date'].strftime("%B %Y")
-        
-        # Format the Dasha information
-        person1 = f"{event['dasha_lord1']} / {event['antardasha_lord1']}"
-        person2 = f"{event['dasha_lord2']} / {event['antardasha_lord2']}"
-        
-        # Get the compatibility level
-        level = get_compatibility_level(event['score'] * 10)
-        
-        rows.append([
-            date_str,
-            person1,
-            person2,
-            f"{event['score']:.1f}/10",
-            level
-        ])
-    
-    print(tabulate(rows, headers=headers, tablefmt="grid"))
+    # Check if 'events' key exists and is a list before iterating
+    if 'events' in timeline and isinstance(timeline['events'], list):
+        for event in timeline['events']:
+            # Format the date
+            # Assuming event['date'] is a flatlib Datetime object
+            # We need a way to format it. Let's use its __str__ representation for now.
+            # date_str = event['date'].strftime("%B %Y") # Original line causes error if event['date'] is not datetime
+            date_str = str(event.get('date', 'N/A')) # Use get for safety and convert to string
+            
+            # Format the Dasha information
+            person1 = f"{event.get('dasha_lord1', 'N/A')} / {event.get('antardasha_lord1', 'N/A')}"
+            person2 = f"{event.get('dasha_lord2', 'N/A')} / {event.get('antardasha_lord2', 'N/A')}"
+            
+            # Get the compatibility level
+            score = event.get('score', 0) # Default to 0 if score is missing
+            level = get_compatibility_level(score * 10)
+            
+            rows.append([
+                date_str,
+                person1,
+                person2,
+                f"{score:.1f}/10",
+                level
+            ])
+    else:
+        print("  No timeline events found or timeline format is incorrect.")
+
+    if rows:
+        print(tabulate(rows, headers=headers, tablefmt="grid"))
 
 
 def get_compatibility_level(score):
@@ -351,18 +363,26 @@ def get_compatibility_level(score):
 
 def print_overall_compatibility(compatibility):
     """
-    Print overall compatibility
+    Print overall compatibility summary
     
     Args:
-        compatibility (dict): Dictionary with compatibility information
+        compatibility (dict): Dictionary with overall compatibility information
     """
     print(f"\n{'=' * 60}")
     print(f"Overall Compatibility")
     print(f"{'=' * 60}")
     
-    print(f"Score: {compatibility['score']:.1f}/100")
-    print(f"Level: {get_compatibility_level(compatibility['score'])}")
-    print(f"Description: {compatibility['description']}")
+    # Check if 'overall_score' key exists
+    if 'overall_score' in compatibility:
+        score = compatibility['overall_score']
+        level = get_compatibility_level(score)
+        print(f"Score: {score:.1f}/100")
+        print(f"Level: {level}")
+    else:
+        print("  Overall score not found.")
+    
+    # You might want to print other details from the compatibility dict here
+    # e.g., factors, moon_compatibility, etc.
 
 
 def main():
@@ -446,8 +466,9 @@ def main():
     print_navamsa_compatibility(navamsa_compatibility)
     
     # Get compatibility timeline
-    current_date = Datetime.now()
-    end_date = Datetime.fromDatetime(current_date.datetime() + timedelta(days=args.timeline_days))
+    current_date = Datetime.fromDatetime(datetime.now())
+    end_jd = current_date.jd + args.timeline_days
+    end_date = Datetime.fromJD(end_jd, current_date.utcoffset)
     timeline = get_compatibility_timeline(chart1, chart2, current_date, end_date)
     
     # Print compatibility timeline

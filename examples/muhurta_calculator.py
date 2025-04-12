@@ -28,7 +28,7 @@ from flatlib.vedic.muhurta import (
     get_panchanga, get_muhurta_quality, get_abhijit_muhurta,
     get_brahma_muhurta, get_rahu_kala, get_yama_ghantaka,
     get_gulika_kala, get_activity_score, get_best_time_for_activity,
-    get_muhurta_predictions, analyze_muhurta
+    get_basic_muhurta_analysis
 )
 
 # Default location: Bangalore, India
@@ -126,8 +126,7 @@ def print_panchanga(chart):
     print(f"  Pada: {nakshatra['pada']}")
     print(f"  Lord: {nakshatra['lord']}")
     print(f"  Type: {nakshatra['type']}")
-    print(f"  Elapsed: {nakshatra['elapsed'] * 100:.2f}%")
-    
+
     # Print Yoga
     yoga = panchanga['yoga']
     print(f"\nYoga: {yoga['name']} ({yoga['num']})")
@@ -295,27 +294,39 @@ def print_muhurta_predictions(date, location):
         date (Datetime): The date and time
         location (GeoPos): The geographical location
     """
-    # Get the predictions
-    predictions = get_muhurta_predictions(date, location)
-    
+    # Get the basic analysis
+    analysis_result = get_basic_muhurta_analysis(date, location)
+
     print(f"\n{'=' * 60}")
-    print(f"Muhurta Predictions")
+    print(f"Muhurta Analysis (Basic)")
     print(f"{'=' * 60}")
-    
-    # Print general predictions
-    print("General Predictions:")
-    for prediction in predictions['general']:
-        print(f"  - {prediction}")
-    
-    # Print activity-specific predictions
-    print("\nActivity Predictions:")
-    for activity, prediction in predictions['activities'].items():
-        print(f"  - {activity.capitalize()}: {prediction}")
-    
-    # Print timing predictions
-    print("\nTiming Predictions:")
-    for prediction in predictions['timing']:
-        print(f"  - {prediction}")
+
+    # Create a copy to modify for printing
+    analysis_print = analysis_result.copy()
+    # Convert the Datetime object to its string representation
+    if 'date' in analysis_print and isinstance(analysis_print['date'], Datetime):
+        analysis_print['date'] = str(analysis_print['date'])
+
+    # Print the modified analysis result with a formatted date
+    # Use pprint for better readability of the dictionary
+    import pprint
+    pprint.pprint(analysis_print)
+
+    # Commented out original prediction processing due to unknown structure
+    # # Print general predictions
+    # print("General Predictions:")
+    # for prediction in predictions['general']:
+    #     print(f"  - {prediction}")
+    #
+    # # Print activity-specific predictions
+    # print("\nActivity Predictions:")
+    # for activity, prediction in predictions['activities'].items():
+    #     print(f"  - {activity.capitalize()}: {prediction}")
+    #
+    # # Print timing predictions
+    # print("\nTiming Predictions:")
+    # for prediction in predictions['timing']:
+    #     print(f"  - {prediction}")
 
 def main():
     """Main function"""

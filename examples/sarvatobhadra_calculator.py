@@ -27,8 +27,7 @@ from flatlib.vedic.sarvatobhadra import (
     get_sarvatobhadra_chakra, get_chakra_quality,
     get_auspicious_directions, get_inauspicious_directions,
     get_best_direction, get_direction_for_activity,
-    get_tara_bala, get_sarvatobhadra_predictions,
-    analyze_sarvatobhadra
+    get_tara_bala, get_basic_sarvatobhadra_analysis
 )
 
 # Default location: Bangalore, India
@@ -281,39 +280,49 @@ def print_direction_for_activity(chakra, activity):
     for factor in direction['factors']:
         print(f"  - {factor}")
 
-def print_sarvatobhadra_predictions(chart):
+def print_basic_sarvatobhadra_analysis(chart):
     """
-    Print predictions based on Sarvatobhadra Chakra
+    Print basic analysis based on Sarvatobhadra Chakra
     
     Args:
         chart (Chart): The chart
     """
-    # Get the predictions
-    predictions = get_sarvatobhadra_predictions(chart)
+    # Get the basic analysis
+    analysis = get_basic_sarvatobhadra_analysis(chart)
     
     print(f"\n{'=' * 60}")
-    print(f"Sarvatobhadra Chakra Predictions")
+    print(f"Sarvatobhadra Chakra Basic Analysis")
     print(f"{'=' * 60}")
     
-    # Print general predictions
-    print("General Predictions:")
-    for prediction in predictions['general']:
-        print(f"  - {prediction}")
+    # Print chakra quality
+    print(f"Chakra Quality: {analysis['quality']}")
     
-    # Print direction predictions
-    print("\nDirection Predictions:")
-    for direction, prediction in predictions['directions'].items():
-        print(f"  - {direction}: {prediction}")
-    
-    # Print Tara Bala predictions
-    print("\nTara Bala Predictions:")
-    for prediction in predictions['tara_bala']:
-        print(f"  - {prediction}")
-    
-    # Print activity-specific predictions
-    print("\nActivity Predictions:")
-    for activity, prediction in predictions['activities'].items():
-        print(f"  - {activity.capitalize()}: {prediction}")
+    # Print auspicious directions
+    print("\nAuspicious Directions:")
+    if analysis['auspicious_directions']:
+        for direction_info in analysis['auspicious_directions']:
+            print(f"  - {direction_info['direction']} ({direction_info['quality']}, Score: {direction_info['score']})")
+    else:
+        print("  - None")
+
+    # Print inauspicious directions
+    print("\nInauspicious Directions:")
+    if analysis['inauspicious_directions']:
+        for direction_info in analysis['inauspicious_directions']:
+            print(f"  - {direction_info['direction']} ({direction_info['quality']}, Score: {direction_info['score']})")
+    else:
+        print("  - None")
+
+    # Print best direction
+    print(f"\nBest Direction: {analysis['best_direction']}")
+
+    # Print Tara Bala
+    print("\nTara Bala:")
+    if isinstance(analysis['tara_bala'], dict):
+        print(f"  - Quality: {analysis['tara_bala'].get('quality', 'N/A')}")
+        print(f"  - Tara: {analysis['tara_bala'].get('tara', 'N/A')}")
+    else:
+        print(f"  - {analysis['tara_bala']}")
 
 def main():
     """Main function"""
@@ -352,8 +361,8 @@ def main():
     if args.activity:
         print_direction_for_activity(chakra, args.activity)
     
-    # Print the Sarvatobhadra Chakra predictions
-    print_sarvatobhadra_predictions(chart)
+    # Print the Sarvatobhadra Chakra basic analysis
+    print_basic_sarvatobhadra_analysis(chart)
 
 if __name__ == "__main__":
     main()

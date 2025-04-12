@@ -18,6 +18,7 @@ Usage:
 import sys
 import argparse
 from tabulate import tabulate
+from prettytable import PrettyTable
 
 from flatlib.datetime import Datetime
 from flatlib.geopos import GeoPos
@@ -103,19 +104,34 @@ def print_chart_info(chart, location, ayanamsa):
     print(f"Planetary Positions")
     print(f"{'=' * 60}")
     
-    headers = ["Planet", "Sign", "Longitude", "Retrograde"]
-    rows = []
-    
-    for planet_id in const.LIST_OBJECTS_VEDIC:
-        planet = chart.getObject(planet_id)
-        rows.append([
+    table = PrettyTable()
+    table.field_names = ["Planet", "Position", "Motion", "Retrograde"]
+    table.align["Planet"] = "l"
+    table.align["Position"] = "r"
+    table.align["Motion"] = "l"
+    table.align["Retrograde"] = "l"
+
+    # Populate the table
+    for planet in chart.objects:
+        # Check if the object is a planet or node and has the isRetrograde method
+        retrograde_status = "N/A" # Default for nodes or objects without the method
+        if hasattr(planet, 'isRetrograde'):
+            retrograde_status = "Yes" if planet.isRetrograde() else "No"
+            
+        # Check for motion status
+        motion_status = "N/A"
+        if hasattr(planet, 'motion'):
+            motion_status = planet.motion
+            
+        table.add_row([
             planet.id,
-            f"{planet.sign}",
-            f"{planet.signlon:.2f}°",
-            "Yes" if planet.isRetrograde() else "No"
+            f"{planet.sign} {planet.signlon:.2f}°",
+            motion_status, # Use checked motion status
+            retrograde_status
         ])
-    
-    print(tabulate(rows, headers=headers, tablefmt="grid"))
+
+    print(table)
+    print("\n")
 
 def print_shadbala_summary(shadbala_results):
     """
@@ -177,12 +193,12 @@ def print_shadbala_components(shadbala_results):
         result = shadbala_results[planet_id]
         rows.append([
             planet_id,
-            f"{result['sthana_bala']['total']:.2f}",
-            f"{result['dig_bala']['value']:.2f}",
-            f"{result['kala_bala']['total']:.2f}",
-            f"{result['cheshta_bala']['value']:.2f}",
-            f"{result['naisargika_bala']['value']:.2f}",
-            f"{result['drig_bala']['value']:.2f}"
+            f"{result['sthana_bala']:.2f}",
+            f"{result['dig_bala']:.2f}",
+            f"{result['kala_bala']:.2f}",
+            f"{result['cheshta_bala']:.2f}",
+            f"{result['naisargika_bala']:.2f}",
+            f"{result['drig_bala']:.2f}"
         ])
     
     print(tabulate(rows, headers=headers, tablefmt="grid"))

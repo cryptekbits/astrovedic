@@ -26,61 +26,48 @@ vedic_chart = VedicChart(chart)
 print("Basic Chart Information:")
 print(f"Date: {chart.date}")
 print(f"Location: {chart.pos}")
-print(f"House System: {chart.houses.name}")
+print(f"House System: {chart.hsys}")
 print(f"Ayanamsa: {chart.mode}")
 print()
 
 # Print planet positions
 print("Planet Positions:")
-for planet_id in const.LIST_PLANETS:
+for planet_id in const.LIST_OBJECTS_VEDIC:
     planet = chart.getObject(planet_id)
-    print(f"{planet.id}: {planet.sign} {planet.lon:.2f}° (House {planet.house})")
+    print(f"{planet.id}: {planet.sign} {planet.lon:.2f}° (House {chart.houses.getObjectHouse(planet).num()})")
 print()
 
 # Print house cusps
 print("House Cusps:")
-for house_num in range(1, 13):
-    house = chart.houses.getHouse(house_num)
-    print(f"House {house.num}: {house.sign} {house.lon:.2f}°")
+for house in chart.houses: 
+    print(f"House {house.num()}: {house.sign} {house.lon:.2f}°") 
 print()
 
 # Get nakshatra information
 print("Nakshatra Information:")
-for planet_id in const.LIST_PLANETS:
+for planet_id in const.LIST_OBJECTS_VEDIC:
     planet = chart.getObject(planet_id)
     nakshatra = vedic_chart.get_nakshatra(planet_id)
-    print(f"{planet.id}: {nakshatra['nakshatra']} (Pada {nakshatra['pada']})")
+    print(f"{planet.id}: {nakshatra['name']} (Pada {nakshatra['pada']})")
 print()
 
 # Get panchanga information
-panchanga = vedic_chart.get_panchanga()
+panchanga = vedic_chart.get_panchang() 
 print("Panchanga Information:")
-print(f"Tithi: {panchanga['tithi']['tithi']} ({panchanga['tithi']['paksha']})")
-print(f"Karana: {panchanga['karana']['karana']}")
-print(f"Yoga: {panchanga['yoga']['yoga']}")
-print(f"Vara: {panchanga['vara']['vara']}")
+# print(panchanga) 
+print(f"Tithi: {panchanga['tithi']['name']} ({panchanga['tithi']['paksha']})") 
+print(f"Karana: {panchanga['karana']['name']}") 
+print(f"Yoga: {panchanga['yoga']['name']}") 
+print(f"Vara: {panchanga['vara']['name']}") 
 print()
 
 # Get basic yoga information
 yogas = vedic_chart.get_yogas()
 print("Yoga Information:")
-print(f"Total Yogas: {len(yogas['yogas'])}")
-for yoga in yogas['yogas'][:5]:  # Print first 5 yogas
-    print(f"- {yoga['name']}: {yoga['description']}")
-print()
-
-# Get basic ashtakavarga information
-ashtakavarga = vedic_chart.analyze_ashtakavarga()
-print("Ashtakavarga Information:")
-print(f"Total Bindus: {ashtakavarga['total_bindus']}")
-print(f"Average Bindus per Sign: {ashtakavarga['average_bindus_per_sign']:.2f}")
-print()
-
-# Get basic shadbala information
-shadbala = vedic_chart.analyze_shadbala()
-print("Shadbala Information:")
-print(f"Strongest Planet: {shadbala['strongest_planet']}")
-print(f"Weakest Planet: {shadbala['weakest_planet']}")
+# print(yogas) 
+print(f"Total Yogas: {yogas['summary']['total_yogas']}") 
+# for yoga in yogas['yogas'][:5]:  
+#     print(f"- {yoga['name']}: {yoga['description']}") 
 print()
 
 # Get basic varga information
@@ -110,6 +97,9 @@ print()
 
 # Print a summary
 print("Chart Summary:")
-print(f"Lagna (Ascendant): {chart.getObject(const.ASC).sign}")
-print(f"Moon Sign: {chart.getObject(const.MOON).sign}")
-print(f"Sun Sign: {chart.getObject(const.SUN).sign}")
+for first_house in chart.houses: # Iterate to get the first house
+    print(f"Lagna (Ascendant): {first_house.sign}") 
+    break # Only need the first one
+# print(f"Lagna Lord: {vedic_chart.get_lagna_lord()['lord']}")
+# print(f"Strongest House: House {vedic_chart.get_strongest_house()['house']} ({vedic_chart.get_strongest_house()['strength']:.2f})")
+# print(f"Weakest House: House {vedic_chart.get_weakest_house()['house']} ({vedic_chart.get_weakest_house()['strength']:.2f})")

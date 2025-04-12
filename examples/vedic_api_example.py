@@ -14,13 +14,16 @@ Usage:
 import sys
 import argparse
 from tabulate import tabulate
+from prettytable import PrettyTable
 
 from flatlib import const
 from flatlib.datetime import Datetime
 from flatlib.geopos import GeoPos
 from flatlib.chart import Chart
-from flatlib.vedic.api import VedicChart, create_vedic_chart, create_kp_chart
-
+from flatlib.vedic.api import VedicChart, create_vedic_chart
+from flatlib.vedic.vimshottari import get_dasha_balance, get_current_dasha
+from flatlib.dignities.essential import EssentialInfo
+from flatlib.dignities import essential
 
 # Default location: Bangalore, India
 DEFAULT_LAT = 12.9716
@@ -66,10 +69,10 @@ def print_chart_info(chart):
     date = chart.chart.date
     pos = chart.chart.pos
     
-    print(f"Date: {date.date} {date.time} {date.timezone}")
+    print(f"Date: {date.date.toString()} {date.time.toString()} {date.utcoffset.toString()}")
     print(f"Location: {args.location} ({pos.lat}, {pos.lon})")
     print(f"Ayanamsa: {chart.ayanamsa}")
-    print(f"House System: {chart.chart.houses.name}")
+    print(f"House System: {chart.chart.hsys}")
     
     # Print the ascendant
     asc = chart.get_ascendant()
@@ -79,41 +82,74 @@ def print_chart_info(chart):
     asc_nakshatra = chart.get_nakshatra(const.ASC)
     print(f"Ascendant Nakshatra: {asc_nakshatra['name']} (Pada {asc_nakshatra['pada']})")
     
-    # Print the panchang
+    # Get Panchang details
     panchang = chart.get_panchang()
-    print(f"Tithi: {panchang['tithi']['name']} ({panchang['tithi']['phase']})")
-    print(f"Nakshatra: {panchang['nakshatra']['name']}")
-    print(f"Yoga: {panchang['yoga']['name']}")
-    print(f"Karana: {panchang['karana']['name']}")
+    print(f"Tithi: {panchang['tithi']['name']} ({panchang['tithi']['paksha']}) - {panchang['tithi']['completion']:.2f}% complete")
+    print(f"Nakshatra: {panchang['nakshatra']['name']} - {panchang['nakshatra']['percentage']:.2f}% complete")
+    print(f"Yoga: {panchang['yoga']['name']} - {panchang['yoga']['completion']:.2f}% complete")
+    print(f"Karana: {panchang['karana']['name']} - {panchang['karana']['completion']:.2f}% complete")
     print(f"Vara: {panchang['vara']['name']}")
 
 
 def print_planet_positions(chart):
-    """Print planet positions"""
-    print(f"\n{'=' * 60}")
-    print(f"Planet Positions")
-    print(f"{'=' * 60}")
+    """
+    Print detailed planet positions, including dignity and rulership.
     
-    # Create a table
-    headers = ["Planet", "Sign", "Longitude", "Nakshatra", "House", "Retrograde"]
-    rows = []
+    Args:
+        chart (VedicChart): The VedicChart object
+    """
+    print("\n" + "=" * 60)
+    print("Planet Positions".center(60))
+    print("=" * 60 + "\n")
     
-    # Add planets to the table
-    for planet_id in const.LIST_OBJECTS_VEDIC:
-        planet = chart.get_planet(planet_id)
-        nakshatra = chart.get_nakshatra(planet_id)
+    table = PrettyTable()
+    table.field_names = ["Planet", "Position", "House", "Rulerships", "Nakshatra (Pada)", "Dignity"]
+    
+    # Iterate through standard Vedic objects
+    for pid in const.LIST_OBJECTS_VEDIC:
+        planet = chart.get_planet(pid)
+        if planet is None:
+            # Skip if planet data is not available (e.g., Nodes in certain ephem settings)
+            continue
+            
+        # Get house position using the HouseList method
+        house_obj = chart.chart.houses.getObjectHouse(planet)
+        house_num = 'N/A'
+        if house_obj:
+            try:
+                # Extract number from ID like 'House1', 'House10', etc.
+                house_num = int(house_obj.id.replace('House', '')) 
+            except (ValueError, AttributeError):
+                house_num = 'Error' # Should not happen if ID is valid
+
+        # Get rulerships by checking all signs
+        ruled_signs = []
+        for sign in const.LIST_SIGNS:
+            if essential.ruler(sign) == pid:
+                ruled_signs.append(sign)
+        rulerships_str = ", ".join(ruled_signs) if ruled_signs else "None"
         
-        rows.append([
-            planet.name,
-            f"{planet.sign}",
-            f"{planet.lon:.2f}°",
-            f"{nakshatra['name']} (Pada {nakshatra['pada']})",
-            f"{planet.house}",
-            "Yes" if planet.isRetrograde() else "No"
+        # Get nakshatra details
+        nakshatra = chart.get_nakshatra(pid)
+        nak_str = f"{nakshatra['name']} (Pada {nakshatra['pada']})"
+        
+        # Dignity info using EssentialInfo
+        dignity_str = "None"
+        if planet:
+            essential_info = EssentialInfo(planet)
+            dignities_list = essential_info.getDignities()
+            dignity_str = ", ".join(dignities_list) if dignities_list else "None"
+
+        table.add_row([
+            pid, 
+            f"{planet.sign} {planet.signlon:.2f}°",
+            house_num,
+            rulerships_str,
+            nak_str,
+            dignity_str
         ])
-    
-    # Print the table
-    print(tabulate(rows, headers=headers, tablefmt="grid"))
+        
+    print(table)
 
 
 def print_house_positions(chart):
@@ -123,22 +159,23 @@ def print_house_positions(chart):
     print(f"{'=' * 60}")
     
     # Create a table
-    headers = ["House", "Sign", "Cusp", "Lord"]
-    rows = []
-    
-    # Add houses to the table
+    table = PrettyTable()
+    table.field_names = ["House", "Sign", "Longitude"]
+
     for house_num in range(1, 13):
-        house = chart.get_house(house_num)
+        # Construct the string ID (e.g., 'House1')
+        house_id_str = f"House{house_num}"
+        house = chart.get_house(house_id_str)
         
-        rows.append([
-            house_num,
-            house.sign,
-            f"{house.lon:.2f}°",
-            chart.chart.getObject(house.signRuler).name
-        ])
+        if house:
+            table.add_row([
+                house_num,
+                house.sign,
+                f"{house.lon:.2f}°"
+            ])
     
     # Print the table
-    print(tabulate(rows, headers=headers, tablefmt="grid"))
+    print(table)
 
 
 def print_dasha_info(chart):
@@ -147,23 +184,25 @@ def print_dasha_info(chart):
     print(f"Dasha Information")
     print(f"{'=' * 60}")
     
-    # Get the dasha balance at birth
-    dasha_balance = chart.get_dasha_balance()
-    print(f"Dasha Balance at Birth: {dasha_balance['years']} years, {dasha_balance['months']} months, {dasha_balance['days']} days")
+    # Get the dasha balance at birth using the imported function
+    # Pass the base chart object (chart.chart)
+    dasha_balance = get_dasha_balance(chart.chart)
+    print(f"Dasha Balance at Birth: {dasha_balance:.2f} years") # Format float
     
-    # Get the current dasha
-    current_dasha = chart.get_current_dasha()
+    # Get the current dasha using the imported function
+    # Pass the base chart object (chart.chart)
+    current_dasha = get_current_dasha(chart.chart)
     print(f"\nCurrent Mahadasha: {current_dasha['mahadasha']['planet']}")
-    print(f"  Start: {current_dasha['mahadasha']['start']}")
-    print(f"  End: {current_dasha['mahadasha']['end']}")
+    print(f"  Start: {current_dasha['mahadasha']['start_date']}")
+    print(f"  End: {current_dasha['mahadasha']['end_date']}")
     
     print(f"\nCurrent Antardasha: {current_dasha['antardasha']['planet']}")
-    print(f"  Start: {current_dasha['antardasha']['start']}")
-    print(f"  End: {current_dasha['antardasha']['end']}")
+    print(f"  Start: {current_dasha['antardasha']['start_date']}")
+    print(f"  End: {current_dasha['antardasha']['end_date']}")
     
     print(f"\nCurrent Pratyantardasha: {current_dasha['pratyantardasha']['planet']}")
-    print(f"  Start: {current_dasha['pratyantardasha']['start']}")
-    print(f"  End: {current_dasha['pratyantardasha']['end']}")
+    print(f"  Start: {current_dasha['pratyantardasha']['start_date']}")
+    print(f"  End: {current_dasha['pratyantardasha']['end_date']}")
 
 
 def print_varga_info(chart):
@@ -184,7 +223,7 @@ def print_varga_info(chart):
         planet = chart.get_planet(planet_id)
         
         rows.append([
-            planet.name,
+            planet_id,
             planet.sign,
             navamsa_positions[planet_id]['sign']
         ])
@@ -199,28 +238,30 @@ def print_shadbala_info(chart):
     print(f"Shadbala Information")
     print(f"{'=' * 60}")
     
-    # Get the shadbala
-    shadbala = chart.get_shadbala()
-    
     # Create a table
     headers = ["Planet", "Sthana Bala", "Dig Bala", "Kala Bala", "Cheshta Bala", "Naisargika Bala", "Drig Bala", "Total"]
     rows = []
     
-    # Add planets to the table
-    for planet_id in const.LIST_PLANETS:
-        if planet_id in shadbala:
-            planet_shadbala = shadbala[planet_id]
+    # Add planets to the table, iterating over LIST_OBJECTS_VEDIC
+    for planet_id in const.LIST_OBJECTS_VEDIC:
+        # Check if the object is a planet typically used in Shadbala
+        # (Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn)
+        if planet_id in const.LIST_SEVEN_PLANETS: # Use LIST_SEVEN_PLANETS
+            # Call get_shadbala for each planet
+            planet_shadbala = chart.get_shadbala(planet_id)
             
-            rows.append([
-                chart.get_planet(planet_id).name,
-                f"{planet_shadbala['sthana_bala']:.2f}",
-                f"{planet_shadbala['dig_bala']:.2f}",
-                f"{planet_shadbala['kala_bala']:.2f}",
-                f"{planet_shadbala['cheshta_bala']:.2f}",
-                f"{planet_shadbala['naisargika_bala']:.2f}",
-                f"{planet_shadbala['drig_bala']:.2f}",
-                f"{planet_shadbala['total']:.2f}"
-            ])
+            # Check if shadbala data was returned (might be None if calculation fails)
+            if planet_shadbala:
+                rows.append([
+                    planet_id, # Use planet_id directly as name
+                    f"{planet_shadbala.get('sthana_bala', 0):.2f}", 
+                    f"{planet_shadbala.get('dig_bala', 0):.2f}",    
+                    f"{planet_shadbala.get('kala_bala', 0):.2f}",    
+                    f"{planet_shadbala.get('cheshta_bala', 0):.2f}", 
+                    f"{planet_shadbala.get('naisargika_bala', 0):.2f}", 
+                    f"{planet_shadbala.get('drig_bala', 0):.2f}",    
+                    f"{planet_shadbala.get('total_shadbala', {}).get('total_rupas', 0):.2f}" 
+                ])
     
     # Print the table
     print(tabulate(rows, headers=headers, tablefmt="grid"))
