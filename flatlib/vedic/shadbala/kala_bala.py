@@ -394,14 +394,79 @@ def calculate_tribhaga_bala(chart, planet_id):
     }
 
 
+def calculate_mesha_sankranti(year, utcoffset='+00:00'):
+    """
+    Calculate the Mesha Sankranti (solar ingress into Aries) for a given year
+
+    Args:
+        year (int): The year to calculate Mesha Sankranti for
+        utcoffset (str): UTC offset string (default: '+00:00')
+
+    Returns:
+        Datetime: The date and time of Mesha Sankranti
+    """
+    from flatlib.ephem import eph
+    from flatlib.datetime import Datetime
+    from flatlib.vedic.transits import calculator
+
+    # Create a date near the expected Mesha Sankranti (around April 14)
+    # This is just an approximation to start the search
+    start_date = Datetime(f'{year}/04/14', '12:00', utcoffset)
+
+    # Calculate when the Sun enters Aries (sign 1)
+    # For Vedic/sidereal calculations, we need to use the appropriate ayanamsa
+    try:
+        # Use the transit calculator from the vedic.transits module
+        mesha_sankranti = calculator.next_sign_transit(const.SUN, start_date, const.ARIES, const.AY_LAHIRI)
+
+        # If the transit is more than 30 days away, it means we're past this year's
+        # Mesha Sankranti, so we need to look for the previous one
+        if mesha_sankranti.jd - start_date.jd > 30:
+            # Try a date from the previous month
+            start_date = Datetime(f'{year}/03/14', '12:00', utcoffset)
+            mesha_sankranti = calculator.next_sign_transit(const.SUN, start_date, const.ARIES, const.AY_LAHIRI)
+
+        return mesha_sankranti
+    except Exception as e:
+        # Fallback method if the transit calculator fails
+        print(f"Error calculating Mesha Sankranti: {e}")
+
+        # Return a fixed date (April 14) as a fallback
+        return Datetime(f'{year}/04/14', '12:00', utcoffset)
+
+
+def get_weekday_ruler(weekday):
+    """
+    Get the planetary ruler of a weekday
+
+    Args:
+        weekday (int): Day of week (0=Sunday, 1=Monday, ..., 6=Saturday)
+
+    Returns:
+        str: Planet ID of the ruler
+    """
+    # Each planet rules a specific day of the week
+    day_rulers = {
+        0: const.SUN,     # Sun rules Sunday
+        1: const.MOON,    # Moon rules Monday
+        2: const.MARS,    # Mars rules Tuesday
+        3: const.MERCURY, # Mercury rules Wednesday
+        4: const.JUPITER, # Jupiter rules Thursday
+        5: const.VENUS,   # Venus rules Friday
+        6: const.SATURN   # Saturn rules Saturday
+    }
+
+    return day_rulers[weekday]
+
+
 def calculate_abda_bala(chart, planet_id):
     """
     Calculate Abda Bala (Year Lord Strength)
 
-    In Vedic astrology, the year lord (Samvatsara Lord) is determined by the
-    position of Jupiter. Each year in the 60-year cycle has a specific lord.
-    For simplicity, we use a 7-year cycle based on the remainder when dividing
-    the year by 7, which is a common approximation in Shadbala calculations.
+    In Vedic astrology, the year lord (Abda Pati) is determined by the
+    weekday on which the solar year begins (Mesha Sankranti, when the Sun
+    enters Aries in the sidereal zodiac). The lord of that weekday becomes
+    the lord of the year.
 
     Args:
         chart (Chart): The chart
@@ -414,21 +479,17 @@ def calculate_abda_bala(chart, planet_id):
     date_list = jdnDate(chart.date.date.jdn)
     year = date_list[0]
 
-    # In traditional Vedic astrology, the year lord follows a 7-year cycle
-    # with the following rulerships:
-    year_rulers = {
-        1: const.SUN,     # Sun rules years with remainder 1
-        2: const.VENUS,   # Venus rules years with remainder 2
-        3: const.MARS,    # Mars rules years with remainder 3
-        4: const.MERCURY, # Mercury rules years with remainder 4
-        5: const.JUPITER, # Jupiter rules years with remainder 5
-        6: const.SATURN,  # Saturn rules years with remainder 6
-        0: const.MOON     # Moon rules years with remainder 0 (divisible by 7)
-    }
+    # Get the UTC offset from the chart
+    utcoffset = chart.date.utcoffset.toString()
 
-    # Calculate the year ruler based on the remainder when divided by 7
-    year_remainder = year % 7
-    abda_pati = year_rulers[year_remainder]
+    # Calculate Mesha Sankranti for the year
+    mesha_sankranti = calculate_mesha_sankranti(year, utcoffset)
+
+    # Determine the weekday of Mesha Sankranti (0=Sunday, 1=Monday, ..., 6=Saturday)
+    weekday = mesha_sankranti.date.dayofweek()
+
+    # Get the planetary ruler of that weekday
+    abda_pati = get_weekday_ruler(weekday)
 
     # Maximum value (in Virupas)
     max_value = 15.0
@@ -436,12 +497,19 @@ def calculate_abda_bala(chart, planet_id):
     # Calculate Abda Bala
     if planet_id == abda_pati:
         value = max_value
-        description = 'Ruler of the year'
+        description = f'Ruler of the year (lord of Mesha Sankranti weekday: {weekday})'
     else:
         value = 0.0
-        description = 'Not ruler of the year'
+        description = f'Not ruler of the year (Mesha Sankranti weekday: {weekday})'
 
-    return {'value': value, 'description': description}
+    # Add additional information for debugging/analysis
+    return {
+        'value': value,
+        'description': description,
+        'mesha_sankranti': str(mesha_sankranti),
+        'weekday': weekday,
+        'abda_pati': abda_pati
+    }
 
 
 def calculate_masa_bala(chart, planet_id):
