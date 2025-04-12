@@ -116,8 +116,8 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
     *   Saturn: Exaltation listed as Libra 21° (Vedic standard is 20°)
 *   **Category:** `Astrology`, `Data`, `Shadbala`
 *   **Tasks:**
-    *   [ ] Correct the exaltation/fall degree values in the primary dignity source used for Vedic calculations to match standard Vedic degrees.
-    *   [ ] Verify the source being used (e.g., `ESSENTIAL_DIGNITIES` or a potential new Vedic table) is consistently applied.
+    *   [x] Correct the exaltation/fall degree values in the primary dignity source used for Vedic calculations to match standard Vedic degrees.
+    *   [x] Verify the source being used (e.g., `ESSENTIAL_DIGNITIES` or a potential new Vedic table) is consistently applied.
 
 ## 13. Incorrect/Incomplete Natural Friendship Implementation
 

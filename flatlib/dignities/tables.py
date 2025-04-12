@@ -1,11 +1,11 @@
 """
     This file is part of flatlib - (C) FlatAngle
     Author: João Ventura (flatangleweb@gmail.com)
-    
-    
+
+
     This module defines relevant tables, such as
     the Essential Dignities.
-  
+
 """
 
 # ----------------------- #
@@ -358,17 +358,17 @@ LILLY_TERMS = {
 
 # === Dignity Table === #
 
-# This is the default essential dignities table, 
+# This is the default essential dignities table,
 # not considering the terms.
 ESSENTIAL_DIGNITIES = {
 
     'Aries': {
         'ruler': 'Mars',
-        'exalt': ['Sun', 19],
+        'exalt': ['Sun', 10],  # Corrected to Vedic standard (10°)
         'trip': ['Sun', 'Jupiter', 'Saturn'],
         'faces': ['Mars', 'Sun', 'Venus'],
         'exile': 'Venus',
-        'fall': ['Saturn', 21]
+        'fall': ['Saturn', 20]  # Corrected to Vedic standard (20°)
     },
 
     'Taurus': {
@@ -391,7 +391,7 @@ ESSENTIAL_DIGNITIES = {
 
     'Cancer': {
         'ruler': 'Moon',
-        'exalt': ['Jupiter', 15],
+        'exalt': ['Jupiter', 5],  # Corrected to Vedic standard (5°)
         'trip': ['Venus', 'Mars', 'Moon'],
         'faces': ['Venus', 'Mercury', 'Moon'],
         'exile': 'Saturn',
@@ -418,11 +418,11 @@ ESSENTIAL_DIGNITIES = {
 
     'Libra': {
         'ruler': 'Venus',
-        'exalt': ['Saturn', 21],
+        'exalt': ['Saturn', 20],  # Corrected to Vedic standard (20°)
         'trip': ['Saturn', 'Mercury', 'Jupiter'],
         'faces': ['Moon', 'Saturn', 'Jupiter'],
         'exile': 'Mars',
-        'fall': ['Sun', 19]
+        'fall': ['Sun', 10]  # Corrected to Vedic standard (10°)
     },
 
     'Scorpio': {
@@ -449,7 +449,7 @@ ESSENTIAL_DIGNITIES = {
         'trip': ['Venus', 'Moon', 'Mars'],
         'faces': ['Jupiter', 'Mars', 'Sun'],
         'exile': 'Moon',
-        'fall': ['Jupiter', 15]
+        'fall': ['Jupiter', 5]  # Corrected to Vedic standard (5°)
     },
 
     'Aquarius': {
@@ -475,9 +475,9 @@ ESSENTIAL_DIGNITIES = {
 # === Functions === #
 
 def termLons(TERMS):
-    """ Returns a list with the absolute longitude 
+    """ Returns a list with the absolute longitude
     of all terms.
-    
+
     """
     res = []
     for i, sign in enumerate(SIGN_LIST):
