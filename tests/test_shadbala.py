@@ -12,26 +12,26 @@ from flatlib.chart import Chart
 from flatlib import const
 from flatlib.vedic.shadbala import (
     get_shadbala, get_all_shadbala, get_bhava_bala,
-    STHANA_BALA, DIG_BALA, KALA_BALA, 
+    STHANA_BALA, DIG_BALA, KALA_BALA,
     CHESHTA_BALA, NAISARGIKA_BALA, DRIG_BALA,
     MINIMUM_SHADBALA
 )
 
 class TestShadbala(unittest.TestCase):
     """Test case for Shadbala calculations"""
-    
+
     def setUp(self):
         """Set up test case"""
         # Create a chart for the reference date
         date = Datetime('2025/04/09', '20:51', '+05:30')
         pos = GeoPos(12.9716, 77.5946)  # Bangalore, India
         self.chart = Chart(date, pos, hsys=const.HOUSES_WHOLE_SIGN, mode=const.AY_LAHIRI)
-    
+
     def test_get_shadbala(self):
         """Test get_shadbala function"""
         # Calculate Shadbala for the Sun
         sun_shadbala = get_shadbala(self.chart, const.SUN)
-        
+
         # Check that all components are present
         self.assertIn('sthana_bala', sun_shadbala)
         self.assertIn('dig_bala', sun_shadbala)
@@ -45,7 +45,7 @@ class TestShadbala(unittest.TestCase):
         self.assertIn('vimsopaka_bala', sun_shadbala)
         self.assertIn('minimum_required', sun_shadbala)
         self.assertIn('is_sufficient', sun_shadbala)
-        
+
         # Check that the total Shadbala is calculated correctly
         total_virupas = (
             sun_shadbala['sthana_bala']['total'] +
@@ -56,33 +56,33 @@ class TestShadbala(unittest.TestCase):
             sun_shadbala['drig_bala']['value']
         )
         self.assertAlmostEqual(sun_shadbala['total_shadbala']['total_virupas'], total_virupas)
-        
+
         # Check that the total Rupas is calculated correctly
         self.assertAlmostEqual(sun_shadbala['total_shadbala']['total_rupas'], total_virupas / 60.0)
-    
+
     def test_get_all_shadbala(self):
         """Test get_all_shadbala function"""
         # Calculate Shadbala for all planets
         all_shadbala = get_all_shadbala(self.chart)
-        
+
         # Check that all planets are present
         for planet_id in const.LIST_OBJECTS_VEDIC:
             self.assertIn(planet_id, all_shadbala)
-        
+
         # Check that summary information is present
         self.assertIn('summary', all_shadbala)
         self.assertIn('strongest', all_shadbala)
         self.assertIn('weakest', all_shadbala)
-        
+
         # Check that the strongest and weakest planets are valid
         self.assertIn(all_shadbala['strongest'], const.LIST_OBJECTS_VEDIC)
         self.assertIn(all_shadbala['weakest'], const.LIST_OBJECTS_VEDIC)
-    
+
     def test_get_bhava_bala(self):
         """Test get_bhava_bala function"""
         # Calculate Bhava Bala for the 1st house
         house1_bala = get_bhava_bala(self.chart, const.HOUSE1)
-        
+
         # Check that all components are present
         self.assertIn('bhavadhipati_bala', house1_bala)
         self.assertIn('bhava_digbala', house1_bala)
@@ -90,7 +90,7 @@ class TestShadbala(unittest.TestCase):
         self.assertIn('bhava_sthana_bala', house1_bala)
         self.assertIn('total', house1_bala)
         self.assertIn('description', house1_bala)
-        
+
         # Check that the total Bhava Bala is calculated correctly
         total = (
             house1_bala['bhavadhipati_bala']['value'] +
@@ -99,19 +99,19 @@ class TestShadbala(unittest.TestCase):
             house1_bala['bhava_sthana_bala']['value']
         )
         self.assertAlmostEqual(house1_bala['total'], total)
-    
+
     def test_sthana_bala(self):
         """Test Sthana Bala calculations"""
         # Calculate Shadbala for the Sun
         sun_shadbala = get_shadbala(self.chart, const.SUN)
-        
+
         # Check that all components of Sthana Bala are present
         self.assertIn('uchcha_bala', sun_shadbala['sthana_bala'])
         self.assertIn('saptavarga_bala', sun_shadbala['sthana_bala'])
         self.assertIn('ojha_yugma_bala', sun_shadbala['sthana_bala'])
         self.assertIn('kendradi_bala', sun_shadbala['sthana_bala'])
         self.assertIn('drekkana_bala', sun_shadbala['sthana_bala'])
-        
+
         # Check that the total Sthana Bala is calculated correctly
         total = (
             sun_shadbala['sthana_bala']['uchcha_bala']['value'] +
@@ -121,30 +121,30 @@ class TestShadbala(unittest.TestCase):
             sun_shadbala['sthana_bala']['drekkana_bala']['value']
         )
         self.assertAlmostEqual(sun_shadbala['sthana_bala']['total'], total)
-    
+
     def test_dig_bala(self):
         """Test Dig Bala calculations"""
         # Calculate Shadbala for the Sun
         sun_shadbala = get_shadbala(self.chart, const.SUN)
-        
+
         # Check that Dig Bala is calculated
         self.assertIn('value', sun_shadbala['dig_bala'])
         self.assertIn('description', sun_shadbala['dig_bala'])
         self.assertIn('preferred_direction', sun_shadbala['dig_bala'])
         self.assertIn('preferred_house', sun_shadbala['dig_bala'])
         self.assertIn('actual_house', sun_shadbala['dig_bala'])
-        
-        # Check that the preferred direction for the Sun is East
-        self.assertEqual(sun_shadbala['dig_bala']['preferred_direction'], 'East')
-        
-        # Check that the preferred house for the Sun is 1
-        self.assertEqual(sun_shadbala['dig_bala']['preferred_house'], 1)
-    
+
+        # Check that the preferred direction for the Sun is South
+        self.assertEqual(sun_shadbala['dig_bala']['preferred_direction'], 'South')
+
+        # Check that the preferred house for the Sun is 10
+        self.assertEqual(sun_shadbala['dig_bala']['preferred_house'], 10)
+
     def test_kala_bala(self):
         """Test Kala Bala calculations"""
         # Calculate Shadbala for the Sun
         sun_shadbala = get_shadbala(self.chart, const.SUN)
-        
+
         # Check that all components of Kala Bala are present
         self.assertIn('nathonnatha_bala', sun_shadbala['kala_bala'])
         self.assertIn('paksha_bala', sun_shadbala['kala_bala'])
@@ -155,7 +155,7 @@ class TestShadbala(unittest.TestCase):
         self.assertIn('hora_bala', sun_shadbala['kala_bala'])
         self.assertIn('ayana_bala', sun_shadbala['kala_bala'])
         self.assertIn('yuddha_bala', sun_shadbala['kala_bala'])
-        
+
         # Check that the total Kala Bala is calculated correctly
         total = (
             sun_shadbala['kala_bala']['nathonnatha_bala']['value'] +
@@ -169,12 +169,12 @@ class TestShadbala(unittest.TestCase):
             sun_shadbala['kala_bala']['yuddha_bala']['value']
         )
         self.assertAlmostEqual(sun_shadbala['kala_bala']['total'], total)
-    
+
     def test_cheshta_bala(self):
         """Test Cheshta Bala calculations"""
         # Calculate Shadbala for Mars
         mars_shadbala = get_shadbala(self.chart, const.MARS)
-        
+
         # Check that Cheshta Bala is calculated
         self.assertIn('value', mars_shadbala['cheshta_bala'])
         self.assertIn('description', mars_shadbala['cheshta_bala'])
@@ -182,32 +182,32 @@ class TestShadbala(unittest.TestCase):
         self.assertIn('daily_motion', mars_shadbala['cheshta_bala'])
         self.assertIn('max_speed', mars_shadbala['cheshta_bala'])
         self.assertIn('relative_speed', mars_shadbala['cheshta_bala'])
-        
+
         # Check that the Sun and Moon don't have Cheshta Bala
         sun_shadbala = get_shadbala(self.chart, const.SUN)
         moon_shadbala = get_shadbala(self.chart, const.MOON)
-        
+
         self.assertEqual(sun_shadbala['cheshta_bala']['value'], 0.0)
         self.assertEqual(moon_shadbala['cheshta_bala']['value'], 0.0)
-    
+
     def test_naisargika_bala(self):
         """Test Naisargika Bala calculations"""
         # Calculate Shadbala for all planets
         all_shadbala = get_all_shadbala(self.chart)
-        
+
         # Check that the Sun has the highest Naisargika Bala
         sun_naisargika = all_shadbala[const.SUN]['naisargika_bala']['value']
-        
+
         for planet_id in const.LIST_OBJECTS_VEDIC:
             if planet_id != const.SUN:
                 planet_naisargika = all_shadbala[planet_id]['naisargika_bala']['value']
                 self.assertGreaterEqual(sun_naisargika, planet_naisargika)
-    
+
     def test_drig_bala(self):
         """Test Drig Bala calculations"""
         # Calculate Shadbala for the Sun
         sun_shadbala = get_shadbala(self.chart, const.SUN)
-        
+
         # Check that Drig Bala is calculated
         self.assertIn('value', sun_shadbala['drig_bala'])
         self.assertIn('description', sun_shadbala['drig_bala'])
