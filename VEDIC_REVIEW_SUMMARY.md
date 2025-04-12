@@ -242,7 +242,7 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
 *   **Impact:** The current implementation awards the correct strength (30 Virupas) but assigns it based on a simplified rule tied to the Gregorian calendar, not to the actual astrological Lord of the Month.
 *   **Category:** `Astrology`, `Logic`, `Shadbala`, `Simplification`, `Accuracy`
 *   **Tasks:**
-    *   [ ] Replace the Gregorian month simplification with the standard calculation of the Masa Pati (weekday lord of the solar month's start). This requires integrating functionality to calculate the precise times of all solar ingresses (Sankrantis).
+    *   [x] Replace the Gregorian month simplification with the standard calculation of the Masa Pati (weekday lord of the solar month's start). This requires integrating functionality to calculate the precise times of all solar ingresses (Sankrantis).
 
 ## 24. Hora Bala Uses Non-Standard Simplification
 
