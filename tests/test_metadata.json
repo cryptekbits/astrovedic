@@ -514,5 +514,50 @@
         "name": "All Aspects",
         "description": "Tests getting all aspects in a chart",
         "category": "vedic"
+    },
+    "tests.test_vedic_dignities.TestVedicDignities.test_rulership": {
+        "name": "Rulership",
+        "description": "Tests Vedic rulership functions",
+        "category": "vedic"
+    },
+    "tests.test_vedic_dignities.TestVedicDignities.test_exaltation": {
+        "name": "Exaltation",
+        "description": "Tests Vedic exaltation functions",
+        "category": "vedic"
+    },
+    "tests.test_vedic_dignities.TestVedicDignities.test_debilitation": {
+        "name": "Debilitation",
+        "description": "Tests Vedic debilitation functions",
+        "category": "vedic"
+    },
+    "tests.test_vedic_dignities.TestVedicDignities.test_moolatrikona": {
+        "name": "Moolatrikona",
+        "description": "Tests Vedic Moolatrikona functions",
+        "category": "vedic"
+    },
+    "tests.test_vedic_dignities.TestVedicDignities.test_natural_friendship": {
+        "name": "Natural Friendship",
+        "description": "Tests Vedic natural friendship functions",
+        "category": "vedic"
+    },
+    "tests.test_vedic_dignities.TestVedicDignities.test_temporal_friendship": {
+        "name": "Temporal Friendship",
+        "description": "Tests Vedic temporal friendship functions",
+        "category": "vedic"
+    },
+    "tests.test_vedic_dignities.TestVedicDignities.test_combined_friendship": {
+        "name": "Combined Friendship",
+        "description": "Tests Vedic combined friendship functions",
+        "category": "vedic"
+    },
+    "tests.test_vedic_dignities.TestVedicDignities.test_dignity_score": {
+        "name": "Dignity Score",
+        "description": "Tests Vedic dignity score functions",
+        "category": "vedic"
+    },
+    "tests.test_vedic_dignities.TestVedicDignities.test_dignity_name": {
+        "name": "Dignity Name",
+        "description": "Tests Vedic dignity name functions",
+        "category": "vedic"
     }
 }
