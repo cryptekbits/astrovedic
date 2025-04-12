@@ -512,9 +512,59 @@ def calculate_abda_bala(chart, planet_id):
     }
 
 
+def calculate_sankranti(chart, sign):
+    """
+    Calculate the Sankranti (solar ingress) for a given sign
+
+    Args:
+        chart (Chart): The birth chart
+        sign (str or int): The sign to calculate Sankranti for
+
+    Returns:
+        Datetime: The date and time of the Sankranti
+    """
+    from flatlib.vedic.transits import calculator
+
+    # Get the date and UTC offset from the chart
+    date = chart.date
+
+    # Create a date object for the calculation
+    # We'll start from the chart date and look for the next Sankranti
+    start_date = date
+
+    try:
+        # Calculate when the Sun enters the specified sign
+        sankranti = calculator.next_sign_transit(const.SUN, start_date, sign, const.AY_LAHIRI)
+
+        # If the Sankranti is more than 30 days away, it means we're looking for
+        # the current solar month, so we need to find the previous Sankranti
+        if sankranti.jd - start_date.jd > 30:
+            # Try to find the last sign transit
+            try:
+                sankranti = calculator.last_sign_transit(const.SUN, start_date, sign, const.AY_LAHIRI)
+            except Exception as e:
+                # If that fails, use a fallback method
+                print(f"Error calculating last Sankranti: {e}")
+                # Fallback: use a date 30 days before and look for the next Sankranti
+                from flatlib.datetime import Datetime
+                fallback_date = Datetime.fromJD(start_date.jd - 30, start_date.utcoffset.toString())
+                sankranti = calculator.next_sign_transit(const.SUN, fallback_date, sign, const.AY_LAHIRI)
+
+        return sankranti
+    except Exception as e:
+        # If the transit calculator fails, return a fallback date
+        print(f"Error calculating Sankranti: {e}")
+        # Fallback: return the chart date as a placeholder
+        return date
+
+
 def calculate_masa_bala(chart, planet_id):
     """
     Calculate Masa Bala (monthly strength) for a planet
+
+    In Vedic astrology, the month lord (Masa Pati) is determined by the
+    weekday on which the solar month begins (Sankranti, when the Sun
+    enters a new sign). The lord of that weekday becomes the lord of the month.
 
     Args:
         chart (Chart): The birth chart
@@ -523,41 +573,38 @@ def calculate_masa_bala(chart, planet_id):
     Returns:
         dict: Dictionary with Masa Bala information
     """
-    # Get the month of the chart
-    date_list = jdnDate(chart.date.date.jdn)
-    month = date_list[1]
+    # Get the Sun's sign from the chart
+    sun = chart.getObject(const.SUN)
+    sun_sign = sun.sign
 
-    # Each planet rules a specific month in a 12-month cycle
-    month_rulers = {
-        1: const.SUN,     # Sun rules January
-        2: const.VENUS,   # Venus rules February
-        3: const.MARS,    # Mars rules March
-        4: const.MERCURY, # Mercury rules April
-        5: const.JUPITER, # Jupiter rules May
-        6: const.SATURN,  # Saturn rules June
-        7: const.MOON,    # Moon rules July
-        8: const.SUN,     # Sun rules August
-        9: const.VENUS,   # Venus rules September
-        10: const.MARS,   # Mars rules October
-        11: const.MERCURY, # Mercury rules November
-        12: const.JUPITER  # Jupiter rules December
-    }
+    # Calculate the Sankranti for the current solar month
+    sankranti = calculate_sankranti(chart, sun_sign)
+
+    # Determine the weekday of the Sankranti (0=Sunday, 1=Monday, ..., 6=Saturday)
+    weekday = sankranti.date.dayofweek()
+
+    # Get the planetary ruler of that weekday
+    masa_pati = get_weekday_ruler(weekday)
 
     # Maximum value (in Virupas)
     max_value = 30.0
 
-    # Calculate the month ruler
-    month_ruler = month_rulers[month]
-
     # Calculate Masa Bala
-    if planet_id == month_ruler:
+    if planet_id == masa_pati:
         value = max_value
-        description = 'Ruler of the month'
+        description = f'Ruler of the month (lord of Sankranti weekday: {weekday})'
     else:
         value = 0.0
-        description = 'Not ruler of the month'
+        description = f'Not ruler of the month (Sankranti weekday: {weekday})'
 
-    return {'value': value, 'description': description}
+    # Add additional information for debugging/analysis
+    return {
+        'value': value,
+        'description': description,
+        'sankranti': str(sankranti),
+        'weekday': weekday,
+        'masa_pati': masa_pati
+    }
 
 
 def calculate_vara_bala(chart, planet_id):
