@@ -187,8 +187,8 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
     *   Rahu/Ketu: Assigned 0 strength - **Correct/Standard**.
 *   **Category:** `Astrology`, `Logic`, `Shadbala`
 *   **Tasks:**
-    *   [ ] Correct the `preferred_house` assignments within `calculate_dig_bala` to match standard Vedic rules (Jup/Merc->1st, Sun/Mars->10th, Moon/Ven->4th, Sat->7th).
-    *   [ ] Correct the direction label associated with the 4th house to "North".
+    *   [x] Correct the `preferred_house` assignments within `calculate_dig_bala` to match standard Vedic rules (Jup/Merc->1st, Sun/Mars->10th, Moon/Ven->4th, Sat->7th).
+    *   [x] Correct the direction label associated with the 4th house to "North".
 
 ## 19. Nathonnatha Bala Implementation Errors
 
