@@ -254,8 +254,8 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
 *   **Impact:** The current implementation assigns Hora Bala based on incorrect assumptions and calculations, not reflecting the actual planetary hour rulership at birth.
 *   **Category:** `Astrology`, `Logic`, `Shadbala`, `Simplification`, `Accuracy`
 *   **Tasks:**
-    *   [ ] Remove the simplified logic based on clock hours and `hour_of_day % 7`.
-    *   [ ] Implement the standard Hora Bala calculation:
+    *   [x] Remove the simplified logic based on clock hours and `hour_of_day % 7`.
+    *   [x] Implement the standard Hora Bala calculation:
         *   Calculate sunrise and sunset times.
         *   Calculate daytime and nighttime Hora lengths.
         *   Determine the Vara Lord (weekday lord).
