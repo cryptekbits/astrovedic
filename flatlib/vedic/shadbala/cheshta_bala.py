@@ -35,11 +35,15 @@ def calculate_cheshta_bala(chart, planet_id):
     if planet_id in [const.SUN, const.MOON]:
         return {'value': 0.0, 'description': 'Sun and Moon do not have Cheshta Bala'}
     
+    # Rahu and Ketu also don't have traditional Cheshta Bala
+    if planet_id in [const.RAHU, const.KETU]:
+        return {'value': 0.0, 'description': 'Rahu and Ketu do not have Cheshta Bala'}
+
     # Check if the planet is retrograde
     is_retrograde = planet.isRetrograde()
     
     # Get the planet's daily motion
-    daily_motion = abs(planet.speed)
+    daily_motion = abs(planet.lonspeed)
     
     # Calculate the maximum possible speed for the planet
     max_speed = get_max_speed(planet_id)

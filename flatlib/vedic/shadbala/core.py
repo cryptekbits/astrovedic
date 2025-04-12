@@ -27,11 +27,11 @@ def calculate_total_shadbala(sthana_bala, dig_bala, kala_bala,
     """
     # Get the total values from each component
     sthana_total = sthana_bala['total']
-    dig_total = dig_bala['total']
+    dig_total = dig_bala['value']  # Use 'value' for dig_bala
     kala_total = kala_bala['total']
-    cheshta_total = cheshta_bala['total']
-    naisargika_total = naisargika_bala['total']
-    drig_total = drig_bala['total']
+    cheshta_total = cheshta_bala['value']  # Use 'value' for cheshta_bala
+    naisargika_total = naisargika_bala['value']  # Use 'value' for naisargika_bala
+    drig_total = drig_bala['value']  # Use 'value' for drig_bala
     
     # Calculate the total Shadbala
     total = sthana_total + dig_total + kala_total + cheshta_total + naisargika_total + drig_total

@@ -100,12 +100,12 @@ def get_shadbala(chart, planet_id):
 
     return {
         'planet': planet_id,
-        'sthana_bala': sthana_bala,
-        'dig_bala': dig_bala,
-        'kala_bala': kala_bala,
-        'cheshta_bala': cheshta_bala,
-        'naisargika_bala': naisargika_bala,
-        'drig_bala': drig_bala,
+        'sthana_bala': sthana_bala.get('total', 0),
+        'dig_bala': dig_bala.get('value', 0),
+        'kala_bala': kala_bala.get('total', 0),
+        'cheshta_bala': cheshta_bala.get('value', 0),
+        'naisargika_bala': naisargika_bala.get('value', 0),
+        'drig_bala': drig_bala.get('value', 0),
         'total_shadbala': total_shadbala,
         'ishta_phala': ishta_phala,
         'kashta_phala': kashta_phala,
