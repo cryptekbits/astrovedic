@@ -148,6 +148,11 @@ def calculate_uchcha_bala(planet_id, longitude):
 def calculate_saptavarga_bala(chart, planet_id):
     """
     Calculate Saptavarga Bala (strength in divisional charts) for a planet
+    according to standard Vedic astrology rules.
+
+    Saptavarga Bala is calculated based on the dignity of a planet in seven
+    divisional charts (D1, D2, D3, D7, D9, D12, D30) using the standard
+    Virupa point system.
 
     Args:
         chart (Chart): The birth chart
@@ -161,19 +166,8 @@ def calculate_saptavarga_bala(chart, planet_id):
         get_varga_chart, get_varga_longitude
     )
 
-    # Define the varga types to use
+    # Define the varga types to use (standard Saptavarga)
     varga_types = ['D1', 'D2', 'D3', 'D7', 'D9', 'D12', 'D30']
-
-    # Define the weights for each varga
-    varga_weights = {
-        'D1': 5.0,   # Rashi (birth chart)
-        'D2': 2.0,   # Hora
-        'D3': 3.0,   # Drekkana
-        'D7': 2.5,   # Saptamsha
-        'D9': 4.5,   # Navamsha
-        'D12': 2.0,  # Dwadashamsha
-        'D30': 1.0   # Trimshamsha
-    }
 
     # Get the planet from the chart
     planet = chart.getObject(planet_id)
@@ -196,57 +190,40 @@ def calculate_saptavarga_bala(chart, planet_id):
         varga_sign = varga_planet.sign
         varga_degree = varga_planet.signlon
 
-        # Calculate the dignity score using Vedic dignities
-        dignity_info = vedic_dignities.get_dignity_score(planet_id, varga_sign, varga_degree)
-
-        # Assign Virupa points based on dignity
+        # Standard Virupa points for each dignity level
         virupa_points = 0.0
         dignity_name = 'None'
 
-        if dignity_info['is_exact_exaltation']:
-            virupa_points = 5.0
-            dignity_name = 'Exact Exaltation'
-        elif dignity_info['is_moolatrikona']:
-            virupa_points = 4.0
+        # Check if the planet is in its own sign or Moolatrikona
+        if vedic_dignities.is_in_moolatrikona(planet_id, varga_sign, varga_degree):
+            virupa_points = 45.0  # Standard Virupa points for Moolatrikona
             dignity_name = 'Moolatrikona'
-        elif dignity_info['is_own_sign']:
-            virupa_points = 3.0
+        elif vedic_dignities.is_own_sign(planet_id, varga_sign):
+            virupa_points = 30.0  # Standard Virupa points for Own Sign
             dignity_name = 'Own Sign'
-        elif dignity_info['is_exalted']:
-            virupa_points = 2.0
-            dignity_name = 'Exaltation'
-        elif dignity_info['is_exact_debilitation']:
-            virupa_points = 0.0
-            dignity_name = 'Exact Debilitation'
-        elif dignity_info['is_debilitated']:
-            virupa_points = 0.5
-            dignity_name = 'Debilitation'
         else:
-            # Check friendship level with sign lord
+            # Check Combined Friendship level with sign lord
             sign_lord = vedic_dignities.get_ruler(varga_sign)
-            friendship = vedic_dignities.get_natural_friendship(planet_id, sign_lord)
+            combined_friendship = vedic_dignities.calculate_combined_friendship(chart, planet_id, sign_lord)
 
-            if friendship == vedic_dignities.FRIENDSHIP_LEVELS['GREAT_FRIEND']:
-                virupa_points = 1.5
+            if combined_friendship == 'GREAT_FRIEND':
+                virupa_points = 22.5  # Standard Virupa points for Great Friend
                 dignity_name = 'Great Friend'
-            elif friendship == vedic_dignities.FRIENDSHIP_LEVELS['FRIEND']:
-                virupa_points = 1.0
+            elif combined_friendship == 'FRIEND':
+                virupa_points = 15.0  # Standard Virupa points for Friend
                 dignity_name = 'Friend'
-            elif friendship == vedic_dignities.FRIENDSHIP_LEVELS['NEUTRAL']:
-                virupa_points = 0.5
+            elif combined_friendship == 'NEUTRAL':
+                virupa_points = 7.5   # Standard Virupa points for Neutral
                 dignity_name = 'Neutral'
-            elif friendship == vedic_dignities.FRIENDSHIP_LEVELS['ENEMY']:
-                virupa_points = 0.25
+            elif combined_friendship == 'ENEMY':
+                virupa_points = 3.75  # Standard Virupa points for Enemy
                 dignity_name = 'Enemy'
             else:  # GREAT_ENEMY
-                virupa_points = 0.0
+                virupa_points = 1.875  # Standard Virupa points for Great Enemy
                 dignity_name = 'Great Enemy'
 
-        # Apply the weight for this varga
-        weighted_virupa = virupa_points * varga_weights[varga_type]
-
-        # Add to the total
-        result['total_virupa'] += weighted_virupa
+        # Add to the total (no weighting - all vargas contribute equally)
+        result['total_virupa'] += virupa_points
 
         # Store the details for this varga
         result['varga_details'][varga_type] = {
@@ -254,18 +231,16 @@ def calculate_saptavarga_bala(chart, planet_id):
             'degree': varga_degree,
             'dignity': dignity_name,
             'virupa_points': virupa_points,
-            'weighted_virupa': weighted_virupa
+            'weighted_virupa': virupa_points  # No weighting applied
         }
 
-    # Maximum possible value is 100 (if all charts have maximum dignity)
-    max_value = 100.0
-
-    # Scale to Virupas (maximum 30)
-    value = min(30.0, (result['total_virupa'] / max_value) * 30.0)
+    # The final value is the simple sum of Virupas obtained
+    # No scaling or arbitrary maximums
+    value = result['total_virupa']
 
     # Add the final value to the result
     result['value'] = value
-    result['description'] = 'Strength in seven divisional charts'
+    result['description'] = 'Strength in seven divisional charts (standard Virupa points)'
 
     return result
 

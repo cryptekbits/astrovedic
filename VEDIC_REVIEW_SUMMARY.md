@@ -158,11 +158,11 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
     *   **Non-Standard Scaling:** Uses arbitrary maximums and double scaling for the final result, instead of a simple sum of Virupas obtained.
 *   **Category:** `Astrology`, `Logic`, `Shadbala`
 *   **Tasks:**
-    *   [ ] Refactor `calculate_saptavarga_bala` to use `vedic_dignities.calculate_combined_friendship` to determine the planet's relationship with the sign lord in each Varga.
-    *   [ ] Implement the standard Virupa point system for Moolatrikona (~45), Own Sign (~30), Great Friend (~22.5), Friend (~15), Neutral (~7.5), Enemy (~3.75), Great Enemy (~1.875).
-    *   [ ] Remove Exaltation/Debilitation checks from Saptavarga Bala point assignment.
-    *   [ ] Remove the non-standard Varga weighting.
-    *   [ ] Calculate the final Saptavarga Bala score as the simple sum of Virupas obtained across the 7 Vargas.
+    *   [x] Refactor `calculate_saptavarga_bala` to use `vedic_dignities.calculate_combined_friendship` to determine the planet's relationship with the sign lord in each Varga.
+    *   [x] Implement the standard Virupa point system for Moolatrikona (~45), Own Sign (~30), Great Friend (~22.5), Friend (~15), Neutral (~7.5), Enemy (~3.75), Great Enemy (~1.875).
+    *   [x] Remove Exaltation/Debilitation checks from Saptavarga Bala point assignment.
+    *   [x] Remove the non-standard Varga weighting.
+    *   [x] Calculate the final Saptavarga Bala score as the simple sum of Virupas obtained across the 7 Vargas.
 
 ## 17. Ojha/Yugma Bala Implementation Errors
 
