@@ -212,7 +212,7 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
 *   **Potential Issue:** The calculation's accuracy depends on `angle.distance(sun.lon, moon.lon)` returning the Moon's elongation from the Sun in the direction of zodiacal motion (0-360 degrees). If it returns the shortest angle (0-180), the phase calculation for Krishna Paksha might be inaccurate.
 *   **Category:** `Astrology`, `Logic`, `Shadbala`, `Dependency`
 *   **Tasks:**
-    *   [ ] Verify the behavior of `angle.distance(a, b)`. Ensure it returns `(b-a) % 360` or adjust the Paksha Bala calculation accordingly if it returns the shortest distance.
+    *   [x] Verify the behavior of `angle.distance(a, b)`. Ensure it returns `(b-a) % 360` or adjust the Paksha Bala calculation accordingly if it returns the shortest distance.
 
 ## 21. Tribhaga Bala Not Implemented
 
