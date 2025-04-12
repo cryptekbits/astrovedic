@@ -31,6 +31,16 @@ print(f"Nakshatra: {nakshatra_info['name']} (Pada {nakshatra_info['pada']})")
 - **KP Astrology**: Krishnamurti Paddhati features including sublord calculations
 - **Shadow Planets**: Support for upagrah (shadow planets) like Gulika, Mandi, etc.
 - **Outer Planets**: Support for Uranus, Neptune, and Pluto in Vedic calculations
+- **Core Calculations**: Focus on accurate astrological calculations with minimal interpretation
+
+## Architecture
+
+Flatlib is designed with a clear separation between core calculations and detailed analysis/reporting:
+
+- **Core Library (flatlib)**: Focuses on accurate astrological calculations and core functionality
+- **AstroVed Extension**: Contains detailed analysis, interpretations, and reporting functionality
+
+This separation allows flatlib to remain focused and efficient while providing a path for more detailed analysis through the extension.
 
 ## Installation
 
@@ -56,6 +66,32 @@ Check the `examples/` directory for example scripts:
 - `examples/vedic_chart.py`: Basic Vedic chart calculations
 - `examples/dainik_panchang.py`: Daily panchang calculations
 - `examples/test_reference_date.py`: Test script for the reference date
+
+## Testing
+
+Flatlib includes a comprehensive test suite to ensure accuracy and reliability of calculations.
+
+### Running Tests
+
+```bash
+# Run all tests
+./run_tests.py
+
+# Run tests in a specific category
+./run_tests.py --category vedic
+
+# Generate HTML report
+./run_tests.py --html
+
+# Include tests that are known to fail
+./run_tests.py --include-failing
+```
+
+Test reports are generated in the `reports` directory and include detailed information about each test.
+
+### Adding Tests
+
+See `docs/test_creation_guidelines.md` for detailed information on creating and maintaining tests.
 
 ## Development
 
