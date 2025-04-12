@@ -673,6 +673,12 @@ def calculate_hora_bala(chart, planet_id):
     """
     Calculate Hora Bala (hourly strength) for a planet
 
+    In Vedic astrology, Hora (planetary hour) is calculated by dividing the day
+    (sunrise to sunset) and night (sunset to sunrise) into 12 equal parts each.
+    The first hora of the day is ruled by the lord of the weekday (Vara Lord),
+    and subsequent horas follow the Chaldean order: Saturn, Jupiter, Mars, Sun,
+    Venus, Mercury, Moon.
+
     Args:
         chart (Chart): The birth chart
         planet_id (str): The ID of the planet
@@ -680,68 +686,116 @@ def calculate_hora_bala(chart, planet_id):
     Returns:
         dict: Dictionary with Hora Bala information
     """
-    # Get date components
-    date_list = jdnDate(chart.date.date.jdn)
-    year, month, day = date_list[0], date_list[1], date_list[2]
-
-    # Get time components
-    time_list = chart.date.time.time()
-    hour, minute, second = time_list[0], time_list[1], int(time_list[2]) # Ensure second is int
-
-    # Format string correctly
-    datetime_str = f"{year}/{month:02d}/{day:02d} {hour:02d}:{minute:02d}:{second:02d}"
-
-    try:
-        dt = datetime.strptime(datetime_str, "%Y/%m/%d %H:%M:%S")
-    except ValueError as e:
-        print(f"Error parsing date/time: {datetime_str} with format %Y/%m/%d %H:%M:%S")
-        print(e)
-        return {'value': 0.0, 'description': 'Error calculating Hora Bala'}
-
-    # Get the hour of the day
-    hour_of_day = dt.hour
-
-    # Determine if it's day or night
-    is_diurnal = chart.isDiurnal()
-
-    # Each planet rules a specific hour in a 7-hour cycle
-    # The order is different for day and night
-    if is_diurnal:
-        hour_rulers = {
-            0: const.SUN,     # Sun rules the 1st hour of the day
-            1: const.VENUS,   # Venus rules the 2nd hour of the day
-            2: const.MERCURY, # Mercury rules the 3rd hour of the day
-            3: const.MOON,    # Moon rules the 4th hour of the day
-            4: const.SATURN,  # Saturn rules the 5th hour of the day
-            5: const.JUPITER, # Jupiter rules the 6th hour of the day
-            6: const.MARS     # Mars rules the 7th hour of the day
-        }
-    else:
-        hour_rulers = {
-            0: const.MOON,    # Moon rules the 1st hour of the night
-            1: const.SATURN,  # Saturn rules the 2nd hour of the night
-            2: const.JUPITER, # Jupiter rules the 3rd hour of the night
-            3: const.MARS,    # Mars rules the 4th hour of the night
-            4: const.SUN,     # Sun rules the 5th hour of the night
-            5: const.VENUS,   # Venus rules the 6th hour of the night
-            6: const.MERCURY  # Mercury rules the 7th hour of the night
-        }
+    from flatlib.ephem import ephem
+    from flatlib.tools import planetarytime
 
     # Maximum value (in Virupas)
     max_value = 60.0
 
-    # Calculate the hour ruler
-    hour_ruler = hour_rulers[hour_of_day % 7]
+    try:
+        # Get the date and location from the chart
+        date = chart.date
+        location = chart.pos
 
-    # Calculate Hora Bala
-    if planet_id == hour_ruler:
-        value = max_value
-        description = 'Ruler of the hour'
-    else:
-        value = 0.0
-        description = 'Not ruler of the hour'
+        # Get the planetary hour table
+        hour_table = planetarytime.getHourTable(date, location)
 
-    return {'value': value, 'description': description}
+        # Get the current hora ruler
+        hora_ruler = hour_table.hourRuler()
+
+        # Get additional information for debugging
+        hora_info = hour_table.currInfo()
+
+        # Calculate Hora Bala
+        if planet_id == hora_ruler:
+            value = max_value
+            description = f'Ruler of the hora (hour {hora_info["hourNumber"]})'
+        else:
+            value = 0.0
+            description = f'Not ruler of the hora (hour {hora_info["hourNumber"]}, ruler: {hora_ruler})'
+
+        # Return the result with additional information for debugging
+        return {
+            'value': value,
+            'description': description,
+            'hora_ruler': hora_ruler,
+            'hora_number': hora_info['hourNumber'],
+            'hora_start': str(hora_info['start']),
+            'hora_end': str(hora_info['end']),
+            'day_ruler': hour_table.dayRuler(),
+            'night_ruler': hour_table.nightRuler()
+        }
+    except Exception as e:
+        # If there's an error, use a fallback method
+        print(f"Error calculating Hora Bala: {e}")
+
+        # Fallback method: Calculate the day of week and use a simplified approach
+        try:
+            # Get the day of the week (0=Sunday, 1=Monday, ..., 6=Saturday)
+            day_of_week = chart.date.date.dayofweek()
+
+            # Get the Vara Lord (weekday ruler)
+            day_rulers = {
+                0: const.SUN,     # Sun rules Sunday
+                1: const.MOON,    # Moon rules Monday
+                2: const.MARS,    # Mars rules Tuesday
+                3: const.MERCURY, # Mercury rules Wednesday
+                4: const.JUPITER, # Jupiter rules Thursday
+                5: const.VENUS,   # Venus rules Friday
+                6: const.SATURN   # Saturn rules Saturday
+            }
+            vara_lord = day_rulers[day_of_week]
+
+            # Chaldean order of planets (used for hora sequence)
+            chaldean_order = [
+                const.SATURN,
+                const.JUPITER,
+                const.MARS,
+                const.SUN,
+                const.VENUS,
+                const.MERCURY,
+                const.MOON
+            ]
+
+            # Get the hour of the day (approximate)
+            hour_of_day = chart.date.time.time()[0]
+
+            # Determine if it's day or night (simplified)
+            is_diurnal = chart.isDiurnal()
+
+            # Find the index of the Vara Lord in the Chaldean order
+            vara_lord_index = chaldean_order.index(vara_lord) if vara_lord in chaldean_order else 0
+
+            # Calculate the hora index
+            if is_diurnal:
+                # Day hours start from the Vara Lord
+                hora_index = (vara_lord_index + hour_of_day) % 7
+            else:
+                # Night hours start from the 12th hour after the Vara Lord
+                hora_index = (vara_lord_index + 12 + hour_of_day) % 7
+
+            # Get the hora ruler
+            hora_ruler = chaldean_order[hora_index]
+
+            # Calculate Hora Bala
+            if planet_id == hora_ruler:
+                value = max_value
+                description = f'Ruler of the hora (fallback method)'
+            else:
+                value = 0.0
+                description = f'Not ruler of the hora (fallback method, ruler: {hora_ruler})'
+
+            # Return the result with limited information
+            return {
+                'value': value,
+                'description': description,
+                'hora_ruler': hora_ruler,
+                'day_ruler': vara_lord
+            }
+        except Exception as e:
+            # If even the fallback method fails, return a default value
+            print(f"Error in fallback method for Hora Bala: {e}")
+            return {'value': 0.0, 'description': 'Error calculating Hora Bala'}
 
 
 def calculate_ayana_bala(chart, planet_id):
