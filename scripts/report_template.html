@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style type="text/css">
+        body {
+            padding: 30px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .heading {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .summary-item {
+            margin-bottom: 10px;
+        }
+        .test-case {
+            margin-bottom: 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .test-case-header {
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .test-case-content {
+            padding: 15px;
+            border-top: 1px solid #dee2e6;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .failure {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .skipped {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .badge {
+            font-size: 0.8em;
+            padding: 5px 10px;
+        }
+        .badge-success {
+            background-color: #28a745;
+        }
+        .badge-danger {
+            background-color: #dc3545;
+        }
+        .badge-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        .badge-info {
+            background-color: #17a2b8;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .chart-container {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+        }
+        .test-details {
+            margin-top: 20px;
+        }
+        .test-details h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        .test-details-table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .test-details-table th {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: left;
+        }
+        .test-details-table td {
+            padding: 10px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .test-details-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        .timestamp {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        .footer {
+            margin-top: 30px;
+            padding-top: 10px;
+            border-top: 1px solid #dee2e6;
+            color: #6c757d;
+            font-size: 0.9em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">{{ title }}</h1>
+
+        <div class="summary">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="summary-item">
+                        <strong>Start Time:</strong> {{ start_time }}
+                    </div>
+                    <div class="summary-item">
+                        <strong>Duration:</strong> {{ duration }}
+                    </div>
+                    <div class="summary-item">
+                        <strong>Status:</strong>
+                        {% if status == 'passed' %}
+                            <span class="badge badge-success">Passed</span>
+                        {% else %}
+                            <span class="badge badge-danger">Failed</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="summary-item">
+                        <strong>Total Tests:</strong> {{ total_tests }}
+                    </div>
+                    <div class="summary-item">
+                        <strong>Passed:</strong> <span class="badge badge-success">{{ passed_tests }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <strong>Failed:</strong> <span class="badge badge-danger">{{ failed_tests }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <strong>Errors:</strong> <span class="badge badge-danger">{{ error_tests }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <strong>Skipped:</strong> <span class="badge badge-warning">{{ skipped_tests }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="testResultChart"></canvas>
+        </div>
+
+        <div class="test-details">
+            <h3>Test Results</h3>
+
+            {% if failed_tests_details %}
+            <h4>Failed Tests</h4>
+            {% for test in failed_tests_details %}
+            <div class="test-case">
+                <div class="test-case-header failure" onclick="toggleTestCase(this)">
+                    <span>{{ test.name }}</span>
+                    <span class="badge badge-secondary">{{ test.category }}</span>
+                    <span class="badge badge-danger">Failed</span>
+                </div>
+                <div class="test-case-content">
+                    <p><strong>Description:</strong> {{ test.description }}</p>
+                    <p><strong>Error Message:</strong></p>
+                    <pre>{{ test.error_message }}</pre>
+                    <p><strong>Traceback:</strong></p>
+                    <pre>{{ test.traceback }}</pre>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            {% if error_tests_details %}
+            <h4>Error Tests</h4>
+            {% for test in error_tests_details %}
+            <div class="test-case">
+                <div class="test-case-header error" onclick="toggleTestCase(this)">
+                    <span>{{ test.name }}</span>
+                    <span class="badge badge-secondary">{{ test.category }}</span>
+                    <span class="badge badge-danger">Error</span>
+                </div>
+                <div class="test-case-content">
+                    <p><strong>Description:</strong> {{ test.description }}</p>
+                    <p><strong>Error Message:</strong></p>
+                    <pre>{{ test.error_message }}</pre>
+                    <p><strong>Traceback:</strong></p>
+                    <pre>{{ test.traceback }}</pre>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            {% if skipped_tests_details %}
+            <h4>Skipped Tests</h4>
+            {% for test in skipped_tests_details %}
+            <div class="test-case">
+                <div class="test-case-header skipped" onclick="toggleTestCase(this)">
+                    <span>{{ test.name }}</span>
+                    <span class="badge badge-secondary">{{ test.category }}</span>
+                    <span class="badge badge-warning">Skipped</span>
+                </div>
+                <div class="test-case-content">
+                    <p><strong>Description:</strong> {{ test.description }}</p>
+                    <p><strong>Reason:</strong> {{ test.reason }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            {% if passed_tests_details %}
+            <h4>Passed Tests</h4>
+            <table class="test-details-table">
+                <thead>
+                    <tr>
+                        <th>Test Name</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Duration</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for test in passed_tests_details %}
+                    <tr>
+                        <td>{{ test.name }}</td>
+                        <td>{{ test.description }}</td>
+                        <td>{{ test.category }}</td>
+                        <td>{{ test.duration }}</td>
+                        <td><span class="badge badge-success">Passed</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+
+        <div class="footer">
+            <p>Generated by Flatlib Test Suite on {{ timestamp }}</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        function toggleTestCase(element) {
+            const content = element.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+
+        // Create chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('testResultChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Passed', 'Failed', 'Errors', 'Skipped'],
+                    datasets: [{
+                        data: [{{ passed_tests }}, {{ failed_tests }}, {{ error_tests }}, {{ skipped_tests }}],
+                        backgroundColor: [
+                            '#28a745',
+                            '#dc3545',
+                            '#dc3545',
+                            '#ffc107'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Test Results'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
