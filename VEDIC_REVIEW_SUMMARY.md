@@ -143,10 +143,10 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
 *   **Finding:** While `flatlib/vedic/dignities.py` appears to contain the correct data and functions for Vedic dignities (Exaltation, Moolatrikona) and combined friendships (Natural + Temporal), the implementation of `calculate_saptavarga_bala` within `sthana_bala.py` requires specific verification. It needs to be confirmed that this function correctly utilizes the combined friendship status and applies the standard Virupa point system for each dignity level (Exaltation, Moolatrikona, Own Sign, Great Friend, Friend, Neutral, Enemy, Great Enemy) across the seven Vargas (D1, D2, D3, D7, D9, D12, D30).
 *   **Category:** `Astrology`, `Logic`, `Shadbala`
 *   **Tasks:**
-    *   [ ] Review the code of `calculate_saptavarga_bala` in `sthana_bala.py`.
-    *   [ ] Confirm it fetches the Combined Friendship status using `vedic_dignities.calculate_combined_friendship` (or equivalent logic).
-    *   [ ] Confirm it assigns the correct Virupa points based on the planet's dignity (including Moolatrikona, Own Sign, and the 5 levels of friendship relative to the sign lord) in each of the 7 Vargas.
-    *   [ ] Refactor `calculate_saptavarga_bala` if it deviates from standard Vedic calculation methods or point systems.
+    *   [x] Review the code of `calculate_saptavarga_bala` in `sthana_bala.py`.
+    *   [x] Confirm it fetches the Combined Friendship status using `vedic_dignities.calculate_combined_friendship` (or equivalent logic).
+    *   [x] Confirm it assigns the correct Virupa points based on the planet's dignity (including Moolatrikona, Own Sign, and the 5 levels of friendship relative to the sign lord) in each of the 7 Vargas.
+    *   [x] Refactor `calculate_saptavarga_bala` if it deviates from standard Vedic calculation methods or point systems.
 
 ## 16. Saptavarga Bala Implementation Errors
 
