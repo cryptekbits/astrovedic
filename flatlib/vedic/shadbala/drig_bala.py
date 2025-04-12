@@ -63,7 +63,8 @@ def calculate_drig_bala(chart, planet_id):
 
 def calculate_aspects_received(chart, planet_id):
     """
-    Calculate the aspects received by a planet
+    Calculate the aspects received by a planet using standard Virupa points
+    for Drig Bala calculations.
 
     Args:
         chart (Chart): The birth chart
@@ -86,23 +87,27 @@ def calculate_aspects_received(chart, planet_id):
         if other_id != planet_id:
             other = chart.getObject(other_id)
 
-            # Calculate the aspect strength
-            aspect_strength = calculate_vedic_aspect_strength(other_id, other.lon, planet.lon)
+            # Get aspect information from the Vedic aspects module
+            aspect_info = vedic_aspects.get_graha_drishti_strength(other_id, other.lon, planet.lon)
 
-            if aspect_strength > 0:
+            if aspect_info['has_aspect']:
+                # Calculate Virupa points using the standard system
+                virupa_points = get_drig_bala_virupa_points(
+                    aspecting_planet_id=other_id,
+                    aspect_type=aspect_info['type']
+                )
+
+                # Add to the total aspect value
+                aspect_value += virupa_points
+
                 # Determine if the aspect is benefic or malefic
                 is_benefic = is_benefic_planet(other_id)
-
-                # Benefic aspects increase strength, malefic aspects decrease it
-                if is_benefic:
-                    aspect_value += aspect_strength
-                else:
-                    aspect_value -= aspect_strength
 
                 # Add to the list of aspects
                 aspects.append({
                     'planet': other_id,
-                    'strength': aspect_strength,
+                    'virupa_points': virupa_points,
+                    'aspect_type': aspect_info['type'],
                     'is_benefic': is_benefic
                 })
 
@@ -114,7 +119,8 @@ def calculate_aspects_received(chart, planet_id):
 
 def calculate_aspects_cast(chart, planet_id):
     """
-    Calculate the aspects cast by a planet
+    Calculate the aspects cast by a planet using standard Virupa points
+    for Drig Bala calculations.
 
     Args:
         chart (Chart): The birth chart
@@ -137,23 +143,27 @@ def calculate_aspects_cast(chart, planet_id):
         if other_id != planet_id:
             other = chart.getObject(other_id)
 
-            # Calculate the aspect strength
-            aspect_strength = calculate_vedic_aspect_strength(planet_id, planet.lon, other.lon)
+            # Get aspect information from the Vedic aspects module
+            aspect_info = vedic_aspects.get_graha_drishti_strength(planet_id, planet.lon, other.lon)
 
-            if aspect_strength > 0:
+            if aspect_info['has_aspect']:
+                # Calculate Virupa points using the standard system
+                virupa_points = get_drig_bala_virupa_points(
+                    aspecting_planet_id=planet_id,
+                    aspect_type=aspect_info['type']
+                )
+
+                # Add to the total aspect value
+                aspect_value += virupa_points
+
                 # Determine if the aspect is benefic or malefic
                 is_benefic = is_benefic_planet(planet_id)
-
-                # Benefic aspects increase strength, malefic aspects decrease it
-                if is_benefic:
-                    aspect_value += aspect_strength
-                else:
-                    aspect_value -= aspect_strength
 
                 # Add to the list of aspects
                 aspects.append({
                     'planet': other_id,
-                    'strength': aspect_strength,
+                    'virupa_points': virupa_points,
+                    'aspect_type': aspect_info['type'],
                     'is_benefic': is_benefic
                 })
 
@@ -191,9 +201,52 @@ def calculate_vedic_aspect_strength(planet_id, from_lon, to_lon):
         return 0.0
 
 
+def get_drig_bala_virupa_points(aspecting_planet_id, aspect_type):
+    """
+    Get the standard Virupa points for Drig Bala calculation based on aspect type
+    and the benefic/malefic nature of the aspecting planet.
+
+    According to standard Vedic astrology texts, the Virupa points are:
+    - Full aspect: 60 points
+    - Three-quarter aspect: 45 points
+    - Half aspect: 30 points
+    - Quarter aspect: 15 points
+
+    The points are positive for benefic planets and negative for malefic planets.
+
+    Args:
+        aspecting_planet_id (str): The ID of the planet casting the aspect
+        aspect_type (str): The type of aspect (Full, Three-Quarter, Half, Quarter)
+
+    Returns:
+        float: The Virupa points for the aspect
+    """
+    # Base Virupa points based on aspect type
+    if aspect_type == const.VEDIC_FULL_ASPECT:
+        base_points = 60.0
+    elif aspect_type == const.VEDIC_THREE_QUARTER_ASPECT:
+        base_points = 45.0
+    elif aspect_type == const.VEDIC_HALF_ASPECT:
+        base_points = 30.0
+    elif aspect_type == const.VEDIC_QUARTER_ASPECT:
+        base_points = 15.0
+    else:
+        return 0.0  # No aspect
+
+    # Determine if the aspecting planet is benefic or malefic
+    is_aspecting_benefic = is_benefic_planet(aspecting_planet_id)
+
+    # Adjust points based on benefic/malefic nature of the aspecting planet
+    # Benefic planets give positive points, malefic planets give negative points
+    if is_aspecting_benefic:
+        return base_points  # Benefic aspects are positive
+    else:
+        return -base_points  # Malefic aspects are negative
+
+
 def is_benefic_planet(planet_id):
     """
-    Determine if a planet is benefic or malefic
+    Determine if a planet is benefic or malefic according to Vedic astrology.
 
     Args:
         planet_id (str): The ID of the planet
@@ -201,10 +254,8 @@ def is_benefic_planet(planet_id):
     Returns:
         bool: True if the planet is benefic, False if malefic
     """
-    # Benefic planets
+    # Benefic planets in Vedic astrology
     benefic_planets = [const.JUPITER, const.VENUS, const.MERCURY, const.MOON]
 
-    # Malefic planets
-    malefic_planets = [const.SUN, const.MARS, const.SATURN, const.RAHU, const.KETU]
-
+    # All other planets are considered malefic
     return planet_id in benefic_planets
