@@ -464,5 +464,55 @@
         "name": "Varga Longitude Function",
         "description": "Tests the get_varga_longitude function for calculating divisional chart positions",
         "category": "vedic"
+    },
+    "tests.test_vedic_aspects.TestVedicAspects.test_house_distance": {
+        "name": "House Distance Calculation",
+        "description": "Tests calculation of house distances for Vedic aspects",
+        "category": "vedic"
+    },
+    "tests.test_vedic_aspects.TestVedicAspects.test_graha_drishti": {
+        "name": "Graha Drishti",
+        "description": "Tests Graha Drishti (planetary aspect) calculations",
+        "category": "vedic"
+    },
+    "tests.test_vedic_aspects.TestVedicAspects.test_graha_drishti_strength": {
+        "name": "Graha Drishti Strength",
+        "description": "Tests calculation of Graha Drishti strength",
+        "category": "vedic"
+    },
+    "tests.test_vedic_aspects.TestVedicAspects.test_rashi_drishti": {
+        "name": "Rashi Drishti",
+        "description": "Tests Rashi Drishti (sign aspect) calculations",
+        "category": "vedic"
+    },
+    "tests.test_vedic_aspects.TestVedicAspects.test_rashi_drishti_strength": {
+        "name": "Rashi Drishti Strength",
+        "description": "Tests calculation of Rashi Drishti strength",
+        "category": "vedic"
+    },
+    "tests.test_vedic_aspects.TestVedicAspects.test_planet_aspects": {
+        "name": "Planet Aspects",
+        "description": "Tests getting all aspects cast by a planet",
+        "category": "vedic"
+    },
+    "tests.test_vedic_aspects.TestVedicAspects.test_planet_aspects_received": {
+        "name": "Planet Aspects Received",
+        "description": "Tests getting all aspects received by a planet",
+        "category": "vedic"
+    },
+    "tests.test_vedic_aspects.TestVedicAspects.test_sign_aspects": {
+        "name": "Sign Aspects",
+        "description": "Tests getting all aspects cast by a sign",
+        "category": "vedic"
+    },
+    "tests.test_vedic_aspects.TestVedicAspects.test_sign_aspects_received": {
+        "name": "Sign Aspects Received",
+        "description": "Tests getting all aspects received by a sign",
+        "category": "vedic"
+    },
+    "tests.test_vedic_aspects.TestVedicAspects.test_all_aspects": {
+        "name": "All Aspects",
+        "description": "Tests getting all aspects in a chart",
+        "category": "vedic"
     }
 }

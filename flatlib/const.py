@@ -281,6 +281,32 @@ MAJOR_ASPECTS = [0, 60, 90, 120, 180]
 MINOR_ASPECTS = [30, 36, 45, 72, 108, 135, 144, 150]
 ALL_ASPECTS = MAJOR_ASPECTS + MINOR_ASPECTS
 
+# Vedic Aspects (Graha Drishti)
+# All planets aspect the 7th house from their position
+VEDIC_ASPECT_ALL = 7
+# Mars aspects the 4th and 8th houses from its position
+VEDIC_ASPECT_MARS = [4, 8]
+# Jupiter aspects the 5th and 9th houses from its position
+VEDIC_ASPECT_JUPITER = [5, 9]
+# Saturn aspects the 3rd and 10th houses from its position
+VEDIC_ASPECT_SATURN = [3, 10]
+
+# Vedic Aspect Types
+VEDIC_FULL_ASPECT = 'Full Aspect'  # 100% strength
+VEDIC_THREE_QUARTER_ASPECT = 'Three-Quarter Aspect'  # 75% strength
+VEDIC_HALF_ASPECT = 'Half Aspect'  # 50% strength
+VEDIC_QUARTER_ASPECT = 'Quarter Aspect'  # 25% strength
+
+# Rashi Drishti (Sign Aspects)
+# Each sign aspects the 7th sign from it
+RASHI_DRISHTI_ALL = 7
+# Movable (Cardinal) signs also aspect the 4th and 10th signs
+RASHI_DRISHTI_MOVABLE = [4, 10]
+# Fixed signs also aspect the 5th and 9th signs
+RASHI_DRISHTI_FIXED = [5, 9]
+# Dual (Mutable) signs also aspect the 3rd and 11th signs
+RASHI_DRISHTI_DUAL = [3, 11]
+
 # === Ayanamsas / Sidereal Zodiac === */
 
 AY_FAGAN_BRADLEY = 'Ayanamsa Fagan Bradley'
