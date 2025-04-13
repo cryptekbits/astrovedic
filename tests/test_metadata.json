@@ -892,5 +892,92 @@
         "name": "Get Transit Periods",
         "description": "Tests identification of transit periods with different qualities",
         "category": "vedic"
+    },
+
+    "tests.test_yoga_core.TestYogaCore.test_get_yoga_strength": {
+        "name": "Get Yoga Strength",
+        "description": "Tests calculation of yoga strength based on planetary positions",
+        "category": "vedic"
+    },
+    "tests.test_yoga_core.TestYogaCore.test_get_yoga_effects": {
+        "name": "Get Yoga Effects",
+        "description": "Tests generation of yoga effects based on yoga type and strength",
+        "category": "vedic"
+    },
+    "tests.test_yoga_core.TestYogaCore.test_get_strongest_yoga": {
+        "name": "Get Strongest Yoga",
+        "description": "Tests identification of the strongest yoga in a chart",
+        "category": "vedic"
+    },
+    "tests.test_yoga_core.TestYogaCore.test_is_in_own_sign": {
+        "name": "Is In Own Sign",
+        "description": "Tests identification of planets in their own signs",
+        "category": "vedic"
+    },
+    "tests.test_yoga_core.TestYogaCore.test_is_exalted": {
+        "name": "Is Exalted",
+        "description": "Tests identification of planets in their exaltation signs",
+        "category": "vedic"
+    },
+    "tests.test_yoga_core.TestYogaCore.test_is_debilitated": {
+        "name": "Is Debilitated",
+        "description": "Tests identification of planets in their debilitation signs",
+        "category": "vedic"
+    },
+    "tests.test_yoga_core.TestYogaCore.test_get_house_lord": {
+        "name": "Get House Lord",
+        "description": "Tests identification of the lord of a house",
+        "category": "vedic"
+    },
+    "tests.test_yoga_core.TestYogaCore.test_get_house_number": {
+        "name": "Get House Number",
+        "description": "Tests calculation of the house number of a planet",
+        "category": "vedic"
+    },
+    "tests.test_yoga_core.TestYogaCore.test_are_planets_conjunct": {
+        "name": "Are Planets Conjunct",
+        "description": "Tests identification of conjunctions between planets",
+        "category": "vedic"
+    },
+    "tests.test_yoga_core.TestYogaCore.test_are_planets_in_aspect": {
+        "name": "Are Planets In Aspect",
+        "description": "Tests identification of aspects between planets",
+        "category": "vedic"
+    },
+
+    "tests.test_yoga_types.TestYogaTypes.test_get_mahapurusha_yogas": {
+        "name": "Get Mahapurusha Yogas",
+        "description": "Tests identification of Pancha Mahapurusha yogas in a chart",
+        "category": "vedic"
+    },
+    "tests.test_yoga_types.TestYogaTypes.test_get_raja_yogas": {
+        "name": "Get Raja Yogas",
+        "description": "Tests identification of Raja yogas in a chart",
+        "category": "vedic"
+    },
+    "tests.test_yoga_types.TestYogaTypes.test_get_dhana_yogas": {
+        "name": "Get Dhana Yogas",
+        "description": "Tests identification of Dhana yogas in a chart",
+        "category": "vedic"
+    },
+    "tests.test_yoga_types.TestYogaTypes.test_get_all_yogas": {
+        "name": "Get All Yogas",
+        "description": "Tests identification of all yogas in a chart",
+        "category": "vedic"
+    },
+    "tests.test_yoga_types.TestYogaTypes.test_get_yoga_analysis": {
+        "name": "Get Yoga Analysis",
+        "description": "Tests analysis of yogas in a chart",
+        "category": "vedic"
+    },
+    "tests.test_yoga_types.TestYogaTypes.test_get_yoga_predictions": {
+        "name": "Get Yoga Predictions",
+        "description": "Tests generation of predictions based on yogas in a chart",
+        "category": "vedic"
+    },
+    "tests.test_yoga_types.TestYogaTypes.test_get_yoga_strength_score": {
+        "name": "Get Yoga Strength Score",
+        "description": "Tests calculation of overall yoga strength score for a chart",
+        "category": "vedic"
     }
 }

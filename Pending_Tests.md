@@ -26,12 +26,7 @@ This document lists functionalities in the flatlib library that currently lack c
 ✅ Tests implemented in `tests/test_transit_core.py` and `tests/test_transit_predictions.py`
 
 ### Yogas (Planetary Combinations)
-- `get_yoga_strength` - Testing yoga strength calculation
-- `get_yoga_effects` - Testing yoga effects assessment
-- `get_strongest_yoga` - Testing strongest yoga identification
-- `get_mahapurusha_yogas` - Testing Pancha Mahapurusha yoga identification
-- `get_raja_yogas` - Testing Raja yoga identification
-- `get_dhana_yogas` - Testing Dhana yoga identification
+✅ Tests implemented in `tests/test_yoga_core.py` and `tests/test_yoga_types.py`
 
 ### Vargas (Divisional Charts)
 - `calculate_d20` - Testing D20 (Vimshamsha) chart calculations
