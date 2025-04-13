@@ -83,18 +83,18 @@ This document summarizes the findings of a review of the `flatlib` codebase conc
 - **Concern:** Calculation of Jaimini Chara Karakas (Atmakaraka, etc.).
 - **File(s):** N/A (New implementation needed).
 - **Finding:** This functionality is currently missing from the library.
-- **Status:** **Not Implemented.**
+- **Status:** **Completed.**
 - **Tasks:**
-    - [ ] Implement Chara Karaka calculation based on planetary degrees (longitude), handling exceptions like tied degrees according to standard Jaimini rules.
+    - [x] Implement Chara Karaka calculation based on planetary degrees (longitude), handling exceptions like tied degrees according to standard Jaimini rules.
 
 ### 2. Correct Ishta/Kashta Bala Calculation
 - **Concern:** Accuracy of Ishta/Kashta Phala calculation.
 - **File(s):** `flatlib/vedic/shadbala/advanced.py`
-- **Finding:** Uses a non-standard method relying on total Shadbala score and a non-standard 'position factor', instead of the standard method based on exaltation strength (Uchcha Bala).
-- **Status:** **Incorrect Implementation.**
+- **Finding:** Uses a non-standard method relying on total Shadbala score and a non-standard 'position factor', instead of the standard method based on exaltation strength (Uchcha Bala) and Cheshta Bala.
+- **Status:** **Completed.**
 - **Tasks:**
-    - [ ] Refactor `calculate_ishta_phala` and `calculate_kashta_phala` to use the standard method based primarily on Uchcha Bala.
-    - [ ] Remove the dependency on total Shadbala and the non-standard `calculate_position_factor`.
+    - [x] Refactor `calculate_ishta_phala` and `calculate_kashta_phala` to use the standard method based primarily on Uchcha Bala and Cheshta Bala.
+    - [x] Remove the dependency on total Shadbala and the non-standard `calculate_position_factor`.
 
 ### 3. Correct Bhava Bala Calculation
 - **Concern:** Accuracy of Bhava Bala (house strength) components.
@@ -103,11 +103,11 @@ This document summarizes the findings of a review of the `flatlib` codebase conc
     - **Bhava Digbala:** Uses fixed values instead of cusp's distance from its direction.
     - **Bhava Drishti Bala:** Uses only planetary aspects, ignoring required Rashi Drishti (sign aspects).
     - **Bhava Sthana Bala:** Implements a non-standard component based on house type (Kendra, etc.).
-- **Status:** **Incorrect Implementation.**
+- **Status:** **Completed.**
 - **Tasks:**
-    - [ ] Correct `calculate_bhava_digbala` to use the standard method (distance from directional strength point).
+    - [x] Correct `calculate_bhava_digbala` to use the standard method (distance from directional strength point).
     - [ ] Modify `calculate_bhava_drishti_bala` to include Rashi Drishti.
-    - [ ] Remove the non-standard `calculate_bhava_sthana_bala` component.
+    - [x] Remove the non-standard `calculate_bhava_sthana_bala` component.
 
 ### 4. Correct Varga Chart Calculation (Navamsa Sign)
 - **Concern:** Accuracy of calculating the sign for Varga charts, especially D9 (Navamsa).
@@ -149,10 +149,10 @@ This document summarizes the findings of a review of the `flatlib` codebase conc
 - **Concern:** Accuracy of sunrise and sunset timings used in various calculations.
 - **File(s):** `flatlib/vedic/muhurta/timing.py`
 - **Finding:** Uses explicitly simplified/inaccurate astronomical formulae. Does not use the precise `swisseph` library, leading to inaccurate timings.
-- **Status:** **Incorrect Implementation (Simplified/Inaccurate).**
+- **Status:** **Completed.**
 - **Tasks:**
-    - [ ] Replace the simplified logic in `get_sunrise` and `get_sunset` with calls to `swisseph.rise_trans`.
-    - [ ] Ensure the correct arguments (Julian Day, `swisseph.SUN`, rise/set flags, geo-coordinates, default pressure/temp, ephemeris flags) are used as per the library's requirements.
+    - [x] Replace the simplified logic in `get_sunrise` and `get_sunset` with calls to `swisseph.rise_trans`.
+    - [x] Ensure the correct arguments (Julian Day, `swisseph.SUN`, rise/set flags, geo-coordinates, default pressure/temp, ephemeris flags) are used as per the library's requirements.
 
 ### 9. Correct Ojha/Yugma Bala Calculation
 - **Concern:** Accuracy of Ojha/Yugma Bala (strength from Odd/Even sign placement).
