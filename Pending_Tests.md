@@ -29,14 +29,7 @@ This document lists functionalities in the flatlib library that currently lack c
 ✅ Tests implemented in `tests/test_yoga_core.py` and `tests/test_yoga_types.py`
 
 ### Vargas (Divisional Charts)
-- `calculate_d20` - Testing D20 (Vimshamsha) chart calculations
-- `calculate_d24` - Testing D24 (Chaturvimshamsha) chart calculations
-- `calculate_d27` - Testing D27 (Saptavimshamsha) chart calculations
-- `calculate_d30` - Testing D30 (Trimshamsha) chart calculations
-- `calculate_d40` - Testing D40 (Khavedamsha) chart calculations
-- `calculate_d45` - Testing D45 (Akshavedamsha) chart calculations
-- `calculate_d60` - Testing D60 (Shashtiamsha) chart calculations
-- `get_vimshopaka_bala` - Testing Vimshopaka Bala calculation
+✅ Tests implemented in `tests/test_higher_vargas.py` and `tests/test_vimshopaka_bala.py`
 
 ## Core Library Functions
 

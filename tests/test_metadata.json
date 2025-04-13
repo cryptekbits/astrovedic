@@ -979,5 +979,77 @@
         "name": "Get Yoga Strength Score",
         "description": "Tests calculation of overall yoga strength score for a chart",
         "category": "vedic"
+    },
+
+    "tests.test_higher_vargas.TestHigherVargas.test_d20_chart": {
+        "name": "D20 Chart",
+        "description": "Tests D20 (Vimshamsha) chart calculations",
+        "category": "vedic"
+    },
+    "tests.test_higher_vargas.TestHigherVargas.test_d24_chart": {
+        "name": "D24 Chart",
+        "description": "Tests D24 (Chaturvimshamsha) chart calculations",
+        "category": "vedic"
+    },
+    "tests.test_higher_vargas.TestHigherVargas.test_d27_chart": {
+        "name": "D27 Chart",
+        "description": "Tests D27 (Saptavimshamsha) chart calculations",
+        "category": "vedic"
+    },
+    "tests.test_higher_vargas.TestHigherVargas.test_d30_chart": {
+        "name": "D30 Chart",
+        "description": "Tests D30 (Trimshamsha) chart calculations",
+        "category": "vedic"
+    },
+    "tests.test_higher_vargas.TestHigherVargas.test_d40_chart": {
+        "name": "D40 Chart",
+        "description": "Tests D40 (Khavedamsha) chart calculations",
+        "category": "vedic"
+    },
+    "tests.test_higher_vargas.TestHigherVargas.test_d45_chart": {
+        "name": "D45 Chart",
+        "description": "Tests D45 (Akshavedamsha) chart calculations",
+        "category": "vedic"
+    },
+    "tests.test_higher_vargas.TestHigherVargas.test_d60_chart": {
+        "name": "D60 Chart",
+        "description": "Tests D60 (Shashtiamsha) chart calculations",
+        "category": "vedic"
+    },
+    "tests.test_higher_vargas.TestHigherVargas.test_vimshopaka_bala": {
+        "name": "Vimshopaka Bala",
+        "description": "Tests Vimshopaka Bala calculation",
+        "category": "vedic"
+    },
+    "tests.test_higher_vargas.TestHigherVargas.test_varga_longitude_consistency": {
+        "name": "Varga Longitude Consistency",
+        "description": "Tests consistency of varga longitude calculations",
+        "category": "vedic"
+    },
+
+    "tests.test_vimshopaka_bala.TestVimshopakaBala.test_shodashavarga_bala": {
+        "name": "Shodashavarga Bala",
+        "description": "Tests Shodashavarga Bala calculation",
+        "category": "vedic"
+    },
+    "tests.test_vimshopaka_bala.TestVimshopakaBala.test_vimshopaka_bala": {
+        "name": "Vimshopaka Bala",
+        "description": "Tests Vimshopaka Bala calculation",
+        "category": "vedic"
+    },
+    "tests.test_vimshopaka_bala.TestVimshopakaBala.test_vimshopaka_bala_weights": {
+        "name": "Vimshopaka Bala Weights",
+        "description": "Tests Vimshopaka Bala weights",
+        "category": "vedic"
+    },
+    "tests.test_vimshopaka_bala.TestVimshopakaBala.test_varga_visesha": {
+        "name": "Varga Visesha",
+        "description": "Tests Varga Visesha calculation",
+        "category": "vedic"
+    },
+    "tests.test_vimshopaka_bala.TestVimshopakaBala.test_bhava_bala": {
+        "name": "Bhava Bala",
+        "description": "Tests Bhava Bala calculation",
+        "category": "vedic"
     }
 }
