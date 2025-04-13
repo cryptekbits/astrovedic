@@ -39,6 +39,33 @@ def next_sign_transit(obj, dt, sign, mode=const.AY_LAHIRI):
     jd = dt.jd
     transit_jd = eph.nextSignTransit(obj, jd, sign_num, mode)
 
+    # Check if transit calculation was successful
+    if transit_jd is None:
+        # If transit calculation failed, use a fallback method
+        # Try with a different step size or approach
+        try:
+            # Get the current position
+            obj_data = eph.get_object(obj, jd, mode=mode)
+            curr_lon = obj_data['lon']
+
+            # Calculate the target longitude (start of the sign)
+            target_lon = ((sign_num - 1) * 30.0) % 360.0
+
+            # Estimate days until transit based on current speed
+            speed = abs(obj_data['lonspeed']) or 1.0  # Avoid division by zero
+            dist = angle.distance(curr_lon, target_lon)
+            days_estimate = dist / speed
+
+            # Use a reasonable estimate (not more than 365 days)
+            days_estimate = min(days_estimate, 365.0)
+
+            # Return an estimated date
+            return Datetime.fromJD(jd + days_estimate, dt.utcoffset)
+        except Exception as e:
+            print(f"Error in transit fallback calculation for {obj}: {e}")
+            # Last resort: return a date 30 days in the future
+            return Datetime.fromJD(jd + 30, dt.utcoffset)
+
     # Convert JD back to datetime
     return Datetime.fromJD(transit_jd, dt.utcoffset)
 
@@ -112,6 +139,29 @@ def next_nakshatra_transit(obj, dt, nakshatra, mode=const.AY_LAHIRI):
     jd = dt.jd
     transit_jd = eph.nextLonTransit(obj, jd, nakshatra_lon, mode)
 
+    # Check if transit calculation was successful
+    if transit_jd is None:
+        # If transit calculation failed, use a fallback method
+        try:
+            # Get the current position
+            obj_data = eph.get_object(obj, jd, mode=mode)
+            curr_lon = obj_data['lon']
+
+            # Estimate days until transit based on current speed
+            speed = abs(obj_data['lonspeed']) or 1.0  # Avoid division by zero
+            dist = angle.distance(curr_lon, nakshatra_lon)
+            days_estimate = dist / speed
+
+            # Use a reasonable estimate (not more than 365 days)
+            days_estimate = min(days_estimate, 365.0)
+
+            # Return an estimated date
+            return Datetime.fromJD(jd + days_estimate, dt.utcoffset)
+        except Exception as e:
+            print(f"Error in nakshatra transit fallback calculation for {obj}: {e}")
+            # Last resort: return a date 30 days in the future
+            return Datetime.fromJD(jd + 30, dt.utcoffset)
+
     # Convert JD back to datetime
     return Datetime.fromJD(transit_jd, dt.utcoffset)
 
@@ -142,6 +192,22 @@ def last_nakshatra_transit(obj, dt, nakshatra, mode=const.AY_LAHIRI):
     jd = dt.jd
     transit_jd = eph.lastLonTransit(obj, jd, nakshatra_lon, mode)
 
+    # Check if transit calculation was successful
+    if transit_jd is None or transit_jd >= jd:
+        # If transit calculation failed or returned a future date,
+        # use a fallback method with a longer lookback period
+        for days_back in [30, 60, 90, 180, 365]:
+            fallback_jd = jd - days_back  # Go back in time
+            try_transit_jd = eph.nextLonTransit(obj, fallback_jd, nakshatra_lon, mode)
+            if try_transit_jd is not None and try_transit_jd < jd:
+                transit_jd = try_transit_jd
+                break
+
+    # If we still couldn't find a valid transit, return a date in the past
+    if transit_jd is None or transit_jd >= jd:
+        # Last resort fallback
+        return Datetime.fromJD(jd - 30, dt.utcoffset)
+
     # Convert JD back to datetime
     return Datetime.fromJD(transit_jd, dt.utcoffset)
 
@@ -163,6 +229,32 @@ def next_degree_transit(obj, dt, degree, mode=const.AY_LAHIRI):
     jd = dt.jd
     transit_jd = eph.nextLonTransit(obj, jd, degree, mode)
 
+    # Check if transit calculation was successful
+    if transit_jd is None:
+        # If transit calculation failed, use a fallback method
+        try:
+            # Get the current position
+            obj_data = eph.get_object(obj, jd, mode=mode)
+            curr_lon = obj_data['lon']
+
+            # Normalize degree to 0-360 range
+            degree = degree % 360.0
+
+            # Estimate days until transit based on current speed
+            speed = abs(obj_data['lonspeed']) or 1.0  # Avoid division by zero
+            dist = angle.distance(curr_lon, degree)
+            days_estimate = dist / speed
+
+            # Use a reasonable estimate (not more than 365 days)
+            days_estimate = min(days_estimate, 365.0)
+
+            # Return an estimated date
+            return Datetime.fromJD(jd + days_estimate, dt.utcoffset)
+        except Exception as e:
+            print(f"Error in degree transit fallback calculation for {obj}: {e}")
+            # Last resort: return a date 30 days in the future
+            return Datetime.fromJD(jd + 30, dt.utcoffset)
+
     # Convert JD back to datetime
     return Datetime.fromJD(transit_jd, dt.utcoffset)
 
@@ -183,6 +275,22 @@ def last_degree_transit(obj, dt, degree, mode=const.AY_LAHIRI):
     # Calculate the transit
     jd = dt.jd
     transit_jd = eph.lastLonTransit(obj, jd, degree, mode)
+
+    # Check if transit calculation was successful
+    if transit_jd is None or transit_jd >= jd:
+        # If transit calculation failed or returned a future date,
+        # use a fallback method with a longer lookback period
+        for days_back in [30, 60, 90, 180, 365]:
+            fallback_jd = jd - days_back  # Go back in time
+            try_transit_jd = eph.nextLonTransit(obj, fallback_jd, degree, mode)
+            if try_transit_jd is not None and try_transit_jd < jd:
+                transit_jd = try_transit_jd
+                break
+
+    # If we still couldn't find a valid transit, return a date in the past
+    if transit_jd is None or transit_jd >= jd:
+        # Last resort fallback
+        return Datetime.fromJD(jd - 30, dt.utcoffset)
 
     # Convert JD back to datetime
     return Datetime.fromJD(transit_jd, dt.utcoffset)

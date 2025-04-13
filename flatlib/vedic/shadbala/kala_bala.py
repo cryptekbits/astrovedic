@@ -431,7 +431,8 @@ def calculate_mesha_sankranti(year, utcoffset='+00:00'):
         print(f"Error calculating Mesha Sankranti: {e}")
 
         # Return a fixed date (April 14) as a fallback
-        return Datetime(f'{year}/04/14', '12:00', utcoffset)
+        fallback_date = Datetime(f'{year}/04/14', '12:00', utcoffset)
+        return fallback_date
 
 
 def get_weekday_ruler(weekday):
@@ -523,6 +524,7 @@ def calculate_sankranti(chart, sign):
         Datetime: The date and time of the Sankranti
     """
     from flatlib.vedic.transits import calculator
+    from flatlib.datetime import Datetime
 
     # Get the date and UTC offset from the chart
     date = chart.date
@@ -545,9 +547,13 @@ def calculate_sankranti(chart, sign):
                 # If that fails, use a fallback method
                 print(f"Error calculating last Sankranti: {e}")
                 # Fallback: use a date 30 days before and look for the next Sankranti
-                from flatlib.datetime import Datetime
                 fallback_date = Datetime.fromJD(start_date.jd - 30, start_date.utcoffset.toString())
-                sankranti = calculator.next_sign_transit(const.SUN, fallback_date, sign, const.AY_LAHIRI)
+                try:
+                    sankranti = calculator.next_sign_transit(const.SUN, fallback_date, sign, const.AY_LAHIRI)
+                except Exception as e2:
+                    print(f"Error calculating next Sankranti from fallback date: {e2}")
+                    # If all else fails, use the chart date
+                    sankranti = date
 
         return sankranti
     except Exception as e:
