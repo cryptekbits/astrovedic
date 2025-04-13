@@ -28,13 +28,15 @@ def calculate_varga_longitude(longitude, divisor, offset=0):
     sign_num = int(longitude / 30)
     sign_lon = longitude % 30
     
-    # Calculate the division within the sign
+    # Calculate the division within the sign using standard Vedic multiplication
     division = int(sign_lon * divisor / 30)
     
-    # Calculate the resulting sign
+    # Calculate the resulting sign using standard method
+    # For D9 (Navamsa), each 3.33 degrees in a sign corresponds to one Navamsa sign
     result_sign = (sign_num * divisor + division + offset) % 12
     
     # Calculate the longitude within the resulting sign
+    # This ensures continuity within the divisional chart
     result_lon = (sign_lon * divisor) % 30
     
     # Return the final longitude

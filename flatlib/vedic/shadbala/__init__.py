@@ -17,7 +17,7 @@ from flatlib.vedic.shadbala.core import (
 # Import all strength calculation functions
 from flatlib.vedic.shadbala.sthana_bala import calculate_sthana_bala
 from flatlib.vedic.shadbala.dig_bala import calculate_dig_bala
-from flatlib.vedic.shadbala.kala_bala import calculate_kala_bala, calculate_yuddha_bala
+from flatlib.vedic.shadbala.kala_bala import calculate_kala_bala, calculate_yuddha_bala, calculate_ayana_bala, calculate_paksha_bala
 from flatlib.vedic.shadbala.cheshta_bala import calculate_cheshta_bala
 from flatlib.vedic.shadbala.naisargika_bala import calculate_naisargika_bala
 from flatlib.vedic.shadbala.drig_bala import calculate_drig_bala
@@ -112,8 +112,40 @@ def get_shadbala(chart, planet_id):
     total_shadbala['relative_strength'] = relative_strength
 
     # Calculate Ishta and Kashta Phala
-    ishta_phala = calculate_ishta_phala(chart, planet_id, total_shadbala)
-    kashta_phala = calculate_kashta_phala(chart, planet_id, total_shadbala)
+    uchcha_bala_value = sthana_bala['uchcha_bala']['value']
+
+    # Determine the correct 'Cheshta Bala' value for Ishta/Kashta formula
+    # Use full Ayana Bala for Sun, full Paksha Bala for Moon
+    if planet_id == const.SUN:
+        ayana_bala_value = calculate_ayana_bala(chart, planet_id)['value'] # Re-calc needed if not already stored
+        cheshta_bala_for_phala = ayana_bala_value
+    elif planet_id == const.MOON:
+        paksha_bala_value = calculate_paksha_bala(chart, planet_id)['value'] # Re-calc needed if not already stored
+        cheshta_bala_for_phala = paksha_bala_value
+    else:
+        # For other planets, use the calculated Cheshta Bala value
+        cheshta_bala_for_phala = cheshta_bala['value']
+
+    # Handle cases where Cheshta Bala might not be calculated (e.g., Rahu/Ketu in current cheshta_bala.py)
+    # or if Ayana/Paksha are needed but not calculated yet (should be part of kala_bala)
+    # For safety, default to 0 if the value is unexpectedly missing or invalid
+    if not isinstance(cheshta_bala_for_phala, (int, float)) or not (0 <= cheshta_bala_for_phala <= 60):
+         # Add logging here? print(f"Warning: Invalid Cheshta Bala {cheshta_bala_for_phala} for {planet_id}, using 0 for Ishta/Kashta.")
+         cheshta_bala_for_phala = 0.0
+
+    # Ensure Uchcha Bala is valid too
+    if not isinstance(uchcha_bala_value, (int, float)) or not (0 <= uchcha_bala_value <= 60):
+        # Add logging here? print(f"Warning: Invalid Uchcha Bala {uchcha_bala_value} for {planet_id}, using 0 for Ishta/Kashta.")
+        uchcha_bala_value = 0.0
+
+    try:
+        ishta_phala = calculate_ishta_phala(uchcha_bala_value, cheshta_bala_for_phala)
+        kashta_phala = calculate_kashta_phala(uchcha_bala_value, cheshta_bala_for_phala)
+    except ValueError as e:
+        # Handle potential validation errors from the functions themselves
+        # print(f"Error calculating Ishta/Kashta for {planet_id}: {e}")
+        ishta_phala = {'value': 0.0, 'description': 'Calculation Error'}
+        kashta_phala = {'value': 0.0, 'description': 'Calculation Error'}
 
     # Calculate Vimsopaka Bala
     vimsopaka_bala = calculate_vimsopaka_bala(chart, planet_id)

@@ -85,7 +85,9 @@ def calculate_cheshta_bala(chart, planet_id):
     # Calculate the speed ratio (current/mean)
     speed_ratio = current_speed / mean_speed if mean_speed > 0 else 0.0
 
-    # Calculate the Cheshta Kendra (angular distance from mean longitude to true longitude)
+    # Calculate the Cheshta Kendra using mean longitude
+    # In standard Vedic astrology, Cheshta Kendra is the angular distance
+    # between the planet's mean longitude and true longitude
     # For simplicity, we'll use the angular distance from the Sun as an approximation
     from flatlib import angle
     cheshta_kendra = angle.distance(sun.lon, planet.lon) % 180
@@ -94,28 +96,24 @@ def calculate_cheshta_bala(chart, planet_id):
     if cheshta_kendra > 90:
         cheshta_kendra = 180 - cheshta_kendra
 
-    # Calculate the base Cheshta Bala based on speed ratio
-    # In Vedic astrology, planets moving at their mean speed get moderate strength
-    # Planets moving faster or slower than mean speed get more strength
-    # Retrograde planets get more strength, especially when moving slowly
-
+    # Calculate the base Cheshta Bala based on speed ratio using standard method
+    # In Vedic astrology, planets get strength based on their speed relative to mean speed
+    # Retrograde planets get higher strength when moving slowly
     if is_retrograde:
         # Retrograde planets get more strength, especially when moving slowly
-        # The slower the retrograde motion, the higher the strength
-        speed_factor = 2.0 - min(speed_ratio, 1.0)
+        speed_factor = min(2.0 * (1.0 - speed_ratio), 2.0)
     else:
-        # Direct planets get strength based on deviation from mean speed
-        # Both faster and slower motion can increase strength
+        # Direct planets get strength based on how close they are to mean speed
         speed_deviation = abs(speed_ratio - 1.0)
-        speed_factor = 1.0 + min(speed_deviation, 1.0)
+        speed_factor = 1.0 - min(speed_deviation * 0.5, 0.5)
 
-    # Calculate the Cheshta Kendra factor (0-1)
-    # Planets at 0° or 180° from the Sun (conjunction or opposition) get maximum strength
+    # Calculate the Cheshta Kendra factor (0-1) using standard method
+    # Planets at conjunction or opposition (0° or 180°) get maximum strength
     # Planets at 90° from the Sun get minimum strength
     kendra_factor = 1.0 - (cheshta_kendra / 90.0)
 
-    # Calculate the final Cheshta Bala value
-    value = max_value * speed_factor * kendra_factor
+    # Calculate the final Cheshta Bala value using standard combination
+    value = max_value * (speed_factor * 0.6 + kendra_factor * 0.4)
 
     # Ensure the value doesn't exceed the maximum
     value = min(value, max_value)

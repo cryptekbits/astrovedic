@@ -472,7 +472,7 @@ def is_combust(chart, planet_id):
     from flatlib import angle
     orb = abs(angle.closestdistance(planet.lon, sun.lon))
     
-    # Define combustion orbs for each planet
+    # Define combustion orbs for each planet based on standard Vedic rules
     combustion_orbs = {
         const.MOON: 12,
         const.MERCURY: 14,
@@ -481,6 +481,12 @@ def is_combust(chart, planet_id):
         const.JUPITER: 11,
         const.SATURN: 15
     }
+    
+    # Adjust combustion orb for retrograde planets
+    if is_retrograde(planet):
+        # Retrograde planets have a slightly wider orb for combustion
+        combustion_orbs[const.MERCURY] = 12  # Reduced from 14 as it's closer when retrograde
+        combustion_orbs[const.VENUS] = 8     # Reduced from 10 as it's closer when retrograde
     
     # Check if the planet is combust
     return orb <= combustion_orbs.get(planet_id, 10)

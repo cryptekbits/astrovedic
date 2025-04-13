@@ -9,164 +9,102 @@
 
 from flatlib import const
 from flatlib import angle
+import math
+from flatlib import const 
+from flatlib.angle import closestdistance 
 
-
-def calculate_ishta_phala(chart, planet_id, total_shadbala):
+def calculate_ishta_phala(uchcha_bala_value: float, cheshta_bala_value: float) -> dict:
     """
-    Calculate Ishta Phala (beneficial effects) for a planet
-    
-    Ishta Phala represents the beneficial effects a planet can produce
-    based on its strength and nature.
-    
+    Calculate Ishta Phala (beneficial potential) for a planet.
+
+    Ishta Phala represents the beneficial potential based on the planet's
+    exaltation strength (Uchcha Bala) and motional strength (Cheshta Bala).
+    The standard formula is sqrt(Uchcha Bala * Cheshta Bala).
+
     Args:
-        chart (Chart): The birth chart
-        planet_id (str): The ID of the planet to analyze
-        total_shadbala (dict): The total Shadbala information
-    
+        uchcha_bala_value (float): The Uchcha Bala value (0-60 Virupas).
+        cheshta_bala_value (float): The Cheshta Bala value (0-60 Virupas).
+                                    (For Sun/Moon, use full Ayana/Paksha Bala).
+
     Returns:
-        dict: Dictionary with Ishta Phala information
+        dict: Dictionary with Ishta Phala value and description.
+
+    Raises:
+        ValueError: If input values are outside the 0-60 range.
     """
-    # Get the planet from the chart
-    planet = chart.getObject(planet_id)
-    
-    # Get the total Shadbala in Rupas
-    shadbala_rupas = total_shadbala['total_rupas']
-    
-    # Benefic planets (Jupiter, Venus, Mercury, Moon)
-    benefic_planets = [const.JUPITER, const.VENUS, const.MERCURY, const.MOON]
-    
-    # Malefic planets (Sun, Mars, Saturn, Rahu, Ketu)
-    malefic_planets = [const.SUN, const.MARS, const.SATURN, const.RAHU, const.KETU]
-    
-    # Calculate the base Ishta Phala
-    if planet_id in benefic_planets:
-        # For benefic planets, Ishta Phala is proportional to strength
-        base_value = shadbala_rupas
-    elif planet_id in malefic_planets:
-        # For malefic planets, Ishta Phala is inversely proportional to strength
-        base_value = 5.0 - (shadbala_rupas - 5.0) if shadbala_rupas > 5.0 else shadbala_rupas
-    else:
-        base_value = shadbala_rupas / 2.0
-    
-    # Adjust based on the planet's position
-    position_factor = calculate_position_factor(chart, planet_id)
-    
-    # Calculate the final Ishta Phala
-    value = base_value * position_factor
-    
-    # Determine the description
-    if value >= 40.0:
-        description = 'Very high beneficial effects'
+    # Validate inputs
+    if not (0 <= uchcha_bala_value <= 60) or not (0 <= cheshta_bala_value <= 60):
+        raise ValueError("Uchcha Bala and Cheshta Bala values must be between 0 and 60.")
+
+    # Calculate Ishta Phala using the standard formula
+    # Handle potential domain error if product is negative (though validation should prevent this)
+    try:
+        value = math.sqrt(uchcha_bala_value * cheshta_bala_value)
+    except ValueError:
+        # This should not happen with validated inputs, but as a safeguard
+        value = 0.0
+
+    # Provide a simple description
+    if value >= 45.0:
+        description = 'Very High (Auspicious Potential)'
     elif value >= 30.0:
-        description = 'High beneficial effects'
-    elif value >= 20.0:
-        description = 'Moderate beneficial effects'
-    elif value >= 10.0:
-        description = 'Low beneficial effects'
+        description = 'High (Auspicious Potential)'
+    elif value >= 15.0:
+        description = 'Moderate (Auspicious Potential)'
     else:
-        description = 'Very low beneficial effects'
-    
+        description = 'Low (Auspicious Potential)'
+
     return {
-        'value': value,
-        'description': description,
-        'base_value': base_value,
-        'position_factor': position_factor
+        'value': value,  # Value range 0-60
+        'description': description
     }
 
 
-def calculate_kashta_phala(chart, planet_id, total_shadbala):
+def calculate_kashta_phala(uchcha_bala_value: float, cheshta_bala_value: float) -> dict:
     """
-    Calculate Kashta Phala (harmful effects) for a planet
-    
-    Kashta Phala represents the harmful effects a planet can produce
-    based on its strength and nature.
-    
+    Calculate Kashta Phala (malefic potential) for a planet.
+
+    Kashta Phala represents the malefic potential based on the planet's
+    proximity to debilitation and lack of motional strength.
+    The standard formula is sqrt((60 - Uchcha Bala) * (60 - Cheshta Bala)).
+
     Args:
-        chart (Chart): The birth chart
-        planet_id (str): The ID of the planet to analyze
-        total_shadbala (dict): The total Shadbala information
-    
+        uchcha_bala_value (float): The Uchcha Bala value (0-60 Virupas).
+        cheshta_bala_value (float): The Cheshta Bala value (0-60 Virupas).
+                                    (For Sun/Moon, use full Ayana/Paksha Bala).
+
     Returns:
-        dict: Dictionary with Kashta Phala information
+        dict: Dictionary with Kashta Phala value and description.
+
+    Raises:
+        ValueError: If input values are outside the 0-60 range.
     """
-    # Get the planet from the chart
-    planet = chart.getObject(planet_id)
-    
-    # Get the total Shadbala in Rupas
-    shadbala_rupas = total_shadbala['total_rupas']
-    
-    # Benefic planets (Jupiter, Venus, Mercury, Moon)
-    benefic_planets = [const.JUPITER, const.VENUS, const.MERCURY, const.MOON]
-    
-    # Malefic planets (Sun, Mars, Saturn, Rahu, Ketu)
-    malefic_planets = [const.SUN, const.MARS, const.SATURN, const.RAHU, const.KETU]
-    
-    # Calculate the base Kashta Phala
-    if planet_id in benefic_planets:
-        # For benefic planets, Kashta Phala is inversely proportional to strength
-        base_value = 5.0 - (shadbala_rupas - 5.0) if shadbala_rupas > 5.0 else shadbala_rupas
-    elif planet_id in malefic_planets:
-        # For malefic planets, Kashta Phala is proportional to strength
-        base_value = shadbala_rupas
-    else:
-        base_value = shadbala_rupas / 2.0
-    
-    # Adjust based on the planet's position
-    position_factor = calculate_position_factor(chart, planet_id)
-    
-    # Calculate the final Kashta Phala
-    value = base_value * position_factor
-    
-    # Determine the description
-    if value >= 40.0:
-        description = 'Very high harmful effects'
+    # Validate inputs
+    if not (0 <= uchcha_bala_value <= 60) or not (0 <= cheshta_bala_value <= 60):
+        raise ValueError("Uchcha Bala and Cheshta Bala values must be between 0 and 60.")
+
+    # Calculate Kashta Phala using the standard formula
+    # Handle potential domain error if product is negative (though validation should prevent this)
+    try:
+        value = math.sqrt((60.0 - uchcha_bala_value) * (60.0 - cheshta_bala_value))
+    except ValueError:
+        # This should not happen with validated inputs, but as a safeguard
+        value = 0.0
+
+    # Provide a simple description
+    if value >= 45.0:
+        description = 'Very High (Inauspicious Potential)'
     elif value >= 30.0:
-        description = 'High harmful effects'
-    elif value >= 20.0:
-        description = 'Moderate harmful effects'
-    elif value >= 10.0:
-        description = 'Low harmful effects'
+        description = 'High (Inauspicious Potential)'
+    elif value >= 15.0:
+        description = 'Moderate (Inauspicious Potential)'
     else:
-        description = 'Very low harmful effects'
-    
+        description = 'Low (Inauspicious Potential)'
+
     return {
-        'value': value,
-        'description': description,
-        'base_value': base_value,
-        'position_factor': position_factor
+        'value': value,  # Value range 0-60
+        'description': description
     }
-
-
-def calculate_position_factor(chart, planet_id):
-    """
-    Calculate a factor based on the planet's position in the chart
-    
-    Args:
-        chart (Chart): The birth chart
-        planet_id (str): The ID of the planet
-    
-    Returns:
-        float: A factor between 0.5 and 1.5
-    """
-    # Get the planet from the chart
-    planet = chart.getObject(planet_id)
-    
-    # Get the Ascendant
-    asc = chart.getAngle(const.ASC)
-    
-    # Calculate the house position of the planet (1-12)
-    house_position = 1 + int(angle.distance(planet.lon, asc.lon) / 30)
-    
-    # Determine the house type
-    if house_position in [1, 4, 7, 10]:
-        # Kendra (angular) houses
-        return 1.5
-    elif house_position in [2, 5, 8, 11]:
-        # Panapara (succedent) houses
-        return 1.0
-    else:
-        # Apoklima (cadent) houses
-        return 0.5
 
 
 def calculate_vimsopaka_bala(chart, planet_id):
@@ -251,11 +189,10 @@ def calculate_bhava_bala(chart, house_id):
     """
     Calculate Bhava Bala (house strength) for a house
     
-    Bhava Bala includes:
+    Bhava Bala includes the standard components:
     1. Bhavadhipati Bala (house lord strength)
     2. Bhava Digbala (house directional strength)
     3. Bhava Drishti Bala (house aspect strength)
-    4. Bhava Sthana Bala (house positional strength)
     
     Args:
         chart (Chart): The birth chart
@@ -272,13 +209,12 @@ def calculate_bhava_bala(chart, house_id):
     
     # Calculate each component of Bhava Bala
     bhavadhipati_bala = calculate_bhavadhipati_bala(chart, house_id)
-    bhava_digbala = calculate_bhava_digbala(house_num)
+    bhava_digbala = calculate_bhava_digbala(chart, house_id)
     bhava_drishti_bala = calculate_bhava_drishti_bala(chart, house_id)
-    bhava_sthana_bala = calculate_bhava_sthana_bala(house_num)
     
     # Calculate total Bhava Bala
     total = (bhavadhipati_bala['value'] + bhava_digbala['value'] + 
-             bhava_drishti_bala['value'] + bhava_sthana_bala['value'])
+             bhava_drishti_bala['value'])
     
     # Determine the description
     if total >= 500.0:
@@ -297,7 +233,6 @@ def calculate_bhava_bala(chart, house_id):
         'bhavadhipati_bala': bhavadhipati_bala,
         'bhava_digbala': bhava_digbala,
         'bhava_drishti_bala': bhava_drishti_bala,
-        'bhava_sthana_bala': bhava_sthana_bala,
         'total': total,
         'description': description
     }
@@ -337,45 +272,62 @@ def calculate_bhavadhipati_bala(chart, house_id):
     }
 
 
-def calculate_bhava_digbala(house_num):
+def calculate_bhava_digbala(chart, house_id):
     """
     Calculate Bhava Digbala (house directional strength) for a house
-    
+    based on its cusp's proximity to the directional strength point.
+
     Args:
-        house_num (int): The house number (1-12)
-    
+        chart (Chart): The birth chart
+        house_id (str): The ID of the house (e.g., 'House1')
+
     Returns:
         dict: Dictionary with Bhava Digbala information
     """
     # Maximum value
     max_value = 60.0
-    
-    # Houses and their preferred directions
-    # 1, 5, 9: East
-    # 4, 8, 12: North
-    # 7, 11, 3: West
-    # 10, 2, 6: South
-    
-    if house_num in [1, 5, 9]:
+
+    # Get house number and cusp longitude
+    try:
+        house_num = int(house_id.replace(const.HOUSE, ''))
+        house_cusp_lon = chart.getHouse(house_id).lon
+    except (ValueError, AttributeError):
+        # Handle cases where house_id is invalid or house doesn't exist
+        return {'value': 0.0, 'description': 'Invalid house ID', 'direction': 'Unknown'}
+
+    # Determine the directional point and its longitude
+    if house_num in [1, 5, 9]: # East Houses
         direction = 'East'
-        value = max_value
-    elif house_num in [4, 8, 12]:
+        target_lon = chart.getHouse(const.HOUSE1).lon
+    elif house_num in [4, 8, 12]: # North Houses
         direction = 'North'
-        value = max_value
-    elif house_num in [7, 11, 3]:
+        target_lon = chart.getHouse(const.HOUSE4).lon
+    elif house_num in [7, 11, 3]: # West Houses
         direction = 'West'
-        value = max_value
-    elif house_num in [10, 2, 6]:
+        target_lon = chart.getHouse(const.HOUSE7).lon
+    elif house_num in [10, 2, 6]: # South Houses
         direction = 'South'
-        value = max_value
-    else:
-        direction = 'Unknown'
-        value = 0.0
-    
+        target_lon = chart.getHouse(const.HOUSE10).lon
+    else: # Should not happen for valid house_num 1-12
+        return {'value': 0.0, 'description': 'Unknown house number', 'direction': 'Unknown'}
+
+    # Calculate the shortest distance
+    distance = closestdistance(house_cusp_lon, target_lon)
+
+    # Calculate Dig Bala value
+    # Strength decreases linearly from max_value at 0 distance to 0 at 180 distance
+    value = max_value * (1 - distance / 180.0)
+    value = max(0.0, value) # Ensure value is not negative
+
+    description = f'Strength based on distance from {direction} point ({target_lon:.2f}°)'
+
     return {
         'value': value,
-        'description': f'House in preferred direction ({direction})',
-        'direction': direction
+        'description': description,
+        'direction': direction,
+        'target_point_lon': target_lon,
+        'cusp_lon': house_cusp_lon,
+        'distance': distance
     }
 
 
