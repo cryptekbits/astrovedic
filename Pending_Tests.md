@@ -20,14 +20,7 @@ This document lists functionalities in the flatlib library that currently lack c
 ✅ Tests implemented in `tests/test_compatibility_core.py`
 
 ### Kuta Analysis
-- `get_varna_kuta` - Testing Varna compatibility
-- `get_vashya_kuta` - Testing Vashya compatibility
-- `get_tara_kuta` - Testing Tara compatibility
-- `get_yoni_kuta` - Testing Yoni compatibility
-- `get_graha_maitri_kuta` - Testing planetary friendship compatibility
-- `get_gana_kuta` - Testing Gana compatibility
-- `get_bhakoot_kuta` - Testing Bhakoot compatibility
-- `get_nadi_kuta` - Testing Nadi compatibility
+✅ Tests implemented in `tests/test_kuta.py`
 
 ### Transit Analysis
 - `get_transit_chart` - Testing transit chart creation

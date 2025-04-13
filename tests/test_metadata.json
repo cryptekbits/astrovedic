@@ -794,5 +794,51 @@
         "name": "Get Compatibility Level",
         "description": "Tests determination of compatibility level based on score",
         "category": "vedic"
+    },
+
+    "tests.test_kuta.TestKuta.test_get_varna_kuta": {
+        "name": "Get Varna Kuta",
+        "description": "Tests calculation of Varna (caste/class) compatibility",
+        "category": "vedic"
+    },
+    "tests.test_kuta.TestKuta.test_get_vashya_kuta": {
+        "name": "Get Vashya Kuta",
+        "description": "Tests calculation of Vashya (dominance) compatibility",
+        "category": "vedic"
+    },
+    "tests.test_kuta.TestKuta.test_get_tara_kuta": {
+        "name": "Get Tara Kuta",
+        "description": "Tests calculation of Tara (birth star) compatibility",
+        "category": "vedic"
+    },
+    "tests.test_kuta.TestKuta.test_get_yoni_kuta": {
+        "name": "Get Yoni Kuta",
+        "description": "Tests calculation of Yoni (animal nature) compatibility",
+        "category": "vedic"
+    },
+    "tests.test_kuta.TestKuta.test_get_graha_maitri_kuta": {
+        "name": "Get Graha Maitri Kuta",
+        "description": "Tests calculation of Graha Maitri (planetary friendship) compatibility",
+        "category": "vedic"
+    },
+    "tests.test_kuta.TestKuta.test_get_gana_kuta": {
+        "name": "Get Gana Kuta",
+        "description": "Tests calculation of Gana (temperament) compatibility",
+        "category": "vedic"
+    },
+    "tests.test_kuta.TestKuta.test_get_bhakoot_kuta": {
+        "name": "Get Bhakoot Kuta",
+        "description": "Tests calculation of Bhakoot (house position) compatibility",
+        "category": "vedic"
+    },
+    "tests.test_kuta.TestKuta.test_get_nadi_kuta": {
+        "name": "Get Nadi Kuta",
+        "description": "Tests calculation of Nadi (pulse/constitution) compatibility",
+        "category": "vedic"
+    },
+    "tests.test_kuta.TestKuta.test_get_total_kuta_score": {
+        "name": "Get Total Kuta Score",
+        "description": "Tests calculation of total Kuta score",
+        "category": "vedic"
     }
 }
