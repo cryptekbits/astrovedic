@@ -37,8 +37,7 @@ This document lists functionalities in the flatlib library that currently lack c
 ✅ Tests implemented in `tests/test_primary_directions.py`, `tests/test_profections.py`, and `tests/test_returns.py`
 
 ### Tool Functions
-- `chartdynamics.py` - Chart dynamics calculations
-- `planetarytime.py` - Planetary hours and days
+✅ Tests implemented in `tests/test_chart_dynamics.py` and `tests/test_planetary_time.py`
 
 ### Cache System
 - `cache.py` - Comprehensive caching system tests

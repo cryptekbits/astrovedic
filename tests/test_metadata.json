@@ -1281,5 +1281,112 @@
         "name": "Cache Invalidation",
         "description": "Tests cache invalidation mechanism",
         "category": "core"
+    },
+
+    "tests.test_chart_dynamics.TestChartDynamics.test_in_dignities": {
+        "name": "In Dignities",
+        "description": "Tests inDignities method in ChartDynamics class",
+        "category": "core"
+    },
+    "tests.test_chart_dynamics.TestChartDynamics.test_receives": {
+        "name": "Receives",
+        "description": "Tests receives method in ChartDynamics class",
+        "category": "core"
+    },
+    "tests.test_chart_dynamics.TestChartDynamics.test_disposits": {
+        "name": "Disposits",
+        "description": "Tests disposits method in ChartDynamics class",
+        "category": "core"
+    },
+    "tests.test_chart_dynamics.TestChartDynamics.test_mutual_receptions": {
+        "name": "Mutual Receptions",
+        "description": "Tests mutualReceptions method in ChartDynamics class",
+        "category": "core"
+    },
+    "tests.test_chart_dynamics.TestChartDynamics.test_re_mutual_receptions": {
+        "name": "RE Mutual Receptions",
+        "description": "Tests reMutualReceptions method in ChartDynamics class",
+        "category": "core"
+    },
+    "tests.test_chart_dynamics.TestChartDynamics.test_valid_aspects": {
+        "name": "Valid Aspects",
+        "description": "Tests validAspects method in ChartDynamics class",
+        "category": "core"
+    },
+    "tests.test_chart_dynamics.TestChartDynamics.test_aspects_by_cat": {
+        "name": "Aspects By Category",
+        "description": "Tests aspectsByCat method in ChartDynamics class",
+        "category": "core"
+    },
+    "tests.test_chart_dynamics.TestChartDynamics.test_immediate_aspects": {
+        "name": "Immediate Aspects",
+        "description": "Tests immediateAspects method in ChartDynamics class",
+        "category": "core"
+    },
+    "tests.test_chart_dynamics.TestChartDynamics.test_is_voc": {
+        "name": "Is VOC",
+        "description": "Tests isVOC method in ChartDynamics class",
+        "category": "core"
+    },
+
+    "tests.test_planetary_time.TestPlanetaryTime.test_nth_ruler": {
+        "name": "Nth Ruler",
+        "description": "Tests nthRuler function in planetarytime module",
+        "category": "core"
+    },
+    "tests.test_planetary_time.TestPlanetaryTime.test_hour_table": {
+        "name": "Hour Table",
+        "description": "Tests hourTable function in planetarytime module",
+        "category": "core"
+    },
+    "tests.test_planetary_time.TestPlanetaryTime.test_get_hour_table": {
+        "name": "Get Hour Table",
+        "description": "Tests getHourTable function in planetarytime module",
+        "category": "core"
+    },
+    "tests.test_planetary_time.TestPlanetaryTime.test_hour_table_index": {
+        "name": "Hour Table Index",
+        "description": "Tests index method in HourTable class",
+        "category": "core"
+    },
+    "tests.test_planetary_time.TestPlanetaryTime.test_hour_table_day_ruler": {
+        "name": "Hour Table Day Ruler",
+        "description": "Tests dayRuler method in HourTable class",
+        "category": "core"
+    },
+    "tests.test_planetary_time.TestPlanetaryTime.test_hour_table_night_ruler": {
+        "name": "Hour Table Night Ruler",
+        "description": "Tests nightRuler method in HourTable class",
+        "category": "core"
+    },
+    "tests.test_planetary_time.TestPlanetaryTime.test_hour_table_curr_ruler": {
+        "name": "Hour Table Current Ruler",
+        "description": "Tests currRuler method in HourTable class",
+        "category": "core"
+    },
+    "tests.test_planetary_time.TestPlanetaryTime.test_hour_table_hour_ruler": {
+        "name": "Hour Table Hour Ruler",
+        "description": "Tests hourRuler method in HourTable class",
+        "category": "core"
+    },
+    "tests.test_planetary_time.TestPlanetaryTime.test_hour_table_curr_info": {
+        "name": "Hour Table Current Info",
+        "description": "Tests currInfo method in HourTable class",
+        "category": "core"
+    },
+    "tests.test_planetary_time.TestPlanetaryTime.test_hour_table_index_info": {
+        "name": "Hour Table Index Info",
+        "description": "Tests indexInfo method in HourTable class",
+        "category": "core"
+    },
+    "tests.test_planetary_time.TestPlanetaryTime.test_different_dates": {
+        "name": "Different Dates",
+        "description": "Tests planetarytime module with different dates",
+        "category": "core"
+    },
+    "tests.test_planetary_time.TestPlanetaryTime.test_different_locations": {
+        "name": "Different Locations",
+        "description": "Tests planetarytime module with different locations",
+        "category": "core"
     }
 }
