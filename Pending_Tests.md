@@ -11,10 +11,7 @@ This document lists functionalities in the flatlib library that currently lack c
 ✅ Tests implemented in `tests/test_kp.py`
 
 ### Muhurta (Electional Astrology)
-- `get_muhurta_quality` - Testing muhurta quality calculations
-- `get_best_muhurta` - Finding best muhurta for activities
-- `get_auspicious_times` - Testing auspicious time calculations
-- `get_inauspicious_times` - Testing inauspicious time calculations
+✅ Tests implemented in `tests/test_muhurta_core.py`
 
 ### Sarvatobhadra Chakra
 - `get_sarvatobhadra_chakra` - Testing chakra construction

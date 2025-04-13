@@ -706,5 +706,36 @@
         "name": "Get KP Ruling Planets",
         "description": "Tests getting KP ruling planets at a given time",
         "category": "vedic"
+    },
+
+    "tests.test_muhurta_core.TestMuhurtaCore.test_get_muhurta_quality": {
+        "name": "Get Muhurta Quality",
+        "description": "Tests calculation of Muhurta quality based on Panchanga and planetary positions",
+        "category": "vedic"
+    },
+    "tests.test_muhurta_core.TestMuhurtaCore.test_get_best_muhurta": {
+        "name": "Get Best Muhurta",
+        "description": "Tests finding the best Muhurta within a date range",
+        "category": "vedic"
+    },
+    "tests.test_muhurta_core.TestMuhurtaCore.test_get_auspicious_times": {
+        "name": "Get Auspicious Times",
+        "description": "Tests finding auspicious time periods within a date range",
+        "category": "vedic"
+    },
+    "tests.test_muhurta_core.TestMuhurtaCore.test_get_inauspicious_times": {
+        "name": "Get Inauspicious Times",
+        "description": "Tests finding inauspicious time periods within a date range",
+        "category": "vedic"
+    },
+    "tests.test_muhurta_core.TestMuhurtaCore.test_get_house_number": {
+        "name": "Get House Number",
+        "description": "Tests getting the house number of a planet",
+        "category": "vedic"
+    },
+    "tests.test_muhurta_core.TestMuhurtaCore.test_is_lagna_strong": {
+        "name": "Is Lagna Strong",
+        "description": "Tests checking if the Lagna (Ascendant) is strong",
+        "category": "vedic"
     }
 }
