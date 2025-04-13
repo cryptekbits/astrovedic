@@ -34,9 +34,7 @@ This document lists functionalities in the flatlib library that currently lack c
 ## Core Library Functions
 
 ### Predictive Techniques
-- `primarydirections.py` - Primary directions calculations
-- `profections.py` - Annual profections technique
-- `returns.py` - Solar and lunar returns
+✅ Tests implemented in `tests/test_primary_directions.py`, `tests/test_profections.py`, and `tests/test_returns.py`
 
 ### Tool Functions
 - `chartdynamics.py` - Chart dynamics calculations

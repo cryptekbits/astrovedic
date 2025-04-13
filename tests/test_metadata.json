@@ -1051,5 +1051,235 @@
         "name": "Bhava Bala",
         "description": "Tests Bhava Bala calculation",
         "category": "vedic"
+    },
+
+    "tests.test_primary_directions.TestPrimaryDirections.test_get_arc": {
+        "name": "Get Arc",
+        "description": "Tests calculation of arc between promissor and significator",
+        "category": "core"
+    },
+    "tests.test_primary_directions.TestPrimaryDirections.test_primary_directions_class": {
+        "name": "Primary Directions Class",
+        "description": "Tests PrimaryDirections class functionality",
+        "category": "core"
+    },
+    "tests.test_primary_directions.TestPrimaryDirections.test_primary_directions_table": {
+        "name": "Primary Directions Table",
+        "description": "Tests PDTable class functionality",
+        "category": "core"
+    },
+    "tests.test_primary_directions.TestPrimaryDirections.test_object_creation_methods": {
+        "name": "Object Creation Methods",
+        "description": "Tests object creation methods in PrimaryDirections class",
+        "category": "core"
+    },
+    "tests.test_primary_directions.TestPrimaryDirections.test_get_list": {
+        "name": "Get List",
+        "description": "Tests getList method in PrimaryDirections class",
+        "category": "core"
+    },
+
+    "tests.test_profections.TestProfections.test_compute_profections": {
+        "name": "Compute Profections",
+        "description": "Tests computation of profection chart",
+        "category": "core"
+    },
+    "tests.test_profections.TestProfections.test_compute_profections_fixed_objects": {
+        "name": "Compute Profections with Fixed Objects",
+        "description": "Tests computation of profection chart with fixed objects",
+        "category": "core"
+    },
+    "tests.test_profections.TestProfections.test_profection_rotation": {
+        "name": "Profection Rotation",
+        "description": "Tests rotation of profection chart over time",
+        "category": "core"
+    },
+    "tests.test_profections.TestProfections.test_profection_houses": {
+        "name": "Profection Houses",
+        "description": "Tests house positions in profection chart",
+        "category": "core"
+    },
+
+    "tests.test_returns.TestReturns.test_next_solar_return": {
+        "name": "Next Solar Return",
+        "description": "Tests calculation of next solar return chart",
+        "category": "core"
+    },
+    "tests.test_returns.TestReturns.test_prev_solar_return": {
+        "name": "Previous Solar Return",
+        "description": "Tests calculation of previous solar return chart",
+        "category": "core"
+    },
+    "tests.test_returns.TestReturns.test_solar_return_objects": {
+        "name": "Solar Return Objects",
+        "description": "Tests object positions in solar return chart",
+        "category": "core"
+    },
+    "tests.test_returns.TestReturns.test_solar_return_houses": {
+        "name": "Solar Return Houses",
+        "description": "Tests house positions in solar return chart",
+        "category": "core"
+    },
+    "tests.test_returns.TestReturns.test_solar_return_angles": {
+        "name": "Solar Return Angles",
+        "description": "Tests angle positions in solar return chart",
+        "category": "core"
+    },
+    "tests.test_returns.TestReturns.test_consecutive_solar_returns": {
+        "name": "Consecutive Solar Returns",
+        "description": "Tests calculation of consecutive solar return charts",
+        "category": "core"
+    },
+
+    "tests.test_tool_functions.TestAngleFunctions.test_norm": {
+        "name": "Angle Norm",
+        "description": "Tests angle normalization function",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestAngleFunctions.test_znorm": {
+        "name": "Angle ZNorm",
+        "description": "Tests angle z-normalization function",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestAngleFunctions.test_distance": {
+        "name": "Angle Distance",
+        "description": "Tests angle distance function",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestAngleFunctions.test_closestdistance": {
+        "name": "Angle Closest Distance",
+        "description": "Tests angle closest distance function",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestUtilsFunctions.test_normalize_longitude": {
+        "name": "Normalize Longitude",
+        "description": "Tests longitude normalization function",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestUtilsFunctions.test_get_sign_from_longitude": {
+        "name": "Get Sign From Longitude",
+        "description": "Tests function to get sign from longitude",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestUtilsFunctions.test_get_sign_number": {
+        "name": "Get Sign Number",
+        "description": "Tests function to get sign number",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestUtilsFunctions.test_get_sign_from_number": {
+        "name": "Get Sign From Number",
+        "description": "Tests function to get sign from number",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestAspectsFunctions.test_getAspect": {
+        "name": "Get Aspect",
+        "description": "Tests function to get aspect between two objects",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestAspectsFunctions.test_isAspecting": {
+        "name": "Is Aspecting",
+        "description": "Tests function to check if two objects are aspecting",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestAspectsFunctions.test_getAspects": {
+        "name": "Get Aspects",
+        "description": "Tests function to get all aspects in a chart",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestEssentialDignities.test_getEssentialDignity": {
+        "name": "Get Essential Dignity",
+        "description": "Tests function to get essential dignity of an object",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestEssentialDignities.test_getEssentialDignityScore": {
+        "name": "Get Essential Dignity Score",
+        "description": "Tests function to get essential dignity score of an object",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestEssentialDignities.test_inRuler": {
+        "name": "In Ruler",
+        "description": "Tests function to check if an object is in its ruler",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestEssentialDignities.test_inExaltation": {
+        "name": "In Exaltation",
+        "description": "Tests function to check if an object is in its exaltation",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestEssentialDignities.test_inTriplicity": {
+        "name": "In Triplicity",
+        "description": "Tests function to check if an object is in its triplicity",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestEssentialDignities.test_inTerm": {
+        "name": "In Term",
+        "description": "Tests function to check if an object is in its term",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestEssentialDignities.test_inFace": {
+        "name": "In Face",
+        "description": "Tests function to check if an object is in its face",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestEssentialDignities.test_inDetriment": {
+        "name": "In Detriment",
+        "description": "Tests function to check if an object is in its detriment",
+        "category": "core"
+    },
+    "tests.test_tool_functions.TestEssentialDignities.test_inFall": {
+        "name": "In Fall",
+        "description": "Tests function to check if an object is in its fall",
+        "category": "core"
+    },
+
+    "tests.test_cache_system.TestCacheSystem.test_nakshatra_correctness": {
+        "name": "Nakshatra Cache Correctness",
+        "description": "Tests correctness of cached nakshatra calculation",
+        "category": "core"
+    },
+    "tests.test_cache_system.TestCacheSystem.test_d9_correctness": {
+        "name": "D9 Cache Correctness",
+        "description": "Tests correctness of cached D9 calculation",
+        "category": "core"
+    },
+    "tests.test_cache_system.TestCacheSystem.test_tithi_correctness": {
+        "name": "Tithi Cache Correctness",
+        "description": "Tests correctness of cached tithi calculation",
+        "category": "core"
+    },
+    "tests.test_cache_system.TestCacheSystem.test_kp_sublord_correctness": {
+        "name": "KP Sublord Cache Correctness",
+        "description": "Tests correctness of cached KP sublord calculation",
+        "category": "core"
+    },
+    "tests.test_cache_system.TestCacheSystem.test_gulika_correctness": {
+        "name": "Gulika Cache Correctness",
+        "description": "Tests correctness of cached Gulika calculation",
+        "category": "core"
+    },
+    "tests.test_cache_system.TestCacheSystem.test_utils_correctness": {
+        "name": "Utils Cache Correctness",
+        "description": "Tests correctness of cached utility functions",
+        "category": "core"
+    },
+    "tests.test_cache_system.TestCacheSystem.test_nakshatra_performance": {
+        "name": "Nakshatra Cache Performance",
+        "description": "Tests performance of cached nakshatra calculation",
+        "category": "core"
+    },
+    "tests.test_cache_system.TestCacheSystem.test_d9_performance": {
+        "name": "D9 Cache Performance",
+        "description": "Tests performance of cached D9 calculation",
+        "category": "core"
+    },
+    "tests.test_cache_system.TestCacheSystem.test_utils_performance": {
+        "name": "Utils Cache Performance",
+        "description": "Tests performance of cached utility functions",
+        "category": "core"
+    },
+    "tests.test_cache_system.TestCacheSystem.test_cache_invalidation": {
+        "name": "Cache Invalidation",
+        "description": "Tests cache invalidation mechanism",
+        "category": "core"
     }
 }
