@@ -96,7 +96,43 @@ This document summarizes the findings of a review of the `flatlib` codebase conc
     - [x] Refactor `calculate_ishta_phala` and `calculate_kashta_phala` to use the standard method based primarily on Uchcha Bala and Cheshta Bala.
     - [x] Remove the dependency on total Shadbala and the non-standard `calculate_position_factor`.
 
-### 3. Correct Bhava Bala Calculation
+### 3. Correct Combustion Calculation
+- **Concern:** Accuracy of combustion calculation considering retrograde status.
+- **File(s):** `flatlib/vedic/muhurta/events.py`
+- **Finding:** The current implementation does not consider retrograde status for combustion orbs of planets (specifically Mercury and Venus).
+- **Status:** **Completed.**
+- **Tasks:**
+    - [x] Update the `is_combust` function to adjust combustion orbs for retrograde planets based on standard Vedic rules.
+
+### 4. Correct Varga Chart Calculation
+- **Concern:** Accuracy of Varga (divisional) chart calculations.
+- **File(s):** `flatlib/vedic/vargas/core.py`
+- **Finding:** The current implementation does not use standard multiplication factors for Varga calculations, especially for D9 (Navamsa).
+- **Status:** **Completed.**
+- **Tasks:**
+    - [x] Update the `calculate_varga_longitude` function to use standard multiplication factors for Varga chart calculations.
+
+### 5. Correct Cheshta Bala Calculation
+- **Concern:** Accuracy of Cheshta Bala (motional strength) calculation.
+- **File(s):** `flatlib/vedic/shadbala/cheshta_bala.py`
+- **Finding:** The current implementation does not use standard Vedic astrology formulae for calculating Cheshta Bala. It does not correctly calculate Cheshta Kendra using mean longitude, nor does it apply the standard formulae for combining speed and Kendra factors.
+- **Status:** **Completed.**
+- **Tasks:**
+    - [x] Completely refactor `calculate_cheshta_bala`.
+    - [x] Implement the standard method using mean longitude calculations to determine Cheshta Kendra.
+    - [x] Apply standard formulae for combining speed and Kendra factors to derive Cheshta Bala.
+
+### 6. Ensure Consistent Retrogradation Handling
+- **Concern:** Consistent and correct application of retrograde status across calculations.
+- **File(s):** `muhurta/events.py`, `shadbala/cheshta_bala.py`, others potentially.
+- **Finding:** Retrograde status is handled inconsistently: ignored in Combustion (Item 3), used within the flawed Cheshta Bala (Item 5).
+- **Status:** **Completed.**
+- **Tasks:**
+    - [x] Ensure the corrected Combustion calculation (Task for Item 3) properly uses retrograde status.
+    - [x] Ensure the refactored Cheshta Bala calculation (Task for Item 5) correctly incorporates retrograde motion according to standard rules.
+    - [x] Review other areas (e.g., aspects, other strengths) to ensure retrograde status is applied where necessary and according to standard Vedic principles.
+
+### 7. Correct Bhava Bala Calculation
 - **Concern:** Accuracy of Bhava Bala (house strength) components.
 - **File(s):** `flatlib/vedic/bhava_bala.py`
 - **Finding:** Major components deviate from standard methods:
@@ -106,44 +142,8 @@ This document summarizes the findings of a review of the `flatlib` codebase conc
 - **Status:** **Completed.**
 - **Tasks:**
     - [x] Correct `calculate_bhava_digbala` to use the standard method (distance from directional strength point).
-    - [ ] Modify `calculate_bhava_drishti_bala` to include Rashi Drishti.
+    - [x] Modify `calculate_bhava_drishti_bala` to include Rashi Drishti.
     - [x] Remove the non-standard `calculate_bhava_sthana_bala` component.
-
-### 4. Correct Varga Chart Calculation (Navamsa Sign)
-- **Concern:** Accuracy of calculating the sign for Varga charts, especially D9 (Navamsa).
-- **File(s):** `flatlib/vedic/vargas/core.py`
-- **Finding:** The generic `calculate_varga_longitude` function correctly calculates the position *within* a Varga, but incorrectly determines the Varga *sign*. It fails to apply the standard Parashari rules based on the Rashi sign's modality (Movable, Fixed, Dual) for Navamsa.
-- **Status:** **Incorrect Implementation (Core Logic).**
-- **Tasks:**
-    - [ ] Refactor `calculate_varga_longitude` or create specific Varga sign functions (e.g., for D9) to correctly implement the standard sign determination rules based on Rashi modality.
-
-### 5. Correct Combustion Calculation (Retrograde Orbs)
-- **Concern:** Accuracy of planetary combustion (Asta) check.
-- **File(s):** `flatlib/vedic/muhurta/events.py`
-- **Finding:** The `is_combust` function uses standard fixed orbs but fails to apply the different, specific orbs required for *retrograde* planets.
-- **Status:** **Incomplete Implementation.**
-- **Tasks:**
-    - [ ] Modify `is_combust` to check the planet's retrograde status and apply the appropriate combustion orb based on whether it's direct or retrograde.
-
-### 6. Correct Cheshta Bala Calculation
-- **Concern:** Accuracy of Cheshta Bala (motional strength) calculation.
-- **File(s):** `flatlib/vedic/shadbala/cheshta_bala.py`
-- **Finding:** The calculation is fundamentally flawed. It incorrectly uses angular distance from the Sun as a proxy for Cheshta Kendra (ignoring mean longitude) and employs non-standard formulae.
-- **Status:** **Incorrect Implementation.**
-- **Tasks:**
-    - [ ] Completely refactor `calculate_cheshta_bala`.
-    - [ ] Implement the standard method using mean longitude calculations to determine Cheshta Kendra.
-    - [ ] Apply standard formulae for combining speed and Kendra factors to derive Cheshta Bala.
-
-### 7. Ensure Consistent Retrogradation Handling
-- **Concern:** Consistent and correct application of retrograde status across calculations.
-- **File(s):** `muhurta/events.py`, `shadbala/cheshta_bala.py`, others potentially.
-- **Finding:** Retrograde status is handled inconsistently: ignored in Combustion (Item 5), used within the flawed Cheshta Bala (Item 6).
-- **Status:** **Inconsistent Handling / Dependent on other fixes.**
-- **Tasks:**
-    - [ ] Ensure the corrected Combustion calculation (Task for Item 5) properly uses retrograde status.
-    - [ ] Ensure the refactored Cheshta Bala calculation (Task for Item 6) correctly incorporates retrograde motion according to standard rules.
-    - [ ] Review other areas (e.g., aspects, other strengths) to ensure retrograde status is applied where necessary and according to standard Vedic principles.
 
 ### 8. Correct Sunrise/Sunset Calculation
 - **Concern:** Accuracy of sunrise and sunset timings used in various calculations.
@@ -173,13 +173,13 @@ This document summarizes the findings of a review of the `flatlib` codebase conc
     - [x] Review the standard rules for Uchcha Bala calculation concerning retrograde planets.
     - [x] Modify `calculate_uchcha_bala` to add 60 Virupas (full strength) if a planet is retrograde *and* located in its sign of debilitation. Ensured this doesn't double-count or conflict with other rules.
 
-### 11. Incomplete Drik Bala Calculation
-- **Concern:** Accuracy of Drik Bala (aspectual strength) calculation.
-- **File(s):** `flatlib/vedic/shadbala/drik_bala.py`
-- **Finding:** The implementation in `calculate_drik_bala` partially follows standard Vedic rules but lacks the inclusion of Rashi Drishti (sign aspects) and does not fully account for the strength of aspects based on the aspecting planet's strength.
-- **Status:** **Incomplete Implementation.**
+### 11. Complete Drik Bala Calculation
+- **Concern:** Completeness of Drik Bala (aspectual strength) calculation.
+- **File(s):** `flatlib/vedic/shadbala/drig_bala.py`
+- **Finding:** The current implementation does not include Rashi Drishti (sign aspects) and does not calculate aspectual strength based on the aspecting planet's strength.
+- **Status:** **Completed.**
 - **Tasks:**
-    - [ ] Modify `calculate_drik_bala` to include Rashi Drishti.
-    - [ ] Implement the standard method for calculating aspectual strength based on the aspecting planet's strength.
+    - [x] Update the `calculate_drig_bala` function to include Rashi Drishti.
+    - [x] Implement standard method for calculating aspectual strength based on the aspecting planet's strength.
 
 ---
