@@ -105,6 +105,12 @@ def get_shadbala(chart, planet_id):
     total_shadbala['total_virupas'] = corrected_total_virupas
     total_shadbala['total_rupas'] = corrected_total_rupas
 
+    # Calculate the relative strength (percentage of minimum required strength)
+    # This is a more meaningful metric than the previous fixed maximum approach
+    minimum_required = MINIMUM_SHADBALA.get(planet_id, 5.0)
+    relative_strength = (corrected_total_rupas / minimum_required) * 100.0 if minimum_required > 0 else 0.0
+    total_shadbala['relative_strength'] = relative_strength
+
     # Calculate Ishta and Kashta Phala
     ishta_phala = calculate_ishta_phala(chart, planet_id, total_shadbala)
     kashta_phala = calculate_kashta_phala(chart, planet_id, total_shadbala)
