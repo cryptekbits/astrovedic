@@ -164,4 +164,22 @@ This document summarizes the findings of a review of the `flatlib` codebase conc
     - [x] ~~Correct the classification rules for Mercury.~~ (Verified: Already implemented correctly)
     - [x] ~~Apply standard rules or remove the simplified handling for Rahu/Ketu if appropriate for the intended scope.~~ (Verified: Standard handling implemented)
 
+### 10. Incorrect Handling of Retrograde Planets in Uchcha Bala
+- **Concern:** Uchcha Bala (Exaltation Strength) calculation might not correctly incorporate the adjustment for retrograde planets.
+- **File(s):** `flatlib/vedic/shadbala/sthana_bala.py`
+- **Finding:** The `calculate_uchcha_bala` function was updated to apply the standard Vedic rule where a retrograde planet gets full Uchcha Bala (60 Virupas) if it's in its sign of debilitation (Neecha Bhanga).
+- **Status:** **Completed.**
+- **Tasks:**
+    - [x] Review the standard rules for Uchcha Bala calculation concerning retrograde planets.
+    - [x] Modify `calculate_uchcha_bala` to add 60 Virupas (full strength) if a planet is retrograde *and* located in its sign of debilitation. Ensured this doesn't double-count or conflict with other rules.
+
+### 11. Incomplete Drik Bala Calculation
+- **Concern:** Accuracy of Drik Bala (aspectual strength) calculation.
+- **File(s):** `flatlib/vedic/shadbala/drik_bala.py`
+- **Finding:** The implementation in `calculate_drik_bala` partially follows standard Vedic rules but lacks the inclusion of Rashi Drishti (sign aspects) and does not fully account for the strength of aspects based on the aspecting planet's strength.
+- **Status:** **Incomplete Implementation.**
+- **Tasks:**
+    - [ ] Modify `calculate_drik_bala` to include Rashi Drishti.
+    - [ ] Implement the standard method for calculating aspectual strength based on the aspecting planet's strength.
+
 ---
