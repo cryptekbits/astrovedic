@@ -334,8 +334,8 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
 *   **Impact:** The final Shadbala score may be inaccurate due to the missing Yuddha Bala correction, and the `relative_strength` metric is unreliable. The aggregation logic is vulnerable to changes in component function outputs.
 *   **Category:** `Astrology`, `Logic`, `Shadbala`, `Accuracy`, `Integration`
 *   **Tasks:**
-    *   [ ] Standardize the output format (e.g., always use `'value'`) from all component Shadbala functions (`calculate_sthana_bala`, `calculate_kala_bala`, etc.) and update the extraction logic here accordingly.
-    *   [ ] Either remove the simplified `relative_strength` calculation or replace it with a placeholder/comment indicating a more complex calculation is needed.
-    *   [ ] Implement the Yuddha Bala calculation and apply its result as a correction *after* the initial summation of the six components within the main `get_shadbala` function (in `__init__.py`), not within this aggregation function.
+    *   [x] Standardize the output format (e.g., always use `'value'`) from all component Shadbala functions (`calculate_sthana_bala`, `calculate_kala_bala`, etc.) and update the extraction logic here accordingly.
+    *   [x] Either remove the simplified `relative_strength` calculation or replace it with a placeholder/comment indicating a more complex calculation is needed.
+    *   [x] Implement the Yuddha Bala calculation and apply its result as a correction *after* the initial summation of the six components within the main `get_shadbala` function (in `__init__.py`), not within this aggregation function.
 
 ---
