@@ -322,8 +322,8 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
 *   **Impact:** Provides incorrect Naisargika Bala values for Jupiter, Venus, Rahu, and Ketu.
 *   **Category:** `Astrology`, `Data`, `Shadbala`, `Accuracy`
 *   **Tasks:**
-    *   [ ] Correct the values for Jupiter and Venus in the `natural_strengths` dictionary to match the standard hierarchy (Venus ~42.9, Jupiter ~34.3).
-    *   [ ] Decide on a consistent handling for Rahu/Ketu: either remove them from the dictionary (assigning 0.0 by default) or assign them Saturn's standard value (~8.6). Update the associated comment.
+    *   [x] Correct the values for Jupiter and Venus in the `natural_strengths` dictionary to match the standard hierarchy (Venus ~42.9, Jupiter ~34.3).
+    *   [x] Decide on a consistent handling for Rahu/Ketu: either remove them from the dictionary (assigning 0.0 by default) or assign them Saturn's standard value (~8.6). Update the associated comment.
 
 ## 29. Shadbala Aggregation Issues
 
