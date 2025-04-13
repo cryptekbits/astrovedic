@@ -36,7 +36,8 @@ def calculate_sthana_bala(chart, planet_id):
     from flatlib.vedic.vargas import get_varga_chart
 
     # Calculate each component of Sthana Bala
-    uchcha_bala = calculate_uchcha_bala(planet_id, planet.lon)
+    # Pass retrograde status to uchcha_bala calculation
+    uchcha_bala = calculate_uchcha_bala(planet_id, planet.lon, planet.isRetrograde())
     saptavarga_bala = calculate_saptavarga_bala(chart, planet_id)
 
     # Get the Navamsha (D9) chart and planet position for Ojha-Yugma Bala
@@ -66,13 +67,14 @@ def calculate_sthana_bala(chart, planet_id):
     }
 
 
-def calculate_uchcha_bala(planet_id, longitude):
+def calculate_uchcha_bala(planet_id, longitude, is_retrograde):
     """
     Calculate Uchcha Bala (exaltation strength) for a planet
 
     Args:
         planet_id (str): The ID of the planet
         longitude (float): The longitude of the planet
+        is_retrograde (bool): Whether the planet is retrograde
 
     Returns:
         dict: Dictionary with Uchcha Bala information
@@ -91,7 +93,8 @@ def calculate_uchcha_bala(planet_id, longitude):
 
     # If the planet has no exaltation/debilitation, return 0
     if not exaltation or not debilitation:
-        return {'value': 0.0, 'description': 'Not applicable'}
+        # Include strength key for consistency
+        return {'value': 0.0, 'description': 'Not applicable', 'strength': 'N/A'}
 
     # Convert exaltation and debilitation points to absolute longitudes
     exalt_sign, exalt_deg = exaltation
@@ -109,7 +112,7 @@ def calculate_uchcha_bala(planet_id, longitude):
     # Calculate the distance from the debilitation point
     distance_from_debilitation = angle.distance(longitude, debilitation_point)
 
-    # Calculate Uchcha Bala
+    # Calculate standard Uchcha Bala based on distance
     if distance_from_exaltation <= 180:
         # Planet is moving from exaltation to debilitation
         value = max_value * (1 - distance_from_exaltation / 180.0)
@@ -117,33 +120,42 @@ def calculate_uchcha_bala(planet_id, longitude):
         # Planet is moving from debilitation to exaltation
         value = max_value * (distance_from_debilitation / 180.0)
 
-    # Determine the description
-    if distance_from_exaltation < 1:
-        description = 'Exact exaltation'
-    elif distance_from_debilitation < 1:
-        description = 'Exact debilitation'
-    elif distance_from_exaltation <= 30:
-        description = 'Near exaltation'
-    elif distance_from_debilitation <= 30:
-        description = 'Near debilitation'
-    elif distance_from_exaltation <= 90:
-        description = 'Moving away from exaltation'
-    elif distance_from_debilitation <= 90:
-        description = 'Moving away from debilitation'
-    elif distance_from_exaltation < distance_from_debilitation:
-        description = 'Closer to exaltation'
-    else:
-        description = 'Closer to debilitation'
+    # Initialize description and strength
+    description = 'Calculated by distance'
+    strength = 'Weak'  # Default
 
-    # Add strength assessment
-    if value >= 45.0:
+    # Check for Neecha Bhanga due to retrograde in debilitation sign
+    if is_retrograde and sign == debil_sign:
+        value = max_value  # Grant full strength
+        description = f'Retrograde in debilitation sign ({debil_sign}) - Neecha Bhanga'
         strength = 'Very strong'
-    elif value >= 30.0:
-        strength = 'Strong'
-    elif value >= 15.0:
-        strength = 'Moderate'
     else:
-        strength = 'Weak'
+        # Determine the description based on position if Neecha Bhanga doesn't apply
+        if distance_from_exaltation < 1:
+            description = 'Exact exaltation'
+        elif distance_from_debilitation < 1:
+            description = 'Exact debilitation'
+        elif distance_from_exaltation <= 30:
+            description = 'Near exaltation'
+        elif distance_from_debilitation <= 30:
+            description = 'Near debilitation'
+        elif distance_from_exaltation <= 90:
+            description = 'Moving away from exaltation'
+        elif distance_from_debilitation <= 90:
+            description = 'Moving away from debilitation'
+        elif distance_from_exaltation < distance_from_debilitation:
+            description = 'Closer to exaltation'
+        else:
+            description = 'Closer to debilitation'
+
+        # Add strength assessment based on standard value
+        if value >= 45.0:
+            strength = 'Very strong'
+        elif value >= 30.0:
+            strength = 'Strong'
+        elif value >= 15.0:
+            strength = 'Moderate'
+        # else: strength remains 'Weak' (default)
 
     return {
         'value': value,
