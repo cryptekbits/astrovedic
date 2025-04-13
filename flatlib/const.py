@@ -338,6 +338,29 @@ AY_TRUE_SHEORAN = 'Ayanamsa True Sheoran'
 AY_DEFAULT_VEDIC = AY_LAHIRI
 AY_DEFAULT_KP = AY_KRISHNAMURTI
 
+# === Jaimini Constants ===
+
+# Chara Karakas (Temporary Significators)
+JAI_AK = 'Atma Karaka'       # Soul Significator
+JAI_AMK = 'Amatya Karaka'    # Minister Significator
+JAI_BK = 'Bhratri Karaka'    # Sibling Significator
+JAI_MK = 'Matri Karaka'      # Mother Significator
+JAI_PK = 'Putra Karaka'      # Children Significator
+JAI_GK = 'Gnati Karaka'      # Relative/Obstacle Significator
+JAI_DK = 'Dara Karaka'       # Spouse Significator
+JAI_SK = 'Strī Karaka'       # Alternate Spouse/Co-born Significator (often same as DK or lowest degree)
+
+# List of Chara Karaka ranks (in order)
+LIST_CHARA_KARAKAS = [
+    JAI_AK, JAI_AMK, JAI_BK, JAI_MK, JAI_PK, JAI_GK, JAI_DK, JAI_SK
+]
+
+# Planets considered for Chara Karakas (Sun to Saturn + Rahu)
+CHARA_KARAKA_PLANETS = [
+    SUN, MOON, MERCURY, VENUS, MARS, JUPITER, SATURN, RAHU
+]
+
+
 # === Some Lists === */
 
 LIST_SIGNS = [
@@ -379,15 +402,6 @@ LIST_SEVEN_PLANETS = [
 """MH on 2018/3/3 - List of 10 plantes for modern astrology"""
 LIST_TEN_PLANETS = [
     SUN, MOON, MERCURY, VENUS, MARS, JUPITER, SATURN, NEPTUNE, URANUS, PLUTO
-]
-
-""" Personal planets are the usually the fastest when calculating aspects """
-LIST_PERSONAL_PLANETS = [
-    SUN,
-    MOON,
-    MERCURY,
-    VENUS,
-    MARS,
 ]
 
 """MH on 2018/3/4 - List of aspecting planets"""

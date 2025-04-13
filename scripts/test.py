@@ -59,7 +59,8 @@ class FlatLibTestSuite:
                 'core': ['tests.test_chart', 'tests.test_factory', 'tests.test_angles'],
                 'caching': ['tests.caching.test_comprehensive', 'tests.caching.test_calculation_cache',
                             'tests.caching.test_ephemeris_cache', 'tests.caching.test_reference_data_cache'],
-                'vedic': ['tests.test_divisional_charts', 'tests.test_yogas', 'tests.test_vimshottari_dasha'],
+                'vedic': ['tests.test_divisional_charts', 'tests.test_yogas', 'tests.test_vimshottari_dasha',
+                          'tests.vedic.jaimini.test_karakas'],
                 'examples': ['tests.examples.test_reference_date'],
                 'compatibility': ['tests.test_compatibility'],
                 'error_handling': ['tests.test_error_handling']

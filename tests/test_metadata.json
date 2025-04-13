@@ -604,5 +604,15 @@
         "name": "To Vedic Chart",
         "description": "Tests conversion of regular charts to charts with VedicBody objects",
         "category": "vedic"
+    },
+    "tests.vedic.jaimini.test_karakas.TestCharaKarakas.test_standard_calculation": {
+        "name": "Jaimini Chara Karakas - Standard Calculation",
+        "description": "Tests standard calculation of Jaimini Chara Karakas using specific longitudes.",
+        "category": "vedic"
+    },
+    "tests.vedic.jaimini.test_karakas.TestCharaKarakas.test_tie_breaking": {
+        "name": "Jaimini Chara Karakas - Tie Breaking",
+        "description": "Tests tie-breaking logic for Chara Karakas based on full longitude.",
+        "category": "vedic"
     }
 }
