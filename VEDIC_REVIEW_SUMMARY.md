@@ -156,15 +156,12 @@ This document summarizes the findings of a review of the `flatlib` codebase conc
 
 ### 9. Correct Ojha/Yugma Bala Calculation
 - **Concern:** Accuracy of Ojha/Yugma Bala (strength from Odd/Even sign placement).
-- **File(s):** `flatlib/vedic/shadbala/kala_bala.py` (Verify file, seems correct context).
-- **Finding:** The implementation is incorrect:
-    - It only checks the Rashi (D1) sign, missing the required check in the Navamsa (D9) sign.
-    - It incorrectly classifies Mercury (should get strength in both odd/even).
-    - It uses a non-standard simplification for Rahu/Ketu.
-- **Status:** **Incorrect Implementation.**
+- **File(s):** `flatlib/vedic/shadbala/sthana_bala.py`
+- **Finding:** Verified. The implementation in `calculate_ojha_yugma_bala` correctly checks both D1 and D9 signs, handles Mercury appropriately (strength in both odd/even), and assigns 0 points to Rahu/Ketu, aligning with standard Vedic rules.
+- **Status:** **Verified - Correct Implementation.**
 - **Tasks:**
-    - [ ] Modify `calculate_ojha_yugma_bala` to check the sign type (Odd/Even) in both Rashi (D1) and Navamsa (D9).
-    - [ ] Correct the classification rules for Mercury.
-    - [ ] Apply standard rules or remove the simplified handling for Rahu/Ketu if appropriate for the intended scope.
+    - [x] ~~Modify `calculate_ojha_yugma_bala` to check the sign type (Odd/Even) in both Rashi (D1) and Navamsa (D9).~~ (Verified: Already implemented correctly)
+    - [x] ~~Correct the classification rules for Mercury.~~ (Verified: Already implemented correctly)
+    - [x] ~~Apply standard rules or remove the simplified handling for Rahu/Ketu if appropriate for the intended scope.~~ (Verified: Standard handling implemented)
 
 ---
