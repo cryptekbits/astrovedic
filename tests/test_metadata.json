@@ -768,5 +768,31 @@
         "name": "Is Inauspicious Position",
         "description": "Tests checking if a position in the Sarvatobhadra Chakra is inauspicious",
         "category": "vedic"
+    },
+
+    "tests.test_compatibility_core.TestCompatibilityCore.test_get_compatibility_score": {
+        "name": "Get Compatibility Score",
+        "description": "Tests calculation of compatibility score between two charts",
+        "category": "vedic"
+    },
+    "tests.test_compatibility_core.TestCompatibilityCore.test_get_compatibility_factors": {
+        "name": "Get Compatibility Factors",
+        "description": "Tests identification of compatibility factors between two charts",
+        "category": "vedic"
+    },
+    "tests.test_compatibility_core.TestCompatibilityCore.test_get_compatibility_description": {
+        "name": "Get Compatibility Description",
+        "description": "Tests generation of compatibility description between two charts",
+        "category": "vedic"
+    },
+    "tests.test_compatibility_core.TestCompatibilityCore.test_get_compatibility_report": {
+        "name": "Get Compatibility Report",
+        "description": "Tests generation of detailed compatibility report between two charts",
+        "category": "vedic"
+    },
+    "tests.test_compatibility_core.TestCompatibilityCore.test_get_compatibility_level": {
+        "name": "Get Compatibility Level",
+        "description": "Tests determination of compatibility level based on score",
+        "category": "vedic"
     }
 }
