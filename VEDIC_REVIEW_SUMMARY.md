@@ -289,10 +289,10 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
 *   **Impact:** The calculation provides inaccurate Yuddha Bala results and incorrectly affects the Kala Bala total.
 *   **Category:** `Astrology`, `Logic`, `Shadbala`, `Simplification`, `Accuracy`
 *   **Tasks:**
-    *   [ ] Modify the function to only consider valid participants (Mars, Mercury, Jupiter, Venus, Saturn) for Yuddha checks.
-    *   [ ] Implement a standard method for determining the winner (this can be complex, potentially starting with declination/latitude as a primary factor).
-    *   [ ] Implement the standard strength calculation based on the difference in other Shadbala components.
-    *   [ ] Move the Yuddha Bala calculation outside the main Kala Bala summation, likely to be applied as a final correction after summing the five main Shadbala components.
+    *   [x] Modify the function to only consider valid participants (Mars, Mercury, Jupiter, Venus, Saturn) for Yuddha checks.
+    *   [x] Implement a standard method for determining the winner (this can be complex, potentially starting with declination/latitude as a primary factor).
+    *   [x] Implement the standard strength calculation based on the difference in other Shadbala components.
+    *   [x] Move the Yuddha Bala calculation outside the main Kala Bala summation, likely to be applied as a final correction after summing the five main Shadbala components.
 
 ## 27. Cheshta Bala Incorrectly Implemented
 
