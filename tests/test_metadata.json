@@ -1591,5 +1591,133 @@
         "name": "Real World Chart",
         "description": "Tests with a real-world chart",
         "category": "integration"
+    },
+
+    "tests.test_cache_comprehensive.TestCacheDecorators.test_reference_cache": {
+        "name": "Reference Cache Decorator",
+        "description": "Tests reference_cache decorator",
+        "category": "cache"
+    },
+    "tests.test_cache_comprehensive.TestCacheDecorators.test_calculation_cache": {
+        "name": "Calculation Cache Decorator",
+        "description": "Tests calculation_cache decorator",
+        "category": "cache"
+    },
+    "tests.test_cache_comprehensive.TestCacheDecorators.test_ephemeris_cache": {
+        "name": "Ephemeris Cache Decorator",
+        "description": "Tests ephemeris_cache decorator",
+        "category": "cache"
+    },
+    "tests.test_cache_comprehensive.TestCacheConfig.test_disable_enable": {
+        "name": "Disable/Enable Cache",
+        "description": "Tests disabling and enabling caching",
+        "category": "cache"
+    },
+    "tests.test_cache_comprehensive.TestCacheConfig.test_set_cache_size": {
+        "name": "Set Cache Size",
+        "description": "Tests setting cache size",
+        "category": "cache"
+    },
+    "tests.test_cache_comprehensive.TestCacheConfig.test_get_cache_info": {
+        "name": "Get Cache Info",
+        "description": "Tests getting cache info",
+        "category": "cache"
+    },
+    "tests.test_cache_comprehensive.TestCacheClear.test_clear_category_cache": {
+        "name": "Clear Category Cache",
+        "description": "Tests clearing category cache",
+        "category": "cache"
+    },
+    "tests.test_cache_comprehensive.TestCacheClear.test_clear_all_caches": {
+        "name": "Clear All Caches",
+        "description": "Tests clearing all caches",
+        "category": "cache"
+    },
+    "tests.test_cache_comprehensive.TestCachePerformance.test_cache_performance": {
+        "name": "Cache Performance",
+        "description": "Tests cache performance",
+        "category": "cache"
+    },
+    "tests.test_cache_comprehensive.TestCachePerformance.test_cache_size_limit": {
+        "name": "Cache Size Limit",
+        "description": "Tests cache size limit",
+        "category": "cache"
+    },
+    "tests.test_cache_comprehensive.TestCacheWithRealFunctions.test_chart_creation_caching": {
+        "name": "Chart Creation Caching",
+        "description": "Tests caching of chart creation",
+        "category": "cache"
+    },
+    "tests.test_cache_comprehensive.TestCacheWithRealFunctions.test_object_retrieval_caching": {
+        "name": "Object Retrieval Caching",
+        "description": "Tests caching of object retrieval",
+        "category": "cache"
+    },
+
+    "tests.test_cache_configuration.TestCacheCustomSize.test_custom_cache_size": {
+        "name": "Custom Cache Size",
+        "description": "Tests custom cache size",
+        "category": "cache"
+    },
+    "tests.test_cache_configuration.TestCacheCustomSize.test_cache_size_limit": {
+        "name": "Cache Size Limit (Configuration)",
+        "description": "Tests cache size limit with custom configuration",
+        "category": "cache"
+    },
+    "tests.test_cache_configuration.TestCacheConfigOverride.test_config_override": {
+        "name": "Config Override",
+        "description": "Tests CacheConfig override",
+        "category": "cache"
+    },
+    "tests.test_cache_configuration.TestCacheConfigOverride.test_disable_caching": {
+        "name": "Disable Caching",
+        "description": "Tests disabling caching",
+        "category": "cache"
+    },
+    "tests.test_cache_configuration.TestCacheInvalidation.test_manual_invalidation": {
+        "name": "Manual Invalidation",
+        "description": "Tests manual cache invalidation",
+        "category": "cache"
+    },
+    "tests.test_cache_configuration.TestCacheInvalidation.test_category_invalidation": {
+        "name": "Category Invalidation",
+        "description": "Tests category cache invalidation",
+        "category": "cache"
+    },
+    "tests.test_cache_configuration.TestCacheInvalidation.test_all_invalidation": {
+        "name": "All Invalidation",
+        "description": "Tests all cache invalidation",
+        "category": "cache"
+    },
+
+    "tests.test_cache_performance.TestCachePerformance.test_simple_function_performance": {
+        "name": "Simple Function Performance",
+        "description": "Tests performance of simple function with caching",
+        "category": "cache"
+    },
+    "tests.test_cache_performance.TestCachePerformance.test_medium_function_performance": {
+        "name": "Medium Function Performance",
+        "description": "Tests performance of medium complexity function with caching",
+        "category": "cache"
+    },
+    "tests.test_cache_performance.TestCachePerformance.test_complex_function_performance": {
+        "name": "Complex Function Performance",
+        "description": "Tests performance of complex function with caching",
+        "category": "cache"
+    },
+    "tests.test_cache_performance.TestCacheWithRealFunctions.test_chart_creation_performance": {
+        "name": "Chart Creation Performance",
+        "description": "Tests performance of chart creation with caching",
+        "category": "cache"
+    },
+    "tests.test_cache_performance.TestCacheWithRealFunctions.test_object_retrieval_performance": {
+        "name": "Object Retrieval Performance",
+        "description": "Tests performance of object retrieval with caching",
+        "category": "cache"
+    },
+    "tests.test_cache_performance.TestCacheSizeImpact.test_cache_size_impact": {
+        "name": "Cache Size Impact",
+        "description": "Tests impact of cache size on performance",
+        "category": "cache"
     }
 }

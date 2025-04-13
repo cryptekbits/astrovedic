@@ -40,10 +40,7 @@ This document lists functionalities in the flatlib library that currently lack c
 ✅ Tests implemented in `tests/test_chart_dynamics.py` and `tests/test_planetary_time.py`
 
 ### Cache System
-- `cache.py` - Comprehensive caching system tests
-- Cache invalidation tests
-- Cache size and configuration tests
-- Performance benchmarks for caching
+✅ Tests implemented in `tests/test_cache_comprehensive.py`, `tests/test_cache_configuration.py`, and `tests/test_cache_performance.py`
 
 ### API Functions
 ✅ Tests implemented in `tests/test_api_functions.py`
