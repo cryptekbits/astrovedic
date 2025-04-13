@@ -800,7 +800,17 @@ def calculate_hora_bala(chart, planet_id):
 
 def calculate_ayana_bala(chart, planet_id):
     """
-    Calculate Ayana Bala (solstice strength) for a planet
+    Calculate Ayana Bala (declination strength) for a planet
+
+    In Vedic astrology, Ayana Bala is based on the planet's declination (distance
+    from the celestial equator). Planets gain strength when they are in their
+    preferred hemisphere: northern declination for Sun, Mars, Jupiter, and Mercury;
+    southern declination for Moon, Venus, and Saturn.
+
+    The standard formula is:
+    Strength = (30 + (Declination / Obliquity) * 30) Virupas
+
+    This is adjusted based on the planet's preferred hemisphere.
 
     Args:
         chart (Chart): The birth chart
@@ -809,47 +819,73 @@ def calculate_ayana_bala(chart, planet_id):
     Returns:
         dict: Dictionary with Ayana Bala information
     """
-    # Get the Sun's longitude
-    sun = chart.getObject(const.SUN)
-    sun_lon = sun.lon
+    from flatlib import utils
 
-    # Determine if it's Uttarayana (Sun in Capricorn to Gemini) or
-    # Dakshinayana (Sun in Cancer to Sagittarius)
-    is_uttarayana = (sun_lon >= 270 or sun_lon < 90)
+    # Get the planet from the chart
+    planet = chart.getObject(planet_id)
 
     # Maximum value (in Virupas)
-    max_value = 30.0
+    max_value = 60.0
 
-    # Benefic planets (Jupiter, Venus, Mercury, Moon)
-    benefic_planets = [const.JUPITER, const.VENUS, const.MERCURY, const.MOON]
+    # Standard obliquity of the ecliptic (in degrees)
+    obliquity = 23.44
 
-    # Malefic planets (Sun, Mars, Saturn, Rahu, Ketu)
-    malefic_planets = [const.SUN, const.MARS, const.SATURN, const.RAHU, const.KETU]
+    # Calculate the declination of the planet
+    _, declination = utils.eqCoords(planet.lon, planet.lat)
 
-    # Calculate Ayana Bala
-    if planet_id in benefic_planets:
-        if is_uttarayana:
-            # Benefics gain strength in Uttarayana
-            value = max_value
-            description = 'Benefic in Uttarayana'
-        else:
-            # Benefics lose strength in Dakshinayana
-            value = 0.0
-            description = 'Benefic in Dakshinayana'
-    elif planet_id in malefic_planets:
-        if is_uttarayana:
-            # Malefics lose strength in Uttarayana
-            value = 0.0
-            description = 'Malefic in Uttarayana'
-        else:
-            # Malefics gain strength in Dakshinayana
-            value = max_value
-            description = 'Malefic in Dakshinayana'
+    # Determine the preferred hemisphere for each planet
+    # Northern declination (positive) is preferred for Sun, Mars, Jupiter, Mercury
+    # Southern declination (negative) is preferred for Moon, Venus, Saturn
+    northern_preference = [const.SUN, const.MARS, const.JUPITER, const.MERCURY]
+    southern_preference = [const.MOON, const.VENUS, const.SATURN]
+
+    # For Rahu and Ketu, we'll use the same preference as Saturn (southern)
+    if planet_id in [const.RAHU, const.KETU]:
+        preferred_hemisphere = 'south'
+    elif planet_id in northern_preference:
+        preferred_hemisphere = 'north'
+    elif planet_id in southern_preference:
+        preferred_hemisphere = 'south'
     else:
-        value = max_value / 2.0
-        description = 'Neutral'
+        # For any other object, default to northern
+        preferred_hemisphere = 'north'
 
-    return {'value': value, 'description': description}
+    # Calculate the absolute declination (0 to 23.44 degrees)
+    abs_declination = abs(declination)
+
+    # Calculate the relative strength based on declination (0 to 1)
+    relative_strength = abs_declination / obliquity
+
+    # Adjust the strength based on the preferred hemisphere
+    if (preferred_hemisphere == 'north' and declination >= 0) or \
+       (preferred_hemisphere == 'south' and declination <= 0):
+        # Planet is in its preferred hemisphere
+        strength_factor = relative_strength
+        hemisphere_status = 'preferred'
+    else:
+        # Planet is in its non-preferred hemisphere
+        strength_factor = 1 - relative_strength
+        hemisphere_status = 'non-preferred'
+
+    # Calculate the final Ayana Bala value (0 to 60 Virupas)
+    value = 30.0 + (strength_factor * 30.0)
+
+    # Create a descriptive message
+    if hemisphere_status == 'preferred':
+        description = f'In preferred hemisphere ({preferred_hemisphere}) with declination {declination:.2f}°'
+    else:
+        description = f'In non-preferred hemisphere ({preferred_hemisphere} preferred) with declination {declination:.2f}°'
+
+    # Return the result with additional information for debugging
+    return {
+        'value': value,
+        'description': description,
+        'declination': declination,
+        'preferred_hemisphere': preferred_hemisphere,
+        'hemisphere_status': hemisphere_status,
+        'relative_strength': relative_strength,
+        'strength_factor': strength_factor
+    }
 
 
 def calculate_yuddha_bala(chart, planet_id):
