@@ -14,8 +14,15 @@ from datetime import datetime
 import math
 from datetime import timedelta
 
+# Import swisseph for precise calculations
+import swisseph as swe
+
 # Import Panchanga functions
 from flatlib.vedic.muhurta.panchanga import get_vara
+
+# Standard atmospheric pressure (mbar) and temperature (Celsius)
+ATMOS_PRES = 1013.25
+ATMOS_TEMP = 15
 
 def get_abhijit_muhurta(date, location):
     """
@@ -514,101 +521,101 @@ def get_amrita_siddha_yoga(chart):
     return get_amrita_yoga(chart) and get_siddha_yoga(chart)
 
 
-def get_sunrise(date, location):
+def get_sunrise(date: Datetime, location: GeoPos) -> Datetime:
     """
-    Calculate the sunrise time for a given date and location
+    Calculate the sunrise time for a given date and location using swisseph.
     
     Args:
-        date (Datetime): The date
-        location (GeoPos): The geographical location
+        date (Datetime): The date (UT is derived from this).
+        location (GeoPos): The geographical location.
     
     Returns:
-        Datetime: The sunrise time
+        Datetime: The sunrise time in the original date's timezone.
+        
+    Raises:
+        RuntimeError: If swisseph calculation fails.
     """
-    # This is a simplified calculation for demonstration purposes
-    # In a real implementation, you would use a more accurate algorithm
+    # Get Julian Day UT from input Datetime
+    jd_ut = date.jd
     
-    # Get the date components from flatlib Datetime object
-    year, month, day = date.date.date()
-    
-    # Get the location components
-    lat = location.lat
+    # Get geographic coordinates
     lon = location.lon
+    lat = location.lat
+    alt = location.alt # Use altitude if available, default 0
     
-    # Calculate the day of the year using JDN
-    jdn_start_of_year = dateJDN(year, 1, 1, GREGORIAN) # Assuming Gregorian
-    day_of_year = int(date.date.jdn - jdn_start_of_year + 1)
+    # Prepare arguments for swisseph
+    ipl = swe.SUN
+    starname = ''
+    epheflag = swe.FLG_SWIEPH # Use Swiss Ephemeris
+    # Calculate sunrise (apparent rise of the disc center)
+    risetrans_flag = swe.RISE_TRANS | swe.BIT_DISC_CENTER
+    geopos = (lon, lat, alt)
+    atpress = ATMOS_PRES
+    attemp = ATMOS_TEMP
     
-    # Calculate the solar declination
-    declination = 23.45 * math.sin(math.radians(360 / 365 * (day_of_year - 81)))
+    # Call swisseph
+    try:
+        ret, jd_et, err = swe.rise_trans(jd_ut, ipl, starname, epheflag, risetrans_flag, geopos, atpress, attemp)
+    except Exception as e:
+        raise RuntimeError(f"Swisseph error during sunrise calculation: {e}") from e
+
+    if ret < 0:
+        raise RuntimeError(f"Swisseph calculation failed for sunrise: {err}")
+
+    # Convert result JD ET back to Datetime, preserving original timezone
+    # Note: rise_trans returns JD ET (Ephemeris Time), which is close enough to UT for this purpose
+    # without complex Delta T corrections for historical dates.
+    # Use the original date's utcoffset for conversion.
+    sunrise_dt = Datetime.fromJD(jd_et, date.utcoffset)
     
-    # Calculate the sunrise hour angle
-    hour_angle = math.degrees(math.acos(-math.tan(math.radians(lat)) * math.tan(math.radians(declination))))
-    
-    # Calculate the sunrise time in hours
-    sunrise_hours = 12 - hour_angle / 15
-    
-    # Adjust for longitude
-    sunrise_hours -= lon / 15
-    
-    # Convert to hours and minutes
-    sunrise_hour = int(sunrise_hours)
-    sunrise_minute = int((sunrise_hours - sunrise_hour) * 60)
-    
-    # Create a datetime object for the sunrise time
-    sunrise_dt = datetime(year, month, day, sunrise_hour, sunrise_minute)
-    
-    # Convert to Datetime object
-    # Use the class method fromDatetime which handles conversion correctly
-    return Datetime.fromDatetime(sunrise_dt)
+    return sunrise_dt
 
 
-def get_sunset(date, location):
+def get_sunset(date: Datetime, location: GeoPos) -> Datetime:
     """
-    Calculate the sunset time for a given date and location
+    Calculate the sunset time for a given date and location using swisseph.
     
     Args:
-        date (Datetime): The date
-        location (GeoPos): The geographical location
+        date (Datetime): The date (UT is derived from this).
+        location (GeoPos): The geographical location.
     
     Returns:
-        Datetime: The sunset time
+        Datetime: The sunset time in the original date's timezone.
+        
+    Raises:
+        RuntimeError: If swisseph calculation fails.
     """
-    # This is a simplified calculation for demonstration purposes
-    # In a real implementation, you would use a more accurate algorithm
+    # Get Julian Day UT from input Datetime
+    jd_ut = date.jd
     
-    # Get the date components
-    year, month, day = date.date.date()
-    
-    # Get the location components
-    lat = location.lat
+    # Get geographic coordinates
     lon = location.lon
+    lat = location.lat
+    alt = location.alt # Use altitude if available, default 0
     
-    # Calculate the day of the year
-    jdn_start_of_year = dateJDN(year, 1, 1, GREGORIAN) # Assuming Gregorian
-    day_of_year = int(date.date.jdn - jdn_start_of_year + 1)
+    # Prepare arguments for swisseph
+    ipl = swe.SUN
+    starname = ''
+    epheflag = swe.FLG_SWIEPH # Use Swiss Ephemeris
+    # Calculate sunset (apparent set of the disc center)
+    risetrans_flag = swe.SET_TRANS | swe.BIT_DISC_CENTER 
+    geopos = (lon, lat, alt)
+    atpress = ATMOS_PRES
+    attemp = ATMOS_TEMP
     
-    # Calculate the solar declination
-    declination = 23.45 * math.sin(math.radians(360 / 365 * (day_of_year - 81)))
+    # Call swisseph
+    try:
+        ret, jd_et, err = swe.rise_trans(jd_ut, ipl, starname, epheflag, risetrans_flag, geopos, atpress, attemp)
+    except Exception as e:
+        raise RuntimeError(f"Swisseph error during sunset calculation: {e}") from e
+
+    if ret < 0:
+        raise RuntimeError(f"Swisseph calculation failed for sunset: {err}")
+
+    # Convert result JD ET back to Datetime, preserving original timezone
+    sunset_dt = Datetime.fromJD(jd_et, date.utcoffset)
     
-    # Calculate the sunset hour angle
-    hour_angle = math.degrees(math.acos(-math.tan(math.radians(lat)) * math.tan(math.radians(declination))))
-    
-    # Calculate the sunset time in hours
-    sunset_hours = 12 + hour_angle / 15
-    
-    # Adjust for longitude
-    sunset_hours -= lon / 15
-    
-    # Convert to hours and minutes
-    sunset_hour = int(sunset_hours)
-    sunset_minute = int((sunset_hours - sunset_hour) * 60)
-    
-    # Create a datetime object for the sunset time
-    sunset_dt = datetime(year, month, day, sunset_hour, sunset_minute)
-    
-    # Convert to Datetime object
-    return Datetime.fromDatetime(sunset_dt)
+    return sunset_dt
 
 
 def get_house_number(chart, planet_id):
