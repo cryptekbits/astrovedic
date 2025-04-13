@@ -1388,5 +1388,81 @@
         "name": "Different Locations",
         "description": "Tests planetarytime module with different locations",
         "category": "core"
+    },
+
+    "tests.test_api_functions.TestVedicChartCreation.test_from_data": {
+        "name": "VedicChart from Data",
+        "description": "Tests creation of VedicChart from data",
+        "category": "api"
+    },
+    "tests.test_api_functions.TestVedicChartCreation.test_from_date_place": {
+        "name": "VedicChart from Date and Place",
+        "description": "Tests creation of VedicChart from date and place",
+        "category": "api"
+    },
+    "tests.test_api_functions.TestVedicChartCreation.test_kp_chart": {
+        "name": "KP Chart Creation",
+        "description": "Tests creation of KP chart",
+        "category": "api"
+    },
+    "tests.test_api_functions.TestVedicChartCreation.test_create_vedic_chart": {
+        "name": "Create Vedic Chart",
+        "description": "Tests create_vedic_chart function",
+        "category": "api"
+    },
+    "tests.test_api_functions.TestVedicChartCreation.test_create_kp_chart": {
+        "name": "Create KP Chart",
+        "description": "Tests create_kp_chart function",
+        "category": "api"
+    },
+    "tests.test_api_functions.TestVedicChartMethods.test_get_planet": {
+        "name": "Get Planet",
+        "description": "Tests get_planet method in VedicChart",
+        "category": "api"
+    },
+    "tests.test_api_functions.TestVedicChartMethods.test_get_house": {
+        "name": "Get House",
+        "description": "Tests get_house method in VedicChart",
+        "category": "api"
+    },
+    "tests.test_api_functions.TestVedicChartMethods.test_get_nakshatra": {
+        "name": "Get Nakshatra",
+        "description": "Tests get_nakshatra method in VedicChart",
+        "category": "api"
+    },
+    "tests.test_api_functions.TestVedicChartMethods.test_get_nakshatra_pada": {
+        "name": "Get Nakshatra Pada",
+        "description": "Tests get_nakshatra_pada method in VedicChart",
+        "category": "api"
+    },
+    "tests.test_api_functions.TestVedicChartMethods.test_get_panchang": {
+        "name": "Get Panchang",
+        "description": "Tests get_panchang method in VedicChart",
+        "category": "api"
+    },
+    "tests.test_api_functions.TestVedicChartMethods.test_get_upagrah_positions": {
+        "name": "Get Upagrah Positions",
+        "description": "Tests get_upagrah_positions method in VedicChart",
+        "category": "api"
+    },
+    "tests.test_api_functions.TestVedicChartMethods.test_get_varga_chart": {
+        "name": "Get Varga Chart",
+        "description": "Tests get_varga_chart method in VedicChart",
+        "category": "api"
+    },
+    "tests.test_api_functions.TestVedicChartMethods.test_get_varga_positions": {
+        "name": "Get Varga Positions",
+        "description": "Tests get_varga_positions method in VedicChart",
+        "category": "api"
+    },
+    "tests.test_api_functions.TestVedicChartMethods.test_get_kp_planets": {
+        "name": "Get KP Planets",
+        "description": "Tests get_kp_planets method in VedicChart",
+        "category": "api"
+    },
+    "tests.test_api_functions.TestVedicChartMethods.test_get_kp_houses": {
+        "name": "Get KP Houses",
+        "description": "Tests get_kp_houses method in VedicChart",
+        "category": "api"
     }
 }

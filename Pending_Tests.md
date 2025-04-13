@@ -46,9 +46,7 @@ This document lists functionalities in the flatlib library that currently lack c
 - Performance benchmarks for caching
 
 ### API Functions
-- VedicChart class API methods
-- create_vedic_chart function
-- create_kp_chart function
+✅ Tests implemented in `tests/test_api_functions.py`
 
 ## Error Handling and Edge Cases
 
