@@ -23,14 +23,7 @@ This document lists functionalities in the flatlib library that currently lack c
 ✅ Tests implemented in `tests/test_kuta.py`
 
 ### Transit Analysis
-- `get_transit_chart` - Testing transit chart creation
-- `get_transit_planets` - Testing transit planet positions
-- `get_transit_aspects` - Testing transit aspects calculation
-- `get_transit_houses` - Testing transit house positions
-- `get_transit_quality` - Testing transit quality assessment
-- `get_transit_predictions` - Testing transit predictions
-- `get_transit_timeline` - Testing transit timeline calculation
-- `get_transit_events` - Testing transit event identification
+✅ Tests implemented in `tests/test_transit_core.py` and `tests/test_transit_predictions.py`
 
 ### Yogas (Planetary Combinations)
 - `get_yoga_strength` - Testing yoga strength calculation

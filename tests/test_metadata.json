@@ -840,5 +840,57 @@
         "name": "Get Total Kuta Score",
         "description": "Tests calculation of total Kuta score",
         "category": "vedic"
+    },
+
+    "tests.test_transit_core.TestTransitCore.test_get_transit_chart": {
+        "name": "Get Transit Chart",
+        "description": "Tests creation of transit chart based on natal chart and transit date",
+        "category": "vedic"
+    },
+    "tests.test_transit_core.TestTransitCore.test_get_transit_planets": {
+        "name": "Get Transit Planets",
+        "description": "Tests calculation of transit planet positions relative to natal chart",
+        "category": "vedic"
+    },
+    "tests.test_transit_core.TestTransitCore.test_get_transit_aspects": {
+        "name": "Get Transit Aspects",
+        "description": "Tests calculation of aspects between transit and natal planets",
+        "category": "vedic"
+    },
+    "tests.test_transit_core.TestTransitCore.test_get_transit_houses": {
+        "name": "Get Transit Houses",
+        "description": "Tests calculation of transit house positions relative to natal chart",
+        "category": "vedic"
+    },
+    "tests.test_transit_core.TestTransitCore.test_get_transit_quality": {
+        "name": "Get Transit Quality",
+        "description": "Tests assessment of overall transit quality",
+        "category": "vedic"
+    },
+    "tests.test_transit_core.TestTransitCore.test_get_house_number": {
+        "name": "Get House Number",
+        "description": "Tests calculation of house number for a specific longitude in a chart",
+        "category": "vedic"
+    },
+
+    "tests.test_transit_predictions.TestTransitPredictions.test_get_transit_predictions": {
+        "name": "Get Transit Predictions",
+        "description": "Tests generation of predictions based on transits",
+        "category": "vedic"
+    },
+    "tests.test_transit_predictions.TestTransitPredictions.test_get_transit_timeline": {
+        "name": "Get Transit Timeline",
+        "description": "Tests generation of timeline of transit events for a specific period",
+        "category": "vedic"
+    },
+    "tests.test_transit_predictions.TestTransitPredictions.test_get_transit_events": {
+        "name": "Get Transit Events",
+        "description": "Tests identification of significant transit events for a specific period",
+        "category": "vedic"
+    },
+    "tests.test_transit_predictions.TestTransitPredictions.test_get_transit_periods": {
+        "name": "Get Transit Periods",
+        "description": "Tests identification of transit periods with different qualities",
+        "category": "vedic"
     }
 }
