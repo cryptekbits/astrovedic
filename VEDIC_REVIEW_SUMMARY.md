@@ -307,8 +307,8 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
 *   **Impact:** Provides inaccurate Cheshta Bala values for all objects.
 *   **Category:** `Astrology`, `Logic`, `Shadbala`, `Incorrect Implementation`, `Accuracy`
 *   **Tasks:**
-    *   [ ] Modify the function to include calculations for Sun (based on Ayana Bala) and Moon (based on Paksha Bala), potentially dividing their respective Bala by 2 or following a specific authoritative source.
-    *   [ ] For Mars-Saturn, replace the current logic with the standard calculation:
+    *   [x] Modify the function to include calculations for Sun (based on Ayana Bala) and Moon (based on Paksha Bala), potentially dividing their respective Bala by 2 or following a specific authoritative source.
+    *   [x] For Mars-Saturn, replace the current logic with the standard calculation:
         *   Obtain mean and true longitudes for the planet and the Sun.
         *   Calculate the planet's mean speed and current speed.
         *   Calculate the `Cheshta Kendra` (Mean Longitude - True Longitude).
