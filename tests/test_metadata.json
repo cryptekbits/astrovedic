@@ -737,5 +737,36 @@
         "name": "Is Lagna Strong",
         "description": "Tests checking if the Lagna (Ascendant) is strong",
         "category": "vedic"
+    },
+
+    "tests.test_sarvatobhadra_core.TestSarvatobhadraCore.test_get_sarvatobhadra_chakra": {
+        "name": "Get Sarvatobhadra Chakra",
+        "description": "Tests creation of Sarvatobhadra Chakra based on chart",
+        "category": "vedic"
+    },
+    "tests.test_sarvatobhadra_core.TestSarvatobhadraCore.test_get_chakra_quality": {
+        "name": "Get Chakra Quality",
+        "description": "Tests calculation of Sarvatobhadra Chakra quality",
+        "category": "vedic"
+    },
+    "tests.test_sarvatobhadra_core.TestSarvatobhadraCore.test_get_auspicious_directions": {
+        "name": "Get Auspicious Directions",
+        "description": "Tests finding auspicious directions from Sarvatobhadra Chakra",
+        "category": "vedic"
+    },
+    "tests.test_sarvatobhadra_core.TestSarvatobhadraCore.test_get_inauspicious_directions": {
+        "name": "Get Inauspicious Directions",
+        "description": "Tests finding inauspicious directions from Sarvatobhadra Chakra",
+        "category": "vedic"
+    },
+    "tests.test_sarvatobhadra_core.TestSarvatobhadraCore.test_is_auspicious_position": {
+        "name": "Is Auspicious Position",
+        "description": "Tests checking if a position in the Sarvatobhadra Chakra is auspicious",
+        "category": "vedic"
+    },
+    "tests.test_sarvatobhadra_core.TestSarvatobhadraCore.test_is_inauspicious_position": {
+        "name": "Is Inauspicious Position",
+        "description": "Tests checking if a position in the Sarvatobhadra Chakra is inauspicious",
+        "category": "vedic"
     }
 }

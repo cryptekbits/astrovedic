@@ -14,10 +14,7 @@ This document lists functionalities in the flatlib library that currently lack c
 ✅ Tests implemented in `tests/test_muhurta_core.py`
 
 ### Sarvatobhadra Chakra
-- `get_sarvatobhadra_chakra` - Testing chakra construction
-- `get_chakra_quality` - Testing chakra quality assessment
-- `get_auspicious_directions` - Testing auspicious direction identification
-- `get_inauspicious_directions` - Testing inauspicious direction identification
+✅ Tests implemented in `tests/test_sarvatobhadra_core.py`
 
 ### Compatibility Analysis
 - `get_compatibility_score` - Testing compatibility score calculation
