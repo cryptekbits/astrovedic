@@ -17,7 +17,7 @@ from flatlib.vedic.shadbala.core import (
 # Import all strength calculation functions
 from flatlib.vedic.shadbala.sthana_bala import calculate_sthana_bala
 from flatlib.vedic.shadbala.dig_bala import calculate_dig_bala
-from flatlib.vedic.shadbala.kala_bala import calculate_kala_bala
+from flatlib.vedic.shadbala.kala_bala import calculate_kala_bala, calculate_yuddha_bala
 from flatlib.vedic.shadbala.cheshta_bala import calculate_cheshta_bala
 from flatlib.vedic.shadbala.naisargika_bala import calculate_naisargika_bala
 from flatlib.vedic.shadbala.drig_bala import calculate_drig_bala
@@ -81,11 +81,29 @@ def get_shadbala(chart, planet_id):
     naisargika_bala = calculate_naisargika_bala(planet_id)
     drig_bala = calculate_drig_bala(chart, planet_id)
 
+    # Calculate Yuddha Bala (planetary war) separately
+    # This is now a correction applied after summing the six main components
+    yuddha_bala = calculate_yuddha_bala(chart, planet_id)
+
     # Calculate total Shadbala
     total_shadbala = calculate_total_shadbala(
         sthana_bala, dig_bala, kala_bala,
         cheshta_bala, naisargika_bala, drig_bala
     )
+
+    # Apply the Yuddha Bala correction to the total
+    yuddha_correction = yuddha_bala.get('correction', 0.0)
+
+    # Update the total values with the Yuddha Bala correction
+    corrected_total_virupas = total_shadbala['total_virupas'] + yuddha_correction
+    corrected_total_rupas = corrected_total_virupas / 60.0
+
+    # Update the total Shadbala dictionary
+    total_shadbala['yuddha_correction'] = yuddha_correction
+    total_shadbala['total_virupas_before_correction'] = total_shadbala['total_virupas']
+    total_shadbala['total_rupas_before_correction'] = total_shadbala['total_rupas']
+    total_shadbala['total_virupas'] = corrected_total_virupas
+    total_shadbala['total_rupas'] = corrected_total_rupas
 
     # Calculate Ishta and Kashta Phala
     ishta_phala = calculate_ishta_phala(chart, planet_id, total_shadbala)
@@ -106,6 +124,7 @@ def get_shadbala(chart, planet_id):
         'cheshta_bala': cheshta_bala.get('value', 0),
         'naisargika_bala': naisargika_bala.get('value', 0),
         'drig_bala': drig_bala.get('value', 0),
+        'yuddha_bala': yuddha_bala,  # Include the full Yuddha Bala information
         'total_shadbala': total_shadbala,
         'ishta_phala': ishta_phala,
         'kashta_phala': kashta_phala,

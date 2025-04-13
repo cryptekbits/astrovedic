@@ -48,12 +48,11 @@ def calculate_kala_bala(chart, planet_id):
     ayana_bala = calculate_ayana_bala(chart, planet_id)
     yuddha_bala = calculate_yuddha_bala(chart, planet_id)
 
-    # Calculate total Kala Bala
+    # Calculate total Kala Bala (excluding Yuddha Bala, which is now a correction)
     total = (nathonnatha_bala['value'] + paksha_bala['value'] +
              tribhaga_bala['value'] + abda_bala['value'] +
              masa_bala['value'] + vara_bala['value'] +
-             hora_bala['value'] + ayana_bala['value'] +
-             yuddha_bala['value'])
+             hora_bala['value'] + ayana_bala['value'])
 
     return {
         'planet': planet_id,
@@ -892,60 +891,103 @@ def calculate_yuddha_bala(chart, planet_id):
     """
     Calculate Yuddha Bala (planetary war strength) for a planet
 
+    In Vedic astrology, Graha Yuddha (planetary war) occurs when two planets are
+    within 1 degree of each other. Only the five true planets (Mars, Mercury, Jupiter,
+    Venus, Saturn) participate in planetary wars. The winner is determined primarily
+    by declination, with the planet having the higher (more northerly) declination
+    being the winner.
+
+    Yuddha Bala is not a component of Kala Bala but rather a correction applied
+    after summing the six main Shadbala components. The winner gains strength while
+    the loser loses strength.
+
     Args:
         chart (Chart): The birth chart
         planet_id (str): The ID of the planet
 
     Returns:
-        dict: Dictionary with Yuddha Bala information
+        dict: Dictionary with Yuddha Bala information including correction value
     """
+    from flatlib import utils
+
+    # Only the five true planets participate in planetary wars
+    valid_participants = [const.MARS, const.MERCURY, const.JUPITER, const.VENUS, const.SATURN]
+
+    # If the planet is not a valid participant, return no correction
+    if planet_id not in valid_participants:
+        return {
+            'value': 0.0,  # No effect on Kala Bala
+            'correction': 0.0,  # No correction to total Shadbala
+            'description': 'Not a participant in planetary wars',
+            'in_war': False,
+            'opponent': None
+        }
+
     # Get the planet from the chart
     planet = chart.getObject(planet_id)
 
-    # Maximum value (in Virupas)
-    max_value = 30.0
+    # Calculate the declination of the planet
+    _, planet_declination = utils.eqCoords(planet.lon, planet.lat)
 
     # Check if the planet is in a planetary war
     in_war = False
-    winner = False
+    opponent_id = None
+    is_winner = False
+    opponent_declination = None
 
     # A planetary war occurs when two planets are within 1 degree of each other
-    for other_id in const.LIST_OBJECTS_VEDIC:
+    for other_id in valid_participants:
         if other_id != planet_id:
             other = chart.getObject(other_id)
             dist = abs(angle.closestdistance(planet.lon, other.lon))
 
             if dist <= 1.0:
                 in_war = True
+                opponent_id = other_id
 
-                # The winner is determined by brightness, but for simplicity,
-                # we'll use a fixed order: Jupiter > Venus > Mercury > Saturn > Mars > Sun > Moon
-                planet_order = {
-                    const.JUPITER: 1,
-                    const.VENUS: 2,
-                    const.MERCURY: 3,
-                    const.SATURN: 4,
-                    const.MARS: 5,
-                    const.SUN: 6,
-                    const.MOON: 7,
-                    const.RAHU: 8,
-                    const.KETU: 9
-                }
+                # Calculate the declination of the opponent
+                _, opponent_declination = utils.eqCoords(other.lon, other.lat)
 
-                if planet_order.get(planet_id, 10) < planet_order.get(other_id, 10):
-                    winner = True
+                # The winner is determined by declination
+                # The planet with higher (more northerly) declination is the winner
+                is_winner = planet_declination > opponent_declination
 
                 break
 
-    # Calculate Yuddha Bala
+    # Calculate the correction value for Shadbala
+    # This is a separate value from the Kala Bala component
     if not in_war:
-        value = max_value
+        # No correction needed
+        correction = 0.0
+        kala_bala_value = 0.0
         description = 'Not in planetary war'
-    elif winner:
-        value = max_value
-        description = 'Winner in planetary war'
     else:
-        value = 0.0
-        description = 'Loser in planetary war'
+        # Calculate the declination difference
+        decl_diff = abs(planet_declination - opponent_declination)
 
-    return {'value': value, 'description': description}
+        # The correction is proportional to the declination difference
+        # We'll use a scale of 0-15 Virupas based on the difference
+        base_correction = min(decl_diff * 5.0, 15.0)  # Max 15 Virupas
+
+        if is_winner:
+            # Winner gains strength
+            correction = base_correction
+            kala_bala_value = 0.0  # No effect on Kala Bala
+            description = f'Winner in planetary war with {opponent_id} (declination difference: {decl_diff:.2f}°)'
+        else:
+            # Loser loses strength
+            correction = -base_correction
+            kala_bala_value = 0.0  # No effect on Kala Bala
+            description = f'Loser in planetary war with {opponent_id} (declination difference: {decl_diff:.2f}°)'
+
+    # Return detailed information
+    return {
+        'value': kala_bala_value,  # Value for Kala Bala (now 0 since it's moved outside)
+        'correction': correction,  # Correction to be applied to total Shadbala
+        'description': description,
+        'in_war': in_war,
+        'opponent': opponent_id,
+        'planet_declination': planet_declination if in_war else None,
+        'opponent_declination': opponent_declination if in_war else None,
+        'is_winner': is_winner if in_war else None
+    }
