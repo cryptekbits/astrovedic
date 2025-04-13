@@ -273,8 +273,8 @@ This document summarizes the findings from a review of the `flatlib` codebase fo
 *   **Impact:** The current implementation yields completely wrong results for Ayana Bala.
 *   **Category:** `Astrology`, `Logic`, `Shadbala`, `Incorrect Implementation`, `Accuracy`
 *   **Tasks:**
-    *   [ ] Remove the existing incorrect logic based on the Sun's path.
-    *   [ ] Implement the standard Ayana Bala calculation:
+    *   [x] Remove the existing incorrect logic based on the Sun's path.
+    *   [x] Implement the standard Ayana Bala calculation:
         *   Calculate the declination (`δ`) for the given `planet_id`.
         *   Obtain the obliquity of the ecliptic (`ε`).
         *   Apply the standard formula (e.g., `(30 + (δ / ε) * 30)`) incorporating adjustments for the planet's preferred declination direction (North/South) to scale strength from 0 to 60 Virupas.
