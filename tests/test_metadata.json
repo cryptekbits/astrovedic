@@ -614,5 +614,97 @@
         "name": "Jaimini Chara Karakas - Tie Breaking",
         "description": "Tests tie-breaking logic for Chara Karakas based on full longitude.",
         "category": "vedic"
+    },
+
+    "tests.test_upagrah.TestUpagrah.test_calculate_gulika": {
+        "name": "Calculate Gulika",
+        "description": "Tests calculation of Gulika position",
+        "category": "vedic"
+    },
+    "tests.test_upagrah.TestUpagrah.test_calculate_mandi": {
+        "name": "Calculate Mandi",
+        "description": "Tests calculation of Mandi position",
+        "category": "vedic"
+    },
+    "tests.test_upagrah.TestUpagrah.test_calculate_dhuma": {
+        "name": "Calculate Dhuma",
+        "description": "Tests calculation of Dhuma position",
+        "category": "vedic"
+    },
+    "tests.test_upagrah.TestUpagrah.test_calculate_vyatipata": {
+        "name": "Calculate Vyatipata",
+        "description": "Tests calculation of Vyatipata position",
+        "category": "vedic"
+    },
+    "tests.test_upagrah.TestUpagrah.test_calculate_parivesha": {
+        "name": "Calculate Parivesha",
+        "description": "Tests calculation of Parivesha position",
+        "category": "vedic"
+    },
+    "tests.test_upagrah.TestUpagrah.test_calculate_indrachapa": {
+        "name": "Calculate Indrachapa",
+        "description": "Tests calculation of Indrachapa position",
+        "category": "vedic"
+    },
+    "tests.test_upagrah.TestUpagrah.test_calculate_upaketu": {
+        "name": "Calculate Upaketu",
+        "description": "Tests calculation of Upaketu position",
+        "category": "vedic"
+    },
+    "tests.test_upagrah.TestUpagrah.test_get_upagrah": {
+        "name": "Get Upagrah",
+        "description": "Tests getting a specific Upagrah (shadow planet)",
+        "category": "vedic"
+    },
+    "tests.test_upagrah.TestUpagrah.test_get_upagrah_positions": {
+        "name": "Get Upagrah Positions",
+        "description": "Tests getting all Upagrah positions from a chart",
+        "category": "vedic"
+    },
+    "tests.test_upagrah.TestUpagrah.test_relationship_between_upagrah": {
+        "name": "Relationship Between Upagrah",
+        "description": "Tests the mathematical relationships between different Upagrah",
+        "category": "vedic"
+    },
+
+    "tests.test_kp.TestKP.test_get_kp_sublord": {
+        "name": "Get KP Sublord",
+        "description": "Tests calculation of KP sublord based on Vimshottari Dasha periods",
+        "category": "vedic"
+    },
+    "tests.test_kp.TestKP.test_get_kp_sub_sublord": {
+        "name": "Get KP Sub-Sublord",
+        "description": "Tests calculation of KP sub-sublord",
+        "category": "vedic"
+    },
+    "tests.test_kp.TestKP.test_get_kp_pointer": {
+        "name": "Get KP Pointer",
+        "description": "Tests generation of KP pointer in the format: Sign Lord-Star Lord-Sub Lord-Sub Sub Lord",
+        "category": "vedic"
+    },
+    "tests.test_kp.TestKP.test_get_kp_lords": {
+        "name": "Get KP Lords",
+        "description": "Tests getting sign lord, star lord, sub lord, and sub-sub lord for KP astrology",
+        "category": "vedic"
+    },
+    "tests.test_kp.TestKP.test_get_kp_planets": {
+        "name": "Get KP Planets",
+        "description": "Tests getting KP information for all planets in a chart",
+        "category": "vedic"
+    },
+    "tests.test_kp.TestKP.test_get_kp_houses": {
+        "name": "Get KP Houses",
+        "description": "Tests getting KP information for all houses in a chart",
+        "category": "vedic"
+    },
+    "tests.test_kp.TestKP.test_get_kp_significators": {
+        "name": "Get KP Significators",
+        "description": "Tests getting KP significators for houses",
+        "category": "vedic"
+    },
+    "tests.test_kp.TestKP.test_get_kp_ruling_planets": {
+        "name": "Get KP Ruling Planets",
+        "description": "Tests getting KP ruling planets at a given time",
+        "category": "vedic"
     }
 }
