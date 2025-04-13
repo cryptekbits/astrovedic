@@ -1464,5 +1464,132 @@
         "name": "Get KP Houses",
         "description": "Tests get_kp_houses method in VedicChart",
         "category": "api"
+    },
+
+    "tests.test_edge_cases.TestInvalidInputs.test_invalid_date_format": {
+        "name": "Invalid Date Format",
+        "description": "Tests with invalid date formats",
+        "category": "edge_cases"
+    },
+    "tests.test_edge_cases.TestInvalidInputs.test_invalid_time_format": {
+        "name": "Invalid Time Format",
+        "description": "Tests with invalid time formats",
+        "category": "edge_cases"
+    },
+    "tests.test_edge_cases.TestInvalidInputs.test_invalid_timezone_format": {
+        "name": "Invalid Timezone Format",
+        "description": "Tests with invalid timezone formats",
+        "category": "edge_cases"
+    },
+    "tests.test_edge_cases.TestInvalidInputs.test_invalid_latitude": {
+        "name": "Invalid Latitude",
+        "description": "Tests with invalid latitudes",
+        "category": "edge_cases"
+    },
+    "tests.test_edge_cases.TestInvalidInputs.test_invalid_longitude": {
+        "name": "Invalid Longitude",
+        "description": "Tests with invalid longitudes",
+        "category": "edge_cases"
+    },
+    "tests.test_edge_cases.TestInvalidInputs.test_invalid_house_system": {
+        "name": "Invalid House System",
+        "description": "Tests with invalid house systems",
+        "category": "edge_cases"
+    },
+    "tests.test_edge_cases.TestInvalidInputs.test_invalid_ayanamsa": {
+        "name": "Invalid Ayanamsa",
+        "description": "Tests with invalid ayanamsas",
+        "category": "edge_cases"
+    },
+    "tests.test_edge_cases.TestEdgeCaseBirthData.test_polar_regions": {
+        "name": "Polar Regions",
+        "description": "Tests with polar regions",
+        "category": "edge_cases"
+    },
+    "tests.test_edge_cases.TestEdgeCaseBirthData.test_date_line_crossing": {
+        "name": "Date Line Crossing",
+        "description": "Tests with date line crossing",
+        "category": "edge_cases"
+    },
+    "tests.test_edge_cases.TestEdgeCaseBirthData.test_extreme_dates": {
+        "name": "Extreme Dates",
+        "description": "Tests with extreme dates",
+        "category": "edge_cases"
+    },
+    "tests.test_edge_cases.TestExtremePlanetaryPositions.test_retrograde_planets": {
+        "name": "Retrograde Planets",
+        "description": "Tests with retrograde planets",
+        "category": "edge_cases"
+    },
+    "tests.test_edge_cases.TestExtremePlanetaryPositions.test_stationary_planets": {
+        "name": "Stationary Planets",
+        "description": "Tests with stationary planets",
+        "category": "edge_cases"
+    },
+    "tests.test_edge_cases.TestExtremePlanetaryPositions.test_combust_planets": {
+        "name": "Combust Planets",
+        "description": "Tests with combust planets",
+        "category": "edge_cases"
+    },
+    "tests.test_edge_cases.TestExtremePlanetaryPositions.test_eclipses": {
+        "name": "Eclipses",
+        "description": "Tests with eclipses",
+        "category": "edge_cases"
+    },
+    "tests.test_edge_cases.TestTimezoneHandling.test_timezone_handling": {
+        "name": "Timezone Handling",
+        "description": "Tests timezone handling",
+        "category": "edge_cases"
+    },
+
+    "tests.test_integration.TestFullSystemIntegration.test_full_chart_creation": {
+        "name": "Full Chart Creation",
+        "description": "Tests full chart creation",
+        "category": "integration"
+    },
+    "tests.test_integration.TestFullSystemIntegration.test_vedic_chart_creation": {
+        "name": "VedicChart Creation",
+        "description": "Tests VedicChart creation",
+        "category": "integration"
+    },
+    "tests.test_integration.TestCoreLibraryVedicIntegration.test_nakshatra_integration": {
+        "name": "Nakshatra Integration",
+        "description": "Tests integration with nakshatra module",
+        "category": "integration"
+    },
+    "tests.test_integration.TestCoreLibraryVedicIntegration.test_panchang_integration": {
+        "name": "Panchang Integration",
+        "description": "Tests integration with panchang module",
+        "category": "integration"
+    },
+    "tests.test_integration.TestCoreLibraryVedicIntegration.test_upagrah_integration": {
+        "name": "Upagrah Integration",
+        "description": "Tests integration with upagrah module",
+        "category": "integration"
+    },
+    "tests.test_integration.TestCoreLibraryVedicIntegration.test_varga_integration": {
+        "name": "Varga Integration",
+        "description": "Tests integration with varga module",
+        "category": "integration"
+    },
+    "tests.test_integration.TestCoreLibraryVedicIntegration.test_kp_integration": {
+        "name": "KP Integration",
+        "description": "Tests integration with KP module",
+        "category": "integration"
+    },
+    "tests.test_integration.TestVedicModulesIntegration.test_nakshatra_panchang_integration": {
+        "name": "Nakshatra Panchang Integration",
+        "description": "Tests integration between nakshatra and panchang modules",
+        "category": "integration"
+    },
+    "tests.test_integration.TestVedicModulesIntegration.test_upagrah_varga_integration": {
+        "name": "Upagrah Varga Integration",
+        "description": "Tests integration between upagrah and varga modules",
+        "category": "integration"
+    },
+    "tests.test_integration.TestVedicModulesIntegration.test_real_world_chart": {
+        "name": "Real World Chart",
+        "description": "Tests with a real-world chart",
+        "category": "integration"
     }
 }

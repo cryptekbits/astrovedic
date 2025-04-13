@@ -50,14 +50,8 @@ This document lists functionalities in the flatlib library that currently lack c
 
 ## Error Handling and Edge Cases
 
-- Testing with invalid inputs
-- Testing with edge case birth data (polar regions, date line crossing)
-- Testing with extreme planetary positions
-- Testing error handling in calculations with potential division by zero
-- Testing timezone handling in various edge cases
+✅ Tests implemented in `tests/test_error_handling.py` and `tests/test_edge_cases.py`
 
 ## Integration Tests
 
-- Full system integration tests with real-world charts
-- Integration between core library and Vedic extensions
-- Integration between different Vedic modules
+✅ Tests implemented in `tests/test_integration.py`
