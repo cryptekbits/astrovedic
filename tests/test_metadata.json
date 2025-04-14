@@ -376,6 +376,56 @@
         "category": "compatibility"
     },
 
+    "tests.examples.test_reference_date.TestReferenceDate.test_tropical_planetary_positions": {
+        "name": "Tropical Planetary Positions",
+        "description": "Tests tropical planetary positions against reference data",
+        "category": "reference_data"
+    },
+    "tests.examples.test_reference_date.TestReferenceDate.test_vedic_planetary_positions": {
+        "name": "Vedic Planetary Positions",
+        "description": "Tests Vedic planetary positions against reference data",
+        "category": "reference_data"
+    },
+    "tests.examples.test_reference_date.TestReferenceDate.test_nakshatra_positions": {
+        "name": "Nakshatra Positions",
+        "description": "Tests nakshatra positions against reference data",
+        "category": "reference_data"
+    },
+    "tests.examples.test_reference_date.TestReferenceDate.test_kp_sublords": {
+        "name": "KP Sublords",
+        "description": "Tests KP sublords against reference data",
+        "category": "reference_data"
+    },
+    "tests.examples.test_reference_date.TestReferenceDate.test_house_cusps": {
+        "name": "House Cusps",
+        "description": "Tests house cusps against reference data",
+        "category": "reference_data"
+    },
+    "tests.test_ashtakavarga_reference.TestAshtakavargaReference.test_bhinnashtakavarga": {
+        "name": "Bhinnashtakavarga Reference",
+        "description": "Tests Bhinnashtakavarga calculations against reference data",
+        "category": "reference_data"
+    },
+    "tests.test_ashtakavarga_reference.TestAshtakavargaReference.test_sarvashtakavarga": {
+        "name": "Sarvashtakavarga Reference",
+        "description": "Tests Sarvashtakavarga calculations against reference data",
+        "category": "reference_data"
+    },
+    "tests.test_vimshottari_dasha_reference.TestVimshottariDashaReference.test_current_mahadasha": {
+        "name": "Current Mahadasha Reference",
+        "description": "Tests current Mahadasha calculations against reference data",
+        "category": "reference_data"
+    },
+    "tests.test_vimshottari_dasha_reference.TestVimshottariDashaReference.test_current_antardasha": {
+        "name": "Current Antardasha Reference",
+        "description": "Tests current Antardasha calculations against reference data",
+        "category": "reference_data"
+    },
+    "tests.test_vimshottari_dasha_reference.TestVimshottariDashaReference.test_dasha_sequence": {
+        "name": "Dasha Sequence Reference",
+        "description": "Tests Dasha sequence against reference data",
+        "category": "reference_data"
+    },
     "tests.examples.test_reference_date.main": {
         "name": "Reference Date Test",
         "description": "Tests planetary positions for the reference date (April 9, 2025 at 20:51 in Bangalore)",

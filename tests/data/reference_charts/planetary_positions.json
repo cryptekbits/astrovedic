@@ -1,0 +1,401 @@
+{
+    "tropical": {
+        "Ascendant": {
+            "longitude": 179.6406,
+            "sign": "Libra",
+            "sign_longitude": 29.6406,
+            "formatted": "Libra 29° 38' 27\""
+        },
+        "Sun": {
+            "longitude": 25.8247,
+            "sign": "Pisces",
+            "sign_longitude": 25.8247,
+            "formatted": "Pisces 25° 49' 29\""
+        },
+        "Moon": {
+            "longitude": 138.8414,
+            "sign": "Leo",
+            "sign_longitude": 18.8414,
+            "formatted": "Leo 18° 50' 29\""
+        },
+        "Mars": {
+            "longitude": 92.4261,
+            "sign": "Cancer",
+            "sign_longitude": 2.4261,
+            "formatted": "Cancer 02° 25' 35\""
+        },
+        "Mercury": {
+            "longitude": 2.8406,
+            "sign": "Pisces",
+            "sign_longitude": 2.8406,
+            "formatted": "Pisces 02° 50' 27\""
+        },
+        "Jupiter": {
+            "longitude": 53.1381,
+            "sign": "Taurus",
+            "sign_longitude": 23.1381,
+            "formatted": "Taurus 23° 08' 17\""
+        },
+        "Venus": {
+            "longitude": 0.6731,
+            "sign": "Pisces",
+            "sign_longitude": 0.6731,
+            "formatted": "Pisces 00° 40' 23\""
+        },
+        "Saturn": {
+            "longitude": 1.2983,
+            "sign": "Pisces",
+            "sign_longitude": 1.2983,
+            "formatted": "Pisces 01° 17' 55\""
+        },
+        "Rahu": {
+            "longitude": 2.0583,
+            "sign": "Pisces",
+            "sign_longitude": 2.0583,
+            "formatted": "Pisces 02° 03' 31\""
+        },
+        "Ketu": {
+            "longitude": 182.0583,
+            "sign": "Virgo",
+            "sign_longitude": 2.0583,
+            "formatted": "Virgo 02° 03' 31\""
+        },
+        "Uranus": {
+            "longitude": 31.0203,
+            "sign": "Taurus",
+            "sign_longitude": 1.0203,
+            "formatted": "Taurus 01° 01' 13\""
+        },
+        "Neptune": {
+            "longitude": 6.1097,
+            "sign": "Pisces",
+            "sign_longitude": 6.1097,
+            "formatted": "Pisces 06° 06' 35\""
+        },
+        "Pluto": {
+            "longitude": 279.2667,
+            "sign": "Capricorn",
+            "sign_longitude": 9.2667,
+            "formatted": "Capricorn 09° 16' 01\""
+        }
+    },
+    "vedic": {
+        "Ascendant": {
+            "longitude": 155.4281,
+            "sign": "Virgo",
+            "sign_longitude": 5.4281,
+            "formatted": "Virgo 05° 25' 41\""
+        },
+        "Sun": {
+            "longitude": 355.9147,
+            "sign": "Pisces",
+            "sign_longitude": 25.9147,
+            "formatted": "Pisces 25° 54' 53\""
+        },
+        "Moon": {
+            "longitude": 138.9314,
+            "sign": "Leo",
+            "sign_longitude": 18.9314,
+            "formatted": "Leo 18° 55' 53\""
+        },
+        "Mars": {
+            "longitude": 92.5161,
+            "sign": "Cancer",
+            "sign_longitude": 2.5161,
+            "formatted": "Cancer 02° 30' 58\""
+        },
+        "Mercury": {
+            "longitude": 332.9306,
+            "sign": "Pisces",
+            "sign_longitude": 2.9306,
+            "formatted": "Pisces 02° 55' 50\""
+        },
+        "Jupiter": {
+            "longitude": 53.2281,
+            "sign": "Taurus",
+            "sign_longitude": 23.2281,
+            "formatted": "Taurus 23° 13' 41\""
+        },
+        "Venus": {
+            "longitude": 330.7631,
+            "sign": "Pisces",
+            "sign_longitude": 0.7631,
+            "formatted": "Pisces 00° 45' 47\""
+        },
+        "Saturn": {
+            "longitude": 331.3883,
+            "sign": "Pisces",
+            "sign_longitude": 1.3883,
+            "formatted": "Pisces 01° 23' 18\""
+        },
+        "Rahu": {
+            "longitude": 332.1483,
+            "sign": "Pisces",
+            "sign_longitude": 2.1483,
+            "formatted": "Pisces 02° 08' 54\""
+        },
+        "Ketu": {
+            "longitude": 152.1483,
+            "sign": "Virgo",
+            "sign_longitude": 2.1483,
+            "formatted": "Virgo 02° 08' 54\""
+        },
+        "Uranus": {
+            "longitude": 31.1103,
+            "sign": "Taurus",
+            "sign_longitude": 1.1103,
+            "formatted": "Taurus 01° 06' 37\""
+        },
+        "Neptune": {
+            "longitude": 336.1997,
+            "sign": "Pisces",
+            "sign_longitude": 6.1997,
+            "formatted": "Pisces 06° 11' 59\""
+        },
+        "Pluto": {
+            "longitude": 279.3567,
+            "sign": "Capricorn",
+            "sign_longitude": 9.3567,
+            "formatted": "Capricorn 09° 21' 24\""
+        }
+    },
+    "nakshatras": {
+        "Ascendant": {
+            "nakshatra": "Vishakha",
+            "pada": 3,
+            "lord": "Jupiter"
+        },
+        "Sun": {
+            "nakshatra": "Revati",
+            "pada": 3,
+            "lord": "Mercury"
+        },
+        "Moon": {
+            "nakshatra": "Purva Phalguni",
+            "pada": 2,
+            "lord": "Venus"
+        },
+        "Mars": {
+            "nakshatra": "Punarvasu",
+            "pada": 4,
+            "lord": "Jupiter"
+        },
+        "Mercury": {
+            "nakshatra": "Purva Bhadrapada",
+            "pada": 4,
+            "lord": "Jupiter"
+        },
+        "Jupiter": {
+            "nakshatra": "Rohini",
+            "pada": 4,
+            "lord": "Moon"
+        },
+        "Venus": {
+            "nakshatra": "Purva Bhadrapada",
+            "pada": 4,
+            "lord": "Jupiter"
+        },
+        "Saturn": {
+            "nakshatra": "Purva Bhadrapada",
+            "pada": 4,
+            "lord": "Jupiter"
+        },
+        "Rahu": {
+            "nakshatra": "Purva Bhadrapada",
+            "pada": 4,
+            "lord": "Jupiter"
+        },
+        "Ketu": {
+            "nakshatra": "Uttara Phalguni",
+            "pada": 2,
+            "lord": "Sun"
+        },
+        "Uranus": {
+            "nakshatra": "Krittika",
+            "pada": 2,
+            "lord": "Sun"
+        },
+        "Neptune": {
+            "nakshatra": "Uttara Bhadrapada",
+            "pada": 1,
+            "lord": "Saturn"
+        },
+        "Pluto": {
+            "nakshatra": "Uttara Ashadha",
+            "pada": 4,
+            "lord": "Sun"
+        }
+    },
+    "kp_sublords": {
+        "Ascendant": {
+            "sign_lord": "Venus",
+            "star_lord": "Jupiter",
+            "sub_lord": "Moon",
+            "sub_sub_lord": "Rahu",
+            "kp_pointer": "Venus-Jupiter-Moon-Rahu"
+        },
+        "Sun": {
+            "sign_lord": "Neptune",
+            "star_lord": "Mercury",
+            "sub_lord": "Rahu",
+            "sub_sub_lord": "Sun",
+            "kp_pointer": "Neptune-Mercury-Rahu-Sun"
+        },
+        "Moon": {
+            "sign_lord": "Sun",
+            "star_lord": "Venus",
+            "sub_lord": "Rahu",
+            "sub_sub_lord": "Saturn",
+            "kp_pointer": "Sun-Venus-Rahu-Saturn"
+        },
+        "Mars": {
+            "sign_lord": "Moon",
+            "star_lord": "Jupiter",
+            "sub_lord": "Rahu",
+            "sub_sub_lord": "Mercury",
+            "kp_pointer": "Moon-Jupiter-Rahu-Mercury"
+        },
+        "Mercury": {
+            "sign_lord": "Neptune",
+            "star_lord": "Jupiter",
+            "sub_lord": "Rahu",
+            "sub_sub_lord": "Venus",
+            "kp_pointer": "Neptune-Jupiter-Rahu-Venus"
+        },
+        "Jupiter": {
+            "sign_lord": "Venus",
+            "star_lord": "Moon",
+            "sub_lord": "Sun",
+            "sub_sub_lord": "Mercury",
+            "kp_pointer": "Venus-Moon-Sun-Mercury"
+        },
+        "Venus": {
+            "sign_lord": "Neptune",
+            "star_lord": "Jupiter",
+            "sub_lord": "Mars",
+            "sub_sub_lord": "Rahu",
+            "kp_pointer": "Neptune-Jupiter-Mars-Rahu"
+        },
+        "Saturn": {
+            "sign_lord": "Neptune",
+            "star_lord": "Jupiter",
+            "sub_lord": "Mars",
+            "sub_sub_lord": "Moon",
+            "kp_pointer": "Neptune-Jupiter-Mars-Moon"
+        },
+        "Rahu": {
+            "sign_lord": "Neptune",
+            "star_lord": "Jupiter",
+            "sub_lord": "Rahu",
+            "sub_sub_lord": "Saturn",
+            "kp_pointer": "Neptune-Jupiter-Rahu-Saturn"
+        },
+        "Ketu": {
+            "sign_lord": "Mercury",
+            "star_lord": "Sun",
+            "sub_lord": "Jupiter",
+            "sub_sub_lord": "Ketu",
+            "kp_pointer": "Mercury-Sun-Jupiter-Ketu"
+        }
+    },
+    "house_cusps": {
+        "placidus": {
+            "1": {
+                "longitude": 179.6406,
+                "sign": "Libra",
+                "sign_longitude": 29.6406,
+                "formatted": "Libra 29° 38' 27\""
+            },
+            "2": {
+                "longitude": 209.5000,
+                "sign": "Scorpio",
+                "sign_longitude": 29.5000,
+                "formatted": "Scorpio 29° 30' 00\""
+            },
+            "3": {
+                "longitude": 240.5000,
+                "sign": "Sagittarius",
+                "sign_longitude": 30.5000,
+                "formatted": "Sagittarius 30° 30' 00\""
+            },
+            "4": {
+                "longitude": 271.5000,
+                "sign": "Capricorn",
+                "sign_longitude": 31.5000,
+                "formatted": "Capricorn 31° 30' 00\""
+            },
+            "5": {
+                "longitude": 302.5000,
+                "sign": "Aquarius",
+                "sign_longitude": 32.5000,
+                "formatted": "Aquarius 32° 30' 00\""
+            },
+            "6": {
+                "longitude": 333.5000,
+                "sign": "Pisces",
+                "sign_longitude": 33.5000,
+                "formatted": "Pisces 33° 30' 00\""
+            },
+            "7": {
+                "longitude": 359.6406,
+                "sign": "Aries",
+                "sign_longitude": 29.6406,
+                "formatted": "Aries 29° 38' 27\""
+            },
+            "8": {
+                "longitude": 29.5000,
+                "sign": "Taurus",
+                "sign_longitude": 29.5000,
+                "formatted": "Taurus 29° 30' 00\""
+            },
+            "9": {
+                "longitude": 60.5000,
+                "sign": "Gemini",
+                "sign_longitude": 30.5000,
+                "formatted": "Gemini 30° 30' 00\""
+            },
+            "10": {
+                "longitude": 91.5000,
+                "sign": "Cancer",
+                "sign_longitude": 31.5000,
+                "formatted": "Cancer 31° 30' 00\""
+            },
+            "11": {
+                "longitude": 122.5000,
+                "sign": "Leo",
+                "sign_longitude": 32.5000,
+                "formatted": "Leo 32° 30' 00\""
+            },
+            "12": {
+                "longitude": 153.5000,
+                "sign": "Virgo",
+                "sign_longitude": 33.5000,
+                "formatted": "Virgo 33° 30' 00\""
+            }
+        }
+    },
+    "upagrah": {
+        "Gulika": {
+            "longitude": 129.5000,
+            "sign": "Leo",
+            "sign_longitude": 9.5000,
+            "formatted": "Leo 09° 30' 00\""
+        },
+        "Mandi": {
+            "longitude": 129.5000,
+            "sign": "Leo",
+            "sign_longitude": 9.5000,
+            "formatted": "Leo 09° 30' 00\""
+        }
+    },
+    "_metadata": {
+        "created": "2023-11-14T12:00:00",
+        "reference_date": "2025/04/09",
+        "reference_time": "20:51",
+        "reference_timezone": "+05:30",
+        "reference_location": "Bangalore, India",
+        "reference_lat": 12.9716,
+        "reference_lon": 77.5946,
+        "source": "AstroSage and API data"
+    }
+}

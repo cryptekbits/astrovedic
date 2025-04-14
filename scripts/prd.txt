@@ -1,0 +1,293 @@
+# Product Requirements Document: Flatlib Vedic Astrology Library
+
+## Overview
+
+Flatlib is a Python library for computational astrology with a focus on Vedic (Indian) astrology calculations. The library provides a comprehensive set of tools for calculating and analyzing astrological charts, planetary positions, divisional charts, and various Vedic astrology techniques. It serves as a core calculation engine that can be used by applications requiring astrological data.
+
+## Project Goals
+
+1. Provide accurate and efficient astrological calculations for Vedic astrology
+2. Implement a comprehensive set of Vedic astrology techniques and methodologies
+3. Maintain a clean, well-documented, and easy-to-use API
+4. Support multiple ayanamsas (zodiac systems) and house systems
+5. Ensure mathematical accuracy through comprehensive testing
+6. Optimize performance through caching and efficient algorithms
+7. Package the library for distribution on PyPI
+
+## Target Users
+
+1. Astrology software developers
+2. Researchers in astrological techniques
+3. Python developers building astrology-related applications
+4. Astrologers with programming knowledge
+
+## Current Functionality
+
+### Core Components
+
+1. **Chart Creation and Basic Calculations**
+   - Chart creation with date, time, and location
+   - Support for multiple ayanamsas (Lahiri, Krishnamurti, Raman, etc.)
+   - Support for multiple house systems (Placidus, Koch, Equal, Whole Sign, etc.)
+   - Calculation of planetary positions
+   - Calculation of house cusps and angles
+   - Support for fixed stars
+
+2. **Vedic Astrology API**
+   - Unified interface for Vedic astrology calculations
+   - Support for creating Vedic charts with different ayanamsas
+   - Support for KP (Krishnamurti Paddhati) astrology
+
+3. **Nakshatra Calculations**
+   - Determination of nakshatra (lunar mansion) for planets
+   - Nakshatra lords and padas (quarters)
+   - Nakshatra qualities and characteristics
+
+4. **Panchang Calculations**
+   - Tithi (lunar day) calculations
+   - Karana (half-tithi) calculations
+   - Yoga (sun-moon combination) calculations
+   - Vara (weekday) calculations
+   - Hora (planetary hour) calculations
+
+5. **Upagrah (Shadow Planets) Calculations**
+   - Calculation of Gulika, Mandi, and other shadow planets
+   - Determination of upagrah positions and influences
+
+6. **Vimshottari Dasha System**
+   - Calculation of dasha balance at birth
+   - Determination of current dasha periods
+   - Mahadasha, Antardasha, and Pratyantardasha calculations
+   - Dasha timeline generation
+
+7. **KP (Krishnamurti Paddhati) Astrology**
+   - KP planet and house calculations
+   - KP significators and ruling planets
+   - KP sublord analysis
+
+8. **Divisional Charts (Vargas)**
+   - Calculation of all 16 divisional charts
+   - Rashi (D-1), Hora (D-2), Drekkana (D-3), Chaturthamsha (D-4)
+   - Saptamsha (D-7), Navamsha (D-9), Dashamsha (D-10), Dwadashamsha (D-12)
+   - Shodashamsha (D-16), Vimshamsha (D-20), Chaturvimshamsha (D-24)
+   - Saptavimshamsha (D-27), Trimshamsha (D-30), Khavedamsha (D-40)
+   - Akshavedamsha (D-45), Shashtiamsha (D-60)
+   - Analysis of varga positions and strengths
+
+9. **Shadbala (Six-fold Strength) Calculations**
+   - Sthana Bala (Positional Strength)
+   - Dig Bala (Directional Strength)
+   - Kala Bala (Temporal Strength)
+   - Cheshta Bala (Motional Strength)
+   - Naisargika Bala (Natural Strength)
+   - Drig Bala (Aspectual Strength)
+   - Total Shadbala and relative strength ranking
+
+10. **Ashtakavarga System**
+    - Bhinnashtakavarga (individual planet's points)
+    - Sarvashtakavarga (combined points)
+    - Transit analysis through Ashtakavarga
+
+11. **Yoga Calculations**
+    - Dhana Yogas (wealth combinations)
+    - Raja Yogas (power combinations)
+    - Nabhasa Yogas (special combinations)
+    - Chandra (Moon) Yogas
+    - Dosha Yogas (affliction combinations)
+    - Mahapurusha Yogas (great person combinations)
+
+12. **Muhurta (Electional Astrology)**
+    - Calculation of auspicious times for activities
+    - Determination of favorable and unfavorable muhurtas
+    - Panchang-based muhurta analysis
+
+13. **Sarvatobhadra Chakra**
+    - Calculation of Sarvatobhadra Chakra
+    - Determination of auspicious directions
+    - Tara Bala (lunar strength) calculations
+
+14. **Transit Analysis**
+    - Calculation of current transits
+    - Transit predictions based on natal chart
+    - Transit timeline generation
+
+15. **Compatibility Analysis**
+    - Kuta matching system
+    - Guna Milan (point-based matching)
+    - Dosha analysis (Kuja Dosha, Grahan Dosha, etc.)
+    - Navamsa-based compatibility
+    - Dasha-based compatibility predictions
+
+16. **Jaimini Astrology**
+    - Chara Karaka calculations
+    - Determination of Atmakaraka, Amatyakaraka, etc.
+
+17. **Caching System**
+    - Caching of ephemeris calculations
+    - Caching of frequently used calculations
+    - Performance optimization
+
+## Implemented Tests
+
+1. **Core Functionality Tests**
+   - Chart creation and basic calculations
+   - Angle calculations
+   - API function tests
+   - Factory function tests
+   - Error handling tests
+   - Edge case tests
+
+2. **Vedic Astrology Tests**
+   - Nakshatra calculations
+   - Panchang elements
+   - Upagrah positions
+   - Vimshottari dasha calculations
+   - KP astrology calculations
+   - Divisional chart calculations
+   - Shadbala calculations
+   - Ashtakavarga calculations
+   - Yoga detection
+   - Muhurta calculations
+   - Sarvatobhadra chakra
+   - Transit calculations
+   - Compatibility analysis
+   - Jaimini karaka calculations
+
+3. **Caching Tests**
+   - Calculation cache tests
+   - Ephemeris cache tests
+   - Reference data cache tests
+   - Comprehensive caching tests
+   - Cache configuration tests
+   - Cache performance tests
+
+## Missing Features and Pending Implementation
+
+### 1. Special Panchang Calculations
+   - Amavasya (New Moon) special calculations and significance
+   - Purnima (Full Moon) special calculations and significance
+   - Sankranti (Solar ingress) calculations
+   - Ekadashi tithi calculations and significance
+   - Pradosha tithi calculations
+   - Calculation of all 30 muhurtas in a day
+   - Determination of auspicious and inauspicious muhurtas
+   - Choghadiya muhurta calculations
+
+### 2. Advanced Planetary Calculations
+   - Deep combustion thresholds and calculations
+   - Planetary combustion effects on strength
+   - Heliacal rising and setting calculations
+   - Detection of planetary war conditions
+   - Determination of winner and loser in planetary war
+   - Strength modifications due to planetary war
+   - Calculation of retrograde station points
+   - Strength modifications due to retrograde motion
+   - Vakri effects in divisional charts
+
+### 3. Advanced Varga Analysis
+   - Calculation of Varga Visesha (special divisional chart strengths)
+   - Determination of Parijatamsha, Uttamamsha, Gopuramsha, etc.
+   - Vimshopaka Bala calculations
+   - Calculation of derived houses (Bhavat Bhavam)
+   - Analysis of derived house relationships
+
+### 4. Additional Dasha Systems
+   - Yogini Dasha calculations
+   - Chara Dasha (Jaimini) calculations
+   - Narayana Dasha calculations
+   - Kalachakra Dasha calculations
+   - Ashtottari Dasha calculations
+
+### 5. Advanced Jaimini Calculations
+   - Calculation of Aroodha Padas for all houses
+   - Calculation of Arudha Lagna
+   - Calculation of Upapada
+   - Special Jaimini aspect calculations
+   - Rashi drishti (sign aspect) calculations
+   - Calculation of Char Dasha, Sthira Dasha, and Shoola Dasha
+
+### 6. Advanced Ashtakavarga System
+   - Prashtarashtakavarga detailed point distribution calculations
+   - Trikona Sodhana (triangular reduction process)
+   - Ekadhi Pataki (transit effects through Ashtakavarga)
+
+### 7. Specialized Calculations
+   - Shri Pati Paddhati house sub-divisions
+   - Tajika System (annual chart calculations)
+   - Nadi Astrology calculations
+
+## Reference Data Needed for Testing
+
+### 1. House Systems Validation
+   - Precise house cusp longitudes for all 12 houses in Placidus, Koch, Equal, and Whole Sign systems
+   - House positions of all planets in different house systems
+
+### 2. Divisional Charts Validation
+   - Positions of all planets in D-9 (Navamsha), D-10 (Dashamsha), D-3 (Drekkana), D-7 (Saptamsha), and D-30 (Trimshamsha) charts
+   - Navamsha Lagna (Ascendant) position
+
+### 3. Shadbala Calculations Validation
+   - Sthana Bala (Positional Strength) values
+   - Dig Bala (Directional Strength) values
+   - Kala Bala (Temporal Strength) values
+   - Total Shadbala values and relative strength ranking
+
+### 4. Jaimini Astrology Validation
+   - Chara Karaka values and ordering
+
+### 5. Yoga Calculations Validation
+   - List of active Dhana Yogas, Raja Yogas, and Nabhasa Yogas
+
+### 6. Panchang Elements Validation
+   - Rahu Kaal, Yamaganda Kaal, Gulika Kaal, and Abhijit Muhurta timings
+
+## Technical Requirements
+
+### 1. Performance
+   - Optimize calculation-heavy functions
+   - Implement caching for frequently used calculations
+   - Minimize memory usage for large datasets
+
+### 2. Accuracy
+   - Ensure calculations match established astrological standards
+   - Validate against reference data from multiple sources
+   - Implement comprehensive testing for all calculations
+
+### 3. API Design
+   - Maintain consistent return formats across all functions
+   - Provide clear documentation for all API methods
+   - Ensure backward compatibility with existing code
+
+### 4. Code Organization
+   - Keep files concise and focused (under 600-700 lines)
+   - Split large implementations into multiple files
+   - Create dedicated directories/packages for complex functionality
+
+### 5. Documentation
+   - Document algorithms and sources for each calculation
+   - Provide examples for all major features
+   - Include references to astrological texts where applicable
+
+### 6. Testing
+   - Create comprehensive tests with reference data
+   - Test edge cases and error handling
+   - Ensure test coverage for all major features
+
+## Implementation Priorities
+
+### High Priority
+1. Special Panchang Calculations - Important for daily practice and muhurta
+2. Advanced Planetary Calculations - Essential for accurate strength assessment
+3. Advanced Varga Analysis - Core to comprehensive chart analysis
+
+### Medium Priority
+1. Additional Dasha Systems - Provides alternative timing techniques
+2. Advanced Jaimini Calculations - Valuable alternative approach
+3. Advanced Ashtakavarga System - Important for transit analysis
+
+### Low Priority
+1. Specialized Calculations - More niche applications
+
+## Conclusion
+
+Flatlib aims to be a comprehensive, accurate, and efficient library for Vedic astrology calculations. By implementing the missing features and ensuring proper testing with reference data, the library will provide a solid foundation for astrological applications and research. The focus is on mathematical accuracy, performance optimization, and a clean, well-documented API.
