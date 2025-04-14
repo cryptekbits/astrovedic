@@ -1,5 +1,9 @@
 # Astrovedic - Vedic Astrology Library
 
+<p align="center">
+  <img src="@resources/banner.png" alt="Astrovedic Banner">
+</p>
+
 > **⚠️ IMPORTANT: This library is currently under active development and is not yet ready for production use. APIs may change, and features are still being implemented and tested.**
 
 Astrovedic is a comprehensive Python library for Vedic and Traditional Astrology, evolved from the original flatlib library. It has been significantly enhanced with extensive Vedic astrology features while maintaining compatibility with Western astrological techniques.
