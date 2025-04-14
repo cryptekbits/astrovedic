@@ -72,7 +72,7 @@
     *   `- [ ]` Add calculation for various Tyajyam times (based on Nakshatra, Tithi etc.).
     *   `- [ ]` Add calculation for Chandra Kriya.
 *   **Combustion (Asta):** While mentioned in the Western `dignities/accidental.py`, a specific Vedic calculation for combustion based on degrees from the Sun is needed.
-    *   `- [ ]` Add Vedic combustion calculation (degrees of separation from Sun for each planet).
+    *   `- [x]` Add Vedic combustion calculation (degrees of separation from Sun for each planet).
 *   **Planetary States (Avasthas):** Calculation of different Avasthas (e.g., Baladi, Jagradadi, Lajjitadi) is missing.
     *   `- [ ]` Add Baladi Avastha calculation.
     *   `- [ ]` Add Jagradadi Avastha calculation.
