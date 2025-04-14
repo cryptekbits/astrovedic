@@ -50,7 +50,7 @@
 ## Missing Vedic Features (Computational)
 
 *   **Dasha Systems:** Currently, only Vimshottari Dasha seems implemented (`vedic/vimshottari.py`, `vedic/dashas.py`). Other major Dasha systems are missing.
-    *   `- [ ]` Add Ashtottari Dasha calculation.
+    *   `- [x]` Add Ashtottari Dasha calculation.
     *   `- [x]` Add Yogini Dasha calculation.
     *   `- [ ]` Add Kalachakra Dasha calculation.
     *   `- [x]` Add Jaimini Chara Dasha calculation.
