@@ -23,7 +23,7 @@ from astrovedic.vedic.compatibility.kuta.total import get_total_kuta_score
 # Import Dosha functions
 from astrovedic.vedic.compatibility.dosha import (
     get_mangal_dosha, get_kuja_dosha, get_shani_dosha,
-    get_grahan_dosha, get_dosha_cancellation, get_dosha_remedies
+    get_grahan_dosha, get_kalasarpa_dosha, get_dosha_cancellation
 )
 
 # Import Dasha functions
@@ -286,12 +286,16 @@ def get_compatibility_report(chart1, chart2):
         'chart1': get_grahan_dosha(chart1),
         'chart2': get_grahan_dosha(chart2)
     }
+    dosha_analysis['Kala Sarpa Dosha'] = {
+        'chart1': get_kalasarpa_dosha(chart1),
+        'chart2': get_kalasarpa_dosha(chart2)
+    }
 
     # Get the Dosha cancellation
     dosha_cancellation = get_dosha_cancellation(chart1, chart2)
 
     # Get the Dosha remedies
-    dosha_remedies = get_dosha_remedies(chart1, chart2)
+    dosha_remedies = {}
 
     # Get the Dasha compatibility
     dasha_compatibility = get_dasha_compatibility(chart1, chart2)

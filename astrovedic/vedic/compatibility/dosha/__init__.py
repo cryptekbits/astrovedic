@@ -15,6 +15,7 @@ from astrovedic.vedic.compatibility.dosha.mangal import get_mangal_dosha
 from astrovedic.vedic.compatibility.dosha.kuja import get_kuja_dosha
 from astrovedic.vedic.compatibility.dosha.shani import get_shani_dosha
 from astrovedic.vedic.compatibility.dosha.grahan import get_grahan_dosha
+from astrovedic.vedic.compatibility.dosha.kalasarpa import get_kalasarpa_dosha
 
 
 def get_dosha_cancellation(chart1, chart2):
@@ -37,15 +38,18 @@ def get_dosha_cancellation(chart1, chart2):
     shani_dosha2 = get_shani_dosha(chart2)
     grahan_dosha1 = get_grahan_dosha(chart1)
     grahan_dosha2 = get_grahan_dosha(chart2)
+    kalasarpa_dosha1 = get_kalasarpa_dosha(chart1)
+    kalasarpa_dosha2 = get_kalasarpa_dosha(chart2)
 
     # Check if both have the same Dosha
     both_have_mangal = mangal_dosha1['has_dosha'] and mangal_dosha2['has_dosha']
     both_have_kuja = kuja_dosha1['has_dosha'] and kuja_dosha2['has_dosha']
     both_have_shani = shani_dosha1['has_dosha'] and shani_dosha2['has_dosha']
     both_have_grahan = grahan_dosha1['has_dosha'] and grahan_dosha2['has_dosha']
+    both_have_kalasarpa = kalasarpa_dosha1['has_dosha'] and kalasarpa_dosha2['has_dosha']
 
     # Check for cancellation
-    is_cancelled = both_have_mangal or both_have_kuja or both_have_shani or both_have_grahan
+    is_cancelled = both_have_mangal or both_have_kuja or both_have_shani or both_have_grahan or both_have_kalasarpa
 
     return {
         'is_cancelled': is_cancelled,
@@ -53,10 +57,12 @@ def get_dosha_cancellation(chart1, chart2):
         'both_have_kuja': both_have_kuja,
         'both_have_shani': both_have_shani,
         'both_have_grahan': both_have_grahan,
+        'both_have_kalasarpa': both_have_kalasarpa,
         'mangal_dosha_cancelled': both_have_mangal,
         'kuja_dosha_cancelled': both_have_kuja,
         'shani_dosha_cancelled': both_have_shani,
-        'grahan_dosha_cancelled': both_have_grahan
+        'grahan_dosha_cancelled': both_have_grahan,
+        'kalasarpa_dosha_cancelled': both_have_kalasarpa
     }
 
 

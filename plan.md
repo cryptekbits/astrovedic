@@ -90,7 +90,7 @@
     *   `- [x]` Review Kuta modules (`vedic/compatibility/kuta/`) to ensure no interpretive logic remains.
 *   **Dosha Identification:** Ensure Dosha identification is purely computational.
     *   `- [x]` Review Dosha modules (`vedic/compatibility/dosha/`) to ensure no interpretive logic remains.
-    *   `- [ ]` Add Kala Sarpa Dosha *identification* logic (if not already covered adequately in `vedic/yogas/dosha.py`).
+    *   `- [x]` Add Kala Sarpa Dosha *identification* logic (if not already covered adequately in `vedic/yogas/dosha.py`).
 *   **Analysis/Prediction Code:** Remove any remaining interpretive/predictive logic from `analysis.py`, `basic_analysis.py`, and `predictions.py` files within all `vedic/` submodules (Ashtakavarga, Compatibility, Muhurta, Sarvatobhadra, Shadbala, Transits, Vargas, Yogas).
     *   `- [ ]` Remove prediction/analysis logic from `vedic/ashtakavarga/analysis.py`.
     *   `- [ ]` Remove prediction/analysis logic from `vedic/ashtakavarga/basic_analysis.py`.

@@ -24,7 +24,7 @@ from astrovedic.vedic.compatibility.kuta import (
 
 from astrovedic.vedic.compatibility.dosha import (
     get_mangal_dosha, get_kuja_dosha, get_shani_dosha,
-    get_grahan_dosha, get_dosha_cancellation, get_dosha_remedies
+    get_grahan_dosha, get_kalasarpa_dosha, get_dosha_cancellation
 )
 
 from astrovedic.vedic.compatibility.dasha import (
