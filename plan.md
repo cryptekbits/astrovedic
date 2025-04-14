@@ -58,7 +58,7 @@
 *   **Jaimini Astrology:** The `vedic/jaimini/` module is minimal.
     *   `vedic/jaimini/karakas.py`: Only calculates Chara Karakas.
         *   `- [x]` Add Sthira Karaka calculation.
-        *   `- [ ]` Add Arudha Pada (Lagna Pada, Graha Padas, Upapada Lagna) calculation.
+        *   `- [x]` Add Arudha Pada (Lagna Pada, Graha Padas, Upapada Lagna) calculation.
         *   `- [ ]` Add Jaimini Rashi Drishti calculation (ensure full implementation beyond `vedic/aspects.py`).
 *   **Vedic Aspects (Drishti):** While `vedic/aspects.py` exists, ensure it fully covers both Graha Drishti (planetary aspects including special aspects) and Rashi Drishti (sign aspects).
     *   `- [ ]` Verify/Implement full Graha Drishti rules (including strength variations if applicable computationally).
