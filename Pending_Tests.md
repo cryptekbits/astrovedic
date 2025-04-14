@@ -53,49 +53,58 @@ This document lists functionalities in the flatlib library that currently lack c
 
 ✅ Tests implemented in `tests/test_integration.py`
 
-## Additional Areas Needing Test Coverage
+## Additional Areas Needing Technical Test Coverage
 
-### Traditional Protocols
-- `flatlib/protocols/almutem.py` - Tests for Almutem calculations
-- `flatlib/protocols/behavior.py` - Tests for behavior analysis
-- `flatlib/protocols/temperament.py` - Tests for temperament analysis
+### Calculation Modules
 
-### Vedic Compatibility Subsystems
-- `flatlib/vedic/compatibility/dasha/` - Tests for compatibility dasha analysis
-- `flatlib/vedic/compatibility/dosha/` - Tests for dosha analysis in compatibility
-- `flatlib/vedic/compatibility/navamsa/` - Tests for navamsa compatibility analysis
+#### Traditional Protocol Calculations
+- `flatlib/protocols/almutem.py` - Tests for mathematical correctness of Almutem calculations
+- `flatlib/protocols/behavior.py` - Tests for consistent behavior score calculations
+- `flatlib/protocols/temperament.py` - Tests for temperament score calculations
 
-### Ashtakavarga Detailed Analysis
-- `flatlib/vedic/ashtakavarga/bhinna.py` - Tests for Bhinna Ashtakavarga
-- `flatlib/vedic/ashtakavarga/kaksha.py` - Tests for Kaksha Ashtakavarga
-- `flatlib/vedic/ashtakavarga/sarva.py` - Tests for Sarva Ashtakavarga
-- `flatlib/vedic/ashtakavarga/transits.py` - Tests for Ashtakavarga transit analysis
+#### Ashtakavarga Calculation Modules
+- `flatlib/vedic/ashtakavarga/bhinna.py` - Tests for Bhinna Ashtakavarga point calculations
+- `flatlib/vedic/ashtakavarga/kaksha.py` - Tests for Kaksha Ashtakavarga subdivision calculations
+- `flatlib/vedic/ashtakavarga/sarva.py` - Tests for Sarva Ashtakavarga summation calculations
 
-### Jaimini Astrology
-- More comprehensive tests for `flatlib/vedic/jaimini/` modules
+#### Jaimini System Calculations
+- `flatlib/vedic/jaimini/karakas.py` - Tests for Chara Karaka calculations and assignments
 
-### Specific Varga Charts
-- Individual tests for each divisional chart calculation (D-1 through D-60)
-- Tests for special varga calculations like Khavedamsha and Akshavedamsha
+#### Divisional Chart Calculations
+- Tests for mathematical accuracy of divisional chart calculations (D-1 through D-60)
+- Tests for special varga calculation algorithms like Khavedamsha and Akshavedamsha
 
-### Muhurta Specific Activities
-- `flatlib/vedic/muhurta/activities.py` - Tests for specific activity timing
-- `flatlib/vedic/muhurta/events.py` - Tests for event timing
-- `flatlib/vedic/muhurta/timing.py` - Tests for general timing calculations
+### API Consistency Tests
 
-### Specific Yoga Types
-- `flatlib/vedic/yogas/chandra.py` - Tests for Moon-based yogas
-- `flatlib/vedic/yogas/dhana.py` - Tests for wealth yogas
-- `flatlib/vedic/yogas/dosha.py` - Tests for inauspicious yogas
-- `flatlib/vedic/yogas/mahapurusha.py` - Tests for Mahapurusha yogas
-- `flatlib/vedic/yogas/nabhasa.py` - Tests for Nabhasa yogas
-- `flatlib/vedic/yogas/raja.py` - Tests for Raja yogas
+#### Compatibility Module APIs
+- `flatlib/vedic/compatibility/dasha/` - Tests for API consistency and parameter validation
+- `flatlib/vedic/compatibility/dosha/` - Tests for consistent return types and error handling
+- `flatlib/vedic/compatibility/navamsa/` - Tests for proper function signatures and return values
 
-### Shadbala Components
-- More detailed tests for individual Shadbala components
-- Tests for Shadbala analysis and interpretation
+#### Muhurta Module APIs
+- `flatlib/vedic/muhurta/activities.py` - Tests for API consistency and parameter validation
+- `flatlib/vedic/muhurta/events.py` - Tests for consistent return types and error handling
+- `flatlib/vedic/muhurta/timing.py` - Tests for proper function signatures and return values
 
-### Performance Tests
-- Benchmark tests for critical calculations
-- Memory usage tests for large chart sets
+#### Yoga Module APIs
+- Tests for consistent API patterns across all yoga calculation modules
+- Tests for proper error handling and edge cases in yoga detection functions
+
+#### Shadbala Module APIs
+- Tests for consistent API patterns across all strength calculation components
+- Tests for proper parameter validation and error handling
+
+### Performance and Optimization Tests
+
+#### Benchmark Tests
+- Benchmark tests for critical and computationally intensive calculations
+- Comparative performance tests for alternative calculation methods
+
+#### Memory Usage Tests
+- Memory profiling for large chart sets and extensive calculations
+- Tests for memory leaks in long-running operations
+
+#### Caching Effectiveness Tests
 - Optimization tests for cached vs. non-cached operations
+- Tests for cache invalidation scenarios
+- Tests for cache hit/miss ratios under various workloads
