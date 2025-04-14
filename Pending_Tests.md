@@ -57,10 +57,7 @@ This document lists functionalities in the flatlib library that currently lack c
 
 ### Calculation Modules
 
-#### Traditional Protocol Calculations
-- `flatlib/protocols/almutem.py` - Tests for mathematical correctness of Almutem calculations
-- `flatlib/protocols/behavior.py` - Tests for consistent behavior score calculations
-- `flatlib/protocols/temperament.py` - Tests for temperament score calculations
+> **Note on Testing Mathematical Accuracy**: Testing for mathematical accuracy requires reliable reference data from authoritative sources. For each calculation module, we should identify and document the reference data source before implementing tests.
 
 #### Ashtakavarga Calculation Modules
 - `flatlib/vedic/ashtakavarga/bhinna.py` - Tests for Bhinna Ashtakavarga point calculations
@@ -93,6 +90,23 @@ This document lists functionalities in the flatlib library that currently lack c
 #### Shadbala Module APIs
 - Tests for consistent API patterns across all strength calculation components
 - Tests for proper parameter validation and error handling
+
+### Alternative Testing Approaches
+
+#### Invariant Testing
+- Tests that verify mathematical invariants that should hold true regardless of input
+- Tests for properties that should remain consistent across different calculation methods
+- Tests that verify internal consistency of calculations (e.g., sum of all house cusps should equal 360°)
+
+#### Regression Testing
+- Tests that ensure calculations don't change unexpectedly between versions
+- Tests that verify fixed bugs remain fixed
+- Tests that capture current behavior as a baseline for future comparison
+
+#### Boundary and Edge Case Testing
+- Tests for calculations at the boundaries of valid input ranges
+- Tests for handling of special cases (e.g., planets at 0° or 29° of a sign)
+- Tests for proper handling of extreme inputs (e.g., dates far in the past or future)
 
 ### Performance and Optimization Tests
 
