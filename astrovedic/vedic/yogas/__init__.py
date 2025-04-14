@@ -45,6 +45,11 @@ from astrovedic.vedic.yogas.chandra import (
     has_sunapha_yoga, has_anapha_yoga,
     has_durudhura_yoga, has_kemadruma_yoga
 )
+from astrovedic.vedic.yogas.surya import (
+    get_surya_yogas, has_vasi_yoga,
+    has_vesi_yoga, has_ubhayachari_yoga,
+    has_budha_aditya_yoga, has_sun_parivartana_yoga
+)
 from astrovedic.vedic.yogas.basic_analysis import (
     get_basic_yoga_analysis
 )
@@ -58,11 +63,13 @@ DHANA_YOGA = 'Dhana Yoga'
 NABHASA_YOGA = 'Nabhasa Yoga'
 DOSHA_YOGA = 'Dosha Yoga'
 CHANDRA_YOGA = 'Chandra Yoga'
+SURYA_YOGA = 'Surya Yoga'
 
 # List of all Yoga types
 LIST_YOGA_TYPES = [
     MAHAPURUSHA_YOGA, RAJA_YOGA, DHANA_YOGA,
-    NABHASA_YOGA, DOSHA_YOGA, CHANDRA_YOGA
+    NABHASA_YOGA, DOSHA_YOGA, CHANDRA_YOGA,
+    SURYA_YOGA
 ]
 
 
@@ -84,6 +91,7 @@ def get_all_yogas(chart):
         'nabhasa_yogas': get_nabhasa_yogas(chart),
         'dosha_yogas': get_dosha_yogas(chart),
         'chandra_yogas': get_chandra_yogas(chart),
+        'surya_yogas': get_surya_yogas(chart),
         'summary': None
     }
 

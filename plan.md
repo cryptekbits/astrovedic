@@ -85,7 +85,7 @@
 *   **Upagrahas:** While several are present in `vedic/upagrah.py`, ensure all standard ones used for computation (not just interpretation) are included.
     *   `- [x]` Verify/Add calculations for Kala, Mrityu, Artha Prahara (if deemed computational data).
 *   **Yoga Completeness:** While many Yogas are identified, ensure the *identification* logic covers all major computational categories (not requiring interpretation).
-    *   `- [ ]` Review Yoga categories for any missing major computational patterns (e.g., specific Sun Yogas like Vasi, Vesi, Ubhayachari).
+    *   `- [x]` Review Yoga categories for any missing major computational patterns (e.g., specific Sun Yogas like Vasi, Vesi, Ubhayachari).
 *   **Compatibility (Kuta):** Ensure all standard Kuta calculations are purely computational.
     *   `- [ ]` Review Kuta modules (`vedic/compatibility/kuta/`) to ensure no interpretive logic remains.
 *   **Dosha Identification:** Ensure Dosha identification is purely computational.
