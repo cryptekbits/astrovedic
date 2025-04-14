@@ -40,8 +40,7 @@ def get_tara_kuta(chart1, chart2):
     # Calculate the score
     score = calculate_tara_score(tara)
 
-    # Generate the description
-    description = generate_tara_description(tara, score)
+    
 
     return {
         'nakshatra1': nakshatra1['name'],
@@ -49,8 +48,7 @@ def get_tara_kuta(chart1, chart2):
         'tara': tara,
         'score': score,
         'max_score': 3,
-        'description': description
-    }
+        }
 
 
 def calculate_tara(nakshatra_num1, nakshatra_num2):
@@ -107,56 +105,7 @@ def calculate_tara_score(tara):
     return tara_scores.get(tara, 0)
 
 
-def generate_tara_description(tara, score):
-    """
-    Generate a description for the Tara Kuta
 
-    Args:
-        tara (int): The Tara (1-9)
-        score (int): The Tara Kuta score
-
-    Returns:
-        str: The Tara Kuta description
-    """
-    # Define the Tara names and descriptions
-    tara_info = {
-        1: {
-            'name': 'Janma (Birth)',
-            'description': 'Indicates a strong spiritual connection and mutual understanding.'
-        },
-        2: {
-            'name': 'Sampat (Wealth)',
-            'description': 'May bring financial challenges and material disagreements.'
-        },
-        3: {
-            'name': 'Vipat (Danger)',
-            'description': 'Indicates potential conflicts but can be overcome with effort.'
-        },
-        4: {
-            'name': 'Kshema (Well-being)',
-            'description': 'Brings comfort, security, and mutual care in the relationship.'
-        },
-        5: {
-            'name': 'Pratyak (Obstacle)',
-            'description': 'May create obstacles and misunderstandings in the relationship.'
-        },
-        6: {
-            'name': 'Sadhaka (Achievement)',
-            'description': 'Supports mutual growth and achievement of goals.'
-        },
-        7: {
-            'name': 'Vadha (Destruction)',
-            'description': 'May lead to arguments and destructive patterns in the relationship.'
-        },
-        8: {
-            'name': 'Mitra (Friend)',
-            'description': 'Indicates a strong friendship and supportive partnership.'
-        },
-        9: {
-            'name': 'Ati-Mitra (Best Friend)',
-            'description': 'Indicates an excellent friendship and deeply supportive partnership.'
-        }
-    }
 
     # Get the Tara information
     tara_name = tara_info.get(tara, {}).get('name', 'Unknown')

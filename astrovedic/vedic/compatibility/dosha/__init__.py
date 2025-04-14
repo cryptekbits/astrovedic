@@ -47,26 +47,6 @@ def get_dosha_cancellation(chart1, chart2):
     # Check for cancellation
     is_cancelled = both_have_mangal or both_have_kuja or both_have_shani or both_have_grahan
 
-    # Generate the description
-    description_parts = []
-    if both_have_mangal:
-        description_parts.append("Mangal Dosha")
-    if both_have_kuja:
-        description_parts.append("Kuja Dosha")
-    if both_have_shani:
-        description_parts.append("Shani Dosha")
-    if both_have_grahan:
-        description_parts.append("Grahan Dosha")
-
-    if description_parts:
-        if len(description_parts) > 1:
-            dosha_list = ", ".join(description_parts[:-1]) + ", and " + description_parts[-1]
-        else:
-            dosha_list = description_parts[0]
-        description = f"Both individuals have {dosha_list}, which cancels out the negative effects."
-    else:
-        description = "No Dosha cancellation is present."
-
     return {
         'is_cancelled': is_cancelled,
         'both_have_mangal': both_have_mangal,
@@ -76,118 +56,8 @@ def get_dosha_cancellation(chart1, chart2):
         'mangal_dosha_cancelled': both_have_mangal,
         'kuja_dosha_cancelled': both_have_kuja,
         'shani_dosha_cancelled': both_have_shani,
-        'grahan_dosha_cancelled': both_have_grahan,
-        'description': description
+        'grahan_dosha_cancelled': both_have_grahan
     }
 
 
-def get_dosha_remedies(chart1, chart2):
-    """
-    Get remedies for Doshas
 
-    Args:
-        chart1 (Chart): The first chart
-        chart2 (Chart): The second chart
-
-    Returns:
-        dict: Dictionary with Dosha remedies
-    """
-    # Get the Doshas for each chart
-    mangal_dosha1 = get_mangal_dosha(chart1)
-    mangal_dosha2 = get_mangal_dosha(chart2)
-    kuja_dosha1 = get_kuja_dosha(chart1)
-    kuja_dosha2 = get_kuja_dosha(chart2)
-    shani_dosha1 = get_shani_dosha(chart1)
-    shani_dosha2 = get_shani_dosha(chart2)
-    grahan_dosha1 = get_grahan_dosha(chart1)
-    grahan_dosha2 = get_grahan_dosha(chart2)
-
-    # Initialize the remedies with default empty lists for all possible doshas
-    remedies = {
-        'Mangal Dosha (Person 1)': [],
-        'Mangal Dosha (Person 2)': [],
-        'Kuja Dosha (Person 1)': [],
-        'Kuja Dosha (Person 2)': [],
-        'Shani Dosha (Person 1)': [],
-        'Shani Dosha (Person 2)': [],
-        'Grahan Dosha (Person 1)': [],
-        'Grahan Dosha (Person 2)': []
-    }
-
-    # Add remedies for Mangal Dosha
-    if mangal_dosha1['has_dosha']:
-        remedies['Mangal Dosha (Person 1)'] = [
-            "Wear a red coral gemstone set in gold or copper.",
-            "Recite the Hanuman Chalisa daily.",
-            "Perform Mars-related rituals on Tuesdays.",
-            "Donate red items like red lentils, red cloth, or copper items.",
-            "Worship Lord Hanuman or Lord Kartikeya."
-        ]
-
-    if mangal_dosha2['has_dosha']:
-        remedies['Mangal Dosha (Person 2)'] = [
-            "Wear a red coral gemstone set in gold or copper.",
-            "Recite the Hanuman Chalisa daily.",
-            "Perform Mars-related rituals on Tuesdays.",
-            "Donate red items like red lentils, red cloth, or copper items.",
-            "Worship Lord Hanuman or Lord Kartikeya."
-        ]
-
-    # Add remedies for Kuja Dosha
-    if kuja_dosha1['has_dosha']:
-        remedies['Kuja Dosha (Person 1)'] = [
-            "Perform Kuja Dosha Nivarana Puja.",
-            "Recite the Mangal Gayatri Mantra 108 times daily.",
-            "Donate copper vessels filled with jaggery and ghee.",
-            "Worship Lord Subramanya on Tuesdays.",
-            "Perform charity to unmarried girls."
-        ]
-
-    if kuja_dosha2['has_dosha']:
-        remedies['Kuja Dosha (Person 2)'] = [
-            "Perform Kuja Dosha Nivarana Puja.",
-            "Recite the Mangal Gayatri Mantra 108 times daily.",
-            "Donate copper vessels filled with jaggery and ghee.",
-            "Worship Lord Subramanya on Tuesdays.",
-            "Perform charity to unmarried girls."
-        ]
-
-    # Add remedies for Shani Dosha
-    if shani_dosha1['has_dosha']:
-        remedies['Shani Dosha (Person 1)'] = [
-            "Wear a blue sapphire or amethyst gemstone.",
-            "Recite the Shani Stotra or Shani Chalisa on Saturdays.",
-            "Offer mustard oil to Lord Shani on Saturdays.",
-            "Feed crows and dogs on Saturdays.",
-            "Donate black items like sesame seeds, iron, or black cloth."
-        ]
-
-    if shani_dosha2['has_dosha']:
-        remedies['Shani Dosha (Person 2)'] = [
-            "Wear a blue sapphire or amethyst gemstone.",
-            "Recite the Shani Stotra or Shani Chalisa on Saturdays.",
-            "Offer mustard oil to Lord Shani on Saturdays.",
-            "Feed crows and dogs on Saturdays.",
-            "Donate black items like sesame seeds, iron, or black cloth."
-        ]
-
-    # Add remedies for Grahan Dosha
-    if grahan_dosha1['has_dosha']:
-        remedies['Grahan Dosha (Person 1)'] = [
-            "Perform Grahan Dosha Nivarana Puja.",
-            "Recite the Surya Gayatri Mantra and Chandra Gayatri Mantra.",
-            "Donate according to the afflicted planet (Sun or Moon).",
-            "Perform charity during solar or lunar eclipses.",
-            "Wear a ruby (for Sun) or pearl (for Moon) gemstone."
-        ]
-
-    if grahan_dosha2['has_dosha']:
-        remedies['Grahan Dosha (Person 2)'] = [
-            "Perform Grahan Dosha Nivarana Puja.",
-            "Recite the Surya Gayatri Mantra and Chandra Gayatri Mantra.",
-            "Donate according to the afflicted planet (Sun or Moon).",
-            "Perform charity during solar or lunar eclipses.",
-            "Wear a ruby (for Sun) or pearl (for Moon) gemstone."
-        ]
-
-    return remedies

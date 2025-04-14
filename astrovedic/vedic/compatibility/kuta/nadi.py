@@ -37,16 +37,14 @@ def get_nadi_kuta(chart1, chart2):
     # Calculate the score
     score = calculate_nadi_score(nadi1, nadi2)
 
-    # Generate the description
-    description = generate_nadi_description(nadi1, nadi2, score)
+    
 
     return {
         'nadi1': nadi1,
         'nadi2': nadi2,
         'score': score,
         'max_score': 8,
-        'description': description
-    }
+        }
 
 
 def get_nadi(nakshatra):
@@ -111,24 +109,7 @@ def calculate_nadi_score(nadi1, nadi2):
         return 0
 
 
-def generate_nadi_description(nadi1, nadi2, score):
-    """
-    Generate a description for the Nadi Kuta
 
-    Args:
-        nadi1 (str): The Nadi of the first person
-        nadi2 (str): The Nadi of the second person
-        score (int): The Nadi Kuta score
-
-    Returns:
-        str: The Nadi Kuta description
-    """
-    # Define the Nadi descriptions
-    nadi_descriptions = {
-        'Vata': 'air constitution (active, creative, and quick)',
-        'Pitta': 'fire constitution (intense, intelligent, and determined)',
-        'Kapha': 'water constitution (calm, stable, and nurturing)'
-    }
 
     # Get the descriptions
     desc1 = nadi_descriptions.get(nadi1, 'unknown constitution')

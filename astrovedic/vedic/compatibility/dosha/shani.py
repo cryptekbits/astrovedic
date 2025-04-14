@@ -38,8 +38,7 @@ def get_shani_dosha(chart):
     # Check for Sade Sati
     sade_sati = check_sade_sati(chart, saturn)
     
-    # Generate the description
-    description = generate_shani_dosha_description(saturn_house, is_in_dosha_house, cancellation, sade_sati)
+    
     
     return {
         'has_dosha': has_dosha,
@@ -47,8 +46,7 @@ def get_shani_dosha(chart):
         'is_in_dosha_house': is_in_dosha_house,
         'cancellation': cancellation,
         'sade_sati': sade_sati,
-        'description': description
-    }
+        }
 
 
 def get_house_position(chart, longitude):
@@ -201,49 +199,4 @@ def is_aspected_by(chart, longitude1, longitude2):
     return False
 
 
-def generate_shani_dosha_description(saturn_house, is_in_dosha_house, cancellation, sade_sati):
-    """
-    Generate a description for Shani Dosha
-    
-    Args:
-        saturn_house (int): The house position of Saturn
-        is_in_dosha_house (bool): Whether Saturn is in a Dosha house
-        cancellation (dict): The cancellation information
-        sade_sati (dict): The Sade Sati information
-    
-    Returns:
-        str: The Shani Dosha description
-    """
-    description = ""
-    
-    # Check if there is no Shani Dosha
-    if not is_in_dosha_house:
-        description += f"No Shani Dosha is present. Saturn is in the {saturn_house}th house, which is not a Dosha house. "
-    else:
-        # Check if Shani Dosha is cancelled
-        if cancellation['is_cancelled']:
-            factors = ", ".join(cancellation['cancellation_factors'])
-            description += f"Shani Dosha is present but cancelled. Saturn is in the {saturn_house}th house, but the Dosha is cancelled due to: {factors}. "
-        else:
-            # Define the effects for each Dosha house
-            dosha_effects = {
-                1: "may cause physical ailments, obstacles, and a serious personality",
-                2: "may cause financial problems, family conflicts, and speech defects",
-                4: "may cause property disputes, emotional instability, and mother-related issues",
-                7: "may cause marital discord, delayed marriage, or health issues for the spouse",
-                8: "may cause health problems, accidents, and sudden changes in life",
-                10: "may cause career obstacles, authority issues, and father-related problems",
-                12: "may cause financial losses, isolation, and foreign residence"
-            }
-            
-            effect = dosha_effects.get(saturn_house, "may cause various challenges in life")
-            
-            description += f"Shani Dosha is present. Saturn is in the {saturn_house}th house, which {effect}. "
-    
-    # Add Sade Sati information
-    if sade_sati['is_in_sade_sati']:
-        description += f"The person is currently in Sade Sati ({sade_sati['phase']}), which is a challenging 7.5-year period of Saturn transit."
-    else:
-        description += "The person is not currently in Sade Sati."
-    
-    return description
+

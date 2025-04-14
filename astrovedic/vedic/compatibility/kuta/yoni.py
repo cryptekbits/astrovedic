@@ -37,15 +37,11 @@ def get_yoni_kuta(chart1, chart2):
     # Calculate the score
     score = calculate_yoni_score(yoni1, yoni2)
 
-    # Generate the description
-    description = generate_yoni_description(yoni1, yoni2, score)
-
     return {
         'yoni1': yoni1,
         'yoni2': yoni2,
         'score': score,
-        'max_score': 4,
-        'description': description
+        'max_score': 4
     }
 
 
@@ -196,25 +192,4 @@ def calculate_yoni_score(yoni1, yoni2):
     return yoni_compatibility.get(yoni1, {}).get(yoni2, 0)
 
 
-def generate_yoni_description(yoni1, yoni2, score):
-    """
-    Generate a description for the Yoni Kuta
 
-    Args:
-        yoni1 (str): The Yoni of the first person
-        yoni2 (str): The Yoni of the second person
-        score (int): The Yoni Kuta score
-
-    Returns:
-        str: The Yoni Kuta description
-    """
-    if score == 4:
-        return f"Both individuals have the same Yoni ({yoni1}), indicating excellent physical and temperamental compatibility."
-    elif score == 3:
-        return f"The Yonis ({yoni1} and {yoni2}) are highly compatible, indicating good physical and temperamental harmony."
-    elif score == 2:
-        return f"The Yonis ({yoni1} and {yoni2}) are moderately compatible, indicating average physical and temperamental harmony."
-    elif score == 1:
-        return f"The Yonis ({yoni1} and {yoni2}) have low compatibility, indicating potential physical and temperamental differences."
-    else:
-        return f"The Yonis ({yoni1} and {yoni2}) are incompatible, indicating significant physical and temperamental differences."

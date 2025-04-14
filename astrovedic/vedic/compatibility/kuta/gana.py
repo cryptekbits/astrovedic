@@ -37,16 +37,14 @@ def get_gana_kuta(chart1, chart2):
     # Calculate the score
     score = calculate_gana_score(gana1, gana2)
 
-    # Generate the description
-    description = generate_gana_description(gana1, gana2, score)
+    
 
     return {
         'gana1': gana1,
         'gana2': gana2,
         'score': score,
         'max_score': 6,
-        'description': description
-    }
+        }
 
 
 def get_gana(nakshatra):
@@ -127,24 +125,7 @@ def calculate_gana_score(gana1, gana2):
     return gana_compatibility.get(gana1, {}).get(gana2, 0)
 
 
-def generate_gana_description(gana1, gana2, score):
-    """
-    Generate a description for the Gana Kuta
 
-    Args:
-        gana1 (str): The Gana of the first person
-        gana2 (str): The Gana of the second person
-        score (int): The Gana Kuta score
-
-    Returns:
-        str: The Gana Kuta description
-    """
-    # Define the Gana descriptions
-    gana_descriptions = {
-        'Deva': 'divine and spiritual nature',
-        'Manushya': 'human and balanced nature',
-        'Rakshasa': 'demonic and passionate nature'
-    }
 
     # Get the descriptions
     desc1 = gana_descriptions.get(gana1, 'unknown nature')

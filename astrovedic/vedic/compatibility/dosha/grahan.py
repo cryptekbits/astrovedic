@@ -55,15 +55,7 @@ def get_grahan_dosha(chart):
     # Determine if there is Grahan Dosha after cancellation
     has_dosha = has_dosha and not cancellation['is_cancelled']
     
-    # Generate the description
-    description = generate_grahan_dosha_description(
-        has_solar_eclipse, has_lunar_eclipse,
-        sun_rahu_conjunction, sun_rahu_opposition,
-        moon_ketu_conjunction, moon_ketu_opposition,
-        sun_ketu_conjunction, sun_ketu_opposition,
-        moon_rahu_conjunction, moon_rahu_opposition,
-        cancellation
-    )
+    
     
     return {
         'has_dosha': has_dosha,
@@ -78,8 +70,7 @@ def get_grahan_dosha(chart):
         'moon_rahu_conjunction': moon_rahu_conjunction,
         'moon_rahu_opposition': moon_rahu_opposition,
         'cancellation': cancellation,
-        'description': description
-    }
+        }
 
 
 def is_conjunct(longitude1, longitude2, orb=10):
@@ -198,71 +189,4 @@ def is_aspected_by(chart, longitude1, longitude2):
     return False
 
 
-def generate_grahan_dosha_description(
-    has_solar_eclipse, has_lunar_eclipse,
-    sun_rahu_conjunction, sun_rahu_opposition,
-    moon_ketu_conjunction, moon_ketu_opposition,
-    sun_ketu_conjunction, sun_ketu_opposition,
-    moon_rahu_conjunction, moon_rahu_opposition,
-    cancellation
-):
-    """
-    Generate a description for Grahan Dosha
-    
-    Args:
-        has_solar_eclipse (bool): Whether there is a solar eclipse
-        has_lunar_eclipse (bool): Whether there is a lunar eclipse
-        sun_rahu_conjunction (bool): Whether Sun and Rahu are conjunct
-        sun_rahu_opposition (bool): Whether Sun and Rahu are opposite
-        moon_ketu_conjunction (bool): Whether Moon and Ketu are conjunct
-        moon_ketu_opposition (bool): Whether Moon and Ketu are opposite
-        sun_ketu_conjunction (bool): Whether Sun and Ketu are conjunct
-        sun_ketu_opposition (bool): Whether Sun and Ketu are opposite
-        moon_rahu_conjunction (bool): Whether Moon and Rahu are conjunct
-        moon_rahu_opposition (bool): Whether Moon and Rahu are opposite
-        cancellation (dict): The cancellation information
-    
-    Returns:
-        str: The Grahan Dosha description
-    """
-    # Check if there is no Grahan Dosha
-    if not (has_solar_eclipse or has_lunar_eclipse):
-        return "No Grahan Dosha is present. There are no eclipse-like configurations in the chart."
-    
-    # Check if Grahan Dosha is cancelled
-    if cancellation['is_cancelled']:
-        factors = ", ".join(cancellation['cancellation_factors'])
-        return f"Grahan Dosha is present but cancelled. The Dosha is cancelled due to: {factors}."
-    
-    # Generate the description
-    description = "Grahan Dosha is present. "
-    
-    if has_solar_eclipse:
-        description += "There is a solar eclipse-like configuration: "
-        
-        if sun_rahu_conjunction:
-            description += "Sun is conjunct Rahu. "
-        if sun_rahu_opposition:
-            description += "Sun is opposite Rahu. "
-        if sun_ketu_conjunction:
-            description += "Sun is conjunct Ketu. "
-        if sun_ketu_opposition:
-            description += "Sun is opposite Ketu. "
-        
-        description += "This may cause health issues, eye problems, and obstacles in career. "
-    
-    if has_lunar_eclipse:
-        description += "There is a lunar eclipse-like configuration: "
-        
-        if moon_ketu_conjunction:
-            description += "Moon is conjunct Ketu. "
-        if moon_ketu_opposition:
-            description += "Moon is opposite Ketu. "
-        if moon_rahu_conjunction:
-            description += "Moon is conjunct Rahu. "
-        if moon_rahu_opposition:
-            description += "Moon is opposite Rahu. "
-        
-        description += "This may cause emotional instability, mental stress, and mother-related issues."
-    
-    return description
+

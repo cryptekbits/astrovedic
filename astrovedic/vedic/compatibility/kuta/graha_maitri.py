@@ -35,8 +35,7 @@ def get_graha_maitri_kuta(chart1, chart2):
     # Calculate the score
     score = calculate_graha_maitri_score(friendship)
     
-    # Generate the description
-    description = generate_graha_maitri_description(lord1, lord2, friendship, score)
+    
     
     return {
         'lord1': lord1,
@@ -44,8 +43,7 @@ def get_graha_maitri_kuta(chart1, chart2):
         'friendship': friendship,
         'score': score,
         'max_score': 5,
-        'description': description
-    }
+        }
 
 
 def get_sign_lord(sign):
@@ -180,24 +178,4 @@ def calculate_graha_maitri_score(friendship):
     return friendship_scores.get(friendship, 0)
 
 
-def generate_graha_maitri_description(lord1, lord2, friendship, score):
-    """
-    Generate a description for the Graha Maitri Kuta
-    
-    Args:
-        lord1 (str): The lord of the first person's Moon sign
-        lord2 (str): The lord of the second person's Moon sign
-        friendship (str): The friendship type
-        score (int): The Graha Maitri Kuta score
-    
-    Returns:
-        str: The Graha Maitri Kuta description
-    """
-    if friendship == 'Friend':
-        return f"The lords of the Moon signs ({lord1} and {lord2}) are friends, indicating excellent planetary compatibility and mutual understanding."
-    elif friendship == 'Neutral':
-        return f"The lords of the Moon signs ({lord1} and {lord2}) are neutral to each other, indicating moderate planetary compatibility."
-    elif friendship == 'Enemy':
-        return f"The lords of the Moon signs ({lord1} and {lord2}) are enemies, indicating potential conflicts and misunderstandings."
-    else:
-        return f"The relationship between the lords of the Moon signs ({lord1} and {lord2}) is unknown."
+

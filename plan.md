@@ -87,9 +87,9 @@
 *   **Yoga Completeness:** While many Yogas are identified, ensure the *identification* logic covers all major computational categories (not requiring interpretation).
     *   `- [x]` Review Yoga categories for any missing major computational patterns (e.g., specific Sun Yogas like Vasi, Vesi, Ubhayachari).
 *   **Compatibility (Kuta):** Ensure all standard Kuta calculations are purely computational.
-    *   `- [ ]` Review Kuta modules (`vedic/compatibility/kuta/`) to ensure no interpretive logic remains.
+    *   `- [x]` Review Kuta modules (`vedic/compatibility/kuta/`) to ensure no interpretive logic remains.
 *   **Dosha Identification:** Ensure Dosha identification is purely computational.
-    *   `- [ ]` Review Dosha modules (`vedic/compatibility/dosha/`) to ensure no interpretive logic remains.
+    *   `- [x]` Review Dosha modules (`vedic/compatibility/dosha/`) to ensure no interpretive logic remains.
     *   `- [ ]` Add Kala Sarpa Dosha *identification* logic (if not already covered adequately in `vedic/yogas/dosha.py`).
 *   **Analysis/Prediction Code:** Remove any remaining interpretive/predictive logic from `analysis.py`, `basic_analysis.py`, and `predictions.py` files within all `vedic/` submodules (Ashtakavarga, Compatibility, Muhurta, Sarvatobhadra, Shadbala, Transits, Vargas, Yogas).
     *   `- [ ]` Remove prediction/analysis logic from `vedic/ashtakavarga/analysis.py`.

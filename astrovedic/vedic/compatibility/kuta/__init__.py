@@ -44,29 +44,10 @@ def get_total_kuta_score(kuta_scores):
     # Calculate the percentage
     percentage = (total_score / max_total_score) * 100 if max_total_score > 0 else 0
 
-    # Determine the compatibility level
-    if percentage >= 80:
-        level = 'Excellent'
-        description = 'This is an excellent match with strong compatibility.'
-    elif percentage >= 60:
-        level = 'Good'
-        description = 'This is a good match with positive compatibility.'
-    elif percentage >= 40:
-        level = 'Average'
-        description = 'This is an average match with moderate compatibility.'
-    elif percentage >= 20:
-        level = 'Challenging'
-        description = 'This is a challenging match with difficult compatibility.'
-    else:
-        level = 'Difficult'
-        description = 'This is a difficult match with poor compatibility.'
-
     return {
         'total_score': total_score,
         'max_total_score': max_total_score,
-        'percentage': percentage,
-        'level': level,
-        'description': description
+        'percentage': percentage
     }
 
 

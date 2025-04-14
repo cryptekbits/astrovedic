@@ -32,16 +32,14 @@ def get_vashya_kuta(chart1, chart2):
     # Calculate the score
     score = calculate_vashya_score(vashya1, vashya2)
     
-    # Generate the description
-    description = generate_vashya_description(vashya1, vashya2, score)
+    
     
     return {
         'vashya1': vashya1,
         'vashya2': vashya2,
         'score': score,
         'max_score': 2,
-        'description': description
-    }
+        }
 
 
 def get_vashya_category(sign):
@@ -116,21 +114,4 @@ def calculate_vashya_score(vashya1, vashya2):
     return vashya_compatibility.get(vashya1, {}).get(vashya2, 0)
 
 
-def generate_vashya_description(vashya1, vashya2, score):
-    """
-    Generate a description for the Vashya Kuta
-    
-    Args:
-        vashya1 (str): The Vashya category of the first person
-        vashya2 (str): The Vashya category of the second person
-        score (int): The Vashya Kuta score
-    
-    Returns:
-        str: The Vashya Kuta description
-    """
-    if score == 2:
-        return f"Both individuals belong to the same Vashya category ({vashya1}), indicating excellent dominance compatibility."
-    elif score == 1:
-        return f"The individuals belong to compatible Vashya categories ({vashya1} and {vashya2}), indicating moderate dominance compatibility."
-    else:
-        return f"The individuals belong to incompatible Vashya categories ({vashya1} and {vashya2}), indicating potential dominance issues."
+

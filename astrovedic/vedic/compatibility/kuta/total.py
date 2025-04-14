@@ -82,13 +82,4 @@ def get_total_kuta_score(chart1, chart2):
         'score': total_score,
         'max_score': max_score,
         'percentage': percentage,
-        'description': description,
-        'varna_kuta': varna_kuta,
-        'vashya_kuta': vashya_kuta,
-        'tara_kuta': tara_kuta,
-        'yoni_kuta': yoni_kuta,
-        'graha_maitri_kuta': graha_maitri_kuta,
-        'gana_kuta': gana_kuta,
-        'bhakoot_kuta': bhakoot_kuta,
-        'nadi_kuta': nadi_kuta
-    }
+        }

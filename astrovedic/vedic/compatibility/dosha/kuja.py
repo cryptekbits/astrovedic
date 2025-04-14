@@ -48,12 +48,7 @@ def get_kuja_dosha(chart):
     # Determine if there is Kuja Dosha
     has_dosha = is_in_dosha_house and not cancellation['is_cancelled']
 
-    # Generate the description
-    description = generate_kuja_dosha_description(
-        mars_house_from_asc, mars_house_from_moon, mars_house_from_venus,
-        is_in_dosha_house_from_asc, is_in_dosha_house_from_moon, is_in_dosha_house_from_venus,
-        cancellation
-    )
+    
 
     return {
         'has_dosha': has_dosha,
@@ -65,8 +60,7 @@ def get_kuja_dosha(chart):
         'is_in_dosha_house_from_venus': is_in_dosha_house_from_venus,
         'is_in_dosha_house': is_in_dosha_house,
         'cancellation': cancellation,
-        'description': description
-    }
+        }
 
 
 def get_house_position(chart, longitude, reference_point_id):
@@ -190,29 +184,7 @@ def is_aspected_by(chart, longitude1, longitude2):
     return False
 
 
-def generate_kuja_dosha_description(
-    mars_house_from_asc, mars_house_from_moon, mars_house_from_venus,
-    is_in_dosha_house_from_asc, is_in_dosha_house_from_moon, is_in_dosha_house_from_venus,
-    cancellation
-):
-    """
-    Generate a description for Kuja Dosha
 
-    Args:
-        mars_house_from_asc (int): The house position of Mars from the Ascendant
-        mars_house_from_moon (int): The house position of Mars from the Moon
-        mars_house_from_venus (int): The house position of Mars from Venus
-        is_in_dosha_house_from_asc (bool): Whether Mars is in a Dosha house from the Ascendant
-        is_in_dosha_house_from_moon (bool): Whether Mars is in a Dosha house from the Moon
-        is_in_dosha_house_from_venus (bool): Whether Mars is in a Dosha house from Venus
-        cancellation (dict): The cancellation information
-
-    Returns:
-        str: The Kuja Dosha description
-    """
-    # Check if there is no Kuja Dosha
-    if not (is_in_dosha_house_from_asc or is_in_dosha_house_from_moon or is_in_dosha_house_from_venus):
-        return "No Kuja Dosha is present. Mars is not in any Dosha house from the Ascendant, Moon, or Venus."
 
     # Check if Kuja Dosha is cancelled
     if cancellation['is_cancelled']:

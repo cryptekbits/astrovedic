@@ -35,16 +35,14 @@ def get_mangal_dosha(chart):
     # Determine if there is Mangal Dosha
     has_dosha = is_in_dosha_house and not cancellation['is_cancelled']
     
-    # Generate the description
-    description = generate_mangal_dosha_description(mars_house, is_in_dosha_house, cancellation)
+    
     
     return {
         'has_dosha': has_dosha,
         'mars_house': mars_house,
         'is_in_dosha_house': is_in_dosha_house,
         'cancellation': cancellation,
-        'description': description
-    }
+        }
 
 
 def get_house_position(chart, longitude):
@@ -150,35 +148,4 @@ def is_aspected_by(chart, longitude1, longitude2):
     return False
 
 
-def generate_mangal_dosha_description(mars_house, is_in_dosha_house, cancellation):
-    """
-    Generate a description for Mangal Dosha
-    
-    Args:
-        mars_house (int): The house position of Mars
-        is_in_dosha_house (bool): Whether Mars is in a Dosha house
-        cancellation (dict): The cancellation information
-    
-    Returns:
-        str: The Mangal Dosha description
-    """
-    if not is_in_dosha_house:
-        return f"No Mangal Dosha is present. Mars is in the {mars_house}th house, which is not a Dosha house."
-    
-    if cancellation['is_cancelled']:
-        factors = ", ".join(cancellation['cancellation_factors'])
-        return f"Mangal Dosha is present but cancelled. Mars is in the {mars_house}th house, but the Dosha is cancelled due to: {factors}."
-    
-    # Define the effects for each Dosha house
-    dosha_effects = {
-        1: "may cause physical ailments, accidents, and a dominating personality",
-        2: "may cause financial problems, family conflicts, and speech defects",
-        4: "may cause property disputes, emotional instability, and mother-related issues",
-        7: "may cause marital discord, delayed marriage, or multiple marriages",
-        8: "may cause health problems, accidents, and sudden changes in life",
-        12: "may cause financial losses, isolation, and foreign residence"
-    }
-    
-    effect = dosha_effects.get(mars_house, "may cause various challenges in life")
-    
-    return f"Mangal Dosha is present. Mars is in the {mars_house}th house, which {effect}."
+
