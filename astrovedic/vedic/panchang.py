@@ -108,11 +108,17 @@ def get_tithi(jd, ayanamsa=None):
     # Calculate completion percentage
     completion = (phase_angle % 12) / 12 * 100
     
+    # Check for Purnima and Amavasya
+    is_purnima = (tithi_index == 14)
+    is_amavasya = (tithi_index == 29)
+
     return {
         'index': tithi_index,
         'name': tithi_name,
         'paksha': paksha,
-        'completion': completion
+        'completion': completion,
+        'is_purnima': is_purnima,
+        'is_amavasya': is_amavasya
     }
 
 
