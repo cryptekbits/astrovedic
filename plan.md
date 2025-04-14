@@ -74,9 +74,9 @@
 *   **Combustion (Asta):** While mentioned in the Western `dignities/accidental.py`, a specific Vedic calculation for combustion based on degrees from the Sun is needed.
     *   `- [x]` Add Vedic combustion calculation (degrees of separation from Sun for each planet).
 *   **Planetary States (Avasthas):** Calculation of different Avasthas (e.g., Baladi, Jagradadi, Lajjitadi) is missing.
-    *   `- [ ]` Add Baladi Avastha calculation.
-    *   `- [ ]` Add Jagradadi Avastha calculation.
-    *   `- [ ]` Add Lajjitadi Avastha calculation (and others if required).
+    *   `- [x]` Add Baladi Avastha calculation.
+    *   `- [x]` Add Jagradadi Avastha calculation.
+    *   `- [x]` Add Lajjitadi Avastha calculation (and others if required).
 *   **Bhava Chalita Chart:** Calculation for the Bhava Chalita chart (based on equal house division from the Ascendant degree) is missing.
     *   `- [ ]` Add Bhava Chalita chart calculation.
 *   **Argala & Virodhargala:** Calculation for Argala (intervention) and Virodhargala (counter-intervention) is missing.
