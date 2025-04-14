@@ -117,6 +117,9 @@ VYATIPATA = 'Vyatipata' # Calamity
 PARIVESHA = 'Parivesha' # Halo
 INDRACHAPA = 'Indrachapa' # Rainbow
 UPAKETU = 'Upaketu' # Comet
+KALA = 'Kala'       # Time/Death
+MRITYU = 'Mrityu'   # Death
+ARTHA_PRAHARA = 'Artha Prahara' # Wealth
 
 
 # Asteroids
@@ -390,7 +393,8 @@ LIST_OBJECTS_VEDIC = [
 ]
 
 LIST_SHADOW_PLANETS = [
-    GULIKA, MANDI, DHUMA, VYATIPATA, PARIVESHA, INDRACHAPA, UPAKETU
+    GULIKA, MANDI, DHUMA, VYATIPATA, PARIVESHA, INDRACHAPA, UPAKETU,
+    KALA, MRITYU, ARTHA_PRAHARA
 ]
 
 LIST_VEDIC_BODIES = [

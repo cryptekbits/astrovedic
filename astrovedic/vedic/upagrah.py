@@ -166,6 +166,78 @@ def calculate_upaketu(jd):
     return upaketu_lon
 
 
+def calculate_kala(jd):
+    """
+    Calculate the position of Kala
+
+    Kala (time/death) is calculated as:
+    Kala = Sun's longitude + 45°
+
+    Args:
+        jd (float): Julian day
+
+    Returns:
+        float: Longitude of Kala in degrees
+    """
+    from astrovedic.ephem import swe
+
+    # Get Sun's longitude
+    sun_lon = swe.sweObjectLon(const.SUN, jd)
+
+    # Calculate Kala
+    kala_lon = angle.norm(sun_lon + 45)
+
+    return kala_lon
+
+
+def calculate_mrityu(jd):
+    """
+    Calculate the position of Mrityu
+
+    Mrityu (death) is calculated as:
+    Mrityu = Sun's longitude + 255° (or Sun - 105°)
+
+    Args:
+        jd (float): Julian day
+
+    Returns:
+        float: Longitude of Mrityu in degrees
+    """
+    from astrovedic.ephem import swe
+
+    # Get Sun's longitude
+    sun_lon = swe.sweObjectLon(const.SUN, jd)
+
+    # Calculate Mrityu
+    mrityu_lon = angle.norm(sun_lon + 255)
+
+    return mrityu_lon
+
+
+def calculate_artha_prahara(jd):
+    """
+    Calculate the position of Artha Prahara
+
+    Artha Prahara (wealth) is calculated as:
+    Artha Prahara = Sun's longitude + 165°
+
+    Args:
+        jd (float): Julian day
+
+    Returns:
+        float: Longitude of Artha Prahara in degrees
+    """
+    from astrovedic.ephem import swe
+
+    # Get Sun's longitude
+    sun_lon = swe.sweObjectLon(const.SUN, jd)
+
+    # Calculate Artha Prahara
+    artha_prahara_lon = angle.norm(sun_lon + 165)
+
+    return artha_prahara_lon
+
+
 def get_upagrah(upagrah_id, jd, lat=None, lon=None):
     """
     Get the position of an Upagrah (shadow planet)
@@ -198,6 +270,12 @@ def get_upagrah(upagrah_id, jd, lat=None, lon=None):
         longitude = calculate_indrachapa(jd)
     elif upagrah_id == const.UPAKETU:
         longitude = calculate_upaketu(jd)
+    elif upagrah_id == const.KALA:
+        longitude = calculate_kala(jd)
+    elif upagrah_id == const.MRITYU:
+        longitude = calculate_mrityu(jd)
+    elif upagrah_id == const.ARTHA_PRAHARA:
+        longitude = calculate_artha_prahara(jd)
     else:
         raise ValueError(f"Unknown upagrah: {upagrah_id}")
 
@@ -255,7 +333,8 @@ def get_upagrah_positions(chart):
     positions = {}
 
     for upagrah_id in [const.GULIKA, const.MANDI, const.DHUMA, const.VYATIPATA,
-                      const.PARIVESHA, const.INDRACHAPA, const.UPAKETU]:
+                      const.PARIVESHA, const.INDRACHAPA, const.UPAKETU,
+                      const.KALA, const.MRITYU, const.ARTHA_PRAHARA]:
         positions[upagrah_id] = get_upagrah(upagrah_id, chart.date.jd, chart.pos.lat, chart.pos.lon)
 
     return positions

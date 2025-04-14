@@ -83,7 +83,7 @@
     *   `- [x]` Add Argala calculation.
     *   `- [x]` Add Virodhargala calculation.
 *   **Upagrahas:** While several are present in `vedic/upagrah.py`, ensure all standard ones used for computation (not just interpretation) are included.
-    *   `- [ ]` Verify/Add calculations for Kala, Mrityu, Artha Prahara (if deemed computational data).
+    *   `- [x]` Verify/Add calculations for Kala, Mrityu, Artha Prahara (if deemed computational data).
 *   **Yoga Completeness:** While many Yogas are identified, ensure the *identification* logic covers all major computational categories (not requiring interpretation).
     *   `- [ ]` Review Yoga categories for any missing major computational patterns (e.g., specific Sun Yogas like Vasi, Vesi, Ubhayachari).
 *   **Compatibility (Kuta):** Ensure all standard Kuta calculations are purely computational.
