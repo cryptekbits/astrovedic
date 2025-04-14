@@ -52,9 +52,9 @@
 *   **Dasha Systems:** Currently, only Vimshottari Dasha seems implemented (`vedic/vimshottari.py`, `vedic/dashas.py`). Other major Dasha systems are missing.
     *   `- [x]` Add Ashtottari Dasha calculation.
     *   `- [x]` Add Yogini Dasha calculation.
-    *   `- [ ]` Add Kalachakra Dasha calculation.
+    *   `- [x]` Add Kalachakra Dasha calculation.
     *   `- [x]` Add Jaimini Chara Dasha calculation.
-    *   `- [ ]` Add Jaimini Sthira Dasha calculation.
+    *   `- [x]` Add Jaimini Sthira Dasha calculation.
 *   **Jaimini Astrology:** The `vedic/jaimini/` module is minimal.
     *   `vedic/jaimini/karakas.py`: Only calculates Chara Karakas.
         *   `- [x]` Add Sthira Karaka calculation.
@@ -68,9 +68,9 @@
     *   `- [x]` Add calculation for Panchaka Dosha timings.
     *   `- [x]` Add calculation for Chandra Bala (Moon's strength based on house from natal Moon).
 *   **Muhurta:** While `vedic/muhurta/` exists, it needs review to ensure it's purely computational. Specific missing *computational* elements might include:
-    *   `- [ ]` Add calculation for Latta Dosha.
-    *   `- [ ]` Add calculation for various Tyajyam times (based on Nakshatra, Tithi etc.).
-    *   `- [ ]` Add calculation for Chandra Kriya.
+    *   `- [x]` Add calculation for Latta Dosha.
+    *   `- [x]` Add calculation for various Tyajyam times (based on Nakshatra, Tithi etc.).
+    *   `- [x]` Add calculation for Chandra Kriya.
 *   **Combustion (Asta):** While mentioned in the Western `dignities/accidental.py`, a specific Vedic calculation for combustion based on degrees from the Sun is needed.
     *   `- [x]` Add Vedic combustion calculation (degrees of separation from Sun for each planet).
 *   **Planetary States (Avasthas):** Calculation of different Avasthas (e.g., Baladi, Jagradadi, Lajjitadi) is missing.

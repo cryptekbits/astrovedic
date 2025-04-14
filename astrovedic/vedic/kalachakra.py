@@ -1,0 +1,486 @@
+"""
+    This file is part of astrovedic - (C) FlatAngle
+    Modified for Vedic Astrology
+
+    This module implements Kalachakra Dasha calculations for Vedic astrology.
+    Kalachakra Dasha is a special dasha system based on the position of the Moon
+    in a nakshatra and its pada.
+"""
+
+from astrovedic import const
+from astrovedic.chart import Chart
+from astrovedic.datetime import Datetime
+from astrovedic.vedic.nakshatras import get_nakshatra, NAKSHATRA_SPAN, PADA_SPAN
+from datetime import datetime, timedelta
+from typing import Dict, Optional, Any, List, Tuple
+
+# Kalachakra Dasha periods (in years)
+KALACHAKRA_PERIODS = {
+    const.SUN: 5,
+    const.MOON: 21,
+    const.MARS: 7,
+    const.MERCURY: 9,
+    const.JUPITER: 10,
+    const.VENUS: 16,
+    const.SATURN: 4,
+    const.RAHU: 18,
+    const.KETU: 10
+}
+
+# Total years in Kalachakra Dasha cycle
+TOTAL_KALACHAKRA_YEARS = sum(KALACHAKRA_PERIODS.values())  # 100 years
+
+# Kalachakra Dasha groups (savya/forward and apasavya/reverse)
+SAVYA_GROUP = [1, 5, 9, 13, 17, 21, 25]  # Forward group (nakshatra indices starting from 0)
+APASAVYA_GROUP = [2, 6, 10, 14, 18, 22, 26]  # Reverse group
+SAVYA_PADA_GROUP = [1, 2]  # Forward pada group
+APASAVYA_PADA_GROUP = [3, 4]  # Reverse pada group
+
+# Kalachakra Dasha sequence (standard order)
+KALACHAKRA_SEQUENCE = [
+    const.SUN, const.MOON, const.MARS, const.MERCURY,
+    const.JUPITER, const.VENUS, const.SATURN, const.RAHU, const.KETU
+]
+
+# Kalachakra Dasha starting planet mapping based on nakshatra and pada
+# This is a simplified version - in practice, it's more complex
+KALACHAKRA_STARTING_PLANETS = {
+    # Nakshatra index (0-26) and pada (1-4) to starting planet
+    (0, 1): const.SUN,    # Ashwini, Pada 1
+    (0, 2): const.SUN,    # Ashwini, Pada 2
+    (0, 3): const.KETU,   # Ashwini, Pada 3
+    (0, 4): const.KETU,   # Ashwini, Pada 4
+    (1, 1): const.VENUS,  # Bharani, Pada 1
+    (1, 2): const.VENUS,  # Bharani, Pada 2
+    (1, 3): const.SATURN, # Bharani, Pada 3
+    (1, 4): const.SATURN, # Bharani, Pada 4
+    # ... and so on for all nakshatras and padas
+}
+
+# Complete the mapping for all nakshatras and padas
+# This is a simplified implementation - in practice, the mapping follows specific rules
+# based on the nakshatra's group (savya/apasavya) and pada's group
+
+def calculate_kalachakra_dasha_balance(moon_longitude: float) -> float:
+    """
+    Calculate the balance of the current Kalachakra Dasha at birth
+
+    Args:
+        moon_longitude (float): The Moon's longitude in degrees (0-360)
+
+    Returns:
+        float: The balance of the current Kalachakra Dasha in years
+    """
+    # Get nakshatra information
+    nakshatra_info = get_nakshatra(moon_longitude)
+    nakshatra_index = nakshatra_info['index']
+    pada = nakshatra_info['pada']
+    
+    # Determine if the nakshatra is in savya (forward) or apasavya (reverse) group
+    is_savya_nakshatra = nakshatra_index in SAVYA_GROUP
+    is_apasavya_nakshatra = nakshatra_index in APASAVYA_GROUP
+    
+    # Determine if the pada is in savya or apasavya group
+    is_savya_pada = pada in SAVYA_PADA_GROUP
+    is_apasavya_pada = pada in APASAVYA_PADA_GROUP
+    
+    # Determine the direction of the dasha
+    is_forward = (is_savya_nakshatra and is_savya_pada) or (is_apasavya_nakshatra and is_apasavya_pada)
+    
+    # Get the starting planet for this nakshatra and pada
+    starting_planet = KALACHAKRA_STARTING_PLANETS.get((nakshatra_index, pada))
+    if not starting_planet:
+        # Default to Sun if mapping is not available
+        starting_planet = const.SUN
+    
+    # Calculate position within pada (0-3.33333 degrees)
+    pos_in_nakshatra = nakshatra_info['percentage'] / 100 * NAKSHATRA_SPAN
+    pos_in_pada = pos_in_nakshatra % PADA_SPAN
+    percentage_in_pada = pos_in_pada / PADA_SPAN
+    
+    # Calculate the balance of the current Kalachakra Dasha
+    years_of_dasha = KALACHAKRA_PERIODS[starting_planet]
+    balance = years_of_dasha * (1 - percentage_in_pada)
+    
+    return balance
+
+def get_kalachakra_sequence(moon_longitude: float) -> List[Dict[str, Any]]:
+    """
+    Get the sequence of Kalachakra Dashas starting from birth
+
+    Args:
+        moon_longitude (float): The Moon's longitude in degrees (0-360)
+
+    Returns:
+        list: List of dictionaries with Kalachakra Dasha information
+    """
+    # Get nakshatra information
+    nakshatra_info = get_nakshatra(moon_longitude)
+    nakshatra_index = nakshatra_info['index']
+    pada = nakshatra_info['pada']
+    
+    # Determine if the nakshatra is in savya (forward) or apasavya (reverse) group
+    is_savya_nakshatra = nakshatra_index in SAVYA_GROUP
+    is_apasavya_nakshatra = nakshatra_index in APASAVYA_GROUP
+    
+    # Determine if the pada is in savya or apasavya group
+    is_savya_pada = pada in SAVYA_PADA_GROUP
+    is_apasavya_pada = pada in APASAVYA_PADA_GROUP
+    
+    # Determine the direction of the dasha
+    is_forward = (is_savya_nakshatra and is_savya_pada) or (is_apasavya_nakshatra and is_apasavya_pada)
+    
+    # Get the starting planet for this nakshatra and pada
+    starting_planet = KALACHAKRA_STARTING_PLANETS.get((nakshatra_index, pada))
+    if not starting_planet:
+        # Default to Sun if mapping is not available
+        starting_planet = const.SUN
+    
+    # Calculate the balance of the current Kalachakra Dasha
+    balance = calculate_kalachakra_dasha_balance(moon_longitude)
+    
+    # Find the starting index in the Kalachakra sequence
+    start_idx = KALACHAKRA_SEQUENCE.index(starting_planet)
+    
+    # Create the sequence of Kalachakra Dashas
+    kalachakra_sequence = []
+    
+    # Add the current Kalachakra Dasha with its balance
+    kalachakra_sequence.append({
+        'planet': starting_planet,
+        'years': balance
+    })
+    
+    # Add the remaining Kalachakra Dashas in sequence
+    for i in range(1, 9):
+        if is_forward:
+            idx = (start_idx + i) % 9
+        else:
+            idx = (start_idx - i) % 9
+        
+        planet = KALACHAKRA_SEQUENCE[idx]
+        kalachakra_sequence.append({
+            'planet': planet,
+            'years': KALACHAKRA_PERIODS[planet]
+        })
+    
+    return kalachakra_sequence
+
+def get_kalachakra_antardasha_sequence(mahadasha_planet: str, mahadasha_years: float, is_forward: bool) -> List[Dict[str, Any]]:
+    """
+    Get the sequence of Kalachakra Antardashas (sub-periods) for a given Mahadasha
+
+    Args:
+        mahadasha_planet (str): The planet ruling the Mahadasha
+        mahadasha_years (float): The duration of the Mahadasha in years
+        is_forward (bool): Whether the sequence is forward or reverse
+
+    Returns:
+        list: List of dictionaries with Antardasha information
+    """
+    # Find the starting index in the Kalachakra sequence
+    start_idx = KALACHAKRA_SEQUENCE.index(mahadasha_planet)
+    
+    # Create the sequence of Antardashas
+    antardasha_sequence = []
+    
+    # Add all Antardashas in sequence
+    for i in range(9):
+        if is_forward:
+            idx = (start_idx + i) % 9
+        else:
+            idx = (start_idx - i) % 9
+        
+        planet = KALACHAKRA_SEQUENCE[idx]
+        
+        # Calculate the duration of the Antardasha
+        years = (KALACHAKRA_PERIODS[planet] / TOTAL_KALACHAKRA_YEARS) * mahadasha_years
+        
+        antardasha_sequence.append({
+            'planet': planet,
+            'years': years
+        })
+    
+    return antardasha_sequence
+
+def years_to_days(years: float) -> float:
+    """
+    Convert years to days
+
+    Args:
+        years (float): Number of years
+
+    Returns:
+        float: Number of days
+    """
+    return years * 365.25
+
+def add_years_to_date(date: datetime, years: float) -> datetime:
+    """
+    Add a number of years to a date
+
+    Args:
+        date (datetime): The starting date
+        years (float): Number of years to add
+
+    Returns:
+        datetime: The resulting date
+    """
+    days = years_to_days(years)
+    return date + timedelta(days=days)
+
+def calculate_kalachakra_dasha_periods(birth_date: datetime, moon_longitude: float) -> Dict[str, Any]:
+    """
+    Calculate all Kalachakra Dasha periods from birth
+
+    Args:
+        birth_date (datetime): The birth date
+        moon_longitude (float): The Moon's longitude in degrees (0-360)
+
+    Returns:
+        dict: Dictionary with Mahadasha and Antardasha information
+    """
+    # Convert flatlib Datetime to Python datetime if needed
+    if isinstance(birth_date, Datetime):
+        birth_dt = birth_date.to_datetime()
+    else:
+        birth_dt = birth_date
+    
+    # Get nakshatra information
+    nakshatra_info = get_nakshatra(moon_longitude)
+    nakshatra_index = nakshatra_info['index']
+    pada = nakshatra_info['pada']
+    
+    # Determine if the nakshatra is in savya (forward) or apasavya (reverse) group
+    is_savya_nakshatra = nakshatra_index in SAVYA_GROUP
+    is_apasavya_nakshatra = nakshatra_index in APASAVYA_GROUP
+    
+    # Determine if the pada is in savya or apasavya group
+    is_savya_pada = pada in SAVYA_PADA_GROUP
+    is_apasavya_pada = pada in APASAVYA_PADA_GROUP
+    
+    # Determine the direction of the dasha
+    is_forward = (is_savya_nakshatra and is_savya_pada) or (is_apasavya_nakshatra and is_apasavya_pada)
+    
+    # Get the Kalachakra Dasha sequence
+    kalachakra_sequence = get_kalachakra_sequence(moon_longitude)
+    
+    # Calculate start and end dates for each Mahadasha
+    current_date = birth_dt
+    mahadashas = []
+    
+    for mahadasha in kalachakra_sequence:
+        planet = mahadasha['planet']
+        years = mahadasha['years']
+        
+        start_date = current_date
+        end_date = add_years_to_date(start_date, years)
+        
+        # Get Antardashas for this Mahadasha
+        antardasha_sequence = get_kalachakra_antardasha_sequence(planet, years, is_forward)
+        antardashas = []
+        
+        # Calculate start and end dates for each Antardasha
+        antardasha_date = start_date
+        
+        for antardasha in antardasha_sequence:
+            ad_planet = antardasha['planet']
+            ad_years = antardasha['years']
+            
+            ad_start_date = antardasha_date
+            ad_end_date = add_years_to_date(ad_start_date, ad_years)
+            
+            antardashas.append({
+                'planet': ad_planet,
+                'start_date': ad_start_date,
+                'end_date': ad_end_date,
+                'years': ad_years
+            })
+            
+            antardasha_date = ad_end_date
+        
+        mahadashas.append({
+            'planet': planet,
+            'start_date': start_date,
+            'end_date': end_date,
+            'years': years,
+            'antardashas': antardashas
+        })
+        
+        current_date = end_date
+    
+    return {
+        'mahadashas': mahadashas,
+        'birth_date': birth_dt,
+        'moon_longitude': moon_longitude,
+        'is_forward': is_forward
+    }
+
+def get_current_kalachakra_dasha(dasha_periods: Dict[str, Any], date: Optional[datetime] = None) -> Optional[Dict[str, Any]]:
+    """
+    Get the current operating Kalachakra Dasha period
+
+    Args:
+        dasha_periods (dict): Dictionary with Dasha periods
+        date (datetime, optional): The date to check. Defaults to current date.
+
+    Returns:
+        dict: Dictionary with current Mahadasha and Antardasha
+    """
+    if date is None:
+        date = datetime.now()
+    
+    # Find the current Mahadasha
+    current_mahadasha = None
+    for mahadasha in dasha_periods['mahadashas']:
+        if mahadasha['start_date'] <= date < mahadasha['end_date']:
+            current_mahadasha = mahadasha
+            break
+    
+    if not current_mahadasha:
+        return None
+    
+    # Find the current Antardasha
+    current_antardasha = None
+    for antardasha in current_mahadasha['antardashas']:
+        if antardasha['start_date'] <= date < antardasha['end_date']:
+            current_antardasha = antardasha
+            break
+    
+    if not current_antardasha:
+        return {
+            'mahadasha': current_mahadasha,
+            'antardasha': None
+        }
+    
+    return {
+        'mahadasha': current_mahadasha,
+        'antardasha': current_antardasha,
+        'mahadasha_start': current_mahadasha['start_date'],
+        'mahadasha_end': current_mahadasha['end_date'],
+        'antardasha_start': current_antardasha['start_date'],
+        'antardasha_end': current_antardasha['end_date']
+    }
+
+def get_dasha_balance(chart: Chart) -> float:
+    """
+    Get the balance of the first Kalachakra Dasha (major period) at birth for a chart.
+
+    Args:
+        chart (Chart): The chart object containing birth details.
+
+    Returns:
+        float: The balance of the first Kalachakra Dasha in years.
+
+    Raises:
+        ValueError: If the Moon object is not found in the chart.
+    """
+    moon = chart.getObject(const.MOON)
+    if moon is None:
+        raise ValueError("Moon object not found in the chart.")
+    
+    return calculate_kalachakra_dasha_balance(moon.lon)
+
+def get_current_dasha(chart: Chart, date: Optional[Datetime] = None) -> Optional[Dict[str, Any]]:
+    """
+    Get the current operating Kalachakra Dasha for a chart at a specific date.
+
+    Args:
+        chart (Chart): The chart object containing birth details.
+        date (Datetime, optional): The date to calculate for. 
+                                   Defaults to the chart's date if None.
+
+    Returns:
+        dict or None: A dictionary containing the current 'mahadasha' and
+                      'antardasha' lords and their periods, or None if calculation fails.
+
+    Raises:
+        ValueError: If the Moon object or birth date is not found in the chart.
+    """
+    moon = chart.getObject(const.MOON)
+    if moon is None:
+        raise ValueError("Moon object not found in the chart.")
+    
+    if chart.date is None:
+         raise ValueError("Birth date not found in the chart.")
+
+    target_date = date if date else chart.date
+
+    # Calculate all dasha periods starting from birth
+    all_periods = calculate_kalachakra_dasha_periods(chart.date.to_datetime(), moon.lon)
+    
+    # Find the specific dasha for the target date
+    current_dasha_info = get_current_kalachakra_dasha(all_periods, target_date.to_datetime())
+
+    return current_dasha_info
+
+def get_mahadasha(chart: Chart, date: Optional[Datetime] = None) -> Optional[Dict[str, Any]]:
+    """
+    Get the current Kalachakra Mahadasha (major period) for a chart at a specific date.
+
+    Args:
+        chart (Chart): The chart object containing birth details.
+        date (Datetime, optional): The date to calculate for. 
+                                   Defaults to the chart's date if None.
+
+    Returns:
+        dict or None: Dictionary with current Mahadasha information 
+                      (planet, start_date, end_date), or None if not found.
+    """
+    current_dasha = get_current_dasha(chart, date)
+    return current_dasha.get('mahadasha') if current_dasha else None
+
+def get_antardasha(chart: Chart, date: Optional[Datetime] = None) -> Optional[Dict[str, Any]]:
+    """
+    Get the current Kalachakra Antardasha (sub-period) for a chart at a specific date.
+
+    Args:
+        chart (Chart): The chart object containing birth details.
+        date (Datetime, optional): The date to calculate for. 
+                                   Defaults to the chart's date if None.
+
+    Returns:
+        dict or None: Dictionary with current Antardasha information 
+                      (planet, start_date, end_date), or None if not found.
+    """
+    current_dasha = get_current_dasha(chart, date)
+    return current_dasha.get('antardasha') if current_dasha else None
+
+def get_dasha_lord(dasha_info: Optional[Dict[str, Any]]) -> Optional[str]:
+    """
+    Get the ruling planet (lord) from a Dasha information dictionary.
+
+    Args:
+        dasha_info (dict or None): The Dasha dictionary containing a 'planet' key.
+
+    Returns:
+        str or None: The lord of the Dasha, or None if input is invalid.
+    """
+    return dasha_info.get('planet') if isinstance(dasha_info, dict) else None
+
+def get_antardasha_lord(antardasha_info: Optional[Dict[str, Any]]) -> Optional[str]:
+    """
+    Get the ruling planet (lord) from an Antardasha information dictionary.
+
+    Args:
+        antardasha_info (dict or None): The Antardasha dictionary containing a 'planet' key.
+
+    Returns:
+        str or None: The lord of the Antardasha, or None if input is invalid.
+    """
+    return get_dasha_lord(antardasha_info)
+
+def get_dasha(chart: Chart, date: Optional[Datetime] = None) -> Optional[Dict[str, Any]]:
+    """
+    Alias for get_mahadasha.
+    Get the current Kalachakra Mahadasha (major period) for a chart at a specific date.
+
+    Args:
+        chart (Chart): The chart object containing birth details.
+        date (Datetime, optional): The date to calculate for. 
+                                   Defaults to the chart's date if None.
+
+    Returns:
+        dict or None: Dictionary with current Mahadasha information, or None if not found.
+    """
+    return get_mahadasha(chart, date)
