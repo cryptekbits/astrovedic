@@ -64,9 +64,9 @@
     *   `- [x]` Verify/Implement full Graha Drishti rules (including strength variations if applicable computationally).
     *   `- [x]` Verify/Implement full Rashi Drishti rules.
 *   **Panchanga Elements:** Core Panchanga elements seem present (`vedic/panchang.py`), but some derived/related calculations might be missing.
-    *   `- [ ]` Add calculation for Bhadra Karana timings (Vishti).
-    *   `- [ ]` Add calculation for Panchaka Dosha timings.
-    *   `- [ ]` Add calculation for Chandra Bala (Moon's strength based on house from natal Moon).
+    *   `- [x]` Add calculation for Bhadra Karana timings (Vishti).
+    *   `- [x]` Add calculation for Panchaka Dosha timings.
+    *   `- [x]` Add calculation for Chandra Bala (Moon's strength based on house from natal Moon).
 *   **Muhurta:** While `vedic/muhurta/` exists, it needs review to ensure it's purely computational. Specific missing *computational* elements might include:
     *   `- [ ]` Add calculation for Latta Dosha.
     *   `- [ ]` Add calculation for various Tyajyam times (based on Nakshatra, Tithi etc.).
