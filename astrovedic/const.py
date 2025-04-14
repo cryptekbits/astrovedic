@@ -40,7 +40,7 @@ MASCULINE = 'Masculine'
 FEMININE = 'Feminine'
 NEUTRAL = 'Neutral'
 
-# Factions
+# Factions - Kept for backward compatibility
 DIURNAL = 'Diurnal'
 NOCTURNAL = 'Nocturnal'
 
@@ -244,7 +244,7 @@ STAR_ACHERNAR = 'Achernar'
 
 # === Aspects === */
 
-# Major Aspects
+# Western Aspects (kept for compatibility but should use Vedic aspects instead)
 NO_ASPECT = -1
 CONJUNCTION = 0
 SEXTILE = 60
@@ -252,7 +252,7 @@ SQUARE = 90
 TRINE = 120
 OPPOSITION = 180
 
-# Minor Aspects
+# Minor Aspects - Kept for backward compatibility
 SEMISEXTILE = 30
 SEMIQUINTILE = 36
 SEMISQUARE = 45
@@ -373,11 +373,13 @@ LIST_OBJECTS = [
     URANUS, NEPTUNE, PLUTO, LILITH, CHIRON, RAHU, KETU, SYZYGY
 ]
 
+# Traditional objects list - Kept for backward compatibility
 LIST_OBJECTS_TRADITIONAL = [
     SUN, MOON, MERCURY, VENUS, MARS, JUPITER, SATURN,
     RAHU, KETU, SYZYGY
 ]
 
+# Modern objects list - Kept for backward compatibility
 LIST_OBJECTS_MODERN = [
     SUN, MOON, MERCURY, VENUS, MARS, JUPITER, SATURN, NEPTUNE, URANUS, PLUTO,
     RAHU, KETU, SYZYGY
