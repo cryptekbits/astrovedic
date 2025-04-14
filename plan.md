@@ -59,10 +59,10 @@
     *   `vedic/jaimini/karakas.py`: Only calculates Chara Karakas.
         *   `- [x]` Add Sthira Karaka calculation.
         *   `- [x]` Add Arudha Pada (Lagna Pada, Graha Padas, Upapada Lagna) calculation.
-        *   `- [ ]` Add Jaimini Rashi Drishti calculation (ensure full implementation beyond `vedic/aspects.py`).
+        *   `- [x]` Add Jaimini Rashi Drishti calculation (ensure full implementation beyond `vedic/aspects.py`).
 *   **Vedic Aspects (Drishti):** While `vedic/aspects.py` exists, ensure it fully covers both Graha Drishti (planetary aspects including special aspects) and Rashi Drishti (sign aspects).
-    *   `- [ ]` Verify/Implement full Graha Drishti rules (including strength variations if applicable computationally).
-    *   `- [ ]` Verify/Implement full Rashi Drishti rules.
+    *   `- [x]` Verify/Implement full Graha Drishti rules (including strength variations if applicable computationally).
+    *   `- [x]` Verify/Implement full Rashi Drishti rules.
 *   **Panchanga Elements:** Core Panchanga elements seem present (`vedic/panchang.py`), but some derived/related calculations might be missing.
     *   `- [ ]` Add calculation for Bhadra Karana timings (Vishti).
     *   `- [ ]` Add calculation for Panchaka Dosha timings.
