@@ -219,6 +219,22 @@ class Datetime:
         dateUTC = Date(round(self.jd))
         return Datetime(dateUTC, timeUTC)
 
+    def to_datetime(self):
+        """ Converts to Python datetime object. """
+        from datetime import datetime
+        date_parts = self.date.date()
+        time_parts = self.time.time()
+
+        year = date_parts[0]
+        month = date_parts[1]
+        day = date_parts[2]
+
+        hour = int(time_parts[0])
+        minute = int(time_parts[1])
+        second = int(time_parts[2])
+
+        return datetime(year, month, day, hour, minute, second)
+
     def __str__(self):
         return '<%s %s %s>' % (self.date.toString(),
                                self.time.toString(),

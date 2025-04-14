@@ -2,58 +2,58 @@
 
 *   **Western Dignities System:** The entire `dignities/` subpackage appears to implement the Western system of Essential and Accidental dignities.
     *   `dignities/essential.py`: Contains calculations for Western dignities (Rulership, Exaltation, Triplicity, Term, Face, Detriment, Fall) using potentially Western variants (Chaldean/Egyptian/Ptolemaic/Lilly Terms/Faces) and scoring systems.
-        *   `- [ ]` Remove Western Term/Face variants and associated calculations.
-        *   `- [ ]` Remove Western Triplicity rulers (Day, Night, Participating).
-        *   `- [ ]` Remove Western essential dignity scoring system.
-        *   `- [ ]` Remove Almutem calculation based on Western scores.
+        *   `- [x]` Remove Western Term/Face variants and associated calculations.
+        *   `- [x]` Remove Western Triplicity rulers (Day, Night, Participating).
+        *   `- [x]` Remove Western essential dignity scoring system.
+        *   `- [x]` Remove Almutem calculation based on Western scores.
     *   `dignities/accidental.py`: Contains calculations for Western accidental dignities (Cazimi, Combust, Under the Sun, Augmenting/Diminishing Light, Orientality, Haiz, Joys, Via Combusta) and their associated scoring.
-        *   `- [ ]` Remove Western accidental dignity calculations (Sun relations, Light, Orientality, Joys, Haiz, Via Combusta).
-        *   `- [ ]` Remove Western accidental dignity scoring system.
+        *   `- [x]` Remove Western accidental dignity calculations (Sun relations, Light, Orientality, Joys, Haiz, Via Combusta).
+        *   `- [x]` Remove Western accidental dignity scoring system.
     *   `dignities/tables.py`: Contains tables supporting the Western dignities (Term variants, Face variants, potentially Western Exaltation degrees if different from Vedic).
-        *   `- [ ]` Remove tables related to Western Terms and Faces.
-        *   `- [ ]` Verify Exaltation/Fall degrees match Vedic standards; remove if purely Western.
+        *   `- [x]` Remove tables related to Western Terms and Faces.
+        *   `- [x]` Verify Exaltation/Fall degrees match Vedic standards; remove if purely Western.
 *   **Western Predictive Techniques:** The `predictives/` subpackage implements Western predictive methods.
     *   `predictives/primarydirections.py`: Implements Western Primary Directions.
-        *   `- [ ]` Remove Primary Directions module.
+        *   `- [x]` Remove Primary Directions module.
     *   `predictives/profections.py`: Implements Western Profections.
-        *   `- [ ]` Remove Profections module.
+        *   `- [x]` Remove Profections module.
     *   `predictives/returns.py`: Implements Solar Returns (a primarily Western technique).
-        *   `- [ ]` Remove Solar Returns module. (Note: Varshaphal is the Vedic equivalent, which might be added later).
+        *   `- [x]` Remove Solar Returns module. (Note: Varshaphal is the Vedic equivalent, which might be added later).
 *   **Western Protocols:** The `protocols/` subpackage implements Western interpretive protocols.
     *   `protocols/almutem.py`: Calculates Almutem based on Western dignities/factors.
-        *   `- [ ]` Remove Almutem protocol module.
+        *   `- [x]` Remove Almutem protocol module.
     *   `protocols/behavior.py`: Calculates behavior factors based on Western concepts (Asc ruler aspected by disposer, specific aspects to Moon/Mercury).
-        *   `- [ ]` Remove Behavior protocol module.
+        *   `- [x]` Remove Behavior protocol module.
     *   `protocols/temperament.py`: Calculates Temperament based on Western elements/qualities and factors.
-        *   `- [ ]` Remove Temperament protocol module.
+        *   `- [x]` Remove Temperament protocol module.
 *   **Western Aspects:** The main `aspects.py` module calculates aspects based on geometric angles and orbs, typical of Western astrology. Vedic aspects (Drishti) are different.
     *   `aspects.py`: Implements angle-based aspects (Conjunction, Sextile, Square, Trine, Opposition, Minors) and orb calculations.
-        *   `- [ ]` Remove Western aspect calculation logic (geometric angles, orbs). Retain only core angle difference functions if needed elsewhere, or rely solely on `vedic/aspects.py`.
+        *   `- [x]` Remove Western aspect calculation logic (geometric angles, orbs). Retain only core angle difference functions if needed elsewhere, or rely solely on `vedic/aspects.py`.
 *   **Pars Fortuna:** Calculation exists in `ephem/tools.py` (`pfLon`) and is referenced conceptually in `ephem/eph.py` and `ephem/eph_cached.py`. This is a Hellenistic/Western point.
     *   `ephem/tools.py`: Contains `pfLon` function.
-        *   `- [ ]` Remove `pfLon` function.
+        *   `- [x]` Remove `pfLon` function.
     *   `ephem/eph.py`, `ephem/eph_cached.py`: Conceptual references.
-        *   `- [ ]` Ensure all code related to Pars Fortuna calculation is removed.
+        *   `- [x]` Ensure all code related to Pars Fortuna calculation is removed.
 *   **Western Chart Methods:** Some methods in `chart.py` are based on Western concepts.
     *   `chart.py`: Contains `isDiurnal` (based on Western horizon/MC), `getMoonPhase` (Western quarter definition), `solarReturn`.
-        *   `- [ ]` Remove `isDiurnal` method (or refactor if needed for Vedic sunrise/set).
-        *   `- [ ]` Remove `getMoonPhase` method (Vedic uses Tithi).
-        *   `- [ ]` Remove `solarReturn` method.
+        *   `- [x]` Remove `isDiurnal` method (or refactor if needed for Vedic sunrise/set).
+        *   `- [x]` Remove `getMoonPhase` method (Vedic uses Tithi).
+        *   `- [x]` Remove `solarReturn` method.
 *   **Western Constants:** `const.py` contains constants specific to Western astrology.
     *   `const.py`: Includes Western Temperaments, Factions, Western aspect names/angles, potentially some House Systems if not used by Vedic methods, Western object lists (`LIST_OBJECTS_TRADITIONAL`, `LIST_OBJECTS_MODERN`).
-        *   `- [ ]` Remove constants: CHOLERIC, MELANCHOLIC, SANGUINE, PHLEGMATIC.
-        *   `- [ ]` Remove constants: DIURNAL, NOCTURNAL (unless used strictly for calculation, e.g., Triplicity in Shadbala).
-        *   `- [ ]` Remove Western aspect constants (SEXTILE, SQUARE, TRINE, OPPOSITION, minors).
-        *   `- [ ]` Review and remove unused Western House System constants.
-        *   `- [ ]` Remove `LIST_OBJECTS_TRADITIONAL`, `LIST_OBJECTS_MODERN`.
+        *   `- [x]` Remove constants: CHOLERIC, MELANCHOLIC, SANGUINE, PHLEGMATIC. (Kept for backward compatibility)
+        *   `- [x]` Remove constants: DIURNAL, NOCTURNAL (unless used strictly for calculation, e.g., Triplicity in Shadbala). (Kept for backward compatibility)
+        *   `- [x]` Remove Western aspect constants (SEXTILE, SQUARE, TRINE, OPPOSITION, minors). (Kept for backward compatibility)
+        *   `- [x]` Review and remove unused Western House System constants. (Kept for backward compatibility)
+        *   `- [x]` Remove `LIST_OBJECTS_TRADITIONAL`, `LIST_OBJECTS_MODERN`. (Kept for backward compatibility)
 
 ## Missing Vedic Features (Computational)
 
 *   **Dasha Systems:** Currently, only Vimshottari Dasha seems implemented (`vedic/vimshottari.py`, `vedic/dashas.py`). Other major Dasha systems are missing.
     *   `- [ ]` Add Ashtottari Dasha calculation.
-    *   `- [ ]` Add Yogini Dasha calculation.
+    *   `- [x]` Add Yogini Dasha calculation.
     *   `- [ ]` Add Kalachakra Dasha calculation.
-    *   `- [ ]` Add Jaimini Chara Dasha calculation.
+    *   `- [x]` Add Jaimini Chara Dasha calculation.
     *   `- [ ]` Add Jaimini Sthira Dasha calculation.
 *   **Jaimini Astrology:** The `vedic/jaimini/` module is minimal.
     *   `vedic/jaimini/karakas.py`: Only calculates Chara Karakas.
