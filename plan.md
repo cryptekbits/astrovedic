@@ -92,20 +92,20 @@
     *   `- [x]` Review Dosha modules (`vedic/compatibility/dosha/`) to ensure no interpretive logic remains.
     *   `- [x]` Add Kala Sarpa Dosha *identification* logic (if not already covered adequately in `vedic/yogas/dosha.py`).
 *   **Analysis/Prediction Code:** Remove any remaining interpretive/predictive logic from `analysis.py`, `basic_analysis.py`, and `predictions.py` files within all `vedic/` submodules (Ashtakavarga, Compatibility, Muhurta, Sarvatobhadra, Shadbala, Transits, Vargas, Yogas).
-    *   `- [ ]` Remove prediction/analysis logic from `vedic/ashtakavarga/analysis.py`.
-    *   `- [ ]` Remove prediction/analysis logic from `vedic/ashtakavarga/basic_analysis.py`.
-    *   `- [ ]` Remove prediction/analysis logic from `vedic/compatibility/analysis.py`.
-    *   `- [ ]` Remove prediction/analysis logic from `vedic/compatibility/basic_analysis.py`.
-    *   `- [ ]` Remove prediction/analysis logic from `vedic/compatibility/dasha/predictions.py`.
-    *   `- [ ]` Remove prediction/analysis logic from `vedic/muhurta/analysis.py`.
-    *   `- [ ]` Remove prediction/analysis logic from `vedic/muhurta/basic_analysis.py`.
-    *   `- [ ]` Remove prediction/analysis logic from `vedic/sarvatobhadra/analysis.py`.
-    *   `- [ ]` Remove prediction/analysis logic from `vedic/sarvatobhadra/basic_analysis.py`.
-    *   `- [ ]` Remove prediction/analysis logic from `vedic/shadbala/basic_analysis.py`.
-    *   `- [ ]` Remove prediction/analysis logic from `vedic/transits/analysis.py`.
-    *   `- [ ]` Remove prediction/analysis logic from `vedic/transits/basic_analysis.py`.
-    *   `- [ ]` Remove prediction/analysis logic from `vedic/transits/predictions.py`.
-    *   `- [ ]` Remove prediction/analysis logic from `vedic/vargas/analysis.py`.
-    *   `- [ ]` Remove prediction/analysis logic from `vedic/vargas/basic_analysis.py`.
-    *   `- [ ]` Remove prediction/analysis logic from `vedic/yogas/analysis.py`.
-    *   `- [ ]` Remove prediction/analysis logic from `vedic/yogas/basic_analysis.py`.
+    *   `- [x]` Remove prediction/analysis logic from `vedic/ashtakavarga/analysis.py`.
+    *   `- [x]` Remove prediction/analysis logic from `vedic/ashtakavarga/basic_analysis.py`.
+    *   `- [x]` Remove prediction/analysis logic from `vedic/compatibility/analysis.py`.
+    *   `- [x]` Remove prediction/analysis logic from `vedic/compatibility/basic_analysis.py`.
+    *   `- [x]` Remove prediction/analysis logic from `vedic/compatibility/dasha/predictions.py`.
+    *   `- [x]` Remove prediction/analysis logic from `vedic/muhurta/analysis.py`.
+    *   `- [x]` Remove prediction/analysis logic from `vedic/muhurta/basic_analysis.py`.
+    *   `- [x]` Remove prediction/analysis logic from `vedic/sarvatobhadra/analysis.py`.
+    *   `- [x]` Remove prediction/analysis logic from `vedic/sarvatobhadra/basic_analysis.py`.
+    *   `- [x]` Remove prediction/analysis logic from `vedic/shadbala/basic_analysis.py`.
+    *   `- [x]` Remove prediction/analysis logic from `vedic/transits/analysis.py`.
+    *   `- [x]` Remove prediction/analysis logic from `vedic/transits/basic_analysis.py`.
+    *   `- [x]` Remove prediction/analysis logic from `vedic/transits/predictions.py`.
+    *   `- [x]` Remove prediction/analysis logic from `vedic/vargas/analysis.py`.
+    *   `- [x]` Remove prediction/analysis logic from `vedic/vargas/basic_analysis.py`.
+    *   `- [x]` Remove prediction/analysis logic from `vedic/yogas/analysis.py`.
+    *   `- [x]` Remove prediction/analysis logic from `vedic/yogas/basic_analysis.py`.

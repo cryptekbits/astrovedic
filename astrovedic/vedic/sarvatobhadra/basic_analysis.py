@@ -1,7 +1,7 @@
 """
     This file is part of astrovedic - (C) FlatAngle
     Modified for Vedic Astrology
-    
+
     This module implements basic analysis tools for Sarvatobhadra Chakra
     in Vedic astrology. For detailed analysis and reporting,
     use the astroved_extension package.
@@ -30,35 +30,34 @@ from astrovedic.vedic.sarvatobhadra.tara import (
 )
 
 
-def get_basic_sarvatobhadra_analysis(chart):
+def get_basic_sarvatobhadra_data(chart):
     """
-    Get basic analysis of Sarvatobhadra Chakra for a chart.
-    For detailed analysis, use the astroved_extension package.
-    
+    Get basic Sarvatobhadra Chakra data for a chart.
+
     Args:
         chart (Chart): The chart
-    
+
     Returns:
-        dict: Dictionary with basic Sarvatobhadra Chakra analysis
+        dict: Dictionary with basic Sarvatobhadra Chakra data
     """
     # Get the Sarvatobhadra Chakra
     chakra = get_sarvatobhadra_chakra(chart)
-    
+
     # Get the chakra quality
     quality = get_chakra_quality(chakra)
-    
+
     # Get auspicious directions
     auspicious_directions = get_auspicious_directions(chakra)
-    
+
     # Get inauspicious directions
     inauspicious_directions = get_inauspicious_directions(chakra)
-    
+
     # Get Tara Bala
     tara_bala = get_tara_bala(chart)
-    
+
     # Get the best direction
     best_direction = get_best_direction(chakra)
-    
+
     # Generate a basic analysis
     analysis = {
         'quality': quality,
@@ -67,5 +66,5 @@ def get_basic_sarvatobhadra_analysis(chart):
         'best_direction': best_direction,
         'tara_bala': tara_bala
     }
-    
+
     return analysis

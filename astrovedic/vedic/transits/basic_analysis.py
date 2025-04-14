@@ -1,7 +1,7 @@
 """
     This file is part of astrovedic - (C) FlatAngle
     Modified for Vedic Astrology
-    
+
     This module implements basic analysis tools for transit calculations
     in Vedic astrology. For detailed analysis and reporting,
     use the astroved_extension package.
@@ -30,48 +30,47 @@ from astrovedic.vedic.transits.ashtakavarga import (
 )
 
 
-def get_basic_transit_analysis(natal_chart, transit_date):
+def get_basic_transit_data(natal_chart, transit_date):
     """
-    Get basic analysis of transits for a specific date.
-    For detailed analysis, use the astroved_extension package.
-    
+    Get basic transit data for a specific date.
+
     Args:
         natal_chart (Chart): The natal chart
         transit_date (Datetime): The transit date
-    
+
     Returns:
-        dict: Dictionary with basic transit analysis
+        dict: Dictionary with basic transit data
     """
     # Get the transit chart
     transit_chart = get_transit_chart(natal_chart, transit_date)
-    
+
     # Get the transit planets
     transit_planets = get_transit_planets(natal_chart, transit_chart)
-    
+
     # Get the transit aspects
     transit_aspects = get_transit_aspects(natal_chart, transit_chart)
-    
+
     # Get the transit houses
     transit_houses = get_transit_houses(natal_chart, transit_chart)
-    
+
     # Get the transit quality
     transit_quality = get_transit_quality(natal_chart, transit_chart)
-    
+
     # Get the Gochara effects
     gochara_effects = get_gochara_effects(natal_chart, transit_chart)
-    
-    # Get the Ashtakavarga transit analysis
-    ashtakavarga_analysis = get_transit_ashtakavarga(natal_chart, transit_chart)
-    
-    # Generate a basic analysis
-    analysis = {
+
+    # Get the Ashtakavarga transit data
+    ashtakavarga_data = get_transit_ashtakavarga(natal_chart, transit_chart)
+
+    # Compile the basic transit data
+    data = {
         'transit_date': transit_date,
         'transit_planets': transit_planets,
         'transit_aspects': transit_aspects,
         'transit_houses': transit_houses,
         'transit_quality': transit_quality,
         'gochara_effects': gochara_effects,
-        'ashtakavarga_analysis': ashtakavarga_analysis
+        'ashtakavarga_data': ashtakavarga_data
     }
-    
-    return analysis
+
+    return data

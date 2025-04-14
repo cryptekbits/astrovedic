@@ -22,16 +22,15 @@ from astrovedic.vedic.vargas.analysis import (
 )
 
 
-def get_basic_varga_analysis(chart):
+def get_basic_varga_data(chart):
     """
-    Get basic analysis of Vargas (divisional charts) for a chart.
-    For detailed analysis, use the astroved_extension package.
+    Get basic data of Vargas (divisional charts) for a chart.
 
     Args:
         chart (Chart): The chart
 
     Returns:
-        dict: Dictionary with basic Vargas analysis
+        dict: Dictionary with basic Vargas data
     """
     # Initialize the result
     result = {
