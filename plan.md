@@ -80,8 +80,8 @@
 *   **Bhava Chalita Chart:** Calculation for the Bhava Chalita chart (based on equal house division from the Ascendant degree) is missing.
     *   `- [x]` Add Bhava Chalita chart calculation.
 *   **Argala & Virodhargala:** Calculation for Argala (intervention) and Virodhargala (counter-intervention) is missing.
-    *   `- [ ]` Add Argala calculation.
-    *   `- [ ]` Add Virodhargala calculation.
+    *   `- [x]` Add Argala calculation.
+    *   `- [x]` Add Virodhargala calculation.
 *   **Upagrahas:** While several are present in `vedic/upagrah.py`, ensure all standard ones used for computation (not just interpretation) are included.
     *   `- [ ]` Verify/Add calculations for Kala, Mrityu, Artha Prahara (if deemed computational data).
 *   **Yoga Completeness:** While many Yogas are identified, ensure the *identification* logic covers all major computational categories (not requiring interpretation).
