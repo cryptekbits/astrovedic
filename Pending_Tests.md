@@ -52,3 +52,50 @@ This document lists functionalities in the flatlib library that currently lack c
 ## Integration Tests
 
 ✅ Tests implemented in `tests/test_integration.py`
+
+## Additional Areas Needing Test Coverage
+
+### Traditional Protocols
+- `flatlib/protocols/almutem.py` - Tests for Almutem calculations
+- `flatlib/protocols/behavior.py` - Tests for behavior analysis
+- `flatlib/protocols/temperament.py` - Tests for temperament analysis
+
+### Vedic Compatibility Subsystems
+- `flatlib/vedic/compatibility/dasha/` - Tests for compatibility dasha analysis
+- `flatlib/vedic/compatibility/dosha/` - Tests for dosha analysis in compatibility
+- `flatlib/vedic/compatibility/navamsa/` - Tests for navamsa compatibility analysis
+
+### Ashtakavarga Detailed Analysis
+- `flatlib/vedic/ashtakavarga/bhinna.py` - Tests for Bhinna Ashtakavarga
+- `flatlib/vedic/ashtakavarga/kaksha.py` - Tests for Kaksha Ashtakavarga
+- `flatlib/vedic/ashtakavarga/sarva.py` - Tests for Sarva Ashtakavarga
+- `flatlib/vedic/ashtakavarga/transits.py` - Tests for Ashtakavarga transit analysis
+
+### Jaimini Astrology
+- More comprehensive tests for `flatlib/vedic/jaimini/` modules
+
+### Specific Varga Charts
+- Individual tests for each divisional chart calculation (D-1 through D-60)
+- Tests for special varga calculations like Khavedamsha and Akshavedamsha
+
+### Muhurta Specific Activities
+- `flatlib/vedic/muhurta/activities.py` - Tests for specific activity timing
+- `flatlib/vedic/muhurta/events.py` - Tests for event timing
+- `flatlib/vedic/muhurta/timing.py` - Tests for general timing calculations
+
+### Specific Yoga Types
+- `flatlib/vedic/yogas/chandra.py` - Tests for Moon-based yogas
+- `flatlib/vedic/yogas/dhana.py` - Tests for wealth yogas
+- `flatlib/vedic/yogas/dosha.py` - Tests for inauspicious yogas
+- `flatlib/vedic/yogas/mahapurusha.py` - Tests for Mahapurusha yogas
+- `flatlib/vedic/yogas/nabhasa.py` - Tests for Nabhasa yogas
+- `flatlib/vedic/yogas/raja.py` - Tests for Raja yogas
+
+### Shadbala Components
+- More detailed tests for individual Shadbala components
+- Tests for Shadbala analysis and interpretation
+
+### Performance Tests
+- Benchmark tests for critical calculations
+- Memory usage tests for large chart sets
+- Optimization tests for cached vs. non-cached operations
