@@ -1,7 +1,7 @@
 # Astrovedic - Vedic Astrology Library
 
 <p align="center">
-  <img src="@resources/banner.png" alt="Astrovedic Banner">
+  <img src="resources/banner.png" alt="Astrovedic Banner">
 </p>
 
 > **⚠️ IMPORTANT: This library is currently under active development and is not yet ready for production use. APIs may change, and features are still being implemented and tested.**
