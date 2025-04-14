@@ -1,6 +1,9 @@
-"""Jaimini Chara Karaka calculations."""
+"""Jaimini Karaka calculations.
 
-import math
+This module implements both Chara Karaka (temporary significators) and
+Sthira Karaka (fixed significators) calculations for Jaimini astrology.
+"""
+
 from typing import Dict, List, Tuple
 
 from astrovedic import const
@@ -18,6 +21,16 @@ GNATIKARAKA = "GK"
 DARAKARAKA = "DK"
 STRIKAKARAKA = "SK" # Some traditions use 7 karakas, omitting this
 
+# Full Karaka names
+ATMAKARAKA_FULL = "Atma Karaka"
+AMATYAKARAKA_FULL = "Amatya Karaka"
+BHRATRIKARAKA_FULL = "Bhratri Karaka"
+MATRIKARAKA_FULL = "Matri Karaka"
+PUTRAKARAKA_FULL = "Putra Karaka"
+GNATIKARAKA_FULL = "Gnati Karaka"
+DARAKARAKA_FULL = "Dara Karaka"
+STRIKAKARAKA_FULL = "Stri Karaka"
+
 
 # List of planets considered for Chara Karakas
 CHARA_KARAKA_PLANETS = [
@@ -25,11 +38,37 @@ CHARA_KARAKA_PLANETS = [
     const.JUPITER, const.VENUS, const.SATURN, const.RAHU
 ]
 
+# Sthira Karaka (fixed significator) assignments
+STHIRA_KARAKAS = {
+    ATMAKARAKA_FULL: const.SUN,      # Soul, self
+    AMATYAKARAKA_FULL: const.JUPITER, # Career, minister
+    BHRATRIKARAKA_FULL: const.MARS,   # Siblings, courage
+    MATRIKARAKA_FULL: const.MOON,     # Mother, mind
+    PUTRAKARAKA_FULL: const.JUPITER,  # Children, wisdom
+    GNATIKARAKA_FULL: const.SATURN,   # Relatives, longevity
+    DARAKARAKA_FULL: const.VENUS,     # Spouse, relationships
+    STRIKAKARAKA_FULL: const.VENUS    # Alternate spouse significator
+}
+
 # Define Karaka sequence for assignment
 # KARAKA_SEQUENCE = [
 #     ATMAKARAKA, AMATYAKARAKA, BHRATRIKARAKA, MATRIKARAKA,
 #     PUTRAKARAKA, GNATIKARAKA, DARAKARAKA, STRIKAKARAKA
 # ]
+
+
+def calculate_sthira_karakas() -> Dict[str, str]:
+    """Returns the Jaimini Sthira Karakas (fixed significators).
+
+    Sthira Karakas are fixed planetary significators in Jaimini astrology.
+    Unlike Chara Karakas which change based on planetary positions,
+    Sthira Karakas are always the same for every chart.
+
+    Returns:
+        Dict[str, str]: A dictionary where keys are the full Karaka names
+        and values are the corresponding planet IDs.
+    """
+    return STHIRA_KARAKAS
 
 
 def calculate_chara_karakas(chart: Chart) -> Dict[str, str]:
@@ -62,7 +101,7 @@ def calculate_chara_karakas(chart: Chart) -> Dict[str, str]:
     """
     planet_degrees: List[Tuple[str, float, float]] = []
 
-    for planet_id in const.CHARA_KARAKA_PLANETS: 
+    for planet_id in const.CHARA_KARAKA_PLANETS:
         try:
             obj: GenericObject = chart.getObject(planet_id)
             longitude = obj.lon
@@ -70,7 +109,7 @@ def calculate_chara_karakas(chart: Chart) -> Dict[str, str]:
             if planet_id == const.RAHU:
                 # Jaimini rule for Rahu: 360 - longitude
                 # Ensure longitude is positive before calculation
-                adjusted_lon = 360.0 - (longitude % 360) 
+                adjusted_lon = 360.0 - (longitude % 360)
                 deg_in_sign = adjusted_lon % 30.0
                 sort_key = adjusted_lon # Use adjusted lon for tie-breaking
             else:
@@ -92,10 +131,10 @@ def calculate_chara_karakas(chart: Chart) -> Dict[str, str]:
 
     # Assign Karakas based on sorted order
     chara_karakas: Dict[str, str] = {}
-    num_karakas = min(len(planet_degrees), len(const.LIST_CHARA_KARAKAS)) 
+    num_karakas = min(len(planet_degrees), len(const.LIST_CHARA_KARAKAS))
 
     for i in range(num_karakas):
-        karaka_name = const.LIST_CHARA_KARAKAS[i] 
+        karaka_name = const.LIST_CHARA_KARAKAS[i]
         planet_id = planet_degrees[i][0]
         chara_karakas[karaka_name] = planet_id
 
