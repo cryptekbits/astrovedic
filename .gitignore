@@ -36,7 +36,6 @@ reports/
 logs/
 # **/*instructions.md
 output/
-*.md
 **/*postman*.json
 
 # Added by Claude Task Master
