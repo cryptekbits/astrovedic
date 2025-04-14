@@ -78,7 +78,7 @@
     *   `- [x]` Add Jagradadi Avastha calculation.
     *   `- [x]` Add Lajjitadi Avastha calculation (and others if required).
 *   **Bhava Chalita Chart:** Calculation for the Bhava Chalita chart (based on equal house division from the Ascendant degree) is missing.
-    *   `- [ ]` Add Bhava Chalita chart calculation.
+    *   `- [x]` Add Bhava Chalita chart calculation.
 *   **Argala & Virodhargala:** Calculation for Argala (intervention) and Virodhargala (counter-intervention) is missing.
     *   `- [ ]` Add Argala calculation.
     *   `- [ ]` Add Virodhargala calculation.
