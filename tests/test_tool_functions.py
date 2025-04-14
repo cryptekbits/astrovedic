@@ -2,17 +2,17 @@
 """
 Test Tool Functions
 
-This script tests the tool functions in flatlib.
+This script tests the tool functions in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib import angle
-from flatlib import aspects
-from flatlib.dignities import essential
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic import angle
+from astrovedic import aspects
+from astrovedic.dignities import essential
 
 # Define utility functions that might not be directly exposed in the modules
 def normalize_longitude(longitude):

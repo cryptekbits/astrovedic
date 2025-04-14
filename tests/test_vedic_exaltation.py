@@ -8,12 +8,12 @@ import os
 import json
 from datetime import datetime
 
-# Add the parent directory to the path so we can import flatlib
+# Add the parent directory to the path so we can import astrovedic
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from flatlib import const
-from flatlib.vedic import dignities as vedic_dignities
-from flatlib.dignities import tables as western_tables
+from astrovedic import const
+from astrovedic.vedic import dignities as vedic_dignities
+from astrovedic.dignities import tables as western_tables
 
 def test_vedic_exaltation_degrees():
     """Test Vedic exaltation and fall degrees"""

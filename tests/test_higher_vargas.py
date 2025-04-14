@@ -2,26 +2,26 @@
 """
 Test Higher Divisional Charts (Vargas)
 
-This script tests the higher divisional chart calculations in flatlib.
+This script tests the higher divisional chart calculations in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.vargas import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.vargas import (
     D20, D24, D27, D30, D40, D45, D60,
     get_varga_chart, get_varga_longitude
 )
-from flatlib.vedic.vargas.vimshamsha import calculate_d20
-from flatlib.vedic.vargas.chaturvimshamsha import calculate_d24
-from flatlib.vedic.vargas.saptavimshamsha import calculate_d27
-from flatlib.vedic.vargas.trimshamsha import calculate_d30
-from flatlib.vedic.vargas.khavedamsha import calculate_d40
-from flatlib.vedic.vargas.akshavedamsha import calculate_d45
-from flatlib.vedic.vargas.shashtiamsha import calculate_d60
-from flatlib.vedic.vargas.analysis import get_vimshopaka_bala
+from astrovedic.vedic.vargas.vimshamsha import calculate_d20
+from astrovedic.vedic.vargas.chaturvimshamsha import calculate_d24
+from astrovedic.vedic.vargas.saptavimshamsha import calculate_d27
+from astrovedic.vedic.vargas.trimshamsha import calculate_d30
+from astrovedic.vedic.vargas.khavedamsha import calculate_d40
+from astrovedic.vedic.vargas.akshavedamsha import calculate_d45
+from astrovedic.vedic.vargas.shashtiamsha import calculate_d60
+from astrovedic.vedic.vargas.analysis import get_vimshopaka_bala
 
 
 class TestHigherVargas(unittest.TestCase):

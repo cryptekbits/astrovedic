@@ -19,15 +19,15 @@ import sys
 import argparse
 from tabulate import tabulate
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.ashtakavarga import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.ashtakavarga import (
     get_bhinnashtakavarga, get_sarvashtakavarga, get_all_ashtakavarga,
     get_kaksha_bala, get_transit_ashtakavarga, LIST_ASHTAKAVARGA_PLANETS
 )
-from flatlib.vedic.ashtakavarga.analysis import (
+from astrovedic.vedic.ashtakavarga.analysis import (
     get_ashtakavarga_predictions, get_ashtakavarga_strength_in_house
 )
 
@@ -85,7 +85,7 @@ def print_chart_info(chart, location, ayanamsa):
     Print basic chart information
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
         location (str): Location name
         ayanamsa (str): Ayanamsa used
     """
@@ -113,7 +113,7 @@ def print_chart_info(chart, location, ayanamsa):
         planet = chart.getObject(planet_id)
         
         # Get nakshatra information
-        from flatlib.vedic.nakshatras import get_nakshatra
+        from astrovedic.vedic.nakshatras import get_nakshatra
         nakshatra_info = get_nakshatra(planet.lon)
         
         rows.append([
@@ -236,7 +236,7 @@ def print_kaksha_bala(chart):
     Print Kaksha Bala (zodiacal strength) information
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
     """
     print(f"\n{'=' * 60}")
     print(f"Kaksha Bala (Zodiacal Strength)")
@@ -262,7 +262,7 @@ def print_house_strengths(chart):
     Print Ashtakavarga strength for each house
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
     """
     print(f"\n{'=' * 60}")
     print(f"Ashtakavarga Strength for Each House")
@@ -333,7 +333,7 @@ def print_ashtakavarga_predictions(chart):
     Print predictions based on Ashtakavarga
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
     """
     print(f"\n{'=' * 60}")
     print(f"Ashtakavarga Predictions")

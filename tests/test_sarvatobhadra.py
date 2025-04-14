@@ -2,38 +2,38 @@
 """
 Test Sarvatobhadra Chakra Calculations
 
-This script tests the Sarvatobhadra Chakra calculations in flatlib.
+This script tests the Sarvatobhadra Chakra calculations in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.sarvatobhadra import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.sarvatobhadra import (
     get_sarvatobhadra_chakra, get_chakra_quality,
     get_auspicious_directions, get_inauspicious_directions,
     get_best_direction, get_direction_for_activity,
     get_tara_bala, get_sarvatobhadra_predictions,
     analyze_sarvatobhadra
 )
-from flatlib.vedic.sarvatobhadra.chakra import (
+from astrovedic.vedic.sarvatobhadra.chakra import (
     create_chakra, get_chakra_cell, get_chakra_row,
     get_chakra_column, get_chakra_diagonal,
     get_direction_cells, get_nakshatras_in_direction,
     get_planets_in_direction
 )
-from flatlib.vedic.sarvatobhadra.directions import (
+from astrovedic.vedic.sarvatobhadra.directions import (
     get_direction_quality, get_best_direction,
     get_direction_for_activity, get_direction_compatibility
 )
-from flatlib.vedic.sarvatobhadra.tara import (
+from astrovedic.vedic.sarvatobhadra.tara import (
     get_tara_bala, get_janma_tara, get_sampath_tara,
     get_vipat_tara, get_kshema_tara, get_pratyak_tara,
     get_sadhaka_tara, get_vadha_tara, get_mitra_tara,
     get_ati_mitra_tara, get_current_tara, get_tara_bala_score
 )
-from flatlib.vedic.sarvatobhadra.analysis import (
+from astrovedic.vedic.sarvatobhadra.analysis import (
     analyze_sarvatobhadra, get_sarvatobhadra_predictions,
     get_sarvatobhadra_compatibility, get_sarvatobhadra_strength_score
 )

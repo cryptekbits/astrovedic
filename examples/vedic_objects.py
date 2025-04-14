@@ -5,12 +5,12 @@
     Example script demonstrating how to use Vedic objects.
 """
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.object import VedicBody
-from flatlib.vedic.utils import to_vedic_object, to_vedic_chart
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.object import VedicBody
+from astrovedic.vedic.utils import to_vedic_object, to_vedic_chart
 
 
 def main():

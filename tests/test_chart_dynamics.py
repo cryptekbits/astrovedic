@@ -2,15 +2,15 @@
 """
 Test Chart Dynamics
 
-This script tests the chart dynamics calculations in flatlib.
+This script tests the chart dynamics calculations in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.tools.chartdynamics import ChartDynamics
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.tools.chartdynamics import ChartDynamics
 
 
 class TestChartDynamics(unittest.TestCase):

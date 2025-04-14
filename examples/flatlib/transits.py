@@ -6,11 +6,11 @@
     using the flatlib library.
 """
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.api import VedicChart
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.api import VedicChart
 
 # Define date, time, and location for the natal chart
 natal_date = Datetime('2025/04/09', '20:51', '+05:30')

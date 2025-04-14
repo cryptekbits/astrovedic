@@ -7,9 +7,9 @@ This script tests the Vimshottari Dasha calculations in flatlib against referenc
 
 import unittest
 from datetime import datetime
-from flatlib import const
-from flatlib.datetime import Datetime
-from flatlib.vedic.dashas import calculate_dasha_balance, calculate_dasha_periods, get_current_dasha
+from astrovedic import const
+from astrovedic.datetime import Datetime
+from astrovedic.vedic.dashas import calculate_dasha_balance, calculate_dasha_periods, get_current_dasha
 from tests.data.test_data_manager import TestDataManager
 
 # Add to_datetime method to Datetime class if it doesn't exist

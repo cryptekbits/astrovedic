@@ -6,11 +6,11 @@
     to analyze planetary dignities in Vedic astrology.
 """
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic import dignities as vedic_dignities
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic import dignities as vedic_dignities
 from prettytable import PrettyTable
 
 

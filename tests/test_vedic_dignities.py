@@ -3,15 +3,15 @@
 Test Vedic Dignities
 
 This script tests the Vedic dignity (Swakshetra, Uchcha, Neecha, Moolatrikona)
-calculations in flatlib.
+calculations in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic import dignities as vedic_dignities
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic import dignities as vedic_dignities
 
 
 class TestVedicDignities(unittest.TestCase):

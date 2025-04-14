@@ -2,15 +2,15 @@
 """
 Test Compatibility Analysis Core Functions
 
-This script tests the core compatibility analysis functions in flatlib.
+This script tests the core compatibility analysis functions in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.compatibility.core import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.compatibility.core import (
     get_compatibility_score, get_compatibility_factors,
     get_compatibility_description, get_compatibility_report,
     get_compatibility_level

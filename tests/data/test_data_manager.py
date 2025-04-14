@@ -9,10 +9,10 @@ It loads reference data from JSON files and provides methods for accessing it.
 import os
 import json
 from datetime import datetime
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
 
 class TestDataManager:
     """

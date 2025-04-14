@@ -18,16 +18,16 @@ import sys
 import argparse
 from tabulate import tabulate
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.vargas import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.vargas import (
     D1, D2, D3, D4, D7, D9, D10, D12, 
     D16, D20, D24, D27, D30, D40, D45, D60,
     get_varga_chart, get_varga_name, get_varga_description
 )
-from flatlib.vedic.vargas.analysis import get_varga_visesha
+from astrovedic.vedic.vargas.analysis import get_varga_visesha
 
 # Default location: Bangalore, India
 DEFAULT_LAT = 12.9716
@@ -81,7 +81,7 @@ def print_chart_info(chart, location, ayanamsa):
     Print basic chart information
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
         location (str): Location name
         ayanamsa (str): Ayanamsa used
     """
@@ -109,7 +109,7 @@ def print_chart_info(chart, location, ayanamsa):
         planet = chart.getObject(planet_id)
         
         # Get nakshatra information
-        from flatlib.vedic.nakshatras import get_nakshatra
+        from astrovedic.vedic.nakshatras import get_nakshatra
         nakshatra_info = get_nakshatra(planet.lon)
         
         rows.append([
@@ -126,7 +126,7 @@ def print_divisional_chart(chart, varga_type):
     Print planetary positions in a divisional chart
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
         varga_type (str): The type of divisional chart (e.g., D9, D10)
     """
     # Get the divisional chart
@@ -158,7 +158,7 @@ def print_varga_visesha(chart):
     Print Varga Visesha (special divisional chart strengths) for all planets
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
     """
     print(f"\n{'=' * 60}")
     print(f"Varga Visesha (Special Divisional Chart Strengths)")

@@ -20,11 +20,11 @@ import argparse
 from datetime import datetime, timedelta
 from tabulate import tabulate
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.muhurta import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.muhurta import (
     get_panchanga, get_muhurta_quality, get_abhijit_muhurta,
     get_brahma_muhurta, get_rahu_kala, get_yama_ghantaka,
     get_gulika_kala, get_activity_score, get_best_time_for_activity,
@@ -83,7 +83,7 @@ def print_chart_info(chart, location, ayanamsa):
     Print basic chart information
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
         location (str): Location name
         ayanamsa (str): Ayanamsa used
     """
@@ -104,7 +104,7 @@ def print_panchanga(chart):
     Print Panchanga information
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
     """
     # Get the Panchanga
     panchanga = get_panchanga(chart)
@@ -149,7 +149,7 @@ def print_muhurta_quality(chart):
     Print Muhurta quality information
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
     """
     # Get the Muhurta quality
     quality = get_muhurta_quality(chart)

@@ -6,11 +6,11 @@
     to calculate and analyze aspects in Vedic astrology.
 """
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic import aspects as vedic_aspects
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic import aspects as vedic_aspects
 # No need to import VedicChart for this example
 
 

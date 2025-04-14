@@ -2,16 +2,16 @@
 """
 Comprehensive Test Cache System
 
-This script provides comprehensive tests for the cache system in flatlib.
+This script provides comprehensive tests for the cache system in astrovedic.
 """
 
 import unittest
 import time
-from flatlib import const
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib.cache import (
+from astrovedic import const
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic.cache import (
     CacheConfig, clear_all_caches, clear_category_cache,
     reference_cache, calculation_cache, ephemeris_cache,
     CACHE_REFERENCE, CACHE_CALCULATION, CACHE_EPHEMERIS

@@ -1,13 +1,13 @@
 # tests/vedic/shadbala/test_advanced.py
 """
-Unit tests for functions in flatlib.vedic.shadbala.advanced
+Unit tests for functions in astrovedic.vedic.shadbala.advanced
 Specifically testing the refactored Ishta and Kashta Phala calculations.
 """
 
 import unittest
 import math
 
-from flatlib.vedic.shadbala.advanced import calculate_ishta_phala, calculate_kashta_phala
+from astrovedic.vedic.shadbala.advanced import calculate_ishta_phala, calculate_kashta_phala
 
 
 class TestIshtaKashtaPhala(unittest.TestCase):

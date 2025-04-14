@@ -2,33 +2,33 @@
 """
 Test Muhurta Calculations
 
-This script tests the Muhurta (electional astrology) calculations in flatlib.
+This script tests the Muhurta (electional astrology) calculations in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.muhurta import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.muhurta import (
     get_panchanga, get_muhurta_quality, get_abhijit_muhurta,
     get_brahma_muhurta, get_rahu_kala, get_yama_ghantaka,
     get_gulika_kala, get_activity_score, get_best_time_for_activity,
     get_muhurta_predictions, analyze_muhurta
 )
-from flatlib.vedic.muhurta.panchanga import (
+from astrovedic.vedic.muhurta.panchanga import (
     get_tithi, get_nakshatra_for_muhurta, get_yoga,
     get_karana, get_vara
 )
-from flatlib.vedic.muhurta.timing import (
+from astrovedic.vedic.muhurta.timing import (
     get_hora, get_kaala, get_amrita_yoga,
     get_siddha_yoga, get_amrita_siddha_yoga
 )
-from flatlib.vedic.muhurta.activities import (
+from astrovedic.vedic.muhurta.activities import (
     get_activity_rules, get_activity_score,
     get_best_time_for_activity
 )
-from flatlib.vedic.muhurta.analysis import (
+from astrovedic.vedic.muhurta.analysis import (
     analyze_muhurta, get_muhurta_predictions,
     get_muhurta_compatibility, get_muhurta_strength_score
 )

@@ -22,12 +22,12 @@ import datetime
 import logging
 from tabulate import tabulate
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib import angle
-from flatlib.object import GenericObject
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic import angle
+from astrovedic.object import GenericObject
 
 # Configure logging to suppress warnings
 logger = logging.getLogger("flatlib")
@@ -428,7 +428,7 @@ def get_chart(custom_date=None, custom_time=None):
         custom_time (str, optional): Time in format 'HH:MM'. Defaults to current time.
     
     Returns:
-        Chart: Flatlib chart object
+        Chart: Astrovedic chart object
     """
     # Get current time in UTC if no custom date/time provided
     now = datetime.datetime.now()
@@ -516,7 +516,7 @@ def main():
         # Format position like in the reference panchang
         position = f"{int(planet.signlon):02d}° {planet.sign[:3]} {int(planet.signlon % 1 * 60):02d}' {int(planet.signlon % 1 * 60 % 1 * 60):02d}\""
         
-        # Use the house number from flatlib's calculation
+        # Use the house number from astrovedic's calculation
         house_num = house.num() if house else 0
         
         # Use the calculated KP pointer

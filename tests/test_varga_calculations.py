@@ -7,24 +7,24 @@ against standard definitions from Vedic astrology.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.vargas import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.vargas import (
     D1, D2, D3, D4, D7, D9, D10, D12,
     D16, D20, D24, D27, D30, D40, D45, D60,
     get_varga_chart, get_varga_longitude
 )
-from flatlib.vedic.vargas.hora import calculate_d2
-from flatlib.vedic.vargas.drekkana import calculate_d3
-from flatlib.vedic.vargas.chaturthamsha import calculate_d4
-from flatlib.vedic.vargas.saptamsha import calculate_d7
-from flatlib.vedic.vargas.navamsha import calculate_d9
-from flatlib.vedic.vargas.dashamsha import calculate_d10
-from flatlib.vedic.vargas.dwadashamsha import calculate_d12
-from flatlib.vedic.vargas.trimshamsha import calculate_d30
-from flatlib.vedic.vargas.shashtiamsha import calculate_d60
+from astrovedic.vedic.vargas.hora import calculate_d2
+from astrovedic.vedic.vargas.drekkana import calculate_d3
+from astrovedic.vedic.vargas.chaturthamsha import calculate_d4
+from astrovedic.vedic.vargas.saptamsha import calculate_d7
+from astrovedic.vedic.vargas.navamsha import calculate_d9
+from astrovedic.vedic.vargas.dashamsha import calculate_d10
+from astrovedic.vedic.vargas.dwadashamsha import calculate_d12
+from astrovedic.vedic.vargas.trimshamsha import calculate_d30
+from astrovedic.vedic.vargas.shashtiamsha import calculate_d60
 
 class TestVargaCalculations(unittest.TestCase):
     """Test case for specific Varga calculation logic"""

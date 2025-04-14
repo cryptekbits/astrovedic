@@ -2,15 +2,15 @@
 """
 Test Vedic Transit Calculations
 
-This script tests the Vedic transit calculations in flatlib.
+This script tests the Vedic transit calculations in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.transits import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.transits import (
     get_transits, get_transit_predictions_for_date,
     get_transit_timeline_for_period, analyze_transit_period,
     get_transit_chart, get_transit_planets, get_transit_aspects,
@@ -18,34 +18,34 @@ from flatlib.vedic.transits import (
     get_transit_ashtakavarga, get_transit_dasha_effects,
     get_transit_analysis
 )
-from flatlib.vedic.transits.core import (
+from astrovedic.vedic.transits.core import (
     get_house_number, get_house_sign,
     is_aspect_applying
 )
-from flatlib.vedic.transits.gochara import (
+from astrovedic.vedic.transits.gochara import (
     get_planet_gochara, get_house_from_moon,
     get_effect_from_moon, get_vedha_effects,
     get_argala_effects, get_gochara_strength
 )
-from flatlib.vedic.transits.ashtakavarga import (
+from astrovedic.vedic.transits.ashtakavarga import (
     get_transit_bindus, get_transit_sarvashtakavarga,
     get_transit_kaksha, get_transit_ashtakavarga_strength,
     get_transit_sarvashtakavarga_strength
 )
-from flatlib.vedic.transits.dashas import (
+from astrovedic.vedic.transits.dashas import (
     get_transit_dasha_effects, get_transit_antardasha_effects,
     get_transit_pratyantardasha_effects, get_dasha_transit_compatibility,
     get_transit_effects_on_planet, get_aspect_effect,
     get_house_transit_effect, get_aspect_score,
     get_house_transit_score
 )
-from flatlib.vedic.transits.predictions import (
+from astrovedic.vedic.transits.predictions import (
     get_transit_predictions, get_transit_timeline,
     get_transit_events, get_transit_periods,
     generate_planet_prediction, generate_house_prediction,
     generate_dasha_prediction
 )
-from flatlib.vedic.transits.analysis import (
+from astrovedic.vedic.transits.analysis import (
     analyze_transits, get_transit_compatibility,
     get_transit_strength_score, get_transit_analysis
 )
@@ -251,7 +251,7 @@ class TestVedicTransits(unittest.TestCase):
     def test_get_transit_bindus(self):
         """Test get_transit_bindus function"""
         # Get the Ashtakavarga for the natal chart
-        from flatlib.vedic.ashtakavarga import get_ashtakavarga
+        from astrovedic.vedic.ashtakavarga import get_ashtakavarga
         ashtakavarga = get_ashtakavarga(self.natal_chart)
         
         # Get transit bindus
@@ -267,7 +267,7 @@ class TestVedicTransits(unittest.TestCase):
     def test_get_transit_sarvashtakavarga(self):
         """Test get_transit_sarvashtakavarga function"""
         # Get the Sarvashtakavarga for the natal chart
-        from flatlib.vedic.ashtakavarga import get_sarvashtakavarga
+        from astrovedic.vedic.ashtakavarga import get_sarvashtakavarga
         sarvashtakavarga = get_sarvashtakavarga(self.natal_chart)
         
         # Get transit Sarvashtakavarga

@@ -1,7 +1,7 @@
-from flatlib import const
-from flatlib.tools import planetarytime
-from flatlib.dignities import essential
-from flatlib.tools import arabicparts
+from astrovedic import const
+from astrovedic.tools import planetarytime
+from astrovedic.dignities import essential
+from astrovedic.tools import arabicparts
 
 # List of dignities
 DIGNITY_LIST = [

@@ -2,20 +2,20 @@
 """
 Test Integration
 
-This script tests integration between different modules in flatlib.
+This script tests integration between different modules in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.api import VedicChart, create_vedic_chart, create_kp_chart
-from flatlib.vedic.nakshatras import get_nakshatra
-from flatlib.vedic.panchang import get_panchang
-from flatlib.vedic.upagrah import get_upagrah_positions
-from flatlib.vedic.vargas.navamsha import calculate_d9
-from flatlib.vedic.kp import get_kp_sublord
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.api import VedicChart, create_vedic_chart, create_kp_chart
+from astrovedic.vedic.nakshatras import get_nakshatra
+from astrovedic.vedic.panchang import get_panchang
+from astrovedic.vedic.upagrah import get_upagrah_positions
+from astrovedic.vedic.vargas.navamsha import calculate_d9
+from astrovedic.vedic.kp import get_kp_sublord
 
 
 class TestFullSystemIntegration(unittest.TestCase):

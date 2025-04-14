@@ -2,15 +2,15 @@
 """
 Test Yoga Core Functions
 
-This script tests the core Yoga (planetary combinations) functions in flatlib.
+This script tests the core Yoga (planetary combinations) functions in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.yogas.core import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.yogas.core import (
     get_yoga_strength, get_yoga_effects, get_strongest_yoga,
     is_in_own_sign, is_exalted, is_debilitated,
     is_in_friendly_sign, is_in_enemy_sign,

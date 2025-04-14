@@ -6,11 +6,11 @@
     using the flatlib library.
 """
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.api import VedicChart
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.api import VedicChart
 import json
 
 # Define date, time, and location for the first person

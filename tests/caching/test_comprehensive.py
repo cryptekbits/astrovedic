@@ -5,27 +5,27 @@ Comprehensive test script for caching functionality in flatlib
 
 import time
 import unittest
-from flatlib import const
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib.cache import clear_all_caches, CacheConfig
+from astrovedic import const
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic.cache import clear_all_caches, CacheConfig
 
 # Import original functions
-from flatlib.vedic.utils import get_sign_lord as get_sign_lord_orig
-from flatlib.vedic.nakshatras import get_nakshatra as get_nakshatra_orig
-from flatlib.vedic.vargas.navamsha import calculate_d9 as calculate_d9_orig
-from flatlib.vedic.panchang import get_tithi as get_tithi_orig
-from flatlib.ephem.swe import sweObject as sweObject_orig
-from flatlib.ephem.eph import getObject as getObject_orig
+from astrovedic.vedic.utils import get_sign_lord as get_sign_lord_orig
+from astrovedic.vedic.nakshatras import get_nakshatra as get_nakshatra_orig
+from astrovedic.vedic.vargas.navamsha import calculate_d9 as calculate_d9_orig
+from astrovedic.vedic.panchang import get_tithi as get_tithi_orig
+from astrovedic.ephem.swe import sweObject as sweObject_orig
+from astrovedic.ephem.eph import getObject as getObject_orig
 
 # Import cached functions
-from flatlib.vedic.utils_cached import get_sign_lord as get_sign_lord_cached
-from flatlib.vedic.nakshatras_cached import get_nakshatra as get_nakshatra_cached
-from flatlib.vedic.vargas.cached import calculate_d9 as calculate_d9_cached
-from flatlib.vedic.panchang_cached import get_tithi as get_tithi_cached
-from flatlib.ephem.swe_cached import sweObject as sweObject_cached
-from flatlib.ephem.eph_cached import getObject as getObject_cached
+from astrovedic.vedic.utils_cached import get_sign_lord as get_sign_lord_cached
+from astrovedic.vedic.nakshatras_cached import get_nakshatra as get_nakshatra_cached
+from astrovedic.vedic.vargas.cached import calculate_d9 as calculate_d9_cached
+from astrovedic.vedic.panchang_cached import get_tithi as get_tithi_cached
+from astrovedic.ephem.swe_cached import sweObject as sweObject_cached
+from astrovedic.ephem.eph_cached import getObject as getObject_cached
 
 
 class TestCaching(unittest.TestCase):

@@ -2,15 +2,15 @@
 """
 Test Upagrah (Shadow Planets) Calculations
 
-This script tests the Upagrah (shadow planets) calculations in flatlib.
+This script tests the Upagrah (shadow planets) calculations in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.upagrah import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.upagrah import (
     calculate_gulika, calculate_mandi, calculate_dhuma,
     calculate_vyatipata, calculate_parivesha, calculate_indrachapa,
     calculate_upaketu, get_upagrah, get_upagrah_positions

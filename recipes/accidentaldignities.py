@@ -7,13 +7,13 @@
 
 """
 
-from flatlib import const
-from flatlib.chart import Chart
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
+from astrovedic import const
+from astrovedic.chart import Chart
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
 
-from flatlib.dignities import accidental
-from flatlib.dignities.accidental import AccidentalDignity
+from astrovedic.dignities import accidental
+from astrovedic.dignities.accidental import AccidentalDignity
 
 
 # Build a chart for a date and location

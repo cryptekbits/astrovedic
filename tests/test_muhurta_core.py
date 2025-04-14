@@ -2,16 +2,16 @@
 """
 Test Muhurta Core Calculations
 
-This script tests the core Muhurta (electional astrology) calculations in flatlib.
+This script tests the core Muhurta (electional astrology) calculations in astrovedic.
 """
 
 import unittest
 import datetime
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.muhurta.core import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.muhurta.core import (
     get_muhurta_quality, get_best_muhurta,
     get_auspicious_times, get_inauspicious_times,
     get_house_number, is_lagna_strong
@@ -78,7 +78,7 @@ Datetime.fromDatetime = staticmethod(python_datetime_to_flatlib_datetime)
 Datetime.strftime = datetime_strftime
 
 # Monkey patch GeoPos to add alt attribute
-from flatlib.geopos import GeoPos
+from astrovedic.geopos import GeoPos
 GeoPos.alt = 0
 
 

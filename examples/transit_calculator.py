@@ -20,11 +20,11 @@ import argparse
 from datetime import datetime, timedelta
 from tabulate import tabulate
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.transits import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.transits import (
     get_transits, get_transit_predictions_for_date,
     get_transit_timeline_for_period, analyze_transit_period,
     get_transit_chart, get_transit_planets, get_transit_aspects,
@@ -115,7 +115,7 @@ def print_chart_info(chart, chart_type, location, ayanamsa):
     Print basic chart information
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
         chart_type (str): Type of chart ('Natal' or 'Transit')
         location (str): Location name
         ayanamsa (str): Ayanamsa used

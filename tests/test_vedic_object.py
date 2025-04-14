@@ -6,13 +6,13 @@ This script tests the VedicBody class and related utility functions.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.object import VedicBody
-from flatlib.factory import AstronomicalObjectFactory
-from flatlib.vedic.utils import to_vedic_object, to_vedic_chart
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.object import VedicBody
+from astrovedic.factory import AstronomicalObjectFactory
+from astrovedic.vedic.utils import to_vedic_object, to_vedic_chart
 
 
 class TestVedicObject(unittest.TestCase):

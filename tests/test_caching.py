@@ -2,20 +2,20 @@
 """
 Test Caching Implementation
 
-This script tests the caching implementation in flatlib.
+This script tests the caching implementation in astrovedic.
 It compares the performance of cached and non-cached functions
 and verifies that they produce the same results.
 """
 
 import time
 import unittest
-from flatlib import const
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
+from astrovedic import const
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
 
 # Import original functions
-from flatlib.vedic.utils import (
+from astrovedic.vedic.utils import (
     get_sign_lord as get_sign_lord_orig,
     get_element as get_element_orig,
     get_quality as get_quality_orig,
@@ -30,7 +30,7 @@ from flatlib.vedic.utils import (
     get_sign_from_number as get_sign_from_number_orig
 )
 
-from flatlib.vedic.nakshatras import (
+from astrovedic.vedic.nakshatras import (
     get_nakshatra as get_nakshatra_orig,
     get_nakshatra_lord as get_nakshatra_lord_orig,
     get_nakshatra_pada as get_nakshatra_pada_orig,
@@ -39,7 +39,7 @@ from flatlib.vedic.nakshatras import (
 )
 
 # Import cached functions
-from flatlib.vedic.utils_cached import (
+from astrovedic.vedic.utils_cached import (
     get_sign_lord as get_sign_lord_cached,
     get_element as get_element_cached,
     get_quality as get_quality_cached,
@@ -54,7 +54,7 @@ from flatlib.vedic.utils_cached import (
     get_sign_from_number as get_sign_from_number_cached
 )
 
-from flatlib.vedic.nakshatras_cached import (
+from astrovedic.vedic.nakshatras_cached import (
     get_nakshatra as get_nakshatra_cached,
     get_nakshatra_lord as get_nakshatra_lord_cached,
     get_nakshatra_pada as get_nakshatra_pada_cached,
@@ -63,7 +63,7 @@ from flatlib.vedic.nakshatras_cached import (
 )
 
 # Import cache management functions
-from flatlib.cache import clear_all_caches, CacheConfig
+from astrovedic.cache import clear_all_caches, CacheConfig
 
 
 class TestCaching(unittest.TestCase):
@@ -113,7 +113,7 @@ class TestCaching(unittest.TestCase):
             self.assertEqual(get_planet_abbreviation_orig(planet), get_planet_abbreviation_cached(planet))
 
         # Test get_nakshatra_lord
-        from flatlib.vedic.nakshatras import LIST_NAKSHATRAS
+        from astrovedic.vedic.nakshatras import LIST_NAKSHATRAS
         for nakshatra in LIST_NAKSHATRAS:
             self.assertEqual(get_nakshatra_lord_orig(nakshatra), get_nakshatra_lord_cached(nakshatra))
 

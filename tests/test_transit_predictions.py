@@ -2,17 +2,17 @@
 """
 Test Transit Analysis Prediction Functions
 
-This script tests the transit prediction and timeline functions in flatlib.
+This script tests the transit prediction and timeline functions in astrovedic.
 """
 
 import unittest
 import datetime
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.transits.core import get_transit_chart
-from flatlib.vedic.transits.predictions import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.transits.core import get_transit_chart
+from astrovedic.vedic.transits.predictions import (
     get_transit_predictions, get_transit_timeline,
     get_transit_events, get_transit_periods,
     generate_planet_prediction
@@ -81,7 +81,7 @@ Datetime.strftime = datetime_strftime
 Datetime.to_datetime = datetime_to_python_datetime  # Alias for compatibility
 
 # Monkey patch GeoPos to add alt attribute
-from flatlib.geopos import GeoPos
+from astrovedic.geopos import GeoPos
 GeoPos.alt = 0
 
 
@@ -116,12 +116,12 @@ class TestTransitPredictions(unittest.TestCase):
         # This would normally be created by other functions in the module
 
         # Create a minimal transits dictionary for testing
-        from flatlib.vedic.transits.core import (
+        from astrovedic.vedic.transits.core import (
             get_transit_planets, get_transit_aspects,
             get_transit_houses, get_transit_quality
         )
-        from flatlib.vedic.transits.gochara import get_gochara_effects
-        from flatlib.vedic.transits.ashtakavarga import get_transit_ashtakavarga
+        from astrovedic.vedic.transits.gochara import get_gochara_effects
+        from astrovedic.vedic.transits.ashtakavarga import get_transit_ashtakavarga
         # Create a minimal transits dictionary for testing
         transits = {
             'transit_chart': self.transit_chart,

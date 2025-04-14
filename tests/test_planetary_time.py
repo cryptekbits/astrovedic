@@ -2,14 +2,14 @@
 """
 Test Planetary Time
 
-This script tests the planetary time calculations in flatlib.
+This script tests the planetary time calculations in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib import const
-from flatlib.tools import planetarytime
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic import const
+from astrovedic.tools import planetarytime
 
 
 class TestPlanetaryTime(unittest.TestCase):

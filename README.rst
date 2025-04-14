@@ -1,7 +1,7 @@
-flatlib
-=======
+astrovedic
+=========
 
-A Python 3 library for Traditional Astrology.
+A Python 3 library for Vedic and Traditional Astrology.
 
 
 Example
@@ -13,13 +13,19 @@ Example
     >>> pos = GeoPos('38n32', '8w54')
     >>> chart = Chart(date, pos)
 
-    >>> sun = chart.get(const.SUN)    
+    >>> sun = chart.get(const.SUN)
     >>> print(sun)
     <Sun Pisces +19:40:13 +00:59:57>
 
 
 Changelog
 ---------
+
+* 0.3.0 (released 2023)
+    - Renamed project from flatlib to astrovedic
+    - Extensive additions for Vedic astrology
+    - Improved caching system
+    - Enhanced API for Vedic calculations
 
 * 0.2.1 (released 06-05-2016)
     - Added Pars Horsemanship
@@ -36,7 +42,7 @@ Changelog
         - Predictives (Profections, Solar Returns and Primary Directions)
         - Protocols (Almutem, Temperament and Behavior calculations)
     - Bug fixes
-    
+
 * 0.1.1 (released 18-03-2015)
     - Changed threshold for stationary (1 arc-second)
     - Implementation of essential dignities

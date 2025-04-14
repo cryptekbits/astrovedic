@@ -6,8 +6,8 @@ This script tests the Ashtakavarga calculations in flatlib against reference dat
 """
 
 import unittest
-from flatlib import const
-from flatlib.vedic.ashtakavarga import (
+from astrovedic import const
+from astrovedic.vedic.ashtakavarga import (
     get_bhinnashtakavarga, get_sarvashtakavarga
 )
 from tests.data.test_data_manager import TestDataManager

@@ -20,11 +20,11 @@ import argparse
 from tabulate import tabulate
 from prettytable import PrettyTable
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.shadbala import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.shadbala import (
     get_shadbala, get_all_shadbala, get_bhava_bala,
     STHANA_BALA, DIG_BALA, KALA_BALA, 
     CHESHTA_BALA, NAISARGIKA_BALA, DRIG_BALA,
@@ -83,7 +83,7 @@ def print_chart_info(chart, location, ayanamsa):
     Print basic chart information
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
         location (str): Location name
         ayanamsa (str): Ayanamsa used
     """
@@ -234,7 +234,7 @@ def print_bhava_bala(chart):
     Print Bhava Bala for each house
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
     """
     print(f"\n{'=' * 60}")
     print(f"Bhava Bala (House Strength)")

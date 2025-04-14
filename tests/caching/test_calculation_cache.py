@@ -4,16 +4,16 @@ Simple test script for calculation caching functionality
 """
 
 import time
-from flatlib import const
-from flatlib.cache import clear_all_caches, CacheConfig
+from astrovedic import const
+from astrovedic.cache import clear_all_caches, CacheConfig
 
 # Import original functions
-from flatlib.vedic.vargas.navamsha import calculate_d9 as calculate_d9_orig
-from flatlib.vedic.panchang import get_tithi as get_tithi_orig
+from astrovedic.vedic.vargas.navamsha import calculate_d9 as calculate_d9_orig
+from astrovedic.vedic.panchang import get_tithi as get_tithi_orig
 
 # Import cached functions
-from flatlib.vedic.vargas.cached import calculate_d9 as calculate_d9_cached
-from flatlib.vedic.panchang_cached import get_tithi as get_tithi_cached
+from astrovedic.vedic.vargas.cached import calculate_d9 as calculate_d9_cached
+from astrovedic.vedic.panchang_cached import get_tithi as get_tithi_cached
 
 def test_correctness():
     """Test that cached functions produce the same results as original functions."""

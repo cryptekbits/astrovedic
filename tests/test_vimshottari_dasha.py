@@ -2,21 +2,21 @@
 """
 Test Vimshottari Dasha Calculations
 
-This script tests the Vimshottari Dasha calculations in flatlib.
+This script tests the Vimshottari Dasha calculations in astrovedic.
 """
 
 import unittest
 from datetime import datetime
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.dashas import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.dashas import (
     calculate_dasha_balance, get_mahadasha_sequence,
     get_antardasha_sequence, get_pratyantardasha_sequence,
     calculate_dasha_periods, get_current_dasha
 )
-from flatlib.vedic.nakshatras import VIMSHOTTARI_PERIODS
+from astrovedic.vedic.nakshatras import VIMSHOTTARI_PERIODS
 
 class TestVimshottariDasha(unittest.TestCase):
     """Test Vimshottari Dasha calculations"""

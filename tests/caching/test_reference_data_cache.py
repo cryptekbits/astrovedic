@@ -4,16 +4,16 @@ Simple test script for caching functionality
 """
 
 import time
-from flatlib import const
-from flatlib.cache import clear_all_caches, CacheConfig
+from astrovedic import const
+from astrovedic.cache import clear_all_caches, CacheConfig
 
 # Import original functions
-from flatlib.vedic.utils import get_sign_lord as get_sign_lord_orig
-from flatlib.vedic.nakshatras import get_nakshatra as get_nakshatra_orig
+from astrovedic.vedic.utils import get_sign_lord as get_sign_lord_orig
+from astrovedic.vedic.nakshatras import get_nakshatra as get_nakshatra_orig
 
 # Import cached functions
-from flatlib.vedic.utils_cached import get_sign_lord as get_sign_lord_cached
-from flatlib.vedic.nakshatras_cached import get_nakshatra as get_nakshatra_cached
+from astrovedic.vedic.utils_cached import get_sign_lord as get_sign_lord_cached
+from astrovedic.vedic.nakshatras_cached import get_nakshatra as get_nakshatra_cached
 
 def test_correctness():
     """Test that cached functions produce the same results as original functions."""

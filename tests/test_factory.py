@@ -1,8 +1,8 @@
 import unittest
 
-from flatlib import const
-from flatlib.factory import AstronomicalObjectFactory
-from flatlib.object import GenericObject, Object, MoonNode, Asteroid, House, FixedStar
+from astrovedic import const
+from astrovedic.factory import AstronomicalObjectFactory
+from astrovedic.object import GenericObject, Object, MoonNode, Asteroid, House, FixedStar
 
 
 class FactoryTests(unittest.TestCase):

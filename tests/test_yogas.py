@@ -2,50 +2,50 @@
 """
 Test Yoga Calculations
 
-This script tests the Yoga (planetary combinations) calculations in flatlib.
+This script tests the Yoga (planetary combinations) calculations in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.yogas import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.yogas import (
     get_all_yogas, get_yoga_analysis, get_yoga_predictions,
     MAHAPURUSHA_YOGA, RAJA_YOGA, DHANA_YOGA,
     NABHASA_YOGA, DOSHA_YOGA, CHANDRA_YOGA
 )
-from flatlib.vedic.yogas.mahapurusha import (
+from astrovedic.vedic.yogas.mahapurusha import (
     get_mahapurusha_yogas, has_ruchaka_yoga,
     has_bhadra_yoga, has_hamsa_yoga,
     has_malavya_yoga, has_sasa_yoga
 )
-from flatlib.vedic.yogas.raja import (
+from astrovedic.vedic.yogas.raja import (
     get_raja_yogas, has_dharmakarmaadhipati_yoga,
     has_gajakesari_yoga, has_amala_yoga,
     has_sreenatha_yoga, has_chandra_mangala_yoga
 )
-from flatlib.vedic.yogas.dhana import (
+from astrovedic.vedic.yogas.dhana import (
     get_dhana_yogas, has_lakshmi_yoga,
     has_kubera_yoga, has_kalanidhi_yoga,
     has_vasumati_yoga, has_mridanga_yoga
 )
-from flatlib.vedic.yogas.nabhasa import (
+from astrovedic.vedic.yogas.nabhasa import (
     get_nabhasa_yogas, has_rajju_yoga,
     has_musala_yoga, has_nala_yoga,
     has_mala_yoga, has_sarpa_yoga
 )
-from flatlib.vedic.yogas.dosha import (
+from astrovedic.vedic.yogas.dosha import (
     get_dosha_yogas, has_kemadruma_yoga,
     has_daridra_yoga, has_shakat_yoga,
     has_kalasarpa_yoga, has_graha_yuddha
 )
-from flatlib.vedic.yogas.chandra import (
+from astrovedic.vedic.yogas.chandra import (
     get_chandra_yogas, has_adhi_yoga,
     has_sunapha_yoga, has_anapha_yoga,
     has_durudhura_yoga, has_kemadruma_yoga
 )
-from flatlib.vedic.yogas.analysis import (
+from astrovedic.vedic.yogas.analysis import (
     analyze_yogas, get_yoga_predictions,
     get_yoga_compatibility, get_yoga_strength_score
 )

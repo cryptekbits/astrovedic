@@ -2,21 +2,21 @@
 """
 Test Cache System
 
-This script tests the cache system in flatlib.
+This script tests the cache system in astrovedic.
 """
 
 import unittest
 import time
-from flatlib import const
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib.vedic.nakshatra import get_nakshatra
-from flatlib.vedic.vargas.navamsha import calculate_d9
-from flatlib.vedic.panchanga.tithi import get_tithi
-from flatlib.vedic.kp import get_kp_sublord
-from flatlib.vedic.upagrah import calculate_gulika
-from flatlib import utils
+from astrovedic import const
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic.vedic.nakshatra import get_nakshatra
+from astrovedic.vedic.vargas.navamsha import calculate_d9
+from astrovedic.vedic.panchanga.tithi import get_tithi
+from astrovedic.vedic.kp import get_kp_sublord
+from astrovedic.vedic.upagrah import calculate_gulika
+from astrovedic import utils
 
 
 # Create cached versions of the functions for testing

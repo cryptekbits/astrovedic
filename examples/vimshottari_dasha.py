@@ -20,12 +20,12 @@ import sys
 import datetime
 from tabulate import tabulate
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.nakshatras import get_nakshatra
-from flatlib.vedic.dashas import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.nakshatras import get_nakshatra
+from astrovedic.vedic.dashas import (
     calculate_dasha_balance, calculate_dasha_periods,
     get_current_dasha, format_dasha_period, analyze_dasha_strength,
     is_dasha_sandhi
@@ -47,7 +47,7 @@ def get_chart(date_str=None, time_str=None, lat=DEFAULT_LAT, lon=DEFAULT_LON):
         lon (float, optional): Longitude in degrees
     
     Returns:
-        Chart: Flatlib Chart object
+        Chart: Astrovedic Chart object
     """
     # If no date is provided, use current date
     if not date_str:
@@ -77,7 +77,7 @@ def print_dasha_periods(chart, date):
     Print the Vimshottari Dasha periods for the given chart
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
         date (Datetime): Birth date
     """
     # Get the Moon's longitude

@@ -4,22 +4,22 @@ Simple test script for ephemeris caching functionality
 """
 
 import time
-from flatlib import const
-from flatlib.cache import clear_all_caches, CacheConfig
+from astrovedic import const
+from astrovedic.cache import clear_all_caches, CacheConfig
 
 # Import original functions
-from flatlib.ephem.swe import sweObject as sweObject_orig
-from flatlib.ephem.swe import sweHouses as sweHouses_orig
-from flatlib.ephem.swe import sweFixedStar as sweFixedStar_orig
-from flatlib.ephem.eph import getObject as getObject_orig
-from flatlib.ephem.eph import getHouses as getHouses_orig
+from astrovedic.ephem.swe import sweObject as sweObject_orig
+from astrovedic.ephem.swe import sweHouses as sweHouses_orig
+from astrovedic.ephem.swe import sweFixedStar as sweFixedStar_orig
+from astrovedic.ephem.eph import getObject as getObject_orig
+from astrovedic.ephem.eph import getHouses as getHouses_orig
 
 # Import cached functions
-from flatlib.ephem.swe_cached import sweObject as sweObject_cached
-from flatlib.ephem.swe_cached import sweHouses as sweHouses_cached
-from flatlib.ephem.swe_cached import sweFixedStar as sweFixedStar_cached
-from flatlib.ephem.eph_cached import getObject as getObject_cached
-from flatlib.ephem.eph_cached import getHouses as getHouses_cached
+from astrovedic.ephem.swe_cached import sweObject as sweObject_cached
+from astrovedic.ephem.swe_cached import sweHouses as sweHouses_cached
+from astrovedic.ephem.swe_cached import sweFixedStar as sweFixedStar_cached
+from astrovedic.ephem.eph_cached import getObject as getObject_cached
+from astrovedic.ephem.eph_cached import getHouses as getHouses_cached
 
 def test_correctness():
     """Test that cached functions produce the same results as original functions."""

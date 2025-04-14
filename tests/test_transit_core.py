@@ -2,15 +2,15 @@
 """
 Test Transit Analysis Core Functions
 
-This script tests the core transit analysis functions in flatlib.
+This script tests the core transit analysis functions in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.transits.core import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.transits.core import (
     get_transit_chart, get_transit_planets,
     get_transit_aspects, get_transit_houses,
     get_transit_quality, get_house_number

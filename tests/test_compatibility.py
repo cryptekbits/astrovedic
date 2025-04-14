@@ -2,35 +2,35 @@
 """
 Test Compatibility Analysis
 
-This script tests the compatibility analysis calculations in flatlib.
+This script tests the compatibility analysis calculations in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.compatibility import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.compatibility import (
     get_compatibility_score, get_compatibility_factors,
     get_compatibility, get_compatibility_level,
     get_detailed_compatibility_report, get_compatibility_timeline,
     analyze_charts_compatibility, get_basic_compatibility_analysis
 )
-from flatlib.vedic.compatibility.kuta import (
+from astrovedic.vedic.compatibility.kuta import (
     get_varna_kuta, get_vashya_kuta, get_tara_kuta,
     get_yoni_kuta, get_graha_maitri_kuta, get_gana_kuta,
     get_bhakoot_kuta, get_nadi_kuta
 )
-from flatlib.vedic.compatibility.kuta.total import get_total_kuta_score
-from flatlib.vedic.compatibility.dosha import (
+from astrovedic.vedic.compatibility.kuta.total import get_total_kuta_score
+from astrovedic.vedic.compatibility.dosha import (
     get_mangal_dosha, get_kuja_dosha, get_shani_dosha,
     get_grahan_dosha, get_dosha_cancellation
 )
-from flatlib.vedic.compatibility.dasha import (
+from astrovedic.vedic.compatibility.dasha import (
     get_dasha_compatibility, get_antardasha_compatibility,
     get_dasha_periods_compatibility, get_dasha_predictions
 )
-from flatlib.vedic.compatibility.navamsa import (
+from astrovedic.vedic.compatibility.navamsa import (
     get_navamsa_compatibility, get_navamsa_positions,
     get_navamsa_aspects, get_navamsa_strength
 )

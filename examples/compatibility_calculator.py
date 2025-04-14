@@ -20,28 +20,28 @@ import argparse
 from datetime import datetime, timedelta
 from tabulate import tabulate
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.compatibility import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.compatibility import (
     get_compatibility, get_detailed_compatibility_report,
     get_compatibility_timeline, analyze_charts_compatibility
 )
-from flatlib.vedic.compatibility.kuta import (
+from astrovedic.vedic.compatibility.kuta import (
     get_varna_kuta, get_vashya_kuta, get_tara_kuta,
     get_yoni_kuta, get_graha_maitri_kuta, get_gana_kuta,
     get_bhakoot_kuta, get_nadi_kuta, get_total_kuta_score
 )
-from flatlib.vedic.compatibility.dosha import (
+from astrovedic.vedic.compatibility.dosha import (
     get_mangal_dosha, get_kuja_dosha, get_shani_dosha,
     get_grahan_dosha, get_dosha_cancellation, get_dosha_remedies
 )
-from flatlib.vedic.compatibility.dasha import (
+from astrovedic.vedic.compatibility.dasha import (
     get_dasha_compatibility, get_antardasha_compatibility,
     get_dasha_periods_compatibility, get_dasha_predictions
 )
-from flatlib.vedic.compatibility.navamsa import (
+from astrovedic.vedic.compatibility.navamsa import (
     get_navamsa_compatibility, get_navamsa_positions,
     get_navamsa_aspects, get_navamsa_strength
 )
@@ -105,7 +105,7 @@ def print_chart_info(chart, chart_type, location, ayanamsa):
     Print basic chart information
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
         chart_type (str): Type of chart ('Person 1' or 'Person 2')
         location (str): Location name
         ayanamsa (str): Ayanamsa used

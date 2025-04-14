@@ -2,16 +2,16 @@
 """
 Test KP (Krishnamurti Paddhati) Astrology Calculations
 
-This script tests the KP astrology calculations in flatlib.
+This script tests the KP astrology calculations in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib import angle
-from flatlib.vedic.kp import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic import angle
+from astrovedic.vedic.kp import (
     get_nakshatra, get_kp_sublord, get_kp_sub_sublord,
     get_kp_pointer, get_kp_lords, get_kp_planets,
     get_kp_houses, get_kp_significators, get_kp_ruling_planets
@@ -288,7 +288,7 @@ class TestKP(unittest.TestCase):
         """Test get_kp_ruling_planets function"""
         # We need to patch the dayofweek method since it's missing
         # Let's add a temporary method to the Datetime class
-        from flatlib.datetime import Datetime
+        from astrovedic.datetime import Datetime
 
         # Store the original method if it exists
         original_method = getattr(Datetime, 'dayofweek', None)

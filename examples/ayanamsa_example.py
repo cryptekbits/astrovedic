@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-    Example script to demonstrate the use of different ayanamsas in flatlib.
+    Example script to demonstrate the use of different ayanamsas in astrovedic.
 
     This script calculates the position of the Sun using different ayanamsas
     and displays the results.
@@ -9,13 +9,13 @@
 import sys
 import os
 
-# Add the parent directory to the path so we can import flatlib
+# Add the parent directory to the path so we can import astrovedic
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
 
 # Create a sample date and location
 date = Datetime('2023/05/15', '12:00', '+00:00')

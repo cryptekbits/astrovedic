@@ -2,20 +2,20 @@
 """
 Test Kuta Analysis
 
-This script tests the Kuta (compatibility factors) analysis in flatlib.
+This script tests the Kuta (compatibility factors) analysis in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.compatibility.kuta import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.compatibility.kuta import (
     get_varna_kuta, get_vashya_kuta, get_tara_kuta,
     get_yoni_kuta, get_graha_maitri_kuta, get_gana_kuta,
     get_bhakoot_kuta, get_nadi_kuta
 )
-from flatlib.vedic.compatibility.kuta.total import get_total_kuta_score
+from astrovedic.vedic.compatibility.kuta.total import get_total_kuta_score
 
 
 class TestKuta(unittest.TestCase):

@@ -2,15 +2,15 @@
 """
 Test API Functions
 
-This script tests the API functions in flatlib.
+This script tests the API functions in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.api import VedicChart, create_vedic_chart, create_kp_chart
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.api import VedicChart, create_vedic_chart, create_kp_chart
 
 
 class TestVedicChartCreation(unittest.TestCase):

@@ -7,8 +7,8 @@
 
 """
 
-from flatlib.datetime import Datetime
-from flatlib.ephem import ephem
+from astrovedic.datetime import Datetime
+from astrovedic.ephem import ephem
 
 
 # Build a Datetime object

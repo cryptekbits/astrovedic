@@ -22,11 +22,11 @@ import sys
 import argparse
 from tabulate import tabulate
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.yogas import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.yogas import (
     get_all_yogas, get_yoga_analysis, get_yoga_predictions,
     MAHAPURUSHA_YOGA, RAJA_YOGA, DHANA_YOGA,
     NABHASA_YOGA, DOSHA_YOGA, CHANDRA_YOGA
@@ -84,7 +84,7 @@ def print_chart_info(chart, location, ayanamsa):
     Print basic chart information
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
         location (str): Location name
         ayanamsa (str): Ayanamsa used
     """
@@ -112,7 +112,7 @@ def print_chart_info(chart, location, ayanamsa):
         planet = chart.getObject(planet_id)
         
         # Get the house number
-        from flatlib.vedic.yogas.core import get_house_number
+        from astrovedic.vedic.yogas.core import get_house_number
         house_num = get_house_number(chart, planet_id)
         
         rows.append([
@@ -303,7 +303,7 @@ def print_yoga_effects(chart, yogas):
     Print the effects of Yogas in a chart
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
         yogas (dict): Dictionary with Yoga information
     """
     print(f"\n{'=' * 60}")
@@ -331,7 +331,7 @@ def print_yoga_predictions(chart):
     Print predictions based on Yogas in a chart
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
     """
     print(f"\n{'=' * 60}")
     print(f"Yoga Predictions")

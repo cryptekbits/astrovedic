@@ -2,33 +2,33 @@
 """
 Test Yoga Types
 
-This script tests the specific Yoga (planetary combinations) types in flatlib.
+This script tests the specific Yoga (planetary combinations) types in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.yogas import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.yogas import (
     get_all_yogas, get_yoga_analysis, get_yoga_predictions
 )
-from flatlib.vedic.yogas.mahapurusha import (
+from astrovedic.vedic.yogas.mahapurusha import (
     get_mahapurusha_yogas, has_ruchaka_yoga,
     has_bhadra_yoga, has_hamsa_yoga,
     has_malavya_yoga, has_sasa_yoga
 )
-from flatlib.vedic.yogas.raja import (
+from astrovedic.vedic.yogas.raja import (
     get_raja_yogas, has_dharmakarmaadhipati_yoga,
     has_gajakesari_yoga, has_amala_yoga,
     has_sreenatha_yoga, has_chandra_mangala_yoga
 )
-from flatlib.vedic.yogas.dhana import (
+from astrovedic.vedic.yogas.dhana import (
     get_dhana_yogas, has_lakshmi_yoga,
     has_kubera_yoga, has_kalanidhi_yoga,
     has_vasumati_yoga, has_mridanga_yoga
 )
-from flatlib.vedic.yogas.analysis import get_yoga_strength_score
+from astrovedic.vedic.yogas.analysis import get_yoga_strength_score
 
 
 class TestYogaTypes(unittest.TestCase):

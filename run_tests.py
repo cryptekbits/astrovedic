@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Run Flatlib Test Suite
+Run Astrovedic Test Suite
 
-This script provides a simple interface for running the Flatlib test suite.
+This script provides a simple interface for running the Astrovedic test suite.
 """
 
 import sys

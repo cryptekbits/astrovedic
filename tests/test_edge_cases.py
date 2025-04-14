@@ -2,14 +2,14 @@
 """
 Test Edge Cases
 
-This script tests edge cases in flatlib.
+This script tests edge cases in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
 
 
 class TestInvalidInputs(unittest.TestCase):

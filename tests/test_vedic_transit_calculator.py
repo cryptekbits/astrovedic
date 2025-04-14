@@ -6,10 +6,10 @@
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib import const
-from flatlib.vedic.transits import calculator
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic import const
+from astrovedic.vedic.transits import calculator
 
 
 class TestVedicTransitCalculator(unittest.TestCase):

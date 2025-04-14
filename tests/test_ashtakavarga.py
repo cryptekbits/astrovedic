@@ -2,27 +2,27 @@
 """
 Test Ashtakavarga Calculations
 
-This script tests the Ashtakavarga (eight-source strength) calculations in flatlib.
+This script tests the Ashtakavarga (eight-source strength) calculations in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.ashtakavarga import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.ashtakavarga import (
     get_bhinnashtakavarga, get_sarvashtakavarga, get_all_ashtakavarga,
     get_kaksha_bala, get_transit_ashtakavarga, LIST_ASHTAKAVARGA_PLANETS
 )
-from flatlib.vedic.ashtakavarga.bhinna import (
+from astrovedic.vedic.ashtakavarga.bhinna import (
     calculate_bhinnashtakavarga, get_benefic_points,
     get_malefic_points, get_rekha_points
 )
-from flatlib.vedic.ashtakavarga.sarva import (
+from astrovedic.vedic.ashtakavarga.sarva import (
     calculate_sarvashtakavarga, get_trikona_sodhana,
     get_ekadhi_sodhana, get_sodhita_sarvashtakavarga
 )
-from flatlib.vedic.ashtakavarga.analysis import (
+from astrovedic.vedic.ashtakavarga.analysis import (
     get_bindus_in_houses, get_bindus_in_signs,
     get_ashtakavarga_predictions, get_ashtakavarga_strength_in_house
 )

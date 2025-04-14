@@ -5,11 +5,11 @@
     Example script demonstrating how to use the Vedic transit calculator.
 """
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib import const
-from flatlib.ephem import eph
-from flatlib.vedic.transits import calculator
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic import const
+from astrovedic.ephem import eph
+from astrovedic.vedic.transits import calculator
 
 
 def main():

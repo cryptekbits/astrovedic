@@ -2,7 +2,7 @@
 """
 Vedic API Example
 
-This script demonstrates how to use the unified Vedic API in flatlib.
+This script demonstrates how to use the unified Vedic API in astrovedic.
 It shows how to create a VedicChart and access various Vedic astrology features.
 
 Usage:
@@ -16,14 +16,14 @@ import argparse
 from tabulate import tabulate
 from prettytable import PrettyTable
 
-from flatlib import const
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib.vedic.api import VedicChart, create_vedic_chart
-from flatlib.vedic.vimshottari import get_dasha_balance, get_current_dasha
-from flatlib.dignities.essential import EssentialInfo
-from flatlib.dignities import essential
+from astrovedic import const
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic.vedic.api import VedicChart, create_vedic_chart
+from astrovedic.vedic.vimshottari import get_dasha_balance, get_current_dasha
+from astrovedic.dignities.essential import EssentialInfo
+from astrovedic.dignities import essential
 
 # Default location: Bangalore, India
 DEFAULT_LAT = 12.9716

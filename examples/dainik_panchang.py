@@ -15,14 +15,14 @@ import sys
 import datetime
 from tabulate import tabulate
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.panchang import get_panchang
-from flatlib.vedic.nakshatras import get_nakshatra
-from flatlib.vedic.upagrah import get_upagrah
-from flatlib.vedic.kp import get_kp_lords
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.panchang import get_panchang
+from astrovedic.vedic.nakshatras import get_nakshatra
+from astrovedic.vedic.upagrah import get_upagrah
+from astrovedic.vedic.kp import get_kp_lords
 
 # Default location: Bangalore, India
 DEFAULT_LAT = 12.9716
@@ -40,7 +40,7 @@ def get_chart(date_str=None, time_str="00:00", lat=DEFAULT_LAT, lon=DEFAULT_LON)
         lon (float, optional): Longitude in degrees
     
     Returns:
-        Chart: Flatlib Chart object
+        Chart: Astrovedic Chart object
     """
     # If no date is provided, use current date
     if not date_str:
@@ -66,7 +66,7 @@ def print_panchang(chart):
     Print the panchang for the given chart
     
     Args:
-        chart (Chart): Flatlib Chart object
+        chart (Chart): Astrovedic Chart object
     """
     # Get date and location
     date = chart.date

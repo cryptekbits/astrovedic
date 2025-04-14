@@ -13,12 +13,12 @@ import unittest
 import json
 from tabulate import tabulate
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.nakshatras import get_nakshatra
-from flatlib.vedic.kp import get_kp_lords
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.nakshatras import get_nakshatra
+from astrovedic.vedic.kp import get_kp_lords
 
 from tests.data.test_data_manager import TestDataManager
 

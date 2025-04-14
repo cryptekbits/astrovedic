@@ -8,14 +8,14 @@ import os
 import json
 from datetime import datetime
 
-# Add the parent directory to the path so we can import flatlib
+# Add the parent directory to the path so we can import astrovedic
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic import dignities as vedic_dignities
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic import dignities as vedic_dignities
 
 # Test data
 DATE = Datetime('2025/04/09', '20:51', '+05:30')

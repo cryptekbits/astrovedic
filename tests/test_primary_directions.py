@@ -2,16 +2,16 @@
 """
 Test Primary Directions Calculations
 
-This script tests the Primary Directions calculations in flatlib.
+This script tests the Primary Directions calculations in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.predictives import primarydirections
-from flatlib.predictives.primarydirections import PrimaryDirections, PDTable
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.predictives import primarydirections
+from astrovedic.predictives.primarydirections import PrimaryDirections, PDTable
 
 
 class TestPrimaryDirections(unittest.TestCase):

@@ -7,9 +7,9 @@
 
 """
 
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.tools import planetarytime
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.tools import planetarytime
 
 
 # Build a date and location

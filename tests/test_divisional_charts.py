@@ -2,15 +2,15 @@
 """
 Test Divisional Chart Calculations
 
-This script tests the divisional chart calculations in flatlib.
+This script tests the divisional chart calculations in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.vargas import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.vargas import (
     D1, D2, D3, D4, D7, D9, D10, D12, 
     D16, D20, D24, D27, D30, D40, D45, D60,
     get_varga_chart, get_varga_longitude

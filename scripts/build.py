@@ -1,5 +1,5 @@
 """
- Builds a compiled distribution of flatlib.
+ Builds a compiled distribution of astrovedic.
 
 """
 
@@ -11,7 +11,7 @@ import utils
 
 
 # Config
-PKG_NAME = 'flatlib'
+PKG_NAME = 'astrovedic'
 PKG_DIR = utils.PKG_DIR
 
 BUILD_NAME = 'build'
@@ -40,9 +40,9 @@ RES_DST_DIR = os.path.join(BUILD_DIR, 'resources')
 shutil.move(RES_SRC_DIR, RES_DST_DIR)
 
 # Create zip file
-import flatlib
+import astrovedic
 
-VERSION = flatlib.__version__
+VERSION = astrovedic.__version__
 zipname = '%s-%s' % (PKG_NAME, VERSION)
 shutil.make_archive(os.path.join(BUILD_DIR, zipname), 'zip',
                     root_dir=BUILD_DIR, base_dir=PKG_NAME)

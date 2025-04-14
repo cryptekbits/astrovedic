@@ -1,12 +1,12 @@
 import unittest
 from unittest.mock import patch, MagicMock
 
-from flatlib import const
-from flatlib.ephem import eph
-from flatlib.ephem import swe
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
+from astrovedic import const
+from astrovedic.ephem import eph
+from astrovedic.ephem import swe
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
 
 
 class ErrorHandlingTests(unittest.TestCase):
@@ -15,7 +15,7 @@ class ErrorHandlingTests(unittest.TestCase):
         self.date = Datetime('2015/03/13', '17:00', '+00:00')
         self.pos = GeoPos('38n32', '8w54')
 
-    @patch('flatlib.ephem.swe.sweObject')
+    @patch('astrovedic.ephem.swe.sweObject')
     def test_getObject_handles_exception(self, mock_sweObject):
         """
         Test that getObject handles exceptions from sweObject
@@ -45,7 +45,7 @@ class ErrorHandlingTests(unittest.TestCase):
 
     # Note: PARS_FORTUNA test removed as it's not used in Vedic astrology implementation
 
-    @patch('flatlib.ephem.tools.syzygyJD')
+    @patch('astrovedic.ephem.tools.syzygyJD')
     def test_getObject_handles_syzygy_exception(self, mock_syzygyJD):
         """
         Test that getObject handles exceptions when calculating Syzygy
@@ -73,7 +73,7 @@ class ErrorHandlingTests(unittest.TestCase):
         self.assertEqual(obj['lonspeed'], 0.0)
         self.assertEqual(obj['latspeed'], 0.0)
 
-    @patch('flatlib.ephem.swe.swe_object')
+    @patch('astrovedic.ephem.swe.swe_object')
     def test_get_object_handles_exception(self, mock_swe_object):
         """
         Test that get_object handles exceptions from swe_object

@@ -2,15 +2,15 @@
 """
 Test Shadbala Calculations
 
-This script tests the Shadbala (six-fold planetary strength) calculations in flatlib.
+This script tests the Shadbala (six-fold planetary strength) calculations in astrovedic.
 """
 
 import unittest
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
-from flatlib.vedic.shadbala import (
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
+from astrovedic.vedic.shadbala import (
     get_shadbala, get_all_shadbala, get_bhava_bala,
     STHANA_BALA, DIG_BALA, KALA_BALA,
     CHESHTA_BALA, NAISARGIKA_BALA, DRIG_BALA,
