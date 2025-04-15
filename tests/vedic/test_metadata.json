@@ -1,0 +1,62 @@
+{
+    "tests.vedic.test_ashtakavarga.TestAshtakavarga.test_bhinnashtakavarga": {
+        "name": "Bhinnashtakavarga Calculation",
+        "description": "Tests calculation of Bhinnashtakavarga (individual planet strength)",
+        "category": "vedic"
+    },
+    "tests.vedic.test_ashtakavarga.TestAshtakavarga.test_sarvashtakavarga": {
+        "name": "Sarvashtakavarga Calculation",
+        "description": "Tests calculation of Sarvashtakavarga (combined planet strength)",
+        "category": "vedic"
+    },
+    "tests.vedic.test_ashtakavarga.TestAshtakavarga.test_trikona_sodhana": {
+        "name": "Trikona Sodhana",
+        "description": "Tests Trikona Sodhana (reduction) of Sarvashtakavarga",
+        "category": "vedic"
+    },
+    "tests.vedic.test_ashtakavarga.TestAshtakavarga.test_ekadhi_sodhana": {
+        "name": "Ekadhi Sodhana",
+        "description": "Tests Ekadhi Sodhana (reduction) of Sarvashtakavarga",
+        "category": "vedic"
+    },
+    "tests.vedic.test_ashtakavarga.TestAshtakavarga.test_kaksha_bala": {
+        "name": "Kaksha Bala",
+        "description": "Tests calculation of Kaksha Bala (divisional strength)",
+        "category": "vedic"
+    },
+    "tests.vedic.test_ashtakavarga.TestAshtakavarga.test_transit_ashtakavarga": {
+        "name": "Transit Ashtakavarga",
+        "description": "Tests calculation of Ashtakavarga for transit analysis",
+        "category": "vedic"
+    },
+    "tests.vedic.test_bhava_chalita.TestBhavaChalita.test_bhava_chalita_chart": {
+        "name": "Bhava Chalita Chart",
+        "description": "Tests Bhava Chalita chart calculation",
+        "category": "vedic"
+    },
+    "tests.vedic.test_bhava_chalita.TestBhavaChalita.test_bhava_chalita_house_for_planet": {
+        "name": "Bhava Chalita House for Planet",
+        "description": "Tests getting the Bhava Chalita house for a planet",
+        "category": "vedic"
+    },
+    "tests.vedic.test_bhava_chalita.TestBhavaChalita.test_bhava_chalita_planets_in_house": {
+        "name": "Bhava Chalita Planets in House",
+        "description": "Tests getting planets in a Bhava Chalita house",
+        "category": "vedic"
+    },
+    "tests.vedic.test_bhava_chalita.TestBhavaChalita.test_bhava_chalita_house_lord": {
+        "name": "Bhava Chalita House Lord",
+        "description": "Tests getting the lord of a Bhava Chalita house",
+        "category": "vedic"
+    },
+    "tests.vedic.test_bhava_chalita.TestBhavaChalita.test_bhava_chalita_house_strength": {
+        "name": "Bhava Chalita House Strength",
+        "description": "Tests calculating the strength of a Bhava Chalita house",
+        "category": "vedic"
+    },
+    "tests.vedic.test_bhava_chalita.TestBhavaChalita.test_bhava_chalita_logic": {
+        "name": "Bhava Chalita Logic",
+        "description": "Tests the logic of Bhava Chalita chart calculation",
+        "category": "vedic"
+    }
+}
