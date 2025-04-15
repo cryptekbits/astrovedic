@@ -1,0 +1,97 @@
+{
+    "tests.vedic.shadbala.test_shadbala.TestShadbala.test_get_shadbala": {
+        "name": "Get Shadbala",
+        "description": "Tests calculation of Shadbala (six-fold strength) for planets",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_shadbala.TestShadbala.test_get_sthana_bala": {
+        "name": "Get Sthana Bala",
+        "description": "Tests calculation of Sthana Bala (positional strength)",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_shadbala.TestShadbala.test_get_dig_bala": {
+        "name": "Get Dig Bala",
+        "description": "Tests calculation of Dig Bala (directional strength)",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_shadbala.TestShadbala.test_get_kala_bala": {
+        "name": "Get Kala Bala",
+        "description": "Tests calculation of Kala Bala (temporal strength)",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_shadbala.TestShadbala.test_get_cheshta_bala": {
+        "name": "Get Cheshta Bala",
+        "description": "Tests calculation of Cheshta Bala (motional strength)",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_shadbala.TestShadbala.test_get_naisargika_bala": {
+        "name": "Get Naisargika Bala",
+        "description": "Tests calculation of Naisargika Bala (natural strength)",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_shadbala.TestShadbala.test_get_drik_bala": {
+        "name": "Get Drik Bala",
+        "description": "Tests calculation of Drik Bala (aspectual strength)",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_shadbala.TestShadbala.test_get_shadbala_pinda": {
+        "name": "Get Shadbala Pinda",
+        "description": "Tests calculation of Shadbala Pinda (total strength)",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_shadbala.TestShadbala.test_get_shadbala_ratio": {
+        "name": "Get Shadbala Ratio",
+        "description": "Tests calculation of Shadbala Ratio (relative strength)",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_shadbala.TestShadbala.test_get_ishta_phala": {
+        "name": "Get Ishta Phala",
+        "description": "Tests calculation of Ishta Phala (beneficial effects)",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_shadbala.TestShadbala.test_get_kashta_phala": {
+        "name": "Get Kashta Phala",
+        "description": "Tests calculation of Kashta Phala (malefic effects)",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_drig_bala.TestDrigBala.test_get_drig_bala": {
+        "name": "Get Drig Bala",
+        "description": "Tests calculation of Drig Bala (aspectual strength)",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_drig_bala.TestDrigBala.test_get_graha_drishti": {
+        "name": "Get Graha Drishti",
+        "description": "Tests calculation of Graha Drishti (planetary aspects)",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_drig_bala.TestDrigBala.test_get_drishti_phala": {
+        "name": "Get Drishti Phala",
+        "description": "Tests calculation of Drishti Phala (aspectual effects)",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_drig_bala.TestDrigBala.test_get_drishti_strength": {
+        "name": "Get Drishti Strength",
+        "description": "Tests calculation of Drishti Strength (aspect strength)",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_saptavarga_bala.TestSaptavargaBala.test_get_saptavarga_bala": {
+        "name": "Get Saptavarga Bala",
+        "description": "Tests calculation of Saptavarga Bala (seven divisional chart strength)",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_saptavarga_bala.TestSaptavargaBala.test_get_varga_bala": {
+        "name": "Get Varga Bala",
+        "description": "Tests calculation of Varga Bala (divisional chart strength)",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_saptavarga_bala.TestSaptavargaBala.test_get_varga_vishwa": {
+        "name": "Get Varga Vishwa",
+        "description": "Tests calculation of Varga Vishwa (divisional chart points)",
+        "category": "shadbala"
+    },
+    "tests.vedic.shadbala.test_saptavarga_bala.TestSaptavargaBala.test_get_varga_phala": {
+        "name": "Get Varga Phala",
+        "description": "Tests calculation of Varga Phala (divisional chart effects)",
+        "category": "shadbala"
+    }
+}
