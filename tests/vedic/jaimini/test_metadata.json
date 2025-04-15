@@ -1,0 +1,87 @@
+{
+    "tests.vedic.jaimini.test_karakas.TestJaiminiKarakas.test_get_atmakaraka": {
+        "name": "Get Atmakaraka",
+        "description": "Tests calculation of Atmakaraka (soul significator)",
+        "category": "jaimini"
+    },
+    "tests.vedic.jaimini.test_karakas.TestJaiminiKarakas.test_get_amatyakaraka": {
+        "name": "Get Amatyakaraka",
+        "description": "Tests calculation of Amatyakaraka (career significator)",
+        "category": "jaimini"
+    },
+    "tests.vedic.jaimini.test_karakas.TestJaiminiKarakas.test_get_bhratrikaraka": {
+        "name": "Get Bhratrikaraka",
+        "description": "Tests calculation of Bhratrikaraka (siblings significator)",
+        "category": "jaimini"
+    },
+    "tests.vedic.jaimini.test_karakas.TestJaiminiKarakas.test_get_matrikaraka": {
+        "name": "Get Matrikaraka",
+        "description": "Tests calculation of Matrikaraka (mother significator)",
+        "category": "jaimini"
+    },
+    "tests.vedic.jaimini.test_karakas.TestJaiminiKarakas.test_get_pitrikaraka": {
+        "name": "Get Pitrikaraka",
+        "description": "Tests calculation of Pitrikaraka (father significator)",
+        "category": "jaimini"
+    },
+    "tests.vedic.jaimini.test_karakas.TestJaiminiKarakas.test_get_putrakaraka": {
+        "name": "Get Putrakaraka",
+        "description": "Tests calculation of Putrakaraka (children significator)",
+        "category": "jaimini"
+    },
+    "tests.vedic.jaimini.test_karakas.TestJaiminiKarakas.test_get_gnatikaraka": {
+        "name": "Get Gnatikaraka",
+        "description": "Tests calculation of Gnatikaraka (relatives significator)",
+        "category": "jaimini"
+    },
+    "tests.vedic.jaimini.test_karakas.TestJaiminiKarakas.test_get_darakaraka": {
+        "name": "Get Darakaraka",
+        "description": "Tests calculation of Darakaraka (spouse significator)",
+        "category": "jaimini"
+    },
+    "tests.vedic.jaimini.test_karakas.TestJaiminiKarakas.test_get_all_chara_karakas": {
+        "name": "Get All Chara Karakas",
+        "description": "Tests calculation of all Chara Karakas",
+        "category": "jaimini"
+    },
+    "tests.vedic.jaimini.test_arudha.TestJaiminiArudha.test_get_pada": {
+        "name": "Get Pada",
+        "description": "Tests calculation of Pada (projection point)",
+        "category": "jaimini"
+    },
+    "tests.vedic.jaimini.test_arudha.TestJaiminiArudha.test_get_arudha_lagna": {
+        "name": "Get Arudha Lagna",
+        "description": "Tests calculation of Arudha Lagna (projection of Ascendant)",
+        "category": "jaimini"
+    },
+    "tests.vedic.jaimini.test_arudha.TestJaiminiArudha.test_get_arudha_padas": {
+        "name": "Get Arudha Padas",
+        "description": "Tests calculation of all Arudha Padas",
+        "category": "jaimini"
+    },
+    "tests.vedic.jaimini.test_arudha.TestJaiminiArudha.test_get_upapada": {
+        "name": "Get Upapada",
+        "description": "Tests calculation of Upapada (projection of 12th house)",
+        "category": "jaimini"
+    },
+    "tests.vedic.jaimini.test_drishti.TestJaiminiDrishti.test_get_rashi_drishti": {
+        "name": "Get Rashi Drishti",
+        "description": "Tests calculation of Rashi Drishti (sign aspects)",
+        "category": "jaimini"
+    },
+    "tests.vedic.jaimini.test_drishti.TestJaiminiDrishti.test_get_graha_drishti": {
+        "name": "Get Graha Drishti",
+        "description": "Tests calculation of Graha Drishti (planet aspects)",
+        "category": "jaimini"
+    },
+    "tests.vedic.jaimini.test_drishti.TestJaiminiDrishti.test_get_argala": {
+        "name": "Get Argala",
+        "description": "Tests calculation of Argala (intervention)",
+        "category": "jaimini"
+    },
+    "tests.vedic.jaimini.test_drishti.TestJaiminiDrishti.test_get_virodhargala": {
+        "name": "Get Virodhargala",
+        "description": "Tests calculation of Virodhargala (obstruction to intervention)",
+        "category": "jaimini"
+    }
+}
