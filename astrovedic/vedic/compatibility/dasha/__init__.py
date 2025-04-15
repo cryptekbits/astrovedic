@@ -24,7 +24,7 @@ from astrovedic.vedic.compatibility.dasha.helpers import (
 )
 
 from astrovedic.vedic.compatibility.dasha.predictions import (
-    get_dasha_predictions
+    get_dasha_predictions, get_dasha_period_data
 )
 
 
@@ -86,3 +86,18 @@ def get_dasha_predictions(chart1, chart2):
     """
     from astrovedic.vedic.compatibility.dasha.predictions import get_dasha_predictions as get_predictions
     return get_predictions(chart1, chart2)
+
+
+def get_dasha_period_data(chart1, chart2):
+    """
+    Get Dasha period data for compatibility between two charts
+
+    Args:
+        chart1 (Chart): The first chart
+        chart2 (Chart): The second chart
+
+    Returns:
+        dict: Dictionary with Dasha period data
+    """
+    from astrovedic.vedic.compatibility.dasha.predictions import get_dasha_period_data as get_period_data
+    return get_period_data(chart1, chart2)

@@ -68,3 +68,16 @@ def get_basic_sarvatobhadra_data(chart):
     }
 
     return analysis
+
+
+def get_basic_sarvatobhadra_analysis(chart):
+    """
+    Alias for get_basic_sarvatobhadra_data for backward compatibility.
+
+    Args:
+        chart (Chart): The chart
+
+    Returns:
+        dict: Dictionary with basic Sarvatobhadra Chakra data
+    """
+    return get_basic_sarvatobhadra_data(chart)

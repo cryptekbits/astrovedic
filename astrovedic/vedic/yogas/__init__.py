@@ -51,7 +51,7 @@ from astrovedic.vedic.yogas.surya import (
     has_budha_aditya_yoga, has_sun_parivartana_yoga
 )
 from astrovedic.vedic.yogas.basic_analysis import (
-    get_basic_yoga_analysis
+    get_basic_yoga_analysis, get_basic_yoga_data
 )
 
 # Note: For detailed analysis, use the astroved_extension package
@@ -119,6 +119,25 @@ def get_yoga_analysis(chart):
     analysis = get_basic_yoga_analysis(chart, yogas)
 
     return analysis
+
+
+def get_yoga_data(chart):
+    """
+    Get Yoga data for a chart
+
+    Args:
+        chart (Chart): The birth chart
+
+    Returns:
+        dict: Dictionary with Yoga data
+    """
+    # Get all Yogas
+    yogas = get_all_yogas(chart)
+
+    # Get basic data
+    data = get_basic_yoga_data(chart, yogas)
+
+    return data
 
 
 def has_yoga(chart, yoga_name):

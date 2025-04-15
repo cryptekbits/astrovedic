@@ -45,8 +45,11 @@ from astrovedic.vedic.yogas.chandra import (
     has_sunapha_yoga, has_anapha_yoga,
     has_durudhura_yoga, has_kemadruma_yoga
 )
+from astrovedic.vedic.yogas import (
+    get_yoga_data
+)
 from astrovedic.vedic.yogas.analysis import (
-    get_yoga_data, get_yoga_comparison, get_yoga_strength_score
+    get_yoga_comparison, get_yoga_strength_score
 )
 
 class TestYogas(unittest.TestCase):
@@ -248,7 +251,7 @@ class TestYogas(unittest.TestCase):
         yogas = get_all_yogas(self.chart)
 
         # Get the Yoga data
-        data = get_yoga_data(self.chart, yogas)
+        data = get_yoga_data(self.chart)
 
         # Check that all required keys are present
         self.assertIn('total_yogas', data)

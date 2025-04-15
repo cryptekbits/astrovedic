@@ -57,3 +57,16 @@ def get_basic_shadbala_data(shadbala_data):
             }
 
     return result
+
+
+def get_basic_shadbala_analysis(shadbala_data):
+    """
+    Alias for get_basic_shadbala_data for backward compatibility.
+
+    Args:
+        shadbala_data (dict): Dictionary with Shadbala data
+
+    Returns:
+        dict: Dictionary with basic Shadbala data summary
+    """
+    return get_basic_shadbala_data(shadbala_data)

@@ -327,6 +327,20 @@ def get_transit_periods(natal_chart, start_date, end_date):
     return periods
 
 
+def get_transit_predictions(natal_chart, transits):
+    """
+    Alias for get_transit_effects for backward compatibility.
+
+    Args:
+        natal_chart (Chart): The natal chart
+        transits (dict): The transit information
+
+    Returns:
+        dict: Dictionary with transit effects data
+    """
+    return get_transit_effects(natal_chart, transits)
+
+
 
 
 

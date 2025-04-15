@@ -48,3 +48,17 @@ def get_basic_yoga_data(chart, yogas):
         result['yoga_types'][yoga_type] = count
 
     return result
+
+
+def get_basic_yoga_analysis(chart, yogas):
+    """
+    Alias for get_basic_yoga_data for backward compatibility.
+
+    Args:
+        chart (Chart): The birth chart
+        yogas (dict): Dictionary with Yoga information
+
+    Returns:
+        dict: Dictionary with basic Yoga data
+    """
+    return get_basic_yoga_data(chart, yogas)

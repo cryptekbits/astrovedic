@@ -139,9 +139,9 @@ def get_compatibility_factors(chart1, chart2):
     # Add factors for each Kuta
     for kuta_name, kuta_info in kuta_scores.items():
         if kuta_info['score'] >= kuta_info['max_score'] * 0.8:
-            factors.append(f"Strong {kuta_name}: {kuta_info['description']}")
+            factors.append(f"Strong {kuta_name}: Score {kuta_info['score']}/{kuta_info['max_score']}")
         elif kuta_info['score'] <= kuta_info['max_score'] * 0.2:
-            factors.append(f"Weak {kuta_name}: {kuta_info['description']}")
+            factors.append(f"Weak {kuta_name}: Score {kuta_info['score']}/{kuta_info['max_score']}")
 
     # Get the Dosha analysis
     mangal_dosha1 = get_mangal_dosha(chart1)
@@ -151,32 +151,32 @@ def get_compatibility_factors(chart1, chart2):
 
     # Add factors for Doshas
     if mangal_dosha1['has_dosha']:
-        factors.append(f"Person 1 has Mangal Dosha: {mangal_dosha1['description']}")
+        factors.append(f"Person 1 has Mangal Dosha")
     if mangal_dosha2['has_dosha']:
-        factors.append(f"Person 2 has Mangal Dosha: {mangal_dosha2['description']}")
+        factors.append(f"Person 2 has Mangal Dosha")
     if kuja_dosha1['has_dosha']:
-        factors.append(f"Person 1 has Kuja Dosha: {kuja_dosha1['description']}")
+        factors.append(f"Person 1 has Kuja Dosha")
     if kuja_dosha2['has_dosha']:
-        factors.append(f"Person 2 has Kuja Dosha: {kuja_dosha2['description']}")
+        factors.append(f"Person 2 has Kuja Dosha")
 
     # Check for Dosha cancellation
     dosha_cancellation = get_dosha_cancellation(chart1, chart2)
     if dosha_cancellation['is_cancelled']:
-        factors.append(f"Dosha Cancellation: {dosha_cancellation['description']}")
+        factors.append(f"Dosha Cancellation present")
 
     # Get the Dasha compatibility
     dasha_compatibility = get_dasha_compatibility(chart1, chart2)
     if dasha_compatibility['score'] >= 8:
-        factors.append(f"Strong Dasha Compatibility: {dasha_compatibility['description']}")
+        factors.append(f"Strong Dasha Compatibility: Score {dasha_compatibility['score']}/10")
     elif dasha_compatibility['score'] <= 3:
-        factors.append(f"Weak Dasha Compatibility: {dasha_compatibility['description']}")
+        factors.append(f"Weak Dasha Compatibility: Score {dasha_compatibility['score']}/10")
 
     # Get the Navamsa compatibility
     navamsa_compatibility = get_navamsa_compatibility(chart1, chart2)
     if navamsa_compatibility['score'] >= 8:
-        factors.append(f"Strong Navamsa Compatibility: {navamsa_compatibility['description']}")
+        factors.append(f"Strong Navamsa Compatibility: Score {navamsa_compatibility['score']}/10")
     elif navamsa_compatibility['score'] <= 3:
-        factors.append(f"Weak Navamsa Compatibility: {navamsa_compatibility['description']}")
+        factors.append(f"Weak Navamsa Compatibility: Score {navamsa_compatibility['score']}/10")
 
     return factors
 

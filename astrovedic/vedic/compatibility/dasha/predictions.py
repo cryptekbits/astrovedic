@@ -91,8 +91,6 @@ def get_dasha_period_data(chart1, chart2):
         'antardasha_compatibility': antardasha_compatibility
     }
 
-
-
     # Add period dates
     period_data['dasha_start1'] = dasha_start1
     period_data['dasha_end1'] = dasha_end1
@@ -104,6 +102,20 @@ def get_dasha_period_data(chart1, chart2):
     period_data['antardasha_end2'] = antardasha_end2
 
     return period_data
+
+
+def get_dasha_predictions(chart1, chart2):
+    """
+    Alias for get_dasha_period_data for backward compatibility.
+
+    Args:
+        chart1 (Chart): The first chart
+        chart2 (Chart): The second chart
+
+    Returns:
+        dict: Dictionary with Dasha period data
+    """
+    return get_dasha_period_data(chart1, chart2)
 
 
 

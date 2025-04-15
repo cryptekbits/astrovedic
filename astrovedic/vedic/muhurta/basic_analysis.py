@@ -126,3 +126,17 @@ def get_basic_muhurta_data(date, location):
     }
 
     return analysis
+
+
+def get_basic_muhurta_analysis(date, location):
+    """
+    Alias for get_basic_muhurta_data for backward compatibility.
+
+    Args:
+        date (Datetime): The date and time
+        location (GeoPos): The geographical location
+
+    Returns:
+        dict: Dictionary with basic Muhurta data
+    """
+    return get_basic_muhurta_data(date, location)

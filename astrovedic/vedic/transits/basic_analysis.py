@@ -74,3 +74,17 @@ def get_basic_transit_data(natal_chart, transit_date):
     }
 
     return data
+
+
+def get_basic_transit_analysis(natal_chart, transit_date):
+    """
+    Alias for get_basic_transit_data for backward compatibility.
+
+    Args:
+        natal_chart (Chart): The natal chart
+        transit_date (Datetime): The transit date
+
+    Returns:
+        dict: Dictionary with basic transit data
+    """
+    return get_basic_transit_data(natal_chart, transit_date)

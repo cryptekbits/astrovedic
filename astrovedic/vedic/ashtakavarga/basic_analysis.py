@@ -118,3 +118,16 @@ def get_ashtakavarga_bindu_summary(ashtakavarga_data):
     result['house_bindus'] = sarva['bindus_in_houses']
 
     return result
+
+
+def get_basic_ashtakavarga_analysis(ashtakavarga_data):
+    """
+    Alias for get_ashtakavarga_bindu_summary for backward compatibility.
+
+    Args:
+        ashtakavarga_data (dict): Dictionary with Ashtakavarga data
+
+    Returns:
+        dict: Dictionary with Ashtakavarga bindu summary
+    """
+    return get_ashtakavarga_bindu_summary(ashtakavarga_data)
