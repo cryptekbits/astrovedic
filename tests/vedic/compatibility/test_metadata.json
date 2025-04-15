@@ -1,0 +1,72 @@
+{
+    "tests.vedic.compatibility.test_core.TestCompatibilityCore.test_get_compatibility_score": {
+        "name": "Get Compatibility Score",
+        "description": "Tests calculation of compatibility score between two charts",
+        "category": "compatibility"
+    },
+    "tests.vedic.compatibility.test_core.TestCompatibilityCore.test_get_compatibility_factors": {
+        "name": "Get Compatibility Factors",
+        "description": "Tests identification of compatibility factors between two charts",
+        "category": "compatibility"
+    },
+    "tests.vedic.compatibility.test_core.TestCompatibilityCore.test_get_compatibility_description": {
+        "name": "Get Compatibility Description",
+        "description": "Tests generation of compatibility description between two charts",
+        "category": "compatibility"
+    },
+    "tests.vedic.compatibility.test_core.TestCompatibilityCore.test_get_compatibility_report": {
+        "name": "Get Compatibility Report",
+        "description": "Tests generation of detailed compatibility report between two charts",
+        "category": "compatibility"
+    },
+    "tests.vedic.compatibility.test_core.TestCompatibilityCore.test_get_compatibility_level": {
+        "name": "Get Compatibility Level",
+        "description": "Tests determination of compatibility level based on score",
+        "category": "compatibility"
+    },
+    "tests.vedic.compatibility.test_kuta.TestKuta.test_get_varna_kuta": {
+        "name": "Get Varna Kuta",
+        "description": "Tests calculation of Varna (caste/class) compatibility",
+        "category": "compatibility"
+    },
+    "tests.vedic.compatibility.test_kuta.TestKuta.test_get_vashya_kuta": {
+        "name": "Get Vashya Kuta",
+        "description": "Tests calculation of Vashya (dominance) compatibility",
+        "category": "compatibility"
+    },
+    "tests.vedic.compatibility.test_kuta.TestKuta.test_get_tara_kuta": {
+        "name": "Get Tara Kuta",
+        "description": "Tests calculation of Tara (birth star) compatibility",
+        "category": "compatibility"
+    },
+    "tests.vedic.compatibility.test_kuta.TestKuta.test_get_yoni_kuta": {
+        "name": "Get Yoni Kuta",
+        "description": "Tests calculation of Yoni (animal nature) compatibility",
+        "category": "compatibility"
+    },
+    "tests.vedic.compatibility.test_kuta.TestKuta.test_get_graha_maitri_kuta": {
+        "name": "Get Graha Maitri Kuta",
+        "description": "Tests calculation of Graha Maitri (planetary friendship) compatibility",
+        "category": "compatibility"
+    },
+    "tests.vedic.compatibility.test_kuta.TestKuta.test_get_gana_kuta": {
+        "name": "Get Gana Kuta",
+        "description": "Tests calculation of Gana (temperament) compatibility",
+        "category": "compatibility"
+    },
+    "tests.vedic.compatibility.test_kuta.TestKuta.test_get_bhakoot_kuta": {
+        "name": "Get Bhakoot Kuta",
+        "description": "Tests calculation of Bhakoot (house position) compatibility",
+        "category": "compatibility"
+    },
+    "tests.vedic.compatibility.test_kuta.TestKuta.test_get_nadi_kuta": {
+        "name": "Get Nadi Kuta",
+        "description": "Tests calculation of Nadi (pulse/constitution) compatibility",
+        "category": "compatibility"
+    },
+    "tests.vedic.compatibility.test_kuta.TestKuta.test_get_total_kuta_score": {
+        "name": "Get Total Kuta Score",
+        "description": "Tests calculation of total Kuta score",
+        "category": "compatibility"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "tests.reference_data.test_ashtakavarga_reference.TestAshtakavargaReference.test_bhinnashtakavarga": {
+        "name": "Bhinnashtakavarga Reference",
+        "description": "Tests Bhinnashtakavarga calculations against reference data",
+        "category": "reference_data"
+    },
+    "tests.reference_data.test_ashtakavarga_reference.TestAshtakavargaReference.test_sarvashtakavarga": {
+        "name": "Sarvashtakavarga Reference",
+        "description": "Tests Sarvashtakavarga calculations against reference data",
+        "category": "reference_data"
+    }
+}

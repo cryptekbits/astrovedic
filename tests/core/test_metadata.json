@@ -1,0 +1,341 @@
+{
+    "tests.core.test_angles.AngleTests.test_norm": {
+        "name": "Angle Normalization",
+        "description": "Tests normalization of angles to the range 0-360 degrees",
+        "category": "core"
+    },
+    "tests.core.test_angles.AngleTests.test_znorm": {
+        "name": "Angle Z-Normalization",
+        "description": "Tests z-normalization of angles to the range -180 to +180 degrees",
+        "category": "core"
+    },
+    "tests.core.test_angles.AngleTests.test_distances": {
+        "name": "Angle Distances",
+        "description": "Tests calculation of distances between angles in counter-clockwise direction",
+        "category": "core"
+    },
+    "tests.core.test_angles.AngleTests.test_closest_distances": {
+        "name": "Closest Angle Distances",
+        "description": "Tests calculation of closest distances between two angles",
+        "category": "core"
+    },
+    "tests.core.test_cache_system.TestCacheSystem.test_nakshatra_correctness": {
+        "name": "Nakshatra Cache Correctness",
+        "description": "Tests correctness of cached nakshatra calculation",
+        "category": "core"
+    },
+    "tests.core.test_cache_system.TestCacheSystem.test_d9_correctness": {
+        "name": "D9 Cache Correctness",
+        "description": "Tests correctness of cached D9 calculation",
+        "category": "core"
+    },
+    "tests.core.test_cache_system.TestCacheSystem.test_tithi_correctness": {
+        "name": "Tithi Cache Correctness",
+        "description": "Tests correctness of cached tithi calculation",
+        "category": "core"
+    },
+    "tests.core.test_cache_system.TestCacheSystem.test_kp_sublord_correctness": {
+        "name": "KP Sublord Cache Correctness",
+        "description": "Tests correctness of cached KP sublord calculation",
+        "category": "core"
+    },
+    "tests.core.test_cache_system.TestCacheSystem.test_gulika_correctness": {
+        "name": "Gulika Cache Correctness",
+        "description": "Tests correctness of cached Gulika calculation",
+        "category": "core"
+    },
+    "tests.core.test_cache_system.TestCacheSystem.test_utils_correctness": {
+        "name": "Utils Cache Correctness",
+        "description": "Tests correctness of cached utility functions",
+        "category": "core"
+    },
+    "tests.core.test_cache_system.TestCacheSystem.test_nakshatra_performance": {
+        "name": "Nakshatra Cache Performance",
+        "description": "Tests performance of cached nakshatra calculation",
+        "category": "core"
+    },
+    "tests.core.test_cache_system.TestCacheSystem.test_d9_performance": {
+        "name": "D9 Cache Performance",
+        "description": "Tests performance of cached D9 calculation",
+        "category": "core"
+    },
+    "tests.core.test_cache_system.TestCacheSystem.test_utils_performance": {
+        "name": "Utils Cache Performance",
+        "description": "Tests performance of cached utility functions",
+        "category": "core"
+    },
+    "tests.core.test_cache_system.TestCacheSystem.test_cache_invalidation": {
+        "name": "Cache Invalidation",
+        "description": "Tests cache invalidation mechanism",
+        "category": "core"
+    },
+    "tests.core.test_chart.ChartTests.test_solar_return_hsys": {
+        "name": "Solar Return House System",
+        "description": "Tests that solar return charts maintain the original house system",
+        "category": "core"
+    },
+    "tests.core.test_chart_dynamics.TestChartDynamics.test_in_dignities": {
+        "name": "In Dignities",
+        "description": "Tests inDignities method in ChartDynamics class",
+        "category": "core"
+    },
+    "tests.core.test_chart_dynamics.TestChartDynamics.test_receives": {
+        "name": "Receives",
+        "description": "Tests receives method in ChartDynamics class",
+        "category": "core"
+    },
+    "tests.core.test_chart_dynamics.TestChartDynamics.test_disposits": {
+        "name": "Disposits",
+        "description": "Tests disposits method in ChartDynamics class",
+        "category": "core"
+    },
+    "tests.core.test_chart_dynamics.TestChartDynamics.test_mutual_receptions": {
+        "name": "Mutual Receptions",
+        "description": "Tests mutualReceptions method in ChartDynamics class",
+        "category": "core"
+    },
+    "tests.core.test_chart_dynamics.TestChartDynamics.test_re_mutual_receptions": {
+        "name": "RE Mutual Receptions",
+        "description": "Tests reMutualReceptions method in ChartDynamics class",
+        "category": "core"
+    },
+    "tests.core.test_chart_dynamics.TestChartDynamics.test_valid_aspects": {
+        "name": "Valid Aspects",
+        "description": "Tests validAspects method in ChartDynamics class",
+        "category": "core"
+    },
+    "tests.core.test_chart_dynamics.TestChartDynamics.test_aspects_by_cat": {
+        "name": "Aspects By Category",
+        "description": "Tests aspectsByCat method in ChartDynamics class",
+        "category": "core"
+    },
+    "tests.core.test_chart_dynamics.TestChartDynamics.test_immediate_aspects": {
+        "name": "Immediate Aspects",
+        "description": "Tests immediateAspects method in ChartDynamics class",
+        "category": "core"
+    },
+    "tests.core.test_chart_dynamics.TestChartDynamics.test_is_voc": {
+        "name": "Is VOC",
+        "description": "Tests isVOC method in ChartDynamics class",
+        "category": "core"
+    },
+    "tests.core.test_factory.FactoryTests.test_create_fixed_star": {
+        "name": "Create Fixed Star",
+        "description": "Tests creation of fixed star objects",
+        "category": "core"
+    },
+    "tests.core.test_factory.FactoryTests.test_create_house": {
+        "name": "Create House",
+        "description": "Tests creation of house objects",
+        "category": "core"
+    },
+    "tests.core.test_factory.FactoryTests.test_create_object_with_complete_data": {
+        "name": "Create Object with Complete Data",
+        "description": "Tests creation of objects with complete data",
+        "category": "core"
+    },
+    "tests.core.test_factory.FactoryTests.test_create_object_with_empty_data": {
+        "name": "Create Object with Empty Data",
+        "description": "Tests creation of objects with empty data and verifies error handling",
+        "category": "core"
+    },
+    "tests.core.test_factory.FactoryTests.test_create_object_with_missing_data": {
+        "name": "Create Object with Missing Data",
+        "description": "Tests creation of objects with missing required attributes and verifies error handling",
+        "category": "core"
+    },
+    "tests.core.test_factory.FactoryTests.test_get_object_class": {
+        "name": "Get Object Class",
+        "description": "Tests getting the correct object class based on object type and ID",
+        "category": "core"
+    },
+    "tests.core.test_error_handling.ErrorHandlingTests.test_chart_creation_with_invalid_object": {
+        "name": "Chart Creation with Invalid Object",
+        "description": "Tests that Chart creation handles invalid objects gracefully",
+        "category": "error_handling"
+    },
+    "tests.core.test_error_handling.ErrorHandlingTests.test_chart_creation_with_invalid_date": {
+        "name": "Chart Creation with Invalid Date",
+        "description": "Tests that Chart creation handles invalid dates gracefully",
+        "category": "error_handling"
+    },
+    "tests.core.test_error_handling.ErrorHandlingTests.test_chart_creation_with_invalid_location": {
+        "name": "Chart Creation with Invalid Location",
+        "description": "Tests that Chart creation handles invalid locations gracefully",
+        "category": "error_handling"
+    },
+    "tests.core.test_error_handling.ErrorHandlingTests.test_object_creation_with_missing_attributes": {
+        "name": "Object Creation with Missing Attributes",
+        "description": "Tests that object creation handles missing attributes gracefully",
+        "category": "error_handling"
+    },
+    "tests.core.test_error_handling.ErrorHandlingTests.test_calculation_with_invalid_input": {
+        "name": "Calculation with Invalid Input",
+        "description": "Tests that calculations handle invalid input gracefully",
+        "category": "error_handling"
+    },
+    "tests.core.test_error_handling.ErrorHandlingTests.test_getObject_handles_exception": {
+        "name": "GetObject Handles Exception",
+        "description": "Tests that getObject method handles exceptions from sweObject gracefully",
+        "category": "error_handling"
+    },
+    "tests.core.test_error_handling.ErrorHandlingTests.test_getObject_handles_syzygy_exception": {
+        "name": "GetObject Handles Syzygy Exception",
+        "description": "Tests that getObject method handles exceptions when calculating Syzygy",
+        "category": "error_handling"
+    },
+    "tests.core.test_error_handling.ErrorHandlingTests.test_get_object_handles_exception": {
+        "name": "Get Object Handles Exception",
+        "description": "Tests that get_object function handles exceptions from swe_object gracefully",
+        "category": "error_handling"
+    },
+    "tests.core.test_tool_functions.TestAngleFunctions.test_norm": {
+        "name": "Angle Norm",
+        "description": "Tests angle normalization function",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestAngleFunctions.test_znorm": {
+        "name": "Angle ZNorm",
+        "description": "Tests angle z-normalization function",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestAngleFunctions.test_distance": {
+        "name": "Angle Distance",
+        "description": "Tests angle distance function",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestAngleFunctions.test_closestdistance": {
+        "name": "Angle Closest Distance",
+        "description": "Tests angle closest distance function",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestUtilsFunctions.test_normalize_longitude": {
+        "name": "Normalize Longitude",
+        "description": "Tests longitude normalization function",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestUtilsFunctions.test_get_sign_from_longitude": {
+        "name": "Get Sign From Longitude",
+        "description": "Tests function to get sign from longitude",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestUtilsFunctions.test_get_sign_number": {
+        "name": "Get Sign Number",
+        "description": "Tests function to get sign number",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestUtilsFunctions.test_get_sign_from_number": {
+        "name": "Get Sign From Number",
+        "description": "Tests function to get sign from number",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestAspectsFunctions.test_getAspect": {
+        "name": "Get Aspect",
+        "description": "Tests function to get aspect between two objects",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestAspectsFunctions.test_isAspecting": {
+        "name": "Is Aspecting",
+        "description": "Tests function to check if two objects are aspecting",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestAspectsFunctions.test_getAspects": {
+        "name": "Get Aspects",
+        "description": "Tests function to get all aspects in a chart",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestEssentialDignities.test_getEssentialDignity": {
+        "name": "Get Essential Dignity",
+        "description": "Tests function to get essential dignity of an object",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestEssentialDignities.test_getEssentialDignityScore": {
+        "name": "Get Essential Dignity Score",
+        "description": "Tests function to get essential dignity score of an object",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestEssentialDignities.test_inRuler": {
+        "name": "In Ruler",
+        "description": "Tests function to check if an object is in its ruler",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestEssentialDignities.test_inExaltation": {
+        "name": "In Exaltation",
+        "description": "Tests function to check if an object is in its exaltation",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestEssentialDignities.test_inTriplicity": {
+        "name": "In Triplicity",
+        "description": "Tests function to check if an object is in its triplicity",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestEssentialDignities.test_inTerm": {
+        "name": "In Term",
+        "description": "Tests function to check if an object is in its term",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestEssentialDignities.test_inFace": {
+        "name": "In Face",
+        "description": "Tests function to check if an object is in its face",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestEssentialDignities.test_inDetriment": {
+        "name": "In Detriment",
+        "description": "Tests function to check if an object is in its detriment",
+        "category": "core"
+    },
+    "tests.core.test_tool_functions.TestEssentialDignities.test_inFall": {
+        "name": "In Fall",
+        "description": "Tests function to check if an object is in its fall",
+        "category": "core"
+    },
+    "tests.core.test_planetary_time.TestPlanetaryTime.test_nth_ruler": {
+        "name": "Nth Ruler",
+        "description": "Tests nthRuler function in planetarytime module",
+        "category": "core"
+    },
+    "tests.core.test_planetary_time.TestPlanetaryTime.test_hour_table": {
+        "name": "Hour Table",
+        "description": "Tests hourTable function in planetarytime module",
+        "category": "core"
+    },
+    "tests.core.test_planetary_time.TestPlanetaryTime.test_get_hour_table": {
+        "name": "Get Hour Table",
+        "description": "Tests getHourTable function in planetarytime module",
+        "category": "core"
+    },
+    "tests.core.test_planetary_time.TestPlanetaryTime.test_hour_table_index": {
+        "name": "Hour Table Index",
+        "description": "Tests index method in HourTable class",
+        "category": "core"
+    },
+    "tests.core.test_planetary_time.TestPlanetaryTime.test_hour_table_day_ruler": {
+        "name": "Hour Table Day Ruler",
+        "description": "Tests dayRuler method in HourTable class",
+        "category": "core"
+    },
+    "tests.core.test_edge_cases.EdgeCasesTests.test_extreme_latitude": {
+        "name": "Extreme Latitude",
+        "description": "Tests handling of extreme latitudes",
+        "category": "edge_cases"
+    },
+    "tests.core.test_edge_cases.EdgeCasesTests.test_extreme_longitude": {
+        "name": "Extreme Longitude",
+        "description": "Tests handling of extreme longitudes",
+        "category": "edge_cases"
+    },
+    "tests.core.test_edge_cases.EdgeCasesTests.test_extreme_date": {
+        "name": "Extreme Date",
+        "description": "Tests handling of extreme dates",
+        "category": "edge_cases"
+    },
+    "tests.core.test_integration.IntegrationTests.test_chart_creation_and_calculation": {
+        "name": "Chart Creation and Calculation",
+        "description": "Tests integration of chart creation and calculation",
+        "category": "integration"
+    },
+    "tests.core.test_integration.IntegrationTests.test_chart_with_custom_objects": {
+        "name": "Chart with Custom Objects",
+        "description": "Tests integration of chart with custom objects",
+        "category": "integration"
+    }

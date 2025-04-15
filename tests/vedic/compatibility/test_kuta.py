@@ -2,7 +2,7 @@
 """
 Test Kuta Analysis
 
-This script tests the Kuta (compatibility factors) analysis in astrovedic.
+This script tests the Kuta (compatibility factors) analysis in astrovedic.vedic.compatibility.
 """
 
 import unittest

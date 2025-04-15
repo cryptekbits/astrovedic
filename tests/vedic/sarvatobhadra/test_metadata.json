@@ -1,0 +1,57 @@
+{
+    "tests.vedic.sarvatobhadra.test_sarvatobhadra.TestSarvatobhadra.test_get_sarvatobhadra_chakra": {
+        "name": "Get Sarvatobhadra Chakra",
+        "description": "Tests creation of Sarvatobhadra Chakra for a specific date",
+        "category": "sarvatobhadra"
+    },
+    "tests.vedic.sarvatobhadra.test_sarvatobhadra.TestSarvatobhadra.test_get_sarvatobhadra_positions": {
+        "name": "Get Sarvatobhadra Positions",
+        "description": "Tests calculation of planet positions in Sarvatobhadra Chakra",
+        "category": "sarvatobhadra"
+    },
+    "tests.vedic.sarvatobhadra.test_sarvatobhadra.TestSarvatobhadra.test_get_sarvatobhadra_quality": {
+        "name": "Get Sarvatobhadra Quality",
+        "description": "Tests assessment of overall quality of Sarvatobhadra Chakra",
+        "category": "sarvatobhadra"
+    },
+    "tests.vedic.sarvatobhadra.test_sarvatobhadra.TestSarvatobhadra.test_get_sarvatobhadra_predictions": {
+        "name": "Get Sarvatobhadra Predictions",
+        "description": "Tests generation of predictions based on Sarvatobhadra Chakra",
+        "category": "sarvatobhadra"
+    },
+    "tests.vedic.sarvatobhadra.test_sarvatobhadra.TestSarvatobhadra.test_get_sarvatobhadra_auspicious_directions": {
+        "name": "Get Sarvatobhadra Auspicious Directions",
+        "description": "Tests identification of auspicious directions from Sarvatobhadra Chakra",
+        "category": "sarvatobhadra"
+    },
+    "tests.vedic.sarvatobhadra.test_core.TestSarvatobhadraCore.test_get_sarvatobhadra_cell": {
+        "name": "Get Sarvatobhadra Cell",
+        "description": "Tests retrieval of specific cell in Sarvatobhadra Chakra",
+        "category": "sarvatobhadra"
+    },
+    "tests.vedic.sarvatobhadra.test_core.TestSarvatobhadraCore.test_get_sarvatobhadra_row": {
+        "name": "Get Sarvatobhadra Row",
+        "description": "Tests retrieval of specific row in Sarvatobhadra Chakra",
+        "category": "sarvatobhadra"
+    },
+    "tests.vedic.sarvatobhadra.test_core.TestSarvatobhadraCore.test_get_sarvatobhadra_column": {
+        "name": "Get Sarvatobhadra Column",
+        "description": "Tests retrieval of specific column in Sarvatobhadra Chakra",
+        "category": "sarvatobhadra"
+    },
+    "tests.vedic.sarvatobhadra.test_core.TestSarvatobhadraCore.test_get_sarvatobhadra_direction": {
+        "name": "Get Sarvatobhadra Direction",
+        "description": "Tests calculation of direction from Sarvatobhadra Chakra",
+        "category": "sarvatobhadra"
+    },
+    "tests.vedic.sarvatobhadra.test_core.TestSarvatobhadraCore.test_is_auspicious_position": {
+        "name": "Is Auspicious Position",
+        "description": "Tests checking if a position in the Sarvatobhadra Chakra is auspicious",
+        "category": "sarvatobhadra"
+    },
+    "tests.vedic.sarvatobhadra.test_core.TestSarvatobhadraCore.test_is_inauspicious_position": {
+        "name": "Is Inauspicious Position",
+        "description": "Tests checking if a position in the Sarvatobhadra Chakra is inauspicious",
+        "category": "sarvatobhadra"
+    }
+}

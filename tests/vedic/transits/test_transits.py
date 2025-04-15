@@ -2,7 +2,7 @@
 """
 Test Vedic Transit Calculations
 
-This script tests the Vedic transit calculations in astrovedic.
+This script tests the Vedic transit calculations in astrovedic.vedic.transits.
 """
 
 import unittest
@@ -37,8 +37,6 @@ from astrovedic.vedic.transits.dashas import (
 from astrovedic.vedic.transits.analysis import (
     get_transit_data, get_transit_strength_score
 )
-
-from datetime import timedelta
 
 class TestVedicTransits(unittest.TestCase):
     """Test case for Vedic transit calculations"""

@@ -1,0 +1,92 @@
+{
+    "tests.vedic.muhurta.test_muhurta.TestMuhurta.test_get_muhurta": {
+        "name": "Get Muhurta",
+        "description": "Tests retrieval of muhurta (auspicious time) for a specific activity",
+        "category": "muhurta"
+    },
+    "tests.vedic.muhurta.test_muhurta.TestMuhurta.test_get_muhurta_quality": {
+        "name": "Get Muhurta Quality",
+        "description": "Tests calculation of muhurta quality for a specific time",
+        "category": "muhurta"
+    },
+    "tests.vedic.muhurta.test_muhurta.TestMuhurta.test_get_auspicious_times": {
+        "name": "Get Auspicious Times",
+        "description": "Tests retrieval of auspicious times for a specific date",
+        "category": "muhurta"
+    },
+    "tests.vedic.muhurta.test_muhurta.TestMuhurta.test_get_inauspicious_times": {
+        "name": "Get Inauspicious Times",
+        "description": "Tests retrieval of inauspicious times for a specific date",
+        "category": "muhurta"
+    },
+    "tests.vedic.muhurta.test_muhurta.TestMuhurta.test_get_muhurta_score": {
+        "name": "Get Muhurta Score",
+        "description": "Tests calculation of muhurta score for a specific time",
+        "category": "muhurta"
+    },
+    "tests.vedic.muhurta.test_core.TestMuhurtaCore.test_get_panchanga": {
+        "name": "Get Panchanga",
+        "description": "Tests retrieval of panchanga (five limbs of time) for a specific date",
+        "category": "muhurta"
+    },
+    "tests.vedic.muhurta.test_core.TestMuhurtaCore.test_get_tithi": {
+        "name": "Get Tithi",
+        "description": "Tests calculation of tithi (lunar day) for a specific date",
+        "category": "muhurta"
+    },
+    "tests.vedic.muhurta.test_core.TestMuhurtaCore.test_get_nakshatra": {
+        "name": "Get Nakshatra",
+        "description": "Tests calculation of nakshatra (lunar mansion) for a specific date",
+        "category": "muhurta"
+    },
+    "tests.vedic.muhurta.test_core.TestMuhurtaCore.test_get_yoga": {
+        "name": "Get Yoga",
+        "description": "Tests calculation of yoga (combination of Sun and Moon) for a specific date",
+        "category": "muhurta"
+    },
+    "tests.vedic.muhurta.test_core.TestMuhurtaCore.test_get_karana": {
+        "name": "Get Karana",
+        "description": "Tests calculation of karana (half of a tithi) for a specific date",
+        "category": "muhurta"
+    },
+    "tests.vedic.muhurta.test_core.TestMuhurtaCore.test_get_vara": {
+        "name": "Get Vara",
+        "description": "Tests calculation of vara (weekday) for a specific date",
+        "category": "muhurta"
+    },
+    "tests.vedic.muhurta.test_panchanga_elements.TestPanchangaElements.test_get_tithi": {
+        "name": "Get Tithi",
+        "description": "Tests calculation of tithi (lunar day) for a specific date",
+        "category": "muhurta"
+    },
+    "tests.vedic.muhurta.test_panchanga_elements.TestPanchangaElements.test_get_nakshatra": {
+        "name": "Get Nakshatra",
+        "description": "Tests calculation of nakshatra (lunar mansion) for a specific date",
+        "category": "muhurta"
+    },
+    "tests.vedic.muhurta.test_panchanga_elements.TestPanchangaElements.test_get_yoga": {
+        "name": "Get Yoga",
+        "description": "Tests calculation of yoga (combination of Sun and Moon) for a specific date",
+        "category": "muhurta"
+    },
+    "tests.vedic.muhurta.test_panchanga_elements.TestPanchangaElements.test_get_karana": {
+        "name": "Get Karana",
+        "description": "Tests calculation of karana (half of a tithi) for a specific date",
+        "category": "muhurta"
+    },
+    "tests.vedic.muhurta.test_panchanga_elements.TestPanchangaElements.test_get_vara": {
+        "name": "Get Vara",
+        "description": "Tests calculation of vara (weekday) for a specific date",
+        "category": "muhurta"
+    },
+    "tests.vedic.muhurta.test_panchanga_elements.TestPanchangaElements.test_get_hora": {
+        "name": "Get Hora",
+        "description": "Tests calculation of hora (planetary hour) for a specific date and time",
+        "category": "muhurta"
+    },
+    "tests.vedic.muhurta.test_panchanga_elements.TestPanchangaElements.test_get_panchanga": {
+        "name": "Get Panchanga",
+        "description": "Tests retrieval of complete panchanga for a specific date",
+        "category": "muhurta"
+    }
+}

@@ -1,0 +1,102 @@
+{
+    "tests.vedic.yogas.test_yogas.TestYogas.test_get_all_yogas": {
+        "name": "Get All Yogas",
+        "description": "Tests retrieval of all yogas in a chart",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_yogas.TestYogas.test_get_yoga_by_name": {
+        "name": "Get Yoga by Name",
+        "description": "Tests retrieval of a specific yoga by name",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_yogas.TestYogas.test_get_yoga_by_type": {
+        "name": "Get Yoga by Type",
+        "description": "Tests retrieval of yogas by type",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_yogas.TestYogas.test_get_yoga_strength": {
+        "name": "Get Yoga Strength",
+        "description": "Tests calculation of yoga strength",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_yogas.TestYogas.test_yoga_strength_score": {
+        "name": "Yoga Strength Score",
+        "description": "Tests calculation of yoga strength scores to determine their potency",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_core.TestYogaCore.test_get_yoga_definition": {
+        "name": "Get Yoga Definition",
+        "description": "Tests retrieval of yoga definition",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_core.TestYogaCore.test_check_yoga_condition": {
+        "name": "Check Yoga Condition",
+        "description": "Tests checking if a yoga condition is met in a chart",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_core.TestYogaCore.test_get_yoga_planets": {
+        "name": "Get Yoga Planets",
+        "description": "Tests retrieval of planets involved in a yoga",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_core.TestYogaCore.test_get_yoga_houses": {
+        "name": "Get Yoga Houses",
+        "description": "Tests retrieval of houses involved in a yoga",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_core.TestYogaCore.test_get_yoga_strength": {
+        "name": "Get Yoga Strength",
+        "description": "Tests calculation of yoga strength",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_types.TestYogaTypes.test_get_dhana_yoga": {
+        "name": "Get Dhana Yoga",
+        "description": "Tests identification of Dhana (wealth) yogas in a chart",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_types.TestYogaTypes.test_get_raja_yoga": {
+        "name": "Get Raja Yoga",
+        "description": "Tests identification of Raja (royal) yogas in a chart",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_types.TestYogaTypes.test_get_pancha_mahapurusha_yoga": {
+        "name": "Get Pancha Mahapurusha Yoga",
+        "description": "Tests identification of Pancha Mahapurusha yogas in a chart",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_types.TestYogaTypes.test_get_nabhasa_yoga": {
+        "name": "Get Nabhasa Yoga",
+        "description": "Tests identification of Nabhasa yogas in a chart",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_types.TestYogaTypes.test_get_chandra_yoga": {
+        "name": "Get Chandra Yoga",
+        "description": "Tests identification of Chandra (Moon) yogas in a chart",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_types.TestYogaTypes.test_get_yoga_strength_score": {
+        "name": "Get Yoga Strength Score",
+        "description": "Tests calculation of overall yoga strength score for a chart",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_surya_yogas.TestSuryaYogas.test_get_vesi_yoga": {
+        "name": "Get Vesi Yoga",
+        "description": "Tests identification of Vesi yoga (Sun in 4th house)",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_surya_yogas.TestSuryaYogas.test_get_vosi_yoga": {
+        "name": "Get Vosi Yoga",
+        "description": "Tests identification of Vosi yoga (Sun in 7th house)",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_surya_yogas.TestSuryaYogas.test_get_ubhayachari_yoga": {
+        "name": "Get Ubhayachari Yoga",
+        "description": "Tests identification of Ubhayachari yoga (Sun with benefics on both sides)",
+        "category": "yogas"
+    },
+    "tests.vedic.yogas.test_surya_yogas.TestSuryaYogas.test_get_budhaditya_yoga": {
+        "name": "Get Budhaditya Yoga",
+        "description": "Tests identification of Budhaditya yoga (Sun conjunct Mercury)",
+        "category": "yogas"
+    }
+}

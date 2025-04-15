@@ -1,0 +1,77 @@
+{
+    "tests.vedic.dashas.test_dashas.TestDashas.test_get_dasha_system": {
+        "name": "Get Dasha System",
+        "description": "Tests retrieval of dasha system based on name",
+        "category": "dashas"
+    },
+    "tests.vedic.dashas.test_dashas.TestDashas.test_get_current_dasha": {
+        "name": "Get Current Dasha",
+        "description": "Tests calculation of current dasha period",
+        "category": "dashas"
+    },
+    "tests.vedic.dashas.test_dashas.TestDashas.test_get_dasha_at_date": {
+        "name": "Get Dasha at Date",
+        "description": "Tests calculation of dasha period at a specific date",
+        "category": "dashas"
+    },
+    "tests.vedic.dashas.test_dashas.TestDashas.test_get_dasha_periods": {
+        "name": "Get Dasha Periods",
+        "description": "Tests calculation of all dasha periods for a chart",
+        "category": "dashas"
+    },
+    "tests.vedic.dashas.test_dashas.TestDashas.test_get_dasha_balance": {
+        "name": "Get Dasha Balance",
+        "description": "Tests calculation of remaining balance of current dasha period",
+        "category": "dashas"
+    },
+    "tests.vedic.dashas.test_vimshottari_dasha.TestVimshottariDasha.test_get_mahadasha": {
+        "name": "Get Mahadasha",
+        "description": "Tests calculation of Vimshottari Mahadasha periods",
+        "category": "dashas"
+    },
+    "tests.vedic.dashas.test_vimshottari_dasha.TestVimshottariDasha.test_get_antardasha": {
+        "name": "Get Antardasha",
+        "description": "Tests calculation of Vimshottari Antardasha periods",
+        "category": "dashas"
+    },
+    "tests.vedic.dashas.test_vimshottari_dasha.TestVimshottariDasha.test_get_pratyantardasha": {
+        "name": "Get Pratyantardasha",
+        "description": "Tests calculation of Vimshottari Pratyantardasha periods",
+        "category": "dashas"
+    },
+    "tests.vedic.dashas.test_vimshottari_dasha.TestVimshottariDasha.test_get_sookshma_dasha": {
+        "name": "Get Sookshma Dasha",
+        "description": "Tests calculation of Vimshottari Sookshma Dasha periods",
+        "category": "dashas"
+    },
+    "tests.vedic.dashas.test_vimshottari_dasha.TestVimshottariDasha.test_get_prana_dasha": {
+        "name": "Get Prana Dasha",
+        "description": "Tests calculation of Vimshottari Prana Dasha periods",
+        "category": "dashas"
+    },
+    "tests.vedic.dashas.test_vimshottari_dasha.TestVimshottariDasha.test_get_dasha_at_date": {
+        "name": "Get Dasha at Date",
+        "description": "Tests calculation of Vimshottari Dasha period at a specific date",
+        "category": "dashas"
+    },
+    "tests.vedic.dashas.test_vimshottari_dasha.TestVimshottariDasha.test_get_dasha_balance": {
+        "name": "Get Dasha Balance",
+        "description": "Tests calculation of remaining balance of current Vimshottari Dasha period",
+        "category": "dashas"
+    },
+    "tests.vedic.dashas.test_vimshottari_dasha_reference.TestVimshottariDashaReference.test_reference_data": {
+        "name": "Reference Data",
+        "description": "Tests Vimshottari Dasha calculations against reference data",
+        "category": "dashas"
+    },
+    "tests.vedic.dashas.test_vimshottari_dasha_reference.TestVimshottariDashaReference.test_mahadasha_periods": {
+        "name": "Mahadasha Periods",
+        "description": "Tests Vimshottari Mahadasha period calculations against reference data",
+        "category": "dashas"
+    },
+    "tests.vedic.dashas.test_vimshottari_dasha_reference.TestVimshottariDashaReference.test_antardasha_periods": {
+        "name": "Antardasha Periods",
+        "description": "Tests Vimshottari Antardasha period calculations against reference data",
+        "category": "dashas"
+    }
+}

@@ -1,0 +1,132 @@
+{
+    "tests.vedic.dignities.test_dignities.TestVedicDignities.test_get_dignity": {
+        "name": "Get Dignity",
+        "description": "Tests retrieval of planet's dignity in a sign",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_dignities.TestVedicDignities.test_get_dignity_score": {
+        "name": "Get Dignity Score",
+        "description": "Tests calculation of dignity score for a planet",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_dignities.TestVedicDignities.test_is_in_own_sign": {
+        "name": "Is In Own Sign",
+        "description": "Tests checking if a planet is in its own sign",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_dignities.TestVedicDignities.test_is_in_exaltation": {
+        "name": "Is In Exaltation",
+        "description": "Tests checking if a planet is in its exaltation sign",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_dignities.TestVedicDignities.test_is_in_moolatrikona": {
+        "name": "Is In Moolatrikona",
+        "description": "Tests checking if a planet is in its moolatrikona sign",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_dignities.TestVedicDignities.test_is_in_friend_sign": {
+        "name": "Is In Friend Sign",
+        "description": "Tests checking if a planet is in a friendly sign",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_dignities.TestVedicDignities.test_is_in_enemy_sign": {
+        "name": "Is In Enemy Sign",
+        "description": "Tests checking if a planet is in an enemy sign",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_dignities.TestVedicDignities.test_is_in_debilitation": {
+        "name": "Is In Debilitation",
+        "description": "Tests checking if a planet is in its debilitation sign",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_dignities.TestVedicDignities.test_get_dignity_name": {
+        "name": "Get Dignity Name",
+        "description": "Tests retrieval of dignity name for a planet in a sign",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_exaltation.TestVedicExaltation.test_get_exaltation_sign": {
+        "name": "Get Exaltation Sign",
+        "description": "Tests retrieval of exaltation sign for a planet",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_exaltation.TestVedicExaltation.test_get_debilitation_sign": {
+        "name": "Get Debilitation Sign",
+        "description": "Tests retrieval of debilitation sign for a planet",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_exaltation.TestVedicExaltation.test_get_exaltation_degree": {
+        "name": "Get Exaltation Degree",
+        "description": "Tests retrieval of exaltation degree for a planet",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_exaltation.TestVedicExaltation.test_get_debilitation_degree": {
+        "name": "Get Debilitation Degree",
+        "description": "Tests retrieval of debilitation degree for a planet",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_exaltation.TestVedicExaltation.test_get_exaltation_strength": {
+        "name": "Get Exaltation Strength",
+        "description": "Tests calculation of exaltation strength for a planet",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_moolatrikona.TestMoolatrikona.test_get_moolatrikona_sign": {
+        "name": "Get Moolatrikona Sign",
+        "description": "Tests retrieval of moolatrikona sign for a planet",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_moolatrikona.TestMoolatrikona.test_get_moolatrikona_range": {
+        "name": "Get Moolatrikona Range",
+        "description": "Tests retrieval of moolatrikona degree range for a planet",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_moolatrikona.TestMoolatrikona.test_is_in_moolatrikona_range": {
+        "name": "Is In Moolatrikona Range",
+        "description": "Tests checking if a planet is in its moolatrikona degree range",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_natural_friendship.TestNaturalFriendship.test_get_natural_friends": {
+        "name": "Get Natural Friends",
+        "description": "Tests retrieval of natural friends for a planet",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_natural_friendship.TestNaturalFriendship.test_get_natural_enemies": {
+        "name": "Get Natural Enemies",
+        "description": "Tests retrieval of natural enemies for a planet",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_natural_friendship.TestNaturalFriendship.test_get_natural_neutrals": {
+        "name": "Get Natural Neutrals",
+        "description": "Tests retrieval of natural neutrals for a planet",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_natural_friendship.TestNaturalFriendship.test_get_natural_relationship": {
+        "name": "Get Natural Relationship",
+        "description": "Tests retrieval of natural relationship between two planets",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_temporal_friendship.TestTemporalFriendship.test_get_temporal_friends": {
+        "name": "Get Temporal Friends",
+        "description": "Tests retrieval of temporal friends for a planet in a chart",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_temporal_friendship.TestTemporalFriendship.test_get_temporal_enemies": {
+        "name": "Get Temporal Enemies",
+        "description": "Tests retrieval of temporal enemies for a planet in a chart",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_temporal_friendship.TestTemporalFriendship.test_get_temporal_neutrals": {
+        "name": "Get Temporal Neutrals",
+        "description": "Tests retrieval of temporal neutrals for a planet in a chart",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_temporal_friendship.TestTemporalFriendship.test_get_temporal_relationship": {
+        "name": "Get Temporal Relationship",
+        "description": "Tests retrieval of temporal relationship between two planets in a chart",
+        "category": "dignities"
+    },
+    "tests.vedic.dignities.test_temporal_friendship.TestTemporalFriendship.test_get_composite_relationship": {
+        "name": "Get Composite Relationship",
+        "description": "Tests retrieval of composite relationship (natural + temporal) between two planets",
+        "category": "dignities"
+    }
+}

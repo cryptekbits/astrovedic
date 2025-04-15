@@ -1,0 +1,17 @@
+{
+    "tests.caching.test_caching.TestCaching.test_reference_data_correctness": {
+        "name": "Reference Data Caching Correctness",
+        "description": "Tests that cached reference data functions produce the same results as original functions",
+        "category": "caching"
+    },
+    "tests.caching.test_caching.TestCaching.test_calculation_correctness": {
+        "name": "Calculation Caching Correctness",
+        "description": "Tests that cached calculation functions produce the same results as original functions",
+        "category": "caching"
+    },
+    "tests.caching.test_caching.TestCaching.test_calculation_performance": {
+        "name": "Calculation Caching Performance",
+        "description": "Tests the performance improvement of cached calculation functions",
+        "category": "caching"
+    }
+}

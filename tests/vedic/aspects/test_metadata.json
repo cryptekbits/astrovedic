@@ -1,0 +1,82 @@
+{
+    "tests.vedic.aspects.test_aspects.TestVedicAspects.test_house_distance": {
+        "name": "House Distance Calculation",
+        "description": "Tests calculation of house distances for Vedic aspects",
+        "category": "aspects"
+    },
+    "tests.vedic.aspects.test_aspects.TestVedicAspects.test_get_graha_drishti": {
+        "name": "Get Graha Drishti",
+        "description": "Tests calculation of Graha Drishti (planetary aspects)",
+        "category": "aspects"
+    },
+    "tests.vedic.aspects.test_aspects.TestVedicAspects.test_get_rashi_drishti": {
+        "name": "Get Rashi Drishti",
+        "description": "Tests calculation of Rashi Drishti (sign aspects)",
+        "category": "aspects"
+    },
+    "tests.vedic.aspects.test_aspects.TestVedicAspects.test_get_aspect_strength": {
+        "name": "Get Aspect Strength",
+        "description": "Tests calculation of aspect strength",
+        "category": "aspects"
+    },
+    "tests.vedic.aspects.test_aspects.TestVedicAspects.test_get_full_aspect_houses": {
+        "name": "Get Full Aspect Houses",
+        "description": "Tests retrieval of houses receiving full aspects from a planet",
+        "category": "aspects"
+    },
+    "tests.vedic.aspects.test_aspects.TestVedicAspects.test_get_partial_aspect_houses": {
+        "name": "Get Partial Aspect Houses",
+        "description": "Tests retrieval of houses receiving partial aspects from a planet",
+        "category": "aspects"
+    },
+    "tests.vedic.aspects.test_aspects.TestVedicAspects.test_get_aspect_percentage": {
+        "name": "Get Aspect Percentage",
+        "description": "Tests calculation of aspect percentage between planets",
+        "category": "aspects"
+    },
+    "tests.vedic.aspects.test_aspects.TestVedicAspects.test_is_aspected_by": {
+        "name": "Is Aspected By",
+        "description": "Tests checking if a planet is aspected by another planet",
+        "category": "aspects"
+    },
+    "tests.vedic.aspects.test_aspects.TestVedicAspects.test_get_aspecting_planets": {
+        "name": "Get Aspecting Planets",
+        "description": "Tests retrieval of planets aspecting a specific planet or house",
+        "category": "aspects"
+    },
+    "tests.vedic.aspects.test_aspects.TestVedicAspects.test_get_aspected_planets": {
+        "name": "Get Aspected Planets",
+        "description": "Tests retrieval of planets aspected by a specific planet",
+        "category": "aspects"
+    },
+    "tests.vedic.aspects.test_argala.TestVedicArgala.test_get_argala": {
+        "name": "Get Argala",
+        "description": "Tests calculation of Argala (intervention) on a house or planet",
+        "category": "aspects"
+    },
+    "tests.vedic.aspects.test_argala.TestVedicArgala.test_get_virodhargala": {
+        "name": "Get Virodhargala",
+        "description": "Tests calculation of Virodhargala (obstruction to intervention)",
+        "category": "aspects"
+    },
+    "tests.vedic.aspects.test_argala.TestVedicArgala.test_get_argala_planets": {
+        "name": "Get Argala Planets",
+        "description": "Tests retrieval of planets causing Argala on a house",
+        "category": "aspects"
+    },
+    "tests.vedic.aspects.test_argala.TestVedicArgala.test_get_virodhargala_planets": {
+        "name": "Get Virodhargala Planets",
+        "description": "Tests retrieval of planets causing Virodhargala on a house",
+        "category": "aspects"
+    },
+    "tests.vedic.aspects.test_argala.TestVedicArgala.test_get_net_argala": {
+        "name": "Get Net Argala",
+        "description": "Tests calculation of net Argala (Argala - Virodhargala)",
+        "category": "aspects"
+    },
+    "tests.vedic.aspects.test_argala.TestVedicArgala.test_get_argala_strength": {
+        "name": "Get Argala Strength",
+        "description": "Tests calculation of Argala strength",
+        "category": "aspects"
+    }
+}

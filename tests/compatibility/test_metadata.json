@@ -1,0 +1,42 @@
+{
+    "tests.compatibility.test_compatibility.TestCompatibility.test_kuta_calculations": {
+        "name": "Kuta Calculations",
+        "description": "Tests calculation of Kuta points for compatibility analysis",
+        "category": "compatibility"
+    },
+    "tests.compatibility.test_compatibility.TestCompatibility.test_dosha_analysis": {
+        "name": "Dosha Analysis",
+        "description": "Tests analysis of doshas (afflictions) for compatibility",
+        "category": "compatibility"
+    },
+    "tests.compatibility.test_compatibility.TestCompatibility.test_dosha_cancellation": {
+        "name": "Dosha Cancellation",
+        "description": "Tests cancellation of doshas based on other chart factors",
+        "category": "compatibility"
+    },
+    "tests.compatibility.test_compatibility.TestCompatibility.test_dasha_compatibility": {
+        "name": "Dasha Compatibility",
+        "description": "Tests compatibility analysis based on dasha periods",
+        "category": "compatibility"
+    },
+    "tests.compatibility.test_compatibility.TestCompatibility.test_navamsa_compatibility": {
+        "name": "Navamsa Compatibility",
+        "description": "Tests compatibility analysis based on navamsa (D9) charts",
+        "category": "compatibility"
+    },
+    "tests.compatibility.test_compatibility.TestCompatibility.test_overall_compatibility": {
+        "name": "Overall Compatibility",
+        "description": "Tests overall compatibility analysis combining all factors",
+        "category": "compatibility"
+    },
+    "tests.compatibility.test_compatibility.TestCompatibility.test_basic_compatibility": {
+        "name": "Basic Compatibility",
+        "description": "Tests basic compatibility calculations between two charts",
+        "category": "compatibility"
+    },
+    "tests.compatibility.test_compatibility.TestCompatibility.test_detailed_compatibility": {
+        "name": "Detailed Compatibility",
+        "description": "Tests detailed compatibility report generation",
+        "category": "compatibility"
+    }
+}

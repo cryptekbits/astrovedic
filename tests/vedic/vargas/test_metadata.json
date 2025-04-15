@@ -1,0 +1,187 @@
+{
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_d1_chart": {
+        "name": "D1 Chart Calculation",
+        "description": "Tests calculation of D1 (Rashi) chart and verifies it matches the birth chart",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_d9_chart": {
+        "name": "D9 Chart Calculation",
+        "description": "Tests calculation of D9 (Navamsha) chart and verifies correct planet positions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_d2_chart": {
+        "name": "D2 Chart Calculation",
+        "description": "Tests calculation of D2 (Hora) chart and verifies correct planet positions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_d3_chart": {
+        "name": "D3 Chart Calculation",
+        "description": "Tests calculation of D3 (Drekkana) chart and verifies correct planet positions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_d4_chart": {
+        "name": "D4 Chart Calculation",
+        "description": "Tests calculation of D4 (Chaturthamsha) chart and verifies correct planet positions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_d7_chart": {
+        "name": "D7 Chart Calculation",
+        "description": "Tests calculation of D7 (Saptamsha) chart and verifies correct planet positions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_d10_chart": {
+        "name": "D10 Chart Calculation",
+        "description": "Tests calculation of D10 (Dashamsha) chart and verifies correct planet positions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_d12_chart": {
+        "name": "D12 Chart Calculation",
+        "description": "Tests calculation of D12 (Dwadashamsha) chart and verifies correct planet positions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_d16_chart": {
+        "name": "D16 Chart Calculation",
+        "description": "Tests calculation of D16 (Shodashamsha) chart and verifies correct planet positions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_d20_chart": {
+        "name": "D20 Chart Calculation",
+        "description": "Tests calculation of D20 (Vimshamsha) chart and verifies correct planet positions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_d24_chart": {
+        "name": "D24 Chart Calculation",
+        "description": "Tests calculation of D24 (Chaturvimshamsha) chart and verifies correct planet positions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_d27_chart": {
+        "name": "D27 Chart Calculation",
+        "description": "Tests calculation of D27 (Nakshatramsha) chart and verifies correct planet positions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_d30_chart": {
+        "name": "D30 Chart Calculation",
+        "description": "Tests calculation of D30 (Trimshamsha) chart and verifies correct planet positions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_d40_chart": {
+        "name": "D40 Chart Calculation",
+        "description": "Tests calculation of D40 (Khavedamsha) chart and verifies correct planet positions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_d45_chart": {
+        "name": "D45 Chart Calculation",
+        "description": "Tests calculation of D45 (Akshavedamsha) chart and verifies correct planet positions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_d60_chart": {
+        "name": "D60 Chart Calculation",
+        "description": "Tests calculation of D60 (Shashtyamsha) chart and verifies correct planet positions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_all_varga_types": {
+        "name": "All Varga Types",
+        "description": "Tests that all varga (divisional chart) types can be calculated correctly",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_divisional_charts.TestDivisionalCharts.test_varga_longitude_function": {
+        "name": "Varga Longitude Function",
+        "description": "Tests the get_varga_longitude function for calculating divisional chart positions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_varga_calculations.TestVargaCalculations.test_hora_calculation": {
+        "name": "Hora Calculation",
+        "description": "Tests D2 (Hora) calculation logic against standard definitions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_varga_calculations.TestVargaCalculations.test_drekkana_calculation": {
+        "name": "Drekkana Calculation",
+        "description": "Tests D3 (Drekkana) calculation logic against standard definitions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_varga_calculations.TestVargaCalculations.test_navamsha_calculation": {
+        "name": "Navamsha Calculation",
+        "description": "Tests D9 (Navamsha) calculation logic against standard definitions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_varga_calculations.TestVargaCalculations.test_trimshamsha_calculation": {
+        "name": "Trimshamsha Calculation",
+        "description": "Tests D30 (Trimshamsha) calculation logic against standard definitions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_varga_calculations.TestVargaCalculations.test_shashtiamsha_calculation": {
+        "name": "Shashtiamsha Calculation",
+        "description": "Tests D60 (Shashtiamsha) calculation logic against standard definitions",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_higher_vargas.TestHigherVargas.test_d20_chart": {
+        "name": "D20 Chart",
+        "description": "Tests D20 (Vimshamsha) chart calculations",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_higher_vargas.TestHigherVargas.test_d24_chart": {
+        "name": "D24 Chart",
+        "description": "Tests D24 (Chaturvimshamsha) chart calculations",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_higher_vargas.TestHigherVargas.test_d27_chart": {
+        "name": "D27 Chart",
+        "description": "Tests D27 (Saptavimshamsha) chart calculations",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_higher_vargas.TestHigherVargas.test_d30_chart": {
+        "name": "D30 Chart",
+        "description": "Tests D30 (Trimshamsha) chart calculations",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_higher_vargas.TestHigherVargas.test_d40_chart": {
+        "name": "D40 Chart",
+        "description": "Tests D40 (Khavedamsha) chart calculations",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_higher_vargas.TestHigherVargas.test_d45_chart": {
+        "name": "D45 Chart",
+        "description": "Tests D45 (Akshavedamsha) chart calculations",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_higher_vargas.TestHigherVargas.test_d60_chart": {
+        "name": "D60 Chart",
+        "description": "Tests D60 (Shashtiamsha) chart calculations",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_higher_vargas.TestHigherVargas.test_vimshopaka_bala": {
+        "name": "Vimshopaka Bala",
+        "description": "Tests Vimshopaka Bala calculation",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_higher_vargas.TestHigherVargas.test_varga_longitude_consistency": {
+        "name": "Varga Longitude Consistency",
+        "description": "Tests consistency of varga longitude calculations",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_vimshopaka_bala.TestVimshopakaBala.test_shodashavarga_bala": {
+        "name": "Shodashavarga Bala",
+        "description": "Tests Shodashavarga Bala calculation",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_vimshopaka_bala.TestVimshopakaBala.test_vimshopaka_bala": {
+        "name": "Vimshopaka Bala",
+        "description": "Tests Vimshopaka Bala calculation",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_vimshopaka_bala.TestVimshopakaBala.test_vimshopaka_bala_weights": {
+        "name": "Vimshopaka Bala Weights",
+        "description": "Tests Vimshopaka Bala weights",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_vimshopaka_bala.TestVimshopakaBala.test_varga_visesha": {
+        "name": "Varga Visesha",
+        "description": "Tests Varga Visesha calculation",
+        "category": "vedic"
+    },
+    "tests.vedic.vargas.test_vimshopaka_bala.TestVimshopakaBala.test_bhava_bala": {
+        "name": "Bhava Bala",
+        "description": "Tests Bhava Bala calculation",
+        "category": "vedic"
+    }
+}

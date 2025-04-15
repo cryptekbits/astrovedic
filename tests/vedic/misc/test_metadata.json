@@ -1,0 +1,187 @@
+{
+    "tests.vedic.misc.test_object.TestVedicObject.test_vedic_body_creation": {
+        "name": "Vedic Body Creation",
+        "description": "Tests VedicBody object creation and initialization",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_object.TestVedicObject.test_vedic_body_properties": {
+        "name": "Vedic Body Properties",
+        "description": "Tests VedicBody object properties and attributes",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_object.TestVedicObject.test_vedic_body_methods": {
+        "name": "Vedic Body Methods",
+        "description": "Tests VedicBody object methods and functions",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_object.TestVedicObject.test_vedic_chart_creation": {
+        "name": "Vedic Chart Creation",
+        "description": "Tests VedicChart object creation and initialization",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_object.TestVedicObject.test_vedic_chart_properties": {
+        "name": "Vedic Chart Properties",
+        "description": "Tests VedicChart object properties and attributes",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_avasthas.TestVedicAvasthas.test_get_bala_avastha": {
+        "name": "Get Bala Avastha",
+        "description": "Tests calculation of Bala Avastha (age state) of planets",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_avasthas.TestVedicAvasthas.test_get_jagradadi_avastha": {
+        "name": "Get Jagradadi Avastha",
+        "description": "Tests calculation of Jagradadi Avastha (awakening state) of planets",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_avasthas.TestVedicAvasthas.test_get_lajjitadi_avastha": {
+        "name": "Get Lajjitadi Avastha",
+        "description": "Tests calculation of Lajjitadi Avastha (mood state) of planets",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_avasthas.TestVedicAvasthas.test_get_deeptadi_avastha": {
+        "name": "Get Deeptadi Avastha",
+        "description": "Tests calculation of Deeptadi Avastha (brightness state) of planets",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_avasthas.TestVedicAvasthas.test_get_shayanadi_avastha": {
+        "name": "Get Shayanadi Avastha",
+        "description": "Tests calculation of Shayanadi Avastha (posture state) of planets",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_combustion.TestVedicCombustion.test_is_combust": {
+        "name": "Is Combust",
+        "description": "Tests checking if a planet is combust (too close to the Sun)",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_combustion.TestVedicCombustion.test_get_combustion_orb": {
+        "name": "Get Combustion Orb",
+        "description": "Tests retrieval of combustion orb (distance from Sun for combustion) for a planet",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_combustion.TestVedicCombustion.test_get_combustion_strength": {
+        "name": "Get Combustion Strength",
+        "description": "Tests calculation of combustion strength for a planet",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_combustion.TestVedicCombustion.test_is_deeply_combust": {
+        "name": "Is Deeply Combust",
+        "description": "Tests checking if a planet is deeply combust (very close to the Sun)",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_sublord": {
+        "name": "Get KP Sublord",
+        "description": "Tests calculation of KP sublord based on Vimshottari Dasha periods",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_sub_sublord": {
+        "name": "Get KP Sub-Sublord",
+        "description": "Tests calculation of KP sub-sublord",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_pointer": {
+        "name": "Get KP Pointer",
+        "description": "Tests calculation of KP pointer",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_significator": {
+        "name": "Get KP Significator",
+        "description": "Tests calculation of KP significator",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_cuspal_interlink": {
+        "name": "Get KP Cuspal Interlink",
+        "description": "Tests calculation of KP cuspal interlink",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_upagrah.TestUpagrah.test_calculate_dhuma": {
+        "name": "Calculate Dhuma",
+        "description": "Tests calculation of Dhuma position",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_upagrah.TestUpagrah.test_calculate_vyatipata": {
+        "name": "Calculate Vyatipata",
+        "description": "Tests calculation of Vyatipata position",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_upagrah.TestUpagrah.test_calculate_parivesha": {
+        "name": "Calculate Parivesha",
+        "description": "Tests calculation of Parivesha position",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_upagrah.TestUpagrah.test_calculate_indrachapa": {
+        "name": "Calculate Indrachapa",
+        "description": "Tests calculation of Indrachapa position",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_upagrah.TestUpagrah.test_calculate_upaketu": {
+        "name": "Calculate Upaketu",
+        "description": "Tests calculation of Upaketu position",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_upagrah.TestUpagrah.test_get_upagrah": {
+        "name": "Get Upagrah",
+        "description": "Tests getting a specific Upagrah (shadow planet)",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_upagrah.TestUpagrah.test_get_upagrah_positions": {
+        "name": "Get Upagrah Positions",
+        "description": "Tests getting all Upagrah positions from a chart",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_upagrah.TestUpagrah.test_relationship_between_upagrah": {
+        "name": "Relationship Between Upagrah",
+        "description": "Tests the mathematical relationships between different Upagrah",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_vedic_upagrah.TestVedicUpagrah.test_calculate_kaala": {
+        "name": "Calculate Kaala",
+        "description": "Tests calculation of Kaala position",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_vedic_upagrah.TestVedicUpagrah.test_calculate_mrityu": {
+        "name": "Calculate Mrityu",
+        "description": "Tests calculation of Mrityu position",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_vedic_upagrah.TestVedicUpagrah.test_calculate_ardhaprahara": {
+        "name": "Calculate Ardhaprahara",
+        "description": "Tests calculation of Ardhaprahara position",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_vedic_upagrah.TestVedicUpagrah.test_calculate_yamagantaka": {
+        "name": "Calculate Yamagantaka",
+        "description": "Tests calculation of Yamagantaka position",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_vedic_upagrah.TestVedicUpagrah.test_calculate_gulika": {
+        "name": "Calculate Gulika",
+        "description": "Tests calculation of Gulika position",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_kalasarpa_dosha.TestKalasarpaDosha.test_has_kalasarpa_dosha": {
+        "name": "Has Kalasarpa Dosha",
+        "description": "Tests detection of Kalasarpa Dosha in a chart",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_kalasarpa_dosha.TestKalasarpaDosha.test_has_partial_kalasarpa_dosha": {
+        "name": "Has Partial Kalasarpa Dosha",
+        "description": "Tests detection of partial Kalasarpa Dosha in a chart",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_kalasarpa_dosha.TestKalasarpaDosha.test_get_kalasarpa_type": {
+        "name": "Get Kalasarpa Type",
+        "description": "Tests identification of Kalasarpa Dosha type",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_kalasarpa_dosha.TestKalasarpaDosha.test_get_kalasarpa_strength": {
+        "name": "Get Kalasarpa Strength",
+        "description": "Tests calculation of Kalasarpa Dosha strength",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_kalasarpa_dosha.TestKalasarpaDosha.test_get_kalasarpa_remedies": {
+        "name": "Get Kalasarpa Remedies",
+        "description": "Tests retrieval of remedies for Kalasarpa Dosha",
+        "category": "misc"
+    }
+}
