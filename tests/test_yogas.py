@@ -11,7 +11,7 @@ from astrovedic.geopos import GeoPos
 from astrovedic.chart import Chart
 from astrovedic import const
 from astrovedic.vedic.yogas import (
-    get_all_yogas, get_yoga_analysis, get_yoga_predictions,
+    get_all_yogas, get_yoga_data,
     MAHAPURUSHA_YOGA, RAJA_YOGA, DHANA_YOGA,
     NABHASA_YOGA, DOSHA_YOGA, CHANDRA_YOGA
 )
@@ -46,8 +46,7 @@ from astrovedic.vedic.yogas.chandra import (
     has_durudhura_yoga, has_kemadruma_yoga
 )
 from astrovedic.vedic.yogas.analysis import (
-    analyze_yogas, get_yoga_predictions,
-    get_yoga_compatibility, get_yoga_strength_score
+    get_yoga_data, get_yoga_comparison, get_yoga_strength_score
 )
 
 class TestYogas(unittest.TestCase):
@@ -243,58 +242,43 @@ class TestYogas(unittest.TestCase):
                 self.assertIn('is_beneficial', yoga)
                 self.assertIn('strength', yoga)
 
-    def test_yoga_analysis(self):
-        """Test Yoga analysis functions"""
+    def test_yoga_data(self):
+        """Test Yoga data functions"""
         # Calculate all Yogas
         yogas = get_all_yogas(self.chart)
 
-        # Analyze the Yogas
-        analysis = analyze_yogas(self.chart, yogas)
+        # Get the Yoga data
+        data = get_yoga_data(self.chart, yogas)
 
         # Check that all required keys are present
-        self.assertIn('total_yogas', analysis)
-        self.assertIn('beneficial_yogas', analysis)
-        self.assertIn('harmful_yogas', analysis)
-        self.assertIn('strongest_yoga', analysis)
-        self.assertIn('yoga_types', analysis)
-        self.assertIn('effects', analysis)
+        self.assertIn('total_yogas', data)
+        self.assertIn('beneficial_yogas', data)
+        self.assertIn('harmful_yogas', data)
+        self.assertIn('strongest_yoga', data)
+        self.assertIn('yoga_types', data)
 
-    def test_yoga_predictions(self):
-        """Test Yoga prediction functions"""
-        # First get all yogas
-        yogas = get_all_yogas(self.chart)
 
-        # Generate predictions by passing both chart and yogas
-        predictions = get_yoga_predictions(self.chart, yogas)
 
-        # Check that all required keys are present
-        self.assertIn('general', predictions)
-        self.assertIn('personality', predictions)
-        self.assertIn('career', predictions)
-        self.assertIn('wealth', predictions)
-        self.assertIn('relationships', predictions)
-        self.assertIn('health', predictions)
-        self.assertIn('challenges', predictions)
-
-    def test_yoga_compatibility(self):
-        """Test Yoga compatibility functions"""
+    def test_yoga_comparison(self):
+        """Test Yoga comparison functions"""
         # Create a second chart
         date2 = Datetime('2025/05/09', '20:51', '+05:30')
         pos2 = GeoPos(12.9716, 77.5946)  # Bangalore, India
         chart2 = Chart(date2, pos2, hsys=const.HOUSES_WHOLE_SIGN, mode=const.AY_LAHIRI)
 
-        # Calculate compatibility
-        compatibility = get_yoga_compatibility(self.chart, chart2)
+        # Calculate comparison
+        comparison = get_yoga_comparison(self.chart, chart2)
 
         # Check that all required keys are present
-        self.assertIn('compatibility_score', compatibility)
-        self.assertIn('compatibility_factors', compatibility)
-        self.assertIn('compatibility_challenges', compatibility)
-        self.assertIn('description', compatibility)
+        self.assertIn('chart1_yogas', comparison)
+        self.assertIn('chart2_yogas', comparison)
+        self.assertIn('common_yogas', comparison)
 
-        # Check that the compatibility score is within 0-100
-        self.assertGreaterEqual(compatibility['compatibility_score'], 0)
-        self.assertLessEqual(compatibility['compatibility_score'], 100)
+        # Check that chart1_yogas contains the required keys
+        self.assertIn('total', comparison['chart1_yogas'])
+        self.assertIn('beneficial', comparison['chart1_yogas'])
+        self.assertIn('harmful', comparison['chart1_yogas'])
+        self.assertIn('types', comparison['chart1_yogas'])
 
     def test_yoga_strength_score(self):
         """Test Yoga strength score function"""

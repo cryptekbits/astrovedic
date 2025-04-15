@@ -28,7 +28,7 @@ from astrovedic.vedic.compatibility.dosha import (
 )
 from astrovedic.vedic.compatibility.dasha import (
     get_dasha_compatibility, get_antardasha_compatibility,
-    get_dasha_periods_compatibility, get_dasha_predictions
+    get_dasha_periods_compatibility, get_dasha_period_data
 )
 from astrovedic.vedic.compatibility.navamsa import (
     get_navamsa_compatibility, get_navamsa_positions,
@@ -200,11 +200,14 @@ class TestCompatibility(unittest.TestCase):
         self.assertIn('challenging_periods', dasha_periods_compatibility)
         self.assertIn('description', dasha_periods_compatibility)
 
-        # Test Dasha Predictions
-        dasha_predictions = get_dasha_predictions(self.chart1, self.chart2)
-        self.assertIn('predictions', dasha_predictions)
-        self.assertIn('timeline', dasha_predictions)
-        self.assertIn('description', dasha_predictions)
+        # Test Dasha Period Data
+        dasha_period_data = get_dasha_period_data(self.chart1, self.chart2)
+        self.assertIn('dasha_lord1', dasha_period_data)
+        self.assertIn('dasha_lord2', dasha_period_data)
+        self.assertIn('antardasha_lord1', dasha_period_data)
+        self.assertIn('antardasha_lord2', dasha_period_data)
+        self.assertIn('dasha_compatibility', dasha_period_data)
+        self.assertIn('antardasha_compatibility', dasha_period_data)
 
     def test_navamsa_compatibility(self):
         """Test Navamsa compatibility analysis"""
