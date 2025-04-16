@@ -110,7 +110,8 @@ class AstrovedicTestSuite:
                 'caching': ['tests.caching.test_comprehensive', 'tests.caching.test_calculation_cache',
                           'tests.caching.test_ephemeris_cache', 'tests.caching.test_reference_data_cache'],
                 'vedic': ['tests.vedic.vargas.test_divisional_charts', 'tests.vedic.yogas.test_yogas',
-                          'tests.vedic.jaimini.test_karakas', 'tests.vedic.shadbala.test_advanced'],
+                          'tests.vedic.jaimini.test_karakas', 'tests.vedic.shadbala.test_advanced',
+                          'tests.vedic.misc.test_kp'],
                 'examples': ['tests.examples.test_reference_date'],
                 'compatibility': ['tests.vedic.compatibility.test_compatibility_core', 'tests.vedic.compatibility.test_kuta'],
                 'error_handling': ['tests.core.test_error_handling'],
@@ -120,7 +121,8 @@ class AstrovedicTestSuite:
                 'yogas': ['tests.vedic.yogas.test_yogas', 'tests.vedic.yogas.test_surya_yogas'],
                 'vargas': ['tests.vedic.vargas.test_divisional_charts', 'tests.vedic.vargas.test_higher_vargas',
                           'tests.vedic.vargas.test_varga_calculations', 'tests.vedic.vargas.test_vimshopaka_bala'],
-                'reference_data': ['tests.reference_data.test_ashtakavarga_reference']
+                'reference_data': ['tests.reference_data.test_ashtakavarga_reference'],
+                'misc': ['tests.vedic.misc.test_kp']
             }
         }
         return config

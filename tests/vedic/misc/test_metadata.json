@@ -84,14 +84,29 @@
         "description": "Tests calculation of KP pointer",
         "category": "misc"
     },
-    "tests.vedic.misc.test_kp.TestKP.test_get_kp_significator": {
-        "name": "Get KP Significator",
-        "description": "Tests calculation of KP significator",
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_lords": {
+        "name": "Get KP Lords",
+        "description": "Tests calculation of KP lords (sign lord, star lord, sub lord, sub-sub lord)",
         "category": "misc"
     },
-    "tests.vedic.misc.test_kp.TestKP.test_get_kp_cuspal_interlink": {
-        "name": "Get KP Cuspal Interlink",
-        "description": "Tests calculation of KP cuspal interlink",
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_planets": {
+        "name": "Get KP Planets",
+        "description": "Tests calculation of KP information for all planets in a chart",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_houses": {
+        "name": "Get KP Houses",
+        "description": "Tests calculation of KP information for all houses in a chart",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_significators": {
+        "name": "Get KP Significators",
+        "description": "Tests calculation of KP significators for a house",
+        "category": "misc"
+    },
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_ruling_planets": {
+        "name": "Get KP Ruling Planets",
+        "description": "Tests calculation of KP ruling planets",
         "category": "misc"
     },
     "tests.vedic.misc.test_upagrah.TestUpagrah.test_calculate_dhuma": {

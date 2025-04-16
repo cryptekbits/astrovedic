@@ -58,5 +58,45 @@
         "name": "Bhava Chalita Logic",
         "description": "Tests the logic of Bhava Chalita chart calculation",
         "category": "vedic"
+    },
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_sublord": {
+        "name": "Get KP Sublord",
+        "description": "Tests calculation of KP sublord based on Vimshottari Dasha periods",
+        "category": "vedic"
+    },
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_sub_sublord": {
+        "name": "Get KP Sub-Sublord",
+        "description": "Tests calculation of KP sub-sublord",
+        "category": "vedic"
+    },
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_pointer": {
+        "name": "Get KP Pointer",
+        "description": "Tests calculation of KP pointer",
+        "category": "vedic"
+    },
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_lords": {
+        "name": "Get KP Lords",
+        "description": "Tests calculation of KP lords (sign lord, star lord, sub lord, sub-sub lord)",
+        "category": "vedic"
+    },
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_planets": {
+        "name": "Get KP Planets",
+        "description": "Tests calculation of KP information for all planets in a chart",
+        "category": "vedic"
+    },
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_houses": {
+        "name": "Get KP Houses",
+        "description": "Tests calculation of KP information for all houses in a chart",
+        "category": "vedic"
+    },
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_significators": {
+        "name": "Get KP Significators",
+        "description": "Tests calculation of KP significators for a house",
+        "category": "vedic"
+    },
+    "tests.vedic.misc.test_kp.TestKP.test_get_kp_ruling_planets": {
+        "name": "Get KP Ruling Planets",
+        "description": "Tests calculation of KP ruling planets",
+        "category": "vedic"
     }
 }
