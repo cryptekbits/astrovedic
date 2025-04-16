@@ -21,13 +21,13 @@ from astrovedic.cache import reference_cache, calculation_cache
 def get_sign_lord(sign):
     """
     Get the lord (ruling planet) of a sign.
-    
+
     Args:
         sign (str): The sign
-    
+
     Returns:
         str: The lord (ruling planet)
-    
+
     Raises:
         ValidationError: If the sign is invalid
     """
@@ -46,10 +46,10 @@ def get_sign_lord(sign):
         const.AQUARIUS: const.SATURN,
         const.PISCES: const.JUPITER
     }
-    
+
     if sign not in lord_map:
         raise ValidationError(f"Invalid sign: {sign}")
-    
+
     return lord_map[sign]
 
 
@@ -57,13 +57,13 @@ def get_sign_lord(sign):
 def get_element(sign):
     """
     Get the element of a sign.
-    
+
     Args:
         sign (str): The sign
-    
+
     Returns:
         str: The element of the sign
-    
+
     Raises:
         ValidationError: If the sign is invalid
     """
@@ -81,10 +81,10 @@ def get_element(sign):
         const.SCORPIO: 'Water',
         const.PISCES: 'Water'
     }
-    
+
     if sign not in elements:
         raise ValidationError(f"Invalid sign: {sign}")
-    
+
     return elements[sign]
 
 
@@ -92,13 +92,13 @@ def get_element(sign):
 def get_quality(sign):
     """
     Get the quality (cardinal, fixed, mutable) of a sign.
-    
+
     Args:
         sign (str): The sign
-    
+
     Returns:
         str: The quality of the sign
-    
+
     Raises:
         ValidationError: If the sign is invalid
     """
@@ -116,10 +116,10 @@ def get_quality(sign):
         const.SAGITTARIUS: 'Mutable',
         const.PISCES: 'Mutable'
     }
-    
+
     if sign not in qualities:
         raise ValidationError(f"Invalid sign: {sign}")
-    
+
     return qualities[sign]
 
 
@@ -127,13 +127,13 @@ def get_quality(sign):
 def get_gender(sign):
     """
     Get the gender of a sign.
-    
+
     Args:
         sign (str): The sign
-    
+
     Returns:
         str: The gender of the sign
-    
+
     Raises:
         ValidationError: If the sign is invalid
     """
@@ -151,10 +151,10 @@ def get_gender(sign):
         const.AQUARIUS: const.MASCULINE,
         const.PISCES: const.FEMININE
     }
-    
+
     if sign not in genders:
         raise ValidationError(f"Invalid sign: {sign}")
-    
+
     return genders[sign]
 
 
@@ -162,13 +162,13 @@ def get_gender(sign):
 def get_planet_nature(planet_id):
     """
     Get the nature (benefic, malefic) of a planet.
-    
+
     Args:
         planet_id (str): The ID of the planet
-    
+
     Returns:
         str: The nature of the planet
-    
+
     Raises:
         ValidationError: If the planet ID is invalid
     """
@@ -186,10 +186,10 @@ def get_planet_nature(planet_id):
         const.NORTH_NODE: 'Malefic',
         const.SOUTH_NODE: 'Malefic'
     }
-    
+
     if planet_id not in natures:
         raise ValidationError(f"Invalid planet ID: {planet_id}")
-    
+
     return natures[planet_id]
 
 
@@ -197,13 +197,13 @@ def get_planet_nature(planet_id):
 def get_planet_element(planet_id):
     """
     Get the element of a planet.
-    
+
     Args:
         planet_id (str): The ID of the planet
-    
+
     Returns:
         str: The element of the planet
-    
+
     Raises:
         ValidationError: If the planet ID is invalid
     """
@@ -221,10 +221,10 @@ def get_planet_element(planet_id):
         const.NORTH_NODE: 'Air',
         const.SOUTH_NODE: 'Fire'
     }
-    
+
     if planet_id not in elements:
         raise ValidationError(f"Invalid planet ID: {planet_id}")
-    
+
     return elements[planet_id]
 
 
@@ -232,14 +232,14 @@ def get_planet_element(planet_id):
 def get_planet_friendship(planet1, planet2):
     """
     Get the friendship between two planets.
-    
+
     Args:
         planet1 (str): The first planet
         planet2 (str): The second planet
-    
+
     Returns:
         str: The friendship status ('Friend', 'Enemy', 'Neutral')
-    
+
     Raises:
         ValidationError: If either planet ID is invalid
     """
@@ -252,8 +252,8 @@ def get_planet_friendship(planet1, planet2):
         },
         const.MOON: {
             'Friends': [const.SUN, const.MERCURY],
-            'Enemies': [const.SATURN],
-            'Neutral': [const.MARS, const.JUPITER, const.VENUS]
+            'Enemies': [],
+            'Neutral': [const.MARS, const.JUPITER, const.VENUS, const.SATURN]
         },
         const.MERCURY: {
             'Friends': [const.SUN, const.VENUS],
@@ -281,20 +281,20 @@ def get_planet_friendship(planet1, planet2):
             'Neutral': [const.JUPITER]
         }
     }
-    
+
     # Add outer planets
     friendship_table[const.URANUS] = friendship_table[const.SATURN]
     friendship_table[const.NEPTUNE] = friendship_table[const.JUPITER]
     friendship_table[const.PLUTO] = friendship_table[const.MARS]
     friendship_table[const.NORTH_NODE] = friendship_table[const.JUPITER]
     friendship_table[const.SOUTH_NODE] = friendship_table[const.SATURN]
-    
+
     # Validate planets
     if planet1 not in friendship_table:
         raise ValidationError(f"Invalid planet ID: {planet1}")
     if planet2 not in friendship_table:
         raise ValidationError(f"Invalid planet ID: {planet2}")
-    
+
     # Get friendship status
     if planet2 in friendship_table[planet1]['Friends']:
         return 'Friend'
@@ -308,48 +308,49 @@ def get_planet_friendship(planet1, planet2):
 def get_planet_abbreviation(planet_id):
     """
     Get the abbreviation for a planet.
-    
+
     Args:
         planet_id (str): The ID of the planet
-    
+
     Returns:
         str: The abbreviation of the planet
-    
+
     Raises:
         ValidationError: If the planet ID is invalid
     """
     abbreviations = {
-        const.SUN: 'Sun',
-        const.MOON: 'Moo',
-        const.MERCURY: 'Mer',
-        const.VENUS: 'Ven',
-        const.MARS: 'Mar',
-        const.JUPITER: 'Jup',
-        const.SATURN: 'Sat',
-        const.URANUS: 'Ura',
-        const.NEPTUNE: 'Nep',
-        const.PLUTO: 'Plu',
-        const.NORTH_NODE: 'Rah',
-        const.SOUTH_NODE: 'Ket'
+        const.SUN: 'Su',
+        const.MOON: 'Mo',
+        const.MERCURY: 'Me',
+        const.VENUS: 'Ve',
+        const.MARS: 'Ma',
+        const.JUPITER: 'Ju',
+        const.SATURN: 'Sa',
+        const.URANUS: 'Ur',
+        const.NEPTUNE: 'Ne',
+        const.PLUTO: 'Pl',
+        const.NORTH_NODE: 'Ra',
+        const.SOUTH_NODE: 'Ke'
     }
-    
+
     if planet_id not in abbreviations:
         raise ValidationError(f"Invalid planet ID: {planet_id}")
-    
+
     return abbreviations[planet_id]
 
 
-@calculation_cache()
+@calculation_cache(maxsize=1000)
 def normalize_longitude(longitude):
     """
     Normalize a longitude value to the range [0, 360).
-    
+
     Args:
         longitude (float): The longitude to normalize
-    
+
     Returns:
         float: The normalized longitude
     """
+    # Simple modulo operation is very fast, no need for complex logic
     return longitude % 360
 
 
@@ -357,19 +358,19 @@ def normalize_longitude(longitude):
 def get_sign_from_longitude(longitude):
     """
     Get the sign from a longitude.
-    
+
     Args:
         longitude (float): The longitude in degrees (0-360)
-    
+
     Returns:
         str: The sign
     """
     # Normalize the longitude
     lon = normalize_longitude(longitude)
-    
+
     # Calculate the sign index (0-11)
     sign_index = int(lon / 30)
-    
+
     # Return the sign
     return const.LIST_SIGNS[sign_index]
 
@@ -378,13 +379,13 @@ def get_sign_from_longitude(longitude):
 def get_sign_number(sign):
     """
     Get the number of a sign (1-12).
-    
+
     Args:
         sign (str): The sign
-    
+
     Returns:
         int: The sign number (1-12)
-    
+
     Raises:
         ValidationError: If the sign is invalid
     """
@@ -398,17 +399,17 @@ def get_sign_number(sign):
 def get_sign_from_number(number):
     """
     Get the sign from a sign number (1-12).
-    
+
     Args:
         number (int): The sign number (1-12)
-    
+
     Returns:
         str: The sign
-    
+
     Raises:
         ValidationError: If the number is invalid
     """
     if not isinstance(number, int) or number < 1 or number > 12:
         raise ValidationError(f"Invalid sign number: {number}")
-    
+
     return const.LIST_SIGNS[number - 1]

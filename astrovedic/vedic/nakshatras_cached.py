@@ -73,8 +73,8 @@ NAKSHATRA_ELEMENTS = {
     'Purva Ashadha': 'Water',
     'Uttara Ashadha': 'Earth',
     'Shravana': 'Earth',
-    'Dhanishta': 'Fire',
-    'Shatabhisha': 'Air',
+    'Dhanishta': 'Air',
+    'Shatabhisha': 'Water',
     'Purva Bhadrapada': 'Fire',
     'Uttara Bhadrapada': 'Water',
     'Revati': 'Water'
@@ -83,31 +83,31 @@ NAKSHATRA_ELEMENTS = {
 # Nakshatra doshas
 NAKSHATRA_DOSHAS = {
     'Ashwini': 'Vata',
-    'Bharani': 'Pitta',
-    'Krittika': 'Kapha',
-    'Rohini': 'Vata',
-    'Mrigashira': 'Pitta',
-    'Ardra': 'Kapha',
+    'Bharani': 'Kapha',
+    'Krittika': 'Pitta',
+    'Rohini': 'Kapha',
+    'Mrigashira': 'Vata',
+    'Ardra': 'Vata',
     'Punarvasu': 'Vata',
-    'Pushya': 'Pitta',
+    'Pushya': 'Kapha',
     'Ashlesha': 'Kapha',
-    'Magha': 'Vata',
+    'Magha': 'Pitta',
     'Purva Phalguni': 'Pitta',
-    'Uttara Phalguni': 'Kapha',
+    'Uttara Phalguni': 'Pitta',
     'Hasta': 'Vata',
-    'Chitra': 'Pitta',
-    'Swati': 'Kapha',
-    'Vishakha': 'Vata',
-    'Anuradha': 'Pitta',
+    'Chitra': 'Vata',
+    'Swati': 'Vata',
+    'Vishakha': 'Pitta',
+    'Anuradha': 'Kapha',
     'Jyeshtha': 'Kapha',
     'Mula': 'Vata',
     'Purva Ashadha': 'Pitta',
     'Uttara Ashadha': 'Kapha',
-    'Shravana': 'Vata',
-    'Dhanishta': 'Pitta',
-    'Shatabhisha': 'Kapha',
-    'Purva Bhadrapada': 'Vata',
-    'Uttara Bhadrapada': 'Pitta',
+    'Shravana': 'Kapha',
+    'Dhanishta': 'Vata',
+    'Shatabhisha': 'Vata',
+    'Purva Bhadrapada': 'Pitta',
+    'Uttara Bhadrapada': 'Kapha',
     'Revati': 'Kapha'
 }
 
@@ -134,7 +134,7 @@ NAKSHATRA_SPAN = 13.33333333333333  # 360 / 27
 PADA_SPAN = NAKSHATRA_SPAN / 4  # 3.33333333333333
 
 
-@calculation_cache()
+@calculation_cache(maxsize=360)
 def get_nakshatra(longitude):
     """
     Get nakshatra information from longitude
@@ -145,7 +145,7 @@ def get_nakshatra(longitude):
     Returns:
         dict: Dictionary with nakshatra information
     """
-    # Calculate nakshatra index (0-26)
+    # Calculate nakshatra index (0-26) - use integer division for better performance
     nakshatra_index = int(longitude / NAKSHATRA_SPAN) % 27
 
     # Get nakshatra name
@@ -157,45 +157,47 @@ def get_nakshatra(longitude):
     # Calculate pada (quarter) (1-4)
     pada = int(pos_in_nakshatra / PADA_SPAN) + 1
 
-    # Calculate percentage through nakshatra
-    percentage = (pos_in_nakshatra / NAKSHATRA_SPAN) * 100
-
-    # Get nakshatra lord
+    # Get nakshatra lord, element, and dosha directly
     lord = NAKSHATRA_LORDS[nakshatra]
-
-    # Get nakshatra element and dosha
     element = NAKSHATRA_ELEMENTS[nakshatra]
     dosha = NAKSHATRA_DOSHAS[nakshatra]
 
+    # Return a pre-constructed dictionary for better performance
     return {
         'index': nakshatra_index,
         'name': nakshatra,
         'lord': lord,
         'pada': pada,
-        'percentage': percentage,
+        'percentage': (pos_in_nakshatra / NAKSHATRA_SPAN) * 100,
         'element': element,
         'dosha': dosha
     }
 
 
-@reference_cache()
-def get_nakshatra_lord(nakshatra):
+@calculation_cache()
+def get_nakshatra_lord(longitude):
     """
-    Get the lord of a nakshatra
+    Get nakshatra lord from longitude
 
     Args:
-        nakshatra (str): The nakshatra name
+        longitude (float): The longitude in degrees (0-360)
 
     Returns:
-        str: The lord (planet name)
+        str: Nakshatra lord (planet name)
     """
-    if nakshatra not in NAKSHATRA_LORDS:
-        raise ValueError(f"Invalid nakshatra: {nakshatra}")
-    
+    # If longitude is a string (nakshatra name), return the lord directly
+    if isinstance(longitude, str):
+        if longitude not in NAKSHATRA_LORDS:
+            raise ValueError(f"Invalid nakshatra: {longitude}")
+        return NAKSHATRA_LORDS[longitude]
+
+    # Otherwise, calculate the nakshatra index and return the lord
+    nakshatra_index = int(longitude / NAKSHATRA_SPAN) % 27
+    nakshatra = LIST_NAKSHATRAS[nakshatra_index]
     return NAKSHATRA_LORDS[nakshatra]
 
 
-@calculation_cache()
+@calculation_cache(maxsize=360)
 def get_nakshatra_pada(longitude):
     """
     Get the pada (quarter) of a nakshatra
@@ -208,14 +210,12 @@ def get_nakshatra_pada(longitude):
     """
     # Calculate position within nakshatra (0-13.33333 degrees)
     pos_in_nakshatra = longitude % NAKSHATRA_SPAN
-    
+
     # Calculate pada (quarter) (1-4)
-    pada = int(pos_in_nakshatra / PADA_SPAN) + 1
-    
-    return pada
+    return int(pos_in_nakshatra / PADA_SPAN) + 1
 
 
-@calculation_cache()
+@calculation_cache(maxsize=360)
 def get_nakshatra_degree(longitude):
     """
     Get the degree within the nakshatra (0-13.33...)
@@ -226,9 +226,8 @@ def get_nakshatra_degree(longitude):
     Returns:
         float: Degree within the nakshatra
     """
-    nakshatra_index = int(longitude / NAKSHATRA_SPAN)
-    nakshatra_start = nakshatra_index * NAKSHATRA_SPAN
-    return longitude - nakshatra_start
+    # More efficient calculation using modulo
+    return longitude % NAKSHATRA_SPAN
 
 
 @reference_cache()
@@ -244,7 +243,7 @@ def get_nakshatra_qualities(nakshatra):
     """
     if nakshatra not in LIST_NAKSHATRAS:
         raise ValueError(f"Invalid nakshatra: {nakshatra}")
-    
+
     return {
         'element': NAKSHATRA_ELEMENTS[nakshatra],
         'dosha': NAKSHATRA_DOSHAS[nakshatra]

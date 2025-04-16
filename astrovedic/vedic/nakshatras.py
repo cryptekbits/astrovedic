@@ -291,14 +291,13 @@ def get_nakshatra_qualities(nakshatra):
     Returns:
         dict: Dictionary with nakshatra qualities
     """
-    # Get the nakshatra index
-    nakshatra_index = LIST_NAKSHATRAS.index(nakshatra)
+    # Validate the nakshatra name
+    if nakshatra not in LIST_NAKSHATRAS:
+        raise ValueError(f"Invalid nakshatra: {nakshatra}")
 
-    # Get the element
-    element = NAKSHATRA_ELEMENTS[nakshatra_index]
-
-    # Get the dosha
-    dosha = NAKSHATRA_DOSHAS[nakshatra_index]
+    # Get the element and dosha directly from the dictionaries
+    element = NAKSHATRA_ELEMENTS[nakshatra]
+    dosha = NAKSHATRA_DOSHAS[nakshatra]
 
     return {
         'element': element,
