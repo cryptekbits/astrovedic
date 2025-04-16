@@ -19,17 +19,25 @@ Key enhancements include:
 - Extensive test coverage to ensure accuracy
 
 ```python
-# Example of Vedic chart with Lahiri ayanamsa
+# Example of Vedic chart using the configuration system
 from astrovedic.datetime import Datetime
 from astrovedic.geopos import GeoPos
 from astrovedic.chart import Chart
 from astrovedic import const
+from astrovedic.vedic.config import ChartConfiguration
+from astrovedic.vedic.api import create_vedic_chart
 from astrovedic.vedic.nakshatras import get_nakshatra
 
 # Create a chart for Bangalore, India
 date = Datetime('2025/04/09', '20:51', '+05:30')
 pos = GeoPos(12.9716, 77.5946)  # Bangalore
-chart = Chart(date, pos, hsys=const.HOUSES_WHOLE_SIGN, mode=const.AY_LAHIRI)
+
+# Using the configuration system
+config = ChartConfiguration()  # Default: Lahiri ayanamsa with Whole Sign houses
+chart = Chart(date, pos, hsys=config.house_system, ayanamsa=config.ayanamsa)
+
+# Or using the simplified API
+# vedic_chart = create_vedic_chart(date, pos)
 
 # Get Moon position and nakshatra
 moon = chart.getObject(const.MOON)
@@ -41,6 +49,7 @@ print(f"Nakshatra: {nakshatra_info['name']} (Pada {nakshatra_info['pada']})")
 
 ## Features
 
+- **Configuration System**: Flexible system for customizing ayanamsa and house system settings
 - **Vedic Ayanamsas**: Support for multiple Vedic ayanamsas including Lahiri, Krishnamurti, and more
 - **Nakshatras**: Calculations for the 27 nakshatras (lunar mansions) and their padas (quarters)
 - **Panchang**: Vedic almanac elements including tithi, yoga, karana, and more
@@ -82,6 +91,7 @@ Documentation is currently being updated to reflect the name change and new feat
 For now, you can explore the following resources:
 
 - Code examples in the `examples/` directory
+- Documentation in the `docs/` directory, including `docs/configuration_system.md`
 - Docstrings within the code
 - Test cases that demonstrate functionality
 
@@ -89,7 +99,10 @@ For now, you can explore the following resources:
 
 Check the `examples/` directory for example scripts:
 
-- `examples/vedic_chart.py`: Basic Vedic chart calculations
+- `examples/configuration_example.py`: Comprehensive demonstration of the configuration system
+- `examples/simple_configuration.py`: Simple usage of the configuration system
+- `examples/varga_configuration.py`: Using the configuration system with divisional charts
+- `examples/vedic_api_example.py`: Using the unified Vedic API
 - `examples/dainik_panchang.py`: Daily panchang calculations
 - `examples/vimshottari_dasha.py`: Vimshottari dasha calculations
 - `examples/divisional_charts.py`: Divisional charts (Vargas)

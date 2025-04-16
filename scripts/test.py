@@ -117,7 +117,7 @@ class AstrovedicTestSuite:
                 'error_handling': ['tests.core.test_error_handling'],
                 'jaimini': ['tests.vedic.jaimini.test_karakas'],
                 'muhurta': ['tests.vedic.muhurta.test_muhurta_core'],
-                'transits': ['tests.vedic.transits.test_transit_core'],
+                'transits': ['tests.vedic.transits.test_core', 'tests.vedic.transits.test_calculator', 'tests.vedic.transits.test_transits_core'],
                 'yogas': ['tests.vedic.yogas.test_yogas', 'tests.vedic.yogas.test_surya_yogas'],
                 'vargas': ['tests.vedic.vargas.test_divisional_charts', 'tests.vedic.vargas.test_higher_vargas',
                           'tests.vedic.vargas.test_varga_calculations', 'tests.vedic.vargas.test_vimshopaka_bala'],
@@ -964,47 +964,21 @@ class AstrovedicTestSuite:
         Returns:
             int: Exit code (0 for success, 1 for failure)
         """
-        # Determine which modules to run
-        modules_to_run = []
+        # Run all tests by discovering them in all test directories
+        print("Running tests by discovering them in all test directories...")
+        test_dirs = self.config['test_directories']
 
-        if category and category in self.config['test_categories']:
-            # Run tests from a specific category
-            modules_to_run = self.config['test_categories'][category]
-        elif category == 'all':
-            # Run all tests by discovering them in all test directories
-            print("Running all tests by discovering them in all test directories...")
-            test_dirs = self.config['test_directories']
-            return self.run_all_tests(test_dirs, exclude_known_failures, html_report, output_file, verbosity)
-        else:
-            # Default: run all except examples
-            for cat, cat_modules in self.config['test_categories'].items():
-                if cat != 'examples':
-                    modules_to_run.extend(cat_modules)
+        # Run all tests and filter by category
+        return self.run_all_tests(test_dirs, category, exclude_known_failures, html_report, output_file, verbosity)
 
-        # Exclude known failing tests if requested
-        if exclude_known_failures:
-            modules_to_run = [m for m in modules_to_run if m not in self.config['excluded_tests']]
-
-        # Generate HTML report if requested
-        if html_report:
-            success = self.generate_html_report(modules_to_run)
-            return 0 if success else 1
-
-        # Run the tests
-        if modules_to_run:
-            result = self.run_specific_modules(modules_to_run, verbosity, output_file)
-        else:
-            result = self.discover_and_run_tests(self.tests_dir, verbosity=verbosity, output_file=output_file)
-
-        return 0 if result.wasSuccessful() else 1
-
-    def run_all_tests(self, test_dirs, exclude_known_failures=True, html_report=False,
+    def run_all_tests(self, test_dirs, category=None, exclude_known_failures=True, html_report=False,
                      output_file=None, verbosity=2):
         """
         Run all tests by discovering them in the specified directories.
 
         Args:
             test_dirs (list): List of directories to search for tests
+            category (str): Test category to run (from config)
             exclude_known_failures (bool): Whether to exclude known failing tests
             html_report (bool): Whether to generate an HTML report
             output_file (str): File to write test results to
@@ -1043,9 +1017,52 @@ class AstrovedicTestSuite:
 
         # Create and run test runner
         runner = self.DetailedTestRunner(test_suite=self, stream=stream, verbosity=verbosity)
-        start_time = time.time()
-        result = runner.run(all_tests)
-        end_time = time.time()
+
+        # If a category is specified, filter the tests
+        if category and category != 'all':
+            # Create a filtered test suite
+            filtered_tests = unittest.TestSuite()
+
+            # Create a custom filter function
+            def filter_test(test):
+                if not isinstance(test, unittest.TestCase):
+                    return False
+                test_id = test.id()
+                test_category = self._get_category_for_test(test_id)
+                return test_category == category
+
+            # Create a filtered test suite using a custom filter
+            class CategoryFilter(unittest.TestCase):
+                def __init__(self, test, filter_func):
+                    self.test = test
+                    self.filter_func = filter_func
+
+                def __call__(self, *args, **kwargs):
+                    if self.filter_func(self.test):
+                        self.test(*args, **kwargs)
+
+            # Recursively add tests that match the filter
+            def add_tests_recursively(test_suite, filter_func):
+                for test in test_suite:
+                    if isinstance(test, unittest.TestCase):
+                        if filter_func(test):
+                            filtered_tests.addTest(test)
+                    else:
+                        # Handle test suites
+                        add_tests_recursively(test, filter_func)
+
+            # Add tests that match the filter
+            add_tests_recursively(all_tests, filter_test)
+
+            # Run the filtered tests
+            start_time = time.time()
+            result = runner.run(filtered_tests)
+            end_time = time.time()
+        else:
+            # Run all tests
+            start_time = time.time()
+            result = runner.run(all_tests)
+            end_time = time.time()
 
         # Print summary
         print("\n" + "=" * 80, file=stream)

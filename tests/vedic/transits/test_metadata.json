@@ -1,232 +1,58 @@
 {
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_compatibility": {
-        "name": "Get Transit Compatibility",
-        "description": "Tests compatibility analysis between transit and natal charts",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_chart": {
-        "name": "Get Transit Chart",
-        "description": "Tests creation of transit chart based on natal chart and transit date",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_planets": {
-        "name": "Get Transit Planets",
-        "description": "Tests calculation of transit planet positions relative to natal chart",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_aspects": {
-        "name": "Get Transit Aspects",
-        "description": "Tests calculation of aspects between transit and natal planets",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_houses": {
-        "name": "Get Transit Houses",
-        "description": "Tests calculation of transit house positions relative to natal chart",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_quality": {
-        "name": "Get Transit Quality",
-        "description": "Tests assessment of overall transit quality",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_gochara_effects": {
-        "name": "Get Gochara Effects",
-        "description": "Tests calculation of Gochara (transit) effects",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_planet_gochara": {
-        "name": "Get Planet Gochara",
-        "description": "Tests calculation of Gochara effects for a specific planet",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_house_from_moon": {
-        "name": "Get House From Moon",
-        "description": "Tests calculation of house position from the Moon",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_effect_from_moon": {
-        "name": "Get Effect From Moon",
-        "description": "Tests calculation of transit effects based on position from the Moon",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_vedha_effects": {
-        "name": "Get Vedha Effects",
-        "description": "Tests calculation of Vedha (obstruction) effects in transits",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_argala_effects": {
-        "name": "Get Argala Effects",
-        "description": "Tests calculation of Argala (intervention) effects in transits",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_gochara_strength": {
-        "name": "Get Gochara Strength",
-        "description": "Tests calculation of Gochara strength",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_ashtakavarga": {
-        "name": "Get Transit Ashtakavarga",
-        "description": "Tests calculation of Ashtakavarga for transit analysis",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_bindus": {
-        "name": "Get Transit Bindus",
-        "description": "Tests calculation of Bindus (points) for transit analysis",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_sarvashtakavarga": {
-        "name": "Get Transit Sarvashtakavarga",
-        "description": "Tests calculation of Sarvashtakavarga for transit analysis",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_kaksha": {
-        "name": "Get Transit Kaksha",
-        "description": "Tests calculation of Kaksha (subdivision) for transit analysis",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_ashtakavarga_strength": {
-        "name": "Get Transit Ashtakavarga Strength",
-        "description": "Tests calculation of Ashtakavarga strength for transit analysis",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_sarvashtakavarga_strength": {
-        "name": "Get Transit Sarvashtakavarga Strength",
-        "description": "Tests calculation of Sarvashtakavarga strength for transit analysis",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_dasha_effects": {
-        "name": "Get Transit Dasha Effects",
-        "description": "Tests calculation of Dasha effects during transits",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_antardasha_effects": {
-        "name": "Get Transit Antardasha Effects",
-        "description": "Tests calculation of Antardasha effects during transits",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_pratyantardasha_effects": {
-        "name": "Get Transit Pratyantardasha Effects",
-        "description": "Tests calculation of Pratyantardasha effects during transits",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_effects_on_planet": {
-        "name": "Get Transit Effects on Planet",
-        "description": "Tests calculation of transit effects on a specific planet",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_dasha_transit_compatibility": {
-        "name": "Get Dasha Transit Compatibility",
-        "description": "Tests compatibility between Dasha periods and transits",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_aspect_effect": {
-        "name": "Get Aspect Effect",
-        "description": "Tests calculation of effects from aspects between planets",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_house_transit_effect": {
-        "name": "Get House Transit Effect",
-        "description": "Tests calculation of effects from planets transiting houses",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_aspect_score": {
-        "name": "Get Aspect Score",
-        "description": "Tests calculation of scores for aspects between planets",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_house_transit_score": {
-        "name": "Get House Transit Score",
-        "description": "Tests calculation of scores for planets transiting houses",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_data": {
-        "name": "Get Transit Data",
-        "description": "Tests retrieval of comprehensive transit data",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transit_strength_score": {
-        "name": "Get Transit Strength Score",
-        "description": "Tests calculation of overall transit strength score",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_transits.TestVedicTransits.test_get_transits": {
-        "name": "Get Transits",
-        "description": "Tests retrieval of all transit information",
-        "category": "vedic"
-    },
     "tests.vedic.transits.test_core.TestTransitCore.test_get_transit_chart": {
         "name": "Get Transit Chart",
         "description": "Tests creation of transit chart based on natal chart and transit date",
-        "category": "vedic"
+        "category": "transits"
     },
     "tests.vedic.transits.test_core.TestTransitCore.test_get_transit_planets": {
         "name": "Get Transit Planets",
         "description": "Tests calculation of transit planet positions relative to natal chart",
-        "category": "vedic"
+        "category": "transits"
     },
     "tests.vedic.transits.test_core.TestTransitCore.test_get_transit_aspects": {
         "name": "Get Transit Aspects",
         "description": "Tests calculation of aspects between transit and natal planets",
-        "category": "vedic"
+        "category": "transits"
     },
     "tests.vedic.transits.test_core.TestTransitCore.test_get_transit_houses": {
         "name": "Get Transit Houses",
         "description": "Tests calculation of transit house positions relative to natal chart",
-        "category": "vedic"
+        "category": "transits"
     },
     "tests.vedic.transits.test_core.TestTransitCore.test_get_transit_quality": {
         "name": "Get Transit Quality",
         "description": "Tests assessment of overall transit quality",
-        "category": "vedic"
+        "category": "transits"
     },
     "tests.vedic.transits.test_core.TestTransitCore.test_get_house_number": {
         "name": "Get House Number",
         "description": "Tests calculation of house number for a specific longitude in a chart",
-        "category": "vedic"
+        "category": "transits"
     },
-    "tests.vedic.transits.test_predictions.TestTransitPredictions.test_get_transit_predictions": {
-        "name": "Get Transit Predictions",
-        "description": "Tests generation of predictions based on transits",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_predictions.TestTransitPredictions.test_get_transit_timeline": {
-        "name": "Get Transit Timeline",
-        "description": "Tests generation of timeline of transit events for a specific period",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_predictions.TestTransitPredictions.test_get_transit_events": {
-        "name": "Get Transit Events",
-        "description": "Tests identification of significant transit events for a specific period",
-        "category": "vedic"
-    },
-    "tests.vedic.transits.test_predictions.TestTransitPredictions.test_get_transit_periods": {
-        "name": "Get Transit Periods",
-        "description": "Tests identification of transit periods with different qualities",
-        "category": "vedic"
-    },
+
     "tests.vedic.transits.test_transits_core.TestTransits.test_get_transit_data": {
         "name": "Get Transit Data",
         "description": "Tests retrieval of comprehensive transit data",
-        "category": "vedic"
+        "category": "transits"
     },
     "tests.vedic.transits.test_transits_core.TestTransits.test_get_transit_strength": {
         "name": "Get Transit Strength",
         "description": "Tests calculation of transit strength",
-        "category": "vedic"
+        "category": "transits"
     },
     "tests.vedic.transits.test_calculator.TestVedicTransitCalculator.test_calculate_next_transit": {
         "name": "Calculate Next Transit",
         "description": "Tests calculation of next transit of a planet over a specific point",
-        "category": "vedic"
+        "category": "transits"
     },
     "tests.vedic.transits.test_calculator.TestVedicTransitCalculator.test_calculate_previous_transit": {
         "name": "Calculate Previous Transit",
         "description": "Tests calculation of previous transit of a planet over a specific point",
-        "category": "vedic"
+        "category": "transits"
     },
     "tests.vedic.transits.test_calculator.TestVedicTransitCalculator.test_calculate_transits_in_period": {
         "name": "Calculate Transits in Period",
         "description": "Tests calculation of all transits of a planet over a specific point in a given period",
-        "category": "vedic"
+        "category": "transits"
     }
 }

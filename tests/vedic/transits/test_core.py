@@ -26,11 +26,11 @@ class TestTransitCore(unittest.TestCase):
         # Create a natal chart
         natal_date = Datetime('2025/04/09', '20:51', '+05:30')
         self.location = GeoPos(12.9716, 77.5946)  # Bangalore, India
-        self.natal_chart = Chart(natal_date, self.location, hsys=const.HOUSES_WHOLE_SIGN, mode=const.AY_LAHIRI)
+        self.natal_chart = Chart(natal_date, self.location, hsys=const.HOUSES_WHOLE_SIGN, ayanamsa=const.AY_LAHIRI)
 
         # Create a transit chart (1 year later)
         transit_date = Datetime('2026/04/09', '20:51', '+05:30')
-        self.transit_chart = Chart(transit_date, self.location, hsys=const.HOUSES_WHOLE_SIGN, mode=const.AY_LAHIRI)
+        self.transit_chart = Chart(transit_date, self.location, hsys=const.HOUSES_WHOLE_SIGN, ayanamsa=const.AY_LAHIRI)
 
         # Store dates for timeline testing
         self.natal_date = natal_date
@@ -43,7 +43,7 @@ class TestTransitCore(unittest.TestCase):
 
         # Check that the transit chart has the same house system and ayanamsa as the natal chart
         self.assertEqual(transit_chart.hsys, self.natal_chart.hsys)
-        self.assertEqual(transit_chart.mode, self.natal_chart.mode)
+        self.assertEqual(transit_chart.ayanamsa, self.natal_chart.ayanamsa)
 
         # Check that the transit chart has the correct date
         self.assertEqual(transit_chart.date.jd, self.transit_date.jd)
@@ -55,7 +55,7 @@ class TestTransitCore(unittest.TestCase):
         # Print the transit chart information for reference
         print(f"Transit Chart: {self.transit_date.date.date()}/{self.transit_date.time.time()}")
         print(f"House System: {transit_chart.hsys}")
-        print(f"Ayanamsa: {transit_chart.mode}")
+        print(f"Ayanamsa: {transit_chart.ayanamsa}")
 
     def test_get_transit_planets(self):
         """Test get_transit_planets function"""
