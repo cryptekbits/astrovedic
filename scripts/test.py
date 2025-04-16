@@ -103,7 +103,8 @@ class AstrovedicTestSuite:
                 'tests/vedic/muhurta',
                 'tests/vedic/transits',
                 'tests/compatibility',
-                'tests/reference_data'
+                'tests/reference_data',
+                'tests/ay_lahiri'
             ],
             'test_categories': {
                 'core': ['tests.core.test_factory', 'tests.core.test_error_handling'],
@@ -122,7 +123,10 @@ class AstrovedicTestSuite:
                 'vargas': ['tests.vedic.vargas.test_divisional_charts', 'tests.vedic.vargas.test_higher_vargas',
                           'tests.vedic.vargas.test_varga_calculations', 'tests.vedic.vargas.test_vimshopaka_bala'],
                 'reference_data': ['tests.reference_data.test_ashtakavarga_reference'],
-                'misc': ['tests.vedic.misc.test_kp']
+                'misc': ['tests.vedic.misc.test_kp'],
+                'ay_lahiri': ['tests.ay_lahiri.test_ashtakavarga', 'tests.ay_lahiri.test_bhavbala',
+                             'tests.ay_lahiri.test_d1_chart', 'tests.ay_lahiri.test_divisional_charts',
+                             'tests.ay_lahiri.test_panchanga', 'tests.ay_lahiri.test_vimshottari_dasha']
             }
         }
         return config
@@ -1119,6 +1123,8 @@ class AstrovedicTestSuite:
             return 'reference_data'
         elif 'compatibility' in module_name:
             return 'compatibility'
+        elif 'ay_lahiri' in module_name:
+            return 'ay_lahiri'
         elif 'vedic.jaimini' in full_module_name:
             return 'jaimini'
         elif 'vedic.shadbala' in full_module_name:
