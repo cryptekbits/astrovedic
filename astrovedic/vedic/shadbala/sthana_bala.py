@@ -36,8 +36,16 @@ def calculate_sthana_bala(chart, planet_id):
     from astrovedic.vedic.vargas import get_varga_chart
 
     # Calculate each component of Sthana Bala
+    # Check if the planet has isRetrograde method (MoonNode doesn't have it)
+    is_retrograde = False
+    if hasattr(planet, 'isRetrograde'):
+        is_retrograde = planet.isRetrograde()
+    elif planet_id in const.LIST_MOON_NODES:
+        # Moon nodes are always retrograde in their motion
+        is_retrograde = True
+
     # Pass retrograde status to uchcha_bala calculation
-    uchcha_bala = calculate_uchcha_bala(planet_id, planet.lon, planet.isRetrograde())
+    uchcha_bala = calculate_uchcha_bala(planet_id, planet.lon, is_retrograde)
     saptavarga_bala = calculate_saptavarga_bala(chart, planet_id)
 
     # Get the Navamsha (D9) chart and planet position for Ojha-Yugma Bala
