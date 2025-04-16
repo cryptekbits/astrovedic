@@ -1,7 +1,7 @@
 """
     This file is part of astrovedic - (C) FlatAngle
     Modified for Vedic Astrology
-    
+
     This module implements advanced strength calculations for Shadbala
     in Vedic astrology, including Ishta Phala, Kashta Phala, Vimsopaka Bala,
     and Bhava Bala.
@@ -10,8 +10,8 @@
 from astrovedic import const
 from astrovedic import angle
 import math
-from astrovedic import const 
-from astrovedic.angle import closestdistance 
+from astrovedic import const
+from astrovedic.angle import closestdistance
 
 def calculate_ishta_phala(uchcha_bala_value: float, cheshta_bala_value: float) -> dict:
     """
@@ -110,14 +110,14 @@ def calculate_kashta_phala(uchcha_bala_value: float, cheshta_bala_value: float) 
 def calculate_vimsopaka_bala(chart, planet_id):
     """
     Calculate Vimsopaka Bala (twenty-fold strength) for a planet
-    
+
     Vimsopaka Bala is calculated based on the planet's position in
     various divisional charts.
-    
+
     Args:
         chart (Chart): The birth chart
         planet_id (str): The ID of the planet to analyze
-    
+
     Returns:
         dict: Dictionary with Vimsopaka Bala information
     """
@@ -127,7 +127,7 @@ def calculate_vimsopaka_bala(chart, planet_id):
         get_varga_chart
     )
     from astrovedic.vedic.vargas.analysis import calculate_sign_strength
-    
+
     # Get the planet's sign in each divisional chart
     d1_sign = chart.getObject(planet_id).sign
     d2_sign = get_varga_chart(chart, D2).getObject(planet_id).sign
@@ -135,7 +135,7 @@ def calculate_vimsopaka_bala(chart, planet_id):
     d9_sign = get_varga_chart(chart, D9).getObject(planet_id).sign
     d12_sign = get_varga_chart(chart, D12).getObject(planet_id).sign
     d30_sign = get_varga_chart(chart, D30).getObject(planet_id).sign
-    
+
     # Calculate the strength in each divisional chart
     d1_strength = calculate_sign_strength(planet_id, d1_sign)
     d2_strength = calculate_sign_strength(planet_id, d2_sign)
@@ -143,7 +143,7 @@ def calculate_vimsopaka_bala(chart, planet_id):
     d9_strength = calculate_sign_strength(planet_id, d9_sign)
     d12_strength = calculate_sign_strength(planet_id, d12_sign)
     d30_strength = calculate_sign_strength(planet_id, d30_sign)
-    
+
     # Calculate the Vimsopaka Bala
     # The weights for each divisional chart are:
     # D1: 6, D2: 2, D3: 4, D9: 5, D12: 2, D30: 1
@@ -155,13 +155,13 @@ def calculate_vimsopaka_bala(chart, planet_id):
         d12_strength * 2.0 +
         d30_strength * 1.0
     )
-    
+
     # Maximum possible value is 20 (if all charts have strength 1.0)
     max_value = 20.0
-    
+
     # Scale to a percentage
     percentage = (value / max_value) * 100.0
-    
+
     # Determine the description
     if percentage >= 75.0:
         description = 'Very strong'
@@ -171,7 +171,7 @@ def calculate_vimsopaka_bala(chart, planet_id):
         description = 'Moderate'
     else:
         description = 'Weak'
-    
+
     return {
         'value': value,
         'percentage': percentage,
@@ -188,34 +188,37 @@ def calculate_vimsopaka_bala(chart, planet_id):
 def calculate_bhava_bala(chart, house_id):
     """
     Calculate Bhava Bala (house strength) for a house
-    
+
     Bhava Bala includes the standard components:
     1. Bhavadhipati Bala (house lord strength)
     2. Bhava Digbala (house directional strength)
     3. Bhava Drishti Bala (house aspect strength)
-    
+
     Args:
         chart (Chart): The birth chart
         house_id (str): The ID of the house to analyze
-    
+
     Returns:
         dict: Dictionary with Bhava Bala information
     """
     # Get the house from the chart
     house = chart.getHouse(house_id)
-    
+
     # Get the house number (1-12)
     house_num = int(house_id.replace('House', ''))
-    
+
     # Calculate each component of Bhava Bala
     bhavadhipati_bala = calculate_bhavadhipati_bala(chart, house_id)
     bhava_digbala = calculate_bhava_digbala(chart, house_id)
     bhava_drishti_bala = calculate_bhava_drishti_bala(chart, house_id)
-    
+
+    # Calculate Bhava Sthana Bala
+    bhava_sthana_bala = calculate_bhava_sthana_bala(house_num)
+
     # Calculate total Bhava Bala
-    total = (bhavadhipati_bala['value'] + bhava_digbala['value'] + 
-             bhava_drishti_bala['value'])
-    
+    total = (bhavadhipati_bala['value'] + bhava_digbala['value'] +
+             bhava_drishti_bala['value'] + bhava_sthana_bala['value'])
+
     # Determine the description
     if total >= 500.0:
         description = 'Very strong house'
@@ -227,12 +230,13 @@ def calculate_bhava_bala(chart, house_id):
         description = 'Weak house'
     else:
         description = 'Very weak house'
-    
+
     return {
         'house': house_id,
         'bhavadhipati_bala': bhavadhipati_bala,
         'bhava_digbala': bhava_digbala,
         'bhava_drishti_bala': bhava_drishti_bala,
+        'bhava_sthana_bala': bhava_sthana_bala,
         'total': total,
         'description': description
     }
@@ -241,30 +245,30 @@ def calculate_bhava_bala(chart, house_id):
 def calculate_bhavadhipati_bala(chart, house_id):
     """
     Calculate Bhavadhipati Bala (house lord strength) for a house
-    
+
     Args:
         chart (Chart): The birth chart
         house_id (str): The ID of the house
-    
+
     Returns:
         dict: Dictionary with Bhavadhipati Bala information
     """
     # Get the house from the chart
     house = chart.getHouse(house_id)
-    
+
     # Get the sign of the house
     house_sign = house.sign
-    
+
     # Get the lord of the sign
     sign_lord = get_sign_lord(house_sign)
-    
+
     # Get the Shadbala of the lord
     from astrovedic.vedic.shadbala import get_shadbala
     lord_shadbala = get_shadbala(chart, sign_lord)
-    
+
     # Bhavadhipati Bala is the Shadbala of the house lord
     value = lord_shadbala['total_shadbala']['total_virupas']
-    
+
     return {
         'value': value,
         'description': f'Strength of house lord ({sign_lord})',
@@ -334,53 +338,53 @@ def calculate_bhava_digbala(chart, house_id):
 def calculate_bhava_drishti_bala(chart, house_id):
     """
     Calculate Bhava Drishti Bala (house aspect strength) for a house
-    
+
     Args:
         chart (Chart): The birth chart
         house_id (str): The ID of the house
-    
+
     Returns:
         dict: Dictionary with Bhava Drishti Bala information
     """
     # Get the house from the chart
     house = chart.getHouse(house_id)
-    
+
     # Get the house number (1-12)
     house_num = int(house_id.replace('House', ''))
-    
+
     # Initialize the aspect value
     aspect_value = 0.0
-    
+
     # List of aspects received
     aspects = []
-    
+
     # Check aspects from each planet
     for planet_id in const.LIST_OBJECTS_VEDIC:
         planet = chart.getObject(planet_id)
-        
+
         # Calculate the aspect strength
         aspect_strength = calculate_vedic_aspect_to_house(planet_id, planet.lon, house.lon)
-        
+
         if aspect_strength > 0:
             # Determine if the aspect is benefic or malefic
             is_benefic = is_benefic_planet(planet_id)
-            
+
             # Benefic aspects increase strength, malefic aspects decrease it
             if is_benefic:
                 aspect_value += aspect_strength
             else:
                 aspect_value -= aspect_strength
-            
+
             # Add to the list of aspects
             aspects.append({
                 'planet': planet_id,
                 'strength': aspect_strength,
                 'is_benefic': is_benefic
             })
-    
+
     # Ensure the value is not negative
     aspect_value = max(0.0, aspect_value)
-    
+
     return {
         'value': aspect_value,
         'description': 'Strength from planetary aspects',
@@ -391,20 +395,20 @@ def calculate_bhava_drishti_bala(chart, house_id):
 def calculate_bhava_sthana_bala(house_num):
     """
     Calculate Bhava Sthana Bala (house positional strength) for a house
-    
+
     Args:
         house_num (int): The house number (1-12)
-    
+
     Returns:
         dict: Dictionary with Bhava Sthana Bala information
     """
     # Maximum value
     max_value = 60.0
-    
+
     # Kendra (angular) houses: 1, 4, 7, 10
     # Trikona (trine) houses: 1, 5, 9
     # Dusthana (malefic) houses: 6, 8, 12
-    
+
     if house_num in [1, 5, 9]:
         # Trikona houses
         value = max_value
@@ -425,7 +429,7 @@ def calculate_bhava_sthana_bala(house_num):
         # Dusthana houses
         value = 0.0
         description = 'Dusthana (malefic) house'
-    
+
     return {
         'value': value,
         'description': description
@@ -435,22 +439,22 @@ def calculate_bhava_sthana_bala(house_num):
 def calculate_vedic_aspect_to_house(planet_id, planet_lon, house_lon):
     """
     Calculate the strength of a Vedic aspect to a house
-    
+
     Args:
         planet_id (str): The ID of the planet casting the aspect
         planet_lon (float): The longitude of the planet
         house_lon (float): The longitude of the house
-    
+
     Returns:
         float: The strength of the aspect (0-10)
     """
     # Calculate the distance in houses (0-11)
     distance = int(angle.distance(planet_lon, house_lon) / 30) % 12
-    
+
     # All planets aspect the 7th house
     if distance == 6:
         return 10.0
-    
+
     # Special aspects for Mars, Jupiter, and Saturn
     if planet_id == const.MARS and distance in [3, 7]:
         return 10.0
@@ -458,7 +462,7 @@ def calculate_vedic_aspect_to_house(planet_id, planet_lon, house_lon):
         return 10.0
     elif planet_id == const.SATURN and distance in [2, 9]:
         return 10.0
-    
+
     # No aspect
     return 0.0
 
@@ -466,29 +470,29 @@ def calculate_vedic_aspect_to_house(planet_id, planet_lon, house_lon):
 def is_benefic_planet(planet_id):
     """
     Determine if a planet is benefic or malefic
-    
+
     Args:
         planet_id (str): The ID of the planet
-    
+
     Returns:
         bool: True if the planet is benefic, False if malefic
     """
     # Benefic planets
     benefic_planets = [const.JUPITER, const.VENUS, const.MERCURY, const.MOON]
-    
+
     # Malefic planets
     malefic_planets = [const.SUN, const.MARS, const.SATURN, const.RAHU, const.KETU]
-    
+
     return planet_id in benefic_planets
 
 
 def get_sign_lord(sign):
     """
     Get the lord (ruler) of a sign
-    
+
     Args:
         sign (str): The sign
-    
+
     Returns:
         str: The ID of the planet ruling the sign
     """
@@ -506,5 +510,5 @@ def get_sign_lord(sign):
         const.AQUARIUS: const.SATURN,
         const.PISCES: const.JUPITER
     }
-    
+
     return sign_lords.get(sign, const.SUN)

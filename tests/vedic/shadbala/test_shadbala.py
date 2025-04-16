@@ -183,12 +183,17 @@ class TestShadbala(unittest.TestCase):
         self.assertIn('max_speed', mars_shadbala['cheshta_bala'])
         self.assertIn('relative_speed', mars_shadbala['cheshta_bala'])
 
-        # Check that the Sun and Moon don't have Cheshta Bala
+        # Check that the Sun and Moon have special Cheshta Bala calculations
         sun_shadbala = get_shadbala(self.chart, const.SUN)
         moon_shadbala = get_shadbala(self.chart, const.MOON)
 
-        self.assertEqual(sun_shadbala['cheshta_bala']['value'], 0.0)
-        self.assertEqual(moon_shadbala['cheshta_bala']['value'], 0.0)
+        # Sun's Cheshta Bala is based on half of Ayana Bala
+        self.assertIn('source', sun_shadbala['cheshta_bala'])
+        self.assertEqual(sun_shadbala['cheshta_bala']['source'], 'ayana_bala')
+
+        # Moon's Cheshta Bala is based on half of Paksha Bala
+        self.assertIn('source', moon_shadbala['cheshta_bala'])
+        self.assertEqual(moon_shadbala['cheshta_bala']['source'], 'paksha_bala')
 
     def test_naisargika_bala(self):
         """Test Naisargika Bala calculations"""

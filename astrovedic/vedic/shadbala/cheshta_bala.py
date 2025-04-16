@@ -41,11 +41,17 @@ def calculate_cheshta_bala(chart, planet_id):
         from astrovedic.vedic.shadbala.kala_bala import calculate_ayana_bala
         ayana_bala = calculate_ayana_bala(chart, planet_id)
         value = ayana_bala['value'] / 2.0
+        current_speed = planet.lonspeed if hasattr(planet, 'lonspeed') else 0.0
+        max_speed = get_max_speed(planet_id)
         return {
             'value': value,
             'description': 'Based on half of Ayana Bala',
             'source': 'ayana_bala',
-            'source_value': ayana_bala['value']
+            'source_value': ayana_bala['value'],
+            'daily_motion': current_speed,
+            'max_speed': max_speed,
+            'is_retrograde': False,
+            'relative_speed': current_speed / max_speed if max_speed > 0 else 0.0
         }
 
     # Special case for Moon: Use half of Paksha Bala
@@ -53,20 +59,32 @@ def calculate_cheshta_bala(chart, planet_id):
         from astrovedic.vedic.shadbala.kala_bala import calculate_paksha_bala
         paksha_bala = calculate_paksha_bala(chart, planet_id)
         value = paksha_bala['value'] / 2.0
+        current_speed = planet.lonspeed if hasattr(planet, 'lonspeed') else 0.0
+        max_speed = get_max_speed(planet_id)
         return {
             'value': value,
             'description': 'Based on half of Paksha Bala',
             'source': 'paksha_bala',
-            'source_value': paksha_bala['value']
+            'source_value': paksha_bala['value'],
+            'daily_motion': current_speed,
+            'max_speed': max_speed,
+            'is_retrograde': False,
+            'relative_speed': current_speed / max_speed if max_speed > 0 else 0.0
         }
 
     # Rahu and Ketu don't have traditional Cheshta Bala
     if planet_id in [const.RAHU, const.KETU]:
+        current_speed = abs(planet.lonspeed) if hasattr(planet, 'lonspeed') else 0.0
+        max_speed = get_max_speed(planet_id)
         return {
             'value': 0.0,
             'description': 'Rahu and Ketu do not have Cheshta Bala',
-            'current_speed': abs(planet.lonspeed) if hasattr(planet, 'lonspeed') else 0.0,
-            'mean_speed': get_mean_speed(planet_id)
+            'current_speed': current_speed,
+            'mean_speed': get_mean_speed(planet_id),
+            'daily_motion': current_speed,
+            'max_speed': max_speed,
+            'is_retrograde': True,
+            'relative_speed': current_speed / max_speed if max_speed > 0 else 0.0
         }
 
     # For planets (Mars, Mercury, Jupiter, Venus, Saturn)
@@ -134,7 +152,10 @@ def calculate_cheshta_bala(chart, planet_id):
         'speed_ratio': speed_ratio,
         'speed_factor': speed_factor,
         'cheshta_kendra': cheshta_kendra,
-        'kendra_factor': kendra_factor
+        'kendra_factor': kendra_factor,
+        'daily_motion': current_speed,
+        'max_speed': get_max_speed(planet_id),
+        'relative_speed': current_speed / get_max_speed(planet_id) if get_max_speed(planet_id) > 0 else 0.0
     }
 
 
