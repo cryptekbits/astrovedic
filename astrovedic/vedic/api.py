@@ -13,10 +13,9 @@ from astrovedic.geopos import GeoPos
 from datetime import datetime, timezone, timedelta
 
 # Import from Vedic modules
-from astrovedic.vedic import (
-    DEFAULT_AYANAMSA, DEFAULT_HOUSE_SYSTEM,
-    DEFAULT_KP_AYANAMSA, DEFAULT_KP_HOUSE_SYSTEM
-)
+from astrovedic.vedic.ayanamsa import AyanamsaManager
+from astrovedic.vedic.houses import HouseSystemManager
+from astrovedic.vedic.config import ChartConfiguration
 
 # Import from Nakshatra module
 from astrovedic.vedic.nakshatras import (
@@ -116,37 +115,39 @@ class VedicChart:
     It wraps a flatlib Chart object and provides methods for all Vedic features.
     """
 
-    def __init__(self, chart, ayanamsa=DEFAULT_AYANAMSA):
+    def __init__(self, chart, ayanamsa=None):
         """
         Initialize a VedicChart object.
 
         Args:
             chart (Chart): A flatlib Chart object
-            ayanamsa (str, optional): The ayanamsa to use. Defaults to DEFAULT_AYANAMSA.
+            ayanamsa (str, optional): The ayanamsa to use. If None, uses the chart's ayanamsa.
         """
         self.chart = chart
-        self.ayanamsa = ayanamsa
+        self.ayanamsa = ayanamsa or chart.ayanamsa
 
     @classmethod
-    def from_data(cls, date, pos, hsys=DEFAULT_HOUSE_SYSTEM, ayanamsa=DEFAULT_AYANAMSA):
+    def from_data(cls, date, pos, hsys=None, ayanamsa=None, is_kp=False):
         """
         Create a VedicChart from date and position data.
 
         Args:
             date (Datetime): A flatlib Datetime object
             pos (GeoPos): A flatlib GeoPos object
-            hsys (str, optional): The house system to use. Defaults to DEFAULT_HOUSE_SYSTEM.
-            ayanamsa (str, optional): The ayanamsa to use. Defaults to DEFAULT_AYANAMSA.
+            hsys (str, optional): The house system to use. If None, uses the default.
+            ayanamsa (str, optional): The ayanamsa to use. If None, uses the default.
+            is_kp (bool, optional): Whether this is a KP chart. Defaults to False.
 
         Returns:
             VedicChart: A VedicChart object
         """
-        chart = Chart(date, pos, hsys=hsys, mode=ayanamsa)
+        # Create chart with configuration
+        chart = Chart(date, pos, hsys=hsys, ayanamsa=ayanamsa, is_kp=is_kp)
         return cls(chart, ayanamsa)
 
     @classmethod
     def from_date_place(cls, date_str, time_str, lat, lon, timezone="+00:00",
-                        hsys=DEFAULT_HOUSE_SYSTEM, ayanamsa=DEFAULT_AYANAMSA):
+                        hsys=None, ayanamsa=None, is_kp=False):
         """
         Create a VedicChart from date, time, and location.
 
@@ -156,32 +157,32 @@ class VedicChart:
             lat (float): Latitude
             lon (float): Longitude
             timezone (str, optional): Timezone in format '+/-HH:MM'. Defaults to "+00:00".
-            hsys (str, optional): The house system to use. Defaults to DEFAULT_HOUSE_SYSTEM.
-            ayanamsa (str, optional): The ayanamsa to use. Defaults to DEFAULT_AYANAMSA.
+            hsys (str, optional): The house system to use. If None, uses the default.
+            ayanamsa (str, optional): The ayanamsa to use. If None, uses the default.
+            is_kp (bool, optional): Whether this is a KP chart. Defaults to False.
 
         Returns:
             VedicChart: A VedicChart object
         """
         date = Datetime(date_str, time_str, timezone)
         pos = GeoPos(lat, lon)
-        return cls.from_data(date, pos, hsys, ayanamsa)
+        return cls.from_data(date, pos, hsys, ayanamsa, is_kp)
 
     @classmethod
-    def kp_chart(cls, date, pos, hsys=DEFAULT_KP_HOUSE_SYSTEM, ayanamsa=DEFAULT_KP_AYANAMSA):
+    def kp_chart(cls, date, pos, hsys=None, ayanamsa=None):
         """
         Create a KP (Krishnamurti Paddhati) chart.
 
         Args:
             date (Datetime): A flatlib Datetime object
             pos (GeoPos): A flatlib GeoPos object
-            hsys (str, optional): The house system to use. Defaults to DEFAULT_KP_HOUSE_SYSTEM.
-            ayanamsa (str, optional): The ayanamsa to use. Defaults to DEFAULT_KP_AYANAMSA.
+            hsys (str, optional): The house system to use. If None, uses the KP default.
+            ayanamsa (str, optional): The ayanamsa to use. If None, uses the KP default.
 
         Returns:
             VedicChart: A VedicChart object configured for KP
         """
-        chart = Chart(date, pos, hsys=hsys, mode=ayanamsa)
-        return cls(chart, ayanamsa)
+        return cls.from_data(date, pos, hsys, ayanamsa, is_kp=True)
 
     # Basic chart information methods
     def get_planet(self, planet_id):
@@ -749,7 +750,7 @@ class VedicChart:
 
 
 def create_vedic_chart(date_str, time_str, lat, lon, timezone="+00:00",
-                      hsys=DEFAULT_HOUSE_SYSTEM, ayanamsa=DEFAULT_AYANAMSA):
+                      hsys=None, ayanamsa=None):
     """
     Create a VedicChart from date, time, and location.
 
@@ -759,8 +760,8 @@ def create_vedic_chart(date_str, time_str, lat, lon, timezone="+00:00",
         lat (float): Latitude
         lon (float): Longitude
         timezone (str, optional): Timezone in format '+/-HH:MM'. Defaults to "+00:00".
-        hsys (str, optional): The house system to use. Defaults to DEFAULT_HOUSE_SYSTEM.
-        ayanamsa (str, optional): The ayanamsa to use. Defaults to DEFAULT_AYANAMSA.
+        hsys (str, optional): The house system to use. If None, uses the default.
+        ayanamsa (str, optional): The ayanamsa to use. If None, uses the default.
 
     Returns:
         VedicChart: A VedicChart object
@@ -769,7 +770,7 @@ def create_vedic_chart(date_str, time_str, lat, lon, timezone="+00:00",
 
 
 def create_kp_chart(date_str, time_str, lat, lon, timezone="+00:00",
-                   hsys=DEFAULT_KP_HOUSE_SYSTEM, ayanamsa=DEFAULT_KP_AYANAMSA):
+                   hsys=None, ayanamsa=None):
     """
     Create a KP (Krishnamurti Paddhati) chart from date, time, and location.
 
@@ -779,8 +780,8 @@ def create_kp_chart(date_str, time_str, lat, lon, timezone="+00:00",
         lat (float): Latitude
         lon (float): Longitude
         timezone (str, optional): Timezone in format '+/-HH:MM'. Defaults to "+00:00".
-        hsys (str, optional): The house system to use. Defaults to DEFAULT_KP_HOUSE_SYSTEM.
-        ayanamsa (str, optional): The ayanamsa to use. Defaults to DEFAULT_KP_AYANAMSA.
+        hsys (str, optional): The house system to use. If None, uses the KP default.
+        ayanamsa (str, optional): The ayanamsa to use. If None, uses the KP default.
 
     Returns:
         VedicChart: A VedicChart object configured for KP

@@ -1,6 +1,7 @@
 """
     This file is part of astrovedic - (C) FlatAngle
     Author: João Ventura (flatangleweb@gmail.com)
+    Modified for Vedic Astrology
 
 
     This module implements a class to represent an
@@ -25,6 +26,9 @@ from . import const
 from . import utils
 from .ephem import ephem
 from .datetime import Datetime
+from .vedic.ayanamsa import AyanamsaManager
+from .vedic.houses import HouseSystemManager
+from .vedic.config import ChartConfiguration
 
 
 # ------------------ #
@@ -40,37 +44,50 @@ class Chart:
 
         Optional arguments are:
         - hsys: house system
+        - ayanamsa: ayanamsa for sidereal zodiac (replaces mode)
+        - mode: deprecated, use ayanamsa instead
         - IDs: list of objects to include
         - houses_offset: Offset for including objects in calculed houses.
         - orbs: alternative dict of orbs for using dynamic orbs instead of the default const.LIST_ORBS
-        - mode: ayanamsa for sidereal zodiac
+        - is_kp: whether this is a KP chart
 
         """
         # Handle optional arguments
-        hsys = kwargs.get('hsys', const.HOUSES_DEFAULT)
-        # Use Vedic objects list if mode is set (sidereal zodiac)
-        if 'mode' in kwargs and kwargs['mode'] is not None:
+        is_kp = kwargs.get('is_kp', False)
+
+        # Get ayanamsa from kwargs, with backward compatibility for 'mode'
+        ayanamsa = kwargs.get('ayanamsa', None)
+        if ayanamsa is None and 'mode' in kwargs:
+            ayanamsa = kwargs.get('mode')
+
+        # Create and validate configuration
+        config = ChartConfiguration(ayanamsa, kwargs.get('hsys'), is_kp)
+        config.validate()
+
+        # Get object IDs based on whether we're using an ayanamsa (sidereal zodiac)
+        if config.ayanamsa is not None:
             IDs = kwargs.get('IDs', const.LIST_OBJECTS_VEDIC)
         else:
             IDs = kwargs.get('IDs', const.LIST_OBJECTS_TRADITIONAL)
+
         houses_offset = kwargs.get('houses_offset', const.MODERN_HOUSE_OFFSET)
         orbs = kwargs.get('orbs', const.LIST_ORBS)
-        mode = kwargs.get('mode', None)
 
         self.date = date
         self.pos = pos
-        self.hsys = hsys
+        self.hsys = config.house_system
         self.orbs = orbs
-        self.mode = mode
+        self.ayanamsa = config.ayanamsa
+        # Keep mode for backward compatibility
+        self.mode = config.ayanamsa
+        self.houses_offset = houses_offset
 
-        if mode:
-            self.objects = ephem.get_objects(IDs, date, pos, mode=mode)
-            self.houses_offset = houses_offset
-            self.houses, self.angles = ephem.get_houses(date, pos, hsys, houses_offset, mode=mode)
+        if config.ayanamsa:
+            self.objects = ephem.get_objects(IDs, date, pos, mode=config.ayanamsa)
+            self.houses, self.angles = ephem.get_houses(date, pos, config.house_system, houses_offset, mode=config.ayanamsa)
         else:
             self.objects = ephem.getObjectList(IDs, date, pos)
-            self.houses_offset = houses_offset
-            self.houses, self.angles = ephem.getHouses(date, pos, hsys, houses_offset)
+            self.houses, self.angles = ephem.getHouses(date, pos, config.house_system, houses_offset)
 
         self.update_objects_orbs()
 
@@ -81,6 +98,7 @@ class Chart:
         chart.pos = self.pos
         chart.hsys = self.hsys
         chart.orbs = self.orbs
+        chart.ayanamsa = self.ayanamsa if hasattr(self, 'ayanamsa') else None
         chart.mode = self.mode if hasattr(self, 'mode') else None
         chart.houses_offset = self.houses_offset
         chart.objects = self.objects.copy()
@@ -97,12 +115,22 @@ class Chart:
         for obj in self.angles:
             obj.relocate(obj.lon + offset)
 
-    def to_sidereal_zodiac(self, mode):
-        """ Returns a copy of this chart on the sidereal zodiac. """
+    def to_sidereal_zodiac(self, ayanamsa):
+        """
+        Returns a copy of this chart on the sidereal zodiac.
+
+        Args:
+            ayanamsa (str): The ayanamsa to use for the sidereal zodiac.
+
+        Returns:
+            Chart: A new chart with positions adjusted for the specified ayanamsa.
+        """
         from astrovedic.ephem import swe
         chart = self.copy()
-        offset = swe.get_ayanamsa(chart.date.jd, mode)
+        offset = swe.get_ayanamsa(chart.date.jd, ayanamsa)
         chart.move(-offset)
+        chart.ayanamsa = ayanamsa
+        chart.mode = ayanamsa  # For backward compatibility
         return chart
 
     def update_objects_orbs(self):

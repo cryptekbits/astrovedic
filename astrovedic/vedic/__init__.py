@@ -19,24 +19,14 @@
 """
 
 from astrovedic import const
-
-# Default ayanamsa for Vedic calculations
-DEFAULT_AYANAMSA = const.AY_DEFAULT_VEDIC
-
-# Default ayanamsa for KP calculations
-DEFAULT_KP_AYANAMSA = const.AY_DEFAULT_KP
-
-# Default house system for Vedic calculations
-DEFAULT_HOUSE_SYSTEM = const.HOUSES_WHOLE_SIGN
-
-# Default house system for KP calculations
-DEFAULT_KP_HOUSE_SYSTEM = const.HOUSES_PLACIDUS
+from astrovedic.vedic.ayanamsa import AyanamsaManager
+from astrovedic.vedic.houses import HouseSystemManager
+from astrovedic.vedic.config import ChartConfiguration
 
 # Define the public API
 __all__ = [
-    # Constants
-    'DEFAULT_AYANAMSA', 'DEFAULT_KP_AYANAMSA',
-    'DEFAULT_HOUSE_SYSTEM', 'DEFAULT_KP_HOUSE_SYSTEM',
+    # Managers
+    'AyanamsaManager', 'HouseSystemManager', 'ChartConfiguration',
 
     # Unified API
     'VedicChart', 'create_vedic_chart', 'create_kp_chart',
