@@ -18,7 +18,7 @@ from astrovedic.geopos import GeoPos
 from astrovedic.chart import Chart
 from astrovedic import const
 from astrovedic.vedic.nakshatras import get_nakshatra
-from astrovedic.vedic.kp import get_kp_lords
+from astrovedic.vedic.kp_utils import get_kp_lords_wrapper as get_kp_lords
 
 from tests.data.test_data_manager import TestDataManager
 

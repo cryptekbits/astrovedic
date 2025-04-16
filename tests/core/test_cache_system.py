@@ -14,7 +14,7 @@ from astrovedic.chart import Chart
 from astrovedic.vedic.nakshatras import get_nakshatra
 from astrovedic.vedic.vargas.navamsha import calculate_d9
 from astrovedic.vedic.muhurta.panchanga import get_tithi
-from astrovedic.vedic.kp import get_kp_sublord
+from astrovedic.vedic.kp_utils import get_kp_sublord_wrapper as get_kp_sublord
 from astrovedic.vedic.upagrah import calculate_gulika
 from astrovedic import angle
 

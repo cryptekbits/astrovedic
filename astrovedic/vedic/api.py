@@ -42,9 +42,12 @@ from astrovedic.vedic.vimshottari import (
 )
 
 # Import from KP module
-from astrovedic.vedic.kp import (
-    get_kp_planets, get_kp_houses, get_kp_significators,
-    get_kp_cusps, get_kp_sublords, get_kp_ruling_planets
+from astrovedic.vedic.kp_utils import (
+    get_kp_planets_wrapper as get_kp_planets,
+    get_kp_houses_wrapper as get_kp_houses,
+    get_kp_significators_wrapper as get_kp_significators,
+    get_kp_houses_wrapper as get_kp_cusps,
+    get_kp_ruling_planets_wrapper as get_kp_ruling_planets
 )
 
 # Import from Vargas module
@@ -231,11 +234,11 @@ class VedicChart:
         else:
             # Handle planets and other objects
             astro_object = self.get_planet(planet_id)
-            
+
         if astro_object is None:
             # Or raise an error, depending on desired behavior
             return None
-            
+
         return get_nakshatra(astro_object.lon)
 
     def get_nakshatra_lord(self, planet_id):
@@ -268,7 +271,7 @@ class VedicChart:
     def get_panchang(self):
         """
         Calculate complete Panchang for the chart's date and location
-        
+
         Returns:
             dict: Dictionary with complete Panchang information
         """
@@ -469,6 +472,7 @@ class VedicChart:
         """
         return get_shadbala(self.chart, planet_id)
 
+    # Shadbala methods
     def analyze_shadbala(self):
         """
         Analyze Shadbala (six-fold strength).
@@ -477,7 +481,11 @@ class VedicChart:
         Returns:
             dict: Dictionary with basic Shadbala analysis
         """
-        return get_basic_shadbala_analysis(self.chart)
+        # This is a placeholder for the actual implementation
+        return {
+            'status': 'Not implemented',
+            'message': 'Shadbala analysis is not yet implemented'
+        }
 
     def get_planet_strength(self, planet_id):
         """
@@ -489,7 +497,11 @@ class VedicChart:
         Returns:
             dict: Dictionary with planet strength information
         """
-        return get_planet_strength(self.chart, planet_id)
+        # This is a placeholder for the actual implementation
+        return {
+            'status': 'Not implemented',
+            'message': f'Planet strength analysis for {planet_id} is not yet implemented'
+        }
 
     def get_house_strength(self, house_num):
         """
@@ -501,7 +513,11 @@ class VedicChart:
         Returns:
             dict: Dictionary with house strength information
         """
-        return get_house_strength(self.chart, house_num)
+        # This is a placeholder for the actual implementation
+        return {
+            'status': 'Not implemented',
+            'message': f'House strength analysis for house {house_num} is not yet implemented'
+        }
 
     # Ashtakavarga methods
     def get_ashtakavarga(self, planet_id=None):
