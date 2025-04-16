@@ -233,10 +233,10 @@ class AstrovedicTestSuite:
 
         def get_category_summary_table(self):
             """Generate a category-wise summary table."""
-            if not self.category_results:
+            if not self.test_suite:
                 return "No category data available."
 
-            # Calculate totals
+            # Initialize all categories from the config
             all_categories = {
                 'success': 0,
                 'failure': 0,
@@ -245,8 +245,33 @@ class AstrovedicTestSuite:
                 'total': 0
             }
 
-            for category_data in self.category_results.values():
-                for key, value in category_data.items():
+            # Create a complete category results dictionary with all categories
+            complete_category_results = {}
+
+            # Add all configured categories
+            for category in self.test_suite.config['test_categories'].keys():
+                if category not in complete_category_results:
+                    complete_category_results[category] = {
+                        'success': 0,
+                        'failure': 0,
+                        'error': 0,
+                        'skipped': 0,
+                        'total': 0
+                    }
+
+            # Add additional categories we've detected
+            for category, data in self.category_results.items():
+                if category not in complete_category_results:
+                    complete_category_results[category] = {
+                        'success': 0,
+                        'failure': 0,
+                        'error': 0,
+                        'skipped': 0,
+                        'total': 0
+                    }
+                # Update with actual results
+                for key, value in data.items():
+                    complete_category_results[category][key] = value
                     all_categories[key] += value
 
             # Build the table
@@ -256,7 +281,7 @@ class AstrovedicTestSuite:
             table += "-" * 80 + "\n"
 
             # Add rows for each category
-            for category, data in sorted(self.category_results.items()):
+            for category, data in sorted(complete_category_results.items()):
                 table += f"{category:<20} {data['total']:<10} {data['success']:<10} {data['failure']:<10} {data['error']:<10} {data['skipped']:<10}\n"
 
             # Add totals row
@@ -1050,17 +1075,53 @@ class AstrovedicTestSuite:
         if len(module_parts) < 2:
             return 'unknown'
 
-        module_name = '.'.join(module_parts[:2])  # e.g., 'tests.test_chart'
+        # Get the full module name
+        full_module_name = '.'.join(module_parts[:-2])  # e.g., 'tests.core.test_factory'
+        module_name = '.'.join(module_parts[:2])  # e.g., 'tests.core'
 
-        # Check if module is in a specific category
+        # First check if the test has metadata with a category
+        if test_id in self.test_metadata and 'category' in self.test_metadata[test_id]:
+            return self.test_metadata[test_id]['category']
+
+        # Check if the full module name is in a specific category
         for category, modules in self.config['test_categories'].items():
             for cat_module in modules:
-                if module_name.startswith(cat_module):
+                if full_module_name == cat_module or full_module_name.startswith(cat_module):
                     return category
 
-        # Special case for caching tests
-        if 'caching' in module_name:
+        # Check based on module name patterns
+        if 'core' in module_name:
+            return 'core'
+        elif 'caching' in module_name:
             return 'caching'
+        elif 'examples' in module_name:
+            return 'examples'
+        elif 'reference_data' in module_name:
+            return 'reference_data'
+        elif 'compatibility' in module_name:
+            return 'compatibility'
+        elif 'vedic.jaimini' in full_module_name:
+            return 'jaimini'
+        elif 'vedic.shadbala' in full_module_name:
+            return 'shadbala'
+        elif 'vedic.vargas' in full_module_name:
+            return 'vargas'
+        elif 'vedic.yogas' in full_module_name:
+            return 'yogas'
+        elif 'vedic.aspects' in full_module_name:
+            return 'aspects'
+        elif 'vedic.compatibility' in full_module_name:
+            return 'compatibility'
+        elif 'vedic.dashas' in full_module_name:
+            return 'dashas'
+        elif 'vedic.dignities' in full_module_name:
+            return 'dignities'
+        elif 'vedic.muhurta' in full_module_name:
+            return 'muhurta'
+        elif 'vedic.transits' in full_module_name:
+            return 'transits'
+        elif 'vedic' in module_name:
+            return 'vedic'
 
         return 'unknown'
 
