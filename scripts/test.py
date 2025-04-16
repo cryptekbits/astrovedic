@@ -174,11 +174,14 @@ class AstrovedicTestSuite:
     class DetailedTestResult(TextTestResult):
         """Custom test result class that provides more detailed output."""
 
-        def __init__(self, stream, descriptions, verbosity):
+        def __init__(self, stream, descriptions, verbosity, test_suite=None):
             super().__init__(stream, descriptions, verbosity)
             self.successes = []
             self.start_times = {}
             self.execution_times = {}
+            self.test_suite = test_suite
+            # Track results by category
+            self.category_results = {}
 
         def startTest(self, test):
             super().startTest(test)
@@ -188,27 +191,94 @@ class AstrovedicTestSuite:
             super().addSuccess(test)
             self.successes.append(test)
             self.execution_times[test] = time.time() - self.start_times[test]
+            self._track_category_result(test, 'success')
 
         def addError(self, test, err):
             super().addError(test, err)
             self.execution_times[test] = time.time() - self.start_times[test]
+            self._track_category_result(test, 'error')
 
         def addFailure(self, test, err):
             super().addFailure(test, err)
             self.execution_times[test] = time.time() - self.start_times[test]
+            self._track_category_result(test, 'failure')
 
         def addSkip(self, test, reason):
             super().addSkip(test, reason)
             self.execution_times[test] = time.time() - self.start_times[test]
+            self._track_category_result(test, 'skipped')
+
+        def _track_category_result(self, test, result_type):
+            """Track test results by category."""
+            if not self.test_suite:
+                return
+
+            # Get the category for this test
+            test_id = test.id()
+            category = self.test_suite._get_category_for_test(test_id)
+
+            # Initialize category if not already present
+            if category not in self.category_results:
+                self.category_results[category] = {
+                    'success': 0,
+                    'failure': 0,
+                    'error': 0,
+                    'skipped': 0,
+                    'total': 0
+                }
+
+            # Increment the appropriate counter
+            self.category_results[category][result_type] += 1
+            self.category_results[category]['total'] += 1
+
+        def get_category_summary_table(self):
+            """Generate a category-wise summary table."""
+            if not self.category_results:
+                return "No category data available."
+
+            # Calculate totals
+            all_categories = {
+                'success': 0,
+                'failure': 0,
+                'error': 0,
+                'skipped': 0,
+                'total': 0
+            }
+
+            for category_data in self.category_results.values():
+                for key, value in category_data.items():
+                    all_categories[key] += value
+
+            # Build the table
+            table = "\nCATEGORY-WISE TEST SUMMARY\n"
+            table += "=" * 80 + "\n"
+            table += f"{'Category':<20} {'Total':<10} {'Passed':<10} {'Failed':<10} {'Errors':<10} {'Skipped':<10}\n"
+            table += "-" * 80 + "\n"
+
+            # Add rows for each category
+            for category, data in sorted(self.category_results.items()):
+                table += f"{category:<20} {data['total']:<10} {data['success']:<10} {data['failure']:<10} {data['error']:<10} {data['skipped']:<10}\n"
+
+            # Add totals row
+            table += "-" * 80 + "\n"
+            table += f"{'TOTAL':<20} {all_categories['total']:<10} {all_categories['success']:<10} {all_categories['failure']:<10} {all_categories['error']:<10} {all_categories['skipped']:<10}\n"
+            table += "=" * 80 + "\n"
+
+            return table
 
     class DetailedTestRunner(TextTestRunner):
         """Custom test runner that uses DetailedTestResult."""
 
-        def __init__(self, **kwargs):
+        def __init__(self, test_suite=None, **kwargs):
             super().__init__(**kwargs)
             self.resultclass = AstrovedicTestSuite.DetailedTestResult
+            self.test_suite = test_suite
 
         def run(self, test):
+            # Create result object with reference to test_suite
+            result = self.resultclass(self.stream, self.descriptions, self.verbosity, self.test_suite)
+            self._makeResult = lambda: result  # Override _makeResult to return our custom result
+
             result = super().run(test)
             return result
 
@@ -238,7 +308,7 @@ class AstrovedicTestSuite:
             stream = sys.stdout
 
         # Create and run test runner
-        runner = self.DetailedTestRunner(stream=stream, verbosity=verbosity)
+        runner = self.DetailedTestRunner(test_suite=self, stream=stream, verbosity=verbosity)
         start_time = time.time()
         result = runner.run(test_suite)
         end_time = time.time()
@@ -255,6 +325,9 @@ class AstrovedicTestSuite:
         print(f"Skipped: {len(result.skipped)}", file=stream)
         print(f"Total Time: {end_time - start_time:.2f} seconds", file=stream)
         print("=" * 80, file=stream)
+
+        # Print category-wise summary table
+        print(result.get_category_summary_table(), file=stream)
 
         # Print slow tests
         if result.execution_times:
@@ -304,7 +377,7 @@ class AstrovedicTestSuite:
             stream = sys.stdout
 
         # Create and run test runner
-        runner = self.DetailedTestRunner(stream=stream, verbosity=verbosity)
+        runner = self.DetailedTestRunner(test_suite=self, stream=stream, verbosity=verbosity)
         start_time = time.time()
         result = runner.run(test_suite)
         end_time = time.time()
@@ -321,6 +394,9 @@ class AstrovedicTestSuite:
         print(f"Skipped: {len(result.skipped)}", file=stream)
         print(f"Total Time: {end_time - start_time:.2f} seconds", file=stream)
         print("=" * 80, file=stream)
+
+        # Print category-wise summary table
+        print(result.get_category_summary_table(), file=stream)
 
         # Close output file if needed
         if output_file:
@@ -939,7 +1015,7 @@ class AstrovedicTestSuite:
             stream = sys.stdout
 
         # Create and run test runner
-        runner = self.DetailedTestRunner(stream=stream, verbosity=verbosity)
+        runner = self.DetailedTestRunner(test_suite=self, stream=stream, verbosity=verbosity)
         start_time = time.time()
         result = runner.run(all_tests)
         end_time = time.time()
@@ -956,6 +1032,9 @@ class AstrovedicTestSuite:
         print(f"Skipped: {len(result.skipped)}", file=stream)
         print(f"Total Time: {end_time - start_time:.2f} seconds", file=stream)
         print("=" * 80, file=stream)
+
+        # Print category-wise summary table
+        print(result.get_category_summary_table(), file=stream)
 
         # Close output file if needed
         if output_file:
