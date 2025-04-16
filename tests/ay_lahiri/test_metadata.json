@@ -1,0 +1,167 @@
+{
+    "tests.ay_lahiri.test_ashtakavarga.TestLahiriAshtakavarga.test_bhinnashtakavarga": {
+        "name": "Lahiri Bhinnashtakavarga",
+        "description": "Tests Bhinnashtakavarga calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_ashtakavarga.TestLahiriAshtakavarga.test_sarvashtakavarga": {
+        "name": "Lahiri Sarvashtakavarga",
+        "description": "Tests Sarvashtakavarga calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_bhavbala.TestLahiriBhavbala.test_bhavbala_calculation": {
+        "name": "Lahiri Bhavbala",
+        "description": "Tests Bhavbala (house strength) calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_bhavbala.TestLahiriBhavbala.test_bhavbala_ranking": {
+        "name": "Lahiri Bhavbala Ranking",
+        "description": "Tests Bhavbala ranking with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_d1_chart.TestLahiriD1Chart.test_planet_positions": {
+        "name": "Lahiri D1 Planet Positions",
+        "description": "Tests planet positions in D1 chart with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_d1_chart.TestLahiriD1Chart.test_house_details": {
+        "name": "Lahiri D1 House Details",
+        "description": "Tests house details in D1 chart with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d2_chart": {
+        "name": "Lahiri D2 Chart",
+        "description": "Tests D2 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d3_chart": {
+        "name": "Lahiri D3 Chart",
+        "description": "Tests D3 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d4_chart": {
+        "name": "Lahiri D4 Chart",
+        "description": "Tests D4 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d5_chart": {
+        "name": "Lahiri D5 Chart",
+        "description": "Tests D5 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d6_chart": {
+        "name": "Lahiri D6 Chart",
+        "description": "Tests D6 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d7_chart": {
+        "name": "Lahiri D7 Chart",
+        "description": "Tests D7 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d8_chart": {
+        "name": "Lahiri D8 Chart",
+        "description": "Tests D8 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d9_chart": {
+        "name": "Lahiri D9 Chart",
+        "description": "Tests D9 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d10_chart": {
+        "name": "Lahiri D10 Chart",
+        "description": "Tests D10 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d11_chart": {
+        "name": "Lahiri D11 Chart",
+        "description": "Tests D11 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d12_chart": {
+        "name": "Lahiri D12 Chart",
+        "description": "Tests D12 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d16_chart": {
+        "name": "Lahiri D16 Chart",
+        "description": "Tests D16 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d20_chart": {
+        "name": "Lahiri D20 Chart",
+        "description": "Tests D20 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d24_chart": {
+        "name": "Lahiri D24 Chart",
+        "description": "Tests D24 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d27_chart": {
+        "name": "Lahiri D27 Chart",
+        "description": "Tests D27 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d30_chart": {
+        "name": "Lahiri D30 Chart",
+        "description": "Tests D30 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d40_chart": {
+        "name": "Lahiri D40 Chart",
+        "description": "Tests D40 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d45_chart": {
+        "name": "Lahiri D45 Chart",
+        "description": "Tests D45 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_divisional_charts.TestLahiriDivisionalCharts.test_d60_chart": {
+        "name": "Lahiri D60 Chart",
+        "description": "Tests D60 chart calculations with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_panchanga.TestLahiriPanchanga.test_tithi": {
+        "name": "Lahiri Tithi",
+        "description": "Tests Tithi calculation with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_panchanga.TestLahiriPanchanga.test_nakshatra": {
+        "name": "Lahiri Nakshatra",
+        "description": "Tests Nakshatra calculation with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_panchanga.TestLahiriPanchanga.test_yoga": {
+        "name": "Lahiri Yoga",
+        "description": "Tests Yoga calculation with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_panchanga.TestLahiriPanchanga.test_karana": {
+        "name": "Lahiri Karana",
+        "description": "Tests Karana calculation with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_panchanga.TestLahiriPanchanga.test_vara": {
+        "name": "Lahiri Vara",
+        "description": "Tests Vara (weekday) calculation with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_vimshottari_dasha.TestLahiriVimshottariDasha.test_mahadasha": {
+        "name": "Lahiri Mahadasha",
+        "description": "Tests Mahadasha calculation with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_vimshottari_dasha.TestLahiriVimshottariDasha.test_antardasha": {
+        "name": "Lahiri Antardasha",
+        "description": "Tests Antardasha calculation with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    },
+    "tests.ay_lahiri.test_vimshottari_dasha.TestLahiriVimshottariDasha.test_dasha_sequence": {
+        "name": "Lahiri Dasha Sequence",
+        "description": "Tests Dasha sequence with Lahiri ayanamsa",
+        "category": "ay_lahiri"
+    }
+}
