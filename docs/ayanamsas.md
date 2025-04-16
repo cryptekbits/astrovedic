@@ -1,6 +1,6 @@
-# Ayanamsas in Flatlib
+# Ayanamsas in Astrovedic
 
-This document provides information about the different ayanamsas (sidereal zodiac systems) available in Flatlib.
+This document provides information about the different ayanamsas (sidereal zodiac systems) available in the Astrovedic library.
 
 ## What is an Ayanamsa?
 
@@ -8,20 +8,15 @@ An ayanamsa is the angular difference between the tropical zodiac (based on the 
 
 In Vedic astrology, the sidereal zodiac is used, which requires an ayanamsa to convert from the tropical positions calculated by modern ephemerides.
 
-## Available Ayanamsas in Flatlib
+## Available Ayanamsas in Astrovedic
 
-Flatlib supports the following ayanamsas:
+Astrovedic supports the following Vedic ayanamsas:
 
-### Original Ayanamsas
+### Primary Vedic Ayanamsas
 
-- **Fagan Bradley** (`const.AY_FAGAN_BRADLEY`): Standard Western sidereal astrology ayanamsa.
 - **Lahiri** (`const.AY_LAHIRI`): Official ayanamsa of the Indian government.
-- **De Luce** (`const.AY_DELUCE`): Based on the star Spica at 0° Libra in 285 CE.
 - **Raman** (`const.AY_RAMAN`): B.V. Raman's ayanamsa, a variant of Lahiri.
-- **Krishnamurti** (`const.AY_KRISHNAMURTI`): K.S. Krishnamurti's ayanamsa.
-- **Sassanian** (`const.AY_SASSANIAN`): Traditional Persian/Zoroastrian ayanamsa.
-- **Aldebaran 15 Taurus** (`const.AY_ALDEBARAN_15TAU`): Sets Aldebaran at 15° Taurus.
-- **Galactic Center 5 Sagittarius** (`const.AY_GALCENTER_5SAG`): Sets the Galactic Center at 5° Sagittarius.
+- **Krishnamurti** (`const.AY_KRISHNAMURTI`): K.S. Krishnamurti's ayanamsa used in KP system.
 
 ### Additional Vedic Ayanamsas
 
@@ -40,15 +35,15 @@ Flatlib supports the following ayanamsas:
 - **Aryabhata 522** (`const.AY_ARYABHATA_522`): Aryabhata's ayanamsa for the year 522 CE.
 - **True Sheoran** (`const.AY_TRUE_SHEORAN`): True Sheoran ayanamsa.
 
-## Using Ayanamsas in Flatlib
+## Using Ayanamsas in Astrovedic
 
 To create a chart with a specific ayanamsa:
 
 ```python
-from flatlib.datetime import Datetime
-from flatlib.geopos import GeoPos
-from flatlib.chart import Chart
-from flatlib import const
+from astrovedic.datetime import Datetime
+from astrovedic.geopos import GeoPos
+from astrovedic.chart import Chart
+from astrovedic import const
 
 # Create a date and location
 date = Datetime('2023/05/15', '12:00', '+00:00')
@@ -62,14 +57,21 @@ sun = chart.getObject(const.SUN)
 print(f"Sun in sidereal zodiac: {sun.sign} {sun.signlon:.2f}°")
 ```
 
+## Default Ayanamsas
+
+Astrovedic defines default ayanamsas for different systems:
+
+- **Default for Vedic calculations**: Lahiri (`const.AY_DEFAULT_VEDIC = const.AY_LAHIRI`)
+- **Default for KP calculations**: Krishnamurti (`const.AY_DEFAULT_KP = const.AY_KRISHNAMURTI`)
+
 ## Choosing an Ayanamsa
 
-Different astrological traditions use different ayanamsas:
+Different Vedic astrological traditions use different ayanamsas:
 
-- Western sidereal astrologers typically use Fagan-Bradley
 - Indian government calculations use Lahiri
 - KP (Krishnamurti Paddhati) astrology uses Krishnamurti
 - Traditional Jyotish practitioners may use True Citra or True Pushya
 - Some Vedic astrologers prefer Yukteshwar's ayanamsa
+- B.V. Raman's followers use the Raman ayanamsa
 
 The choice of ayanamsa can shift planetary positions by several degrees, so it's important to be consistent in your practice.

@@ -312,30 +312,24 @@ RASHI_DRISHTI_DUAL = [3, 11]
 
 # === Ayanamsas / Sidereal Zodiac === */
 
-AY_FAGAN_BRADLEY = 'Ayanamsa Fagan Bradley'
-AY_LAHIRI = 'Ayanamsa Lahiri'
-AY_DELUCE = 'Ayanamsa De Luce'
-AY_RAMAN = 'Ayanamsa Raman'
-AY_KRISHNAMURTI = 'Ayanamsa Krishnamurti'
-AY_SASSANIAN = 'Ayanamsa Sassanian'
-AY_ALDEBARAN_15TAU = 'Ayanamsa Aldebaran 15 Taurus'
-AY_GALCENTER_5SAG = 'Ayanamsa Galactic Eq. 05 Sag'
-
-# Additional Vedic Ayanamsas
-AY_YUKTESHWAR = 'Ayanamsa Yukteshwar'
-AY_JN_BHASIN = 'Ayanamsa JN Bhasin'
-AY_SURYASIDDHANTA = 'Ayanamsa Surya Siddhanta'
-AY_SURYASIDDHANTA_MSUN = 'Ayanamsa Surya Siddhanta (Mean Sun)'
-AY_ARYABHATA = 'Ayanamsa Aryabhata'
-AY_ARYABHATA_MSUN = 'Ayanamsa Aryabhata (Mean Sun)'
-AY_SS_REVATI = 'Ayanamsa SS Revati'
-AY_SS_CITRA = 'Ayanamsa SS Citra'
-AY_TRUE_CITRA = 'Ayanamsa True Citra'
-AY_TRUE_REVATI = 'Ayanamsa True Revati'
-AY_TRUE_PUSHYA = 'Ayanamsa True Pushya'
-AY_TRUE_MULA = 'Ayanamsa True Mula'
-AY_ARYABHATA_522 = 'Ayanamsa Aryabhata 522'
-AY_TRUE_SHEORAN = 'Ayanamsa True Sheoran'
+# Vedic Ayanamsas
+AY_LAHIRI = 'Ayanamsa Lahiri'  # Official ayanamsa of the Indian government
+AY_RAMAN = 'Ayanamsa Raman'    # B.V. Raman's ayanamsa, a variant of Lahiri
+AY_KRISHNAMURTI = 'Ayanamsa Krishnamurti'  # K.S. Krishnamurti's ayanamsa for KP system
+AY_YUKTESHWAR = 'Ayanamsa Yukteshwar'  # Based on Sri Yukteshwar's book "The Holy Science"
+AY_JN_BHASIN = 'Ayanamsa JN Bhasin'  # J.N. Bhasin's ayanamsa
+AY_SURYASIDDHANTA = 'Ayanamsa Surya Siddhanta'  # Based on the ancient Surya Siddhanta text
+AY_SURYASIDDHANTA_MSUN = 'Ayanamsa Surya Siddhanta (Mean Sun)'  # Variant using mean solar position
+AY_ARYABHATA = 'Ayanamsa Aryabhata'  # Based on Aryabhata's work
+AY_ARYABHATA_MSUN = 'Ayanamsa Aryabhata (Mean Sun)'  # Variant using mean solar position
+AY_SS_REVATI = 'Ayanamsa SS Revati'  # Surya Siddhanta with Revati at 0° Aries
+AY_SS_CITRA = 'Ayanamsa SS Citra'  # Surya Siddhanta with Citra at 0° Libra
+AY_TRUE_CITRA = 'Ayanamsa True Citra'  # True Citra ayanamsa with Spica at 0° Libra
+AY_TRUE_REVATI = 'Ayanamsa True Revati'  # True Revati ayanamsa with Revati at 0° Aries
+AY_TRUE_PUSHYA = 'Ayanamsa True Pushya'  # True Pushya ayanamsa
+AY_TRUE_MULA = 'Ayanamsa True Mula'  # True Mula ayanamsa
+AY_ARYABHATA_522 = 'Ayanamsa Aryabhata 522'  # Aryabhata's ayanamsa for the year 522 CE
+AY_TRUE_SHEORAN = 'Ayanamsa True Sheoran'  # True Sheoran ayanamsa
 
 # Default Ayanamsas for different systems
 AY_DEFAULT_VEDIC = AY_LAHIRI

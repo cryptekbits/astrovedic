@@ -58,19 +58,16 @@ SWE_HOUSESYS = {
     const.HOUSES_MORINUS: b'M'
 }
 
-# Map ayanamsas
+# Map ayanamsas to Swiss Ephemeris values
 SWE_AYANAMSAS = {
-    const.AY_FAGAN_BRADLEY: 0,
-    const.AY_LAHIRI: 1,
-    const.AY_DELUCE: 2,
-    const.AY_RAMAN: 3,
-    const.AY_KRISHNAMURTI: 5,
-    const.AY_SASSANIAN: 16,
-    const.AY_ALDEBARAN_15TAU: 14,
-    const.AY_GALCENTER_5SAG: 17,
+    # Primary Vedic Ayanamsas
+    const.AY_LAHIRI: 1,        # Official ayanamsa of the Indian government
+    const.AY_RAMAN: 3,         # B.V. Raman's ayanamsa, a variant of Lahiri
+    const.AY_KRISHNAMURTI: 5,  # K.S. Krishnamurti's ayanamsa for KP system
+
     # Additional Vedic Ayanamsas
-    const.AY_YUKTESHWAR: 7,
-    const.AY_JN_BHASIN: 8,
+    const.AY_YUKTESHWAR: 7,    # Based on Sri Yukteshwar's book "The Holy Science"
+    const.AY_JN_BHASIN: 8,     # J.N. Bhasin's ayanamsa
     const.AY_SURYASIDDHANTA: 21,
     const.AY_SURYASIDDHANTA_MSUN: 22,
     const.AY_ARYABHATA: 23,
