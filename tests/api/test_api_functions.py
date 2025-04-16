@@ -70,7 +70,7 @@ class TestVedicChartCreation(unittest.TestCase):
         self.assertEqual(kp_chart.chart.pos.lat, self.chart.pos.lat)
         self.assertEqual(kp_chart.chart.pos.lon, self.chart.pos.lon)
         self.assertEqual(kp_chart.chart.hsys, const.HOUSES_PLACIDUS)
-        self.assertEqual(kp_chart.ayanamsa, const.AY_DEFAULT_KP)
+        self.assertEqual(kp_chart.ayanamsa, const.AY_KRISHNAMURTI)
 
         # Print the chart information for reference
         print(f"KP chart:")
@@ -107,7 +107,7 @@ class TestVedicChartCreation(unittest.TestCase):
         self.assertEqual(kp_chart.chart.pos.lat, self.chart.pos.lat)
         self.assertEqual(kp_chart.chart.pos.lon, self.chart.pos.lon)
         self.assertEqual(kp_chart.chart.hsys, const.HOUSES_PLACIDUS)
-        self.assertEqual(kp_chart.ayanamsa, const.AY_DEFAULT_KP)
+        self.assertEqual(kp_chart.ayanamsa, const.AY_KRISHNAMURTI)
 
         # Print the chart information for reference
         print(f"KP chart from create_kp_chart:")

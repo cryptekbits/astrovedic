@@ -268,7 +268,7 @@ def print_planetary_positions(chart, title):
     print(f"\n{'=' * 80}")
     print(f"{title}")
     print(f"Reference Date: {TestDataManager.REFERENCE_DATE} {TestDataManager.REFERENCE_TIME} ({TestDataManager.REFERENCE_LOCATION})")
-    print(f"Ayanamsa: {chart.mode}, House System: {chart.hsys}")
+    print(f"Ayanamsa: {chart.ayanamsa or 'None (Tropical)'}, House System: {chart.hsys}")
     print(f"{'=' * 80}\n")
 
     # Prepare data for table

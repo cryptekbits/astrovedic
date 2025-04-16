@@ -187,16 +187,30 @@ class TestInvalidInputs(unittest.TestCase):
         for ayanamsa in test_cases:
             try:
                 # Try to create a Chart with invalid ayanamsa
+                chart = Chart(date, pos, ayanamsa=ayanamsa)
+
+                # If we get here, the ayanamsa was accepted
+                # Check that it's a valid Chart object with some reasonable defaults
+                self.assertIsNotNone(chart)
+                self.assertTrue(hasattr(chart, 'objects'))
+                print(f"Ayanamsa '{ayanamsa}' was accepted as {chart.ayanamsa}")
+            except Exception as e:
+                # If we get here, the ayanamsa was rejected (which is also acceptable)
+                print(f"Ayanamsa '{ayanamsa}' was rejected with error: {str(e)}")
+
+            # Also test with the old mode parameter for backward compatibility
+            try:
+                # Try to create a Chart with invalid ayanamsa using mode parameter
                 chart = Chart(date, pos, mode=ayanamsa)
 
                 # If we get here, the ayanamsa was accepted
                 # Check that it's a valid Chart object with some reasonable defaults
                 self.assertIsNotNone(chart)
                 self.assertTrue(hasattr(chart, 'objects'))
-                print(f"Ayanamsa '{ayanamsa}' was accepted as {chart.mode}")
+                print(f"Ayanamsa '{ayanamsa}' was accepted as {chart.ayanamsa} via mode parameter")
             except Exception as e:
                 # If we get here, the ayanamsa was rejected (which is also acceptable)
-                print(f"Ayanamsa '{ayanamsa}' was rejected with error: {str(e)}")
+                print(f"Ayanamsa '{ayanamsa}' was rejected with error when using mode parameter: {str(e)}")
 
 
 class TestEdgeCaseBirthData(unittest.TestCase):
